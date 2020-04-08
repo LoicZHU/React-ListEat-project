@@ -23,24 +23,39 @@ header {
       }
     }
 
-    .header-mobile-nav-button {
+    .header-mobile-nav-button, #help-button-mobile {
       display: none;
     }
 
-    #help-button {
+    #help-button-mobile {
       background-color: $dark-color;
       font-weight: bold;
+      color: #fff;
       text-align: center;
+      border-radius: 50%;
+      width: 2.5em;
+      padding: .7em;
+      margin-left: .2em;
+    }
+
+    #help-button-span {
+      background-color: $dark-color;
+      font-weight: bold;
+      font-size: .8em;
       color: #fff;
       border-radius: 50%;
-      width: 2em;
-      padding: .5em;
+      width: 3em;
+      padding: .1em .6em;
+      margin-left: .2em;
+    }
 
+    #help-button {
       &:hover {
-        box-shadow: 0px 0px 10px rgb(0,0,0,.2);
-        transform: scale(1.2);
-        transform: rotate(20deg);
-        transition: transform .1s;
+        span {
+          transition: transform .1s;
+          color: $dark-color;
+          background-color: #fff;
+        }
       }
     }
 
@@ -69,7 +84,11 @@ header {
     font-size: 2.5em !important;
   }
 
-  #home-button {
+  #help-button-mobile {
+    display: inline-block !important;
+  }
+
+  #home-button, #help-button {
     display: none;
   }
 

@@ -10,11 +10,10 @@ const Header = () => {
         <a href="#">
           <li id="home-button" className="header-nav-button">Accueil</li>
           <li id="home-button-mobile" className="header-mobile-nav-button"><i class="fa fa-home" aria-hidden="true"></i></li>
-
-          
         </a>
         <a href="#">
-          <li id="help-button">?</li>
+          <li id="help-button" className="header-nav-button">Aide <span id="help-button-span">?</span></li>
+          <li id="help-button-mobile">?</li>
         </a>
       </ul>
       <div id="logo-container">
