@@ -1,0 +1,9 @@
+{
+  "name": "ListEat",
+  "version": "1.0.0",
+  "description": "ListEat project - O'Clock - Atlantis 2019/2020",
+  "main": "index.js",
+  "repository": "https://github.com/O-clock-Atlantis/projet-list-eat",
+  "author": "Atlantis - ListEat",
+  "license": "MIT"
+}
