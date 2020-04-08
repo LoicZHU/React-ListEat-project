@@ -9,6 +9,9 @@ const Header = () => {
       <ul>
         <a href="#">
           <li id="home-button" className="header-nav-button">Accueil</li>
+          <li id="home-button-mobile" className="header-mobile-nav-button"><i class="fa fa-home" aria-hidden="true"></i></li>
+
+          
         </a>
         <a href="#">
           <li id="help-button">?</li>

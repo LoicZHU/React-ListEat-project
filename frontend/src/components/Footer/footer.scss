@@ -10,9 +10,9 @@ footer {
     align-items: center;
     margin: 0 auto;
     max-width: 900px;
-    padding: 0em 2em;
+    padding: 1em 2em;
     text-align: right;
-    line-height: 1.5em;
+    line-height: 2em;
 
     .nav, #contact-block {
       padding: 1em 3em;
@@ -44,4 +44,14 @@ footer {
     color: #fff;
     text-align: center;
   }
+}
+
+
+@media (max-width: $mobile-breakpoint) {
+  #footer-first, #contact-block, #contact-block .contact-infos span {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
 }
