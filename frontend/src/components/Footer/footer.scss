@@ -1,0 +1,47 @@
+@import 'src/styles/index.scss';
+
+
+footer {
+  background-color: $light-color;
+
+  #footer-first {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 0em 2em;
+    text-align: right;
+    line-height: 1.5em;
+
+    .nav, #contact-block {
+      padding: 1em 3em;
+    }
+
+    #contact-block {
+      display: flex;
+      flex-direction: column;
+
+      .contact-infos span {
+        display: block;
+        text-align: left;
+      }
+
+      .title {
+        font-weight: bold;
+      }
+    }
+
+    #logo {
+      width: 150px;
+    }
+
+  }
+
+  #footer-last {
+    padding: 1em 2em;
+    background-color: $dark-color;
+    color: #fff;
+    text-align: center;
+  }
+}
