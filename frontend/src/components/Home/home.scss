@@ -1,0 +1,124 @@
+@import 'src/styles/_vars.scss';
+
+.home {
+  margin: 10px;
+
+  h2 {
+    font-size: 1.125em;
+    font-weight: bold;
+  }
+
+  // top
+  &__top {
+    display: flex;
+    border: 1px solid $borderColor;
+    position: relative;
+    background-color: $light-color;
+  
+    &__slogan {
+      width: $sloganWidth;
+      background-color: $light-color;
+
+      p {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2rem;
+        text-align: center;
+        background: rgba(0,0,0,0.5);
+        color: white;
+        padding: 1.25rem;
+        width: calc(#{$sloganWidth} - 2px);
+      }
+    }
+  
+    &__partner {
+      width: $partnerWidth;
+      background-color: $primary-color;
+      padding: 20px 10px;
+      text-align: center;
+      margin: 5px;
+  
+      &__subscribe-button {
+        display: block;
+        margin: 10px auto 20px ;
+        padding: 10px ;
+        background-color: $validate-color;
+        border: none;
+        font-weight: bold;
+        color: white;
+      }
+  
+      &__link {
+        cursor: pointer;
+
+        &:hover {
+          color: $alt-color;
+        }
+      }
+    }
+  }
+
+  // argument
+  &__argument {
+    display: flex;
+    justify-content: space-between;
+
+    &__article {
+      width: $articleWidth;
+      margin: 40px 0;
+      padding: 20px;
+      border: 1px solid $borderColor;
+
+      h1 {
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-size: 1.25em;
+        font-weight: bold;
+      }
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+
+  // info
+  &__info {
+    display: flex;
+    justify-content: space-between;
+
+    &__image {
+      width: 30%;
+      border: 1px solid $borderColor;
+      margin-right: 10px;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    &__content {
+      width: 70%;
+      padding: 0 10px;
+      border: 1px solid $borderColor;
+
+      &__detail {
+        padding: 20px 0;
+      }
+    }
+  }
+
+  // trust
+  &__trust {
+    display: flex;
+    margin-top: 40px;
+    border-top: 1px solid $borderColor;
+    padding-top: 10px;
+  }
+
+}
+
