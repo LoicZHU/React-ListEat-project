@@ -160,12 +160,6 @@ Call to a member function getUsername() on null
     "password": "toto"
 }
 
-{
-  "username": "toto@toto.fr",
-  "roles": [
-    "ROLE_USER"
-  ]
-}
 
 he autoloader expected class "App\Controller\Api\SecurityController" to be defined in file "/var/www/html/projet-list-eat/backend/vendor/composer/../../src/Controller/Api/SecurityController.php". The file was found but the class was not in it, the class name or namespace probably has a typo.
 
@@ -174,3 +168,66 @@ Expected to find class "App\Controller\Api\SecurityController" in file "/var/www
 The autoloader expected class "App\Controller\Api\SecurityController" to be defined in file "/var/www/html/projet-list-eat/backend/vendor/composer/../../src/Controller/Api/SecurityController.php". The file was found but the class was not in it, the class name or namespace probably has a typo.
 
 No route found for "GET /api/partner/login": Method Not Allowed (Allow: POST)
+
+{
+  "username": "toto@toto.fr",
+  "roles": {
+    "id": 1,
+    "name": "ROLE_USER",
+    "label": "ROLE_USER",
+    "__initializer__": null,
+    "__cloner__": null,
+    "__isInitialized__": true
+  }
+}
+
+name: restaurateur
+label: ROLE_RESTAURATEUR
+
+
+  "username": "toto@toto.fr",
+  "roles": {
+    "id": 1,
+    "name": "restaurateur",
+    "label": "ROLE_RESTAURATEUR",
+    "__initializer__": null,
+    "__cloner__": null,
+    "__isInitialized__": true
+  }
+}
+
+{
+  "username": "toto@toto.fr",
+  "roles": "ROLE_USER"
+}
+
+User is not authenticated probably because they have no roles.
+
+{
+  "username": "toto@toto.fr",
+  "roles": "[ROLE_USER]"
+}
+
+===>
+
+{
+  "username": "toto@toto.fr",
+  "roles": [
+    "ROLE_USER"
+  ]
+}
+
+
+{
+  "username": "toto@toto.fr",
+  "roles": [
+    "ROLE_USER"
+  ]
+}
+
+{
+  "username": "toto@toto.fr",
+  "roles": [
+    "ROLE_RESTAURATEUR"
+  ]
+}

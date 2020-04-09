@@ -20,7 +20,7 @@ class UserController extends AbstractController
     /**
      * @Route("/api/partner", name="api_user_add", methods={"POST"})
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, RoleRepository $roleRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, RoleRepository $roleRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
@@ -61,9 +61,6 @@ class UserController extends AbstractController
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        
-
-
         $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
         // if $data->role is not set, default role is RESTAURATEUR (id : 1)
@@ -77,6 +74,25 @@ class UserController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
+
+
+        //We send Email At The New Restaurant
+        $message = (new \Swift_Message('Information partenaire ListEat'))
+
+            ->setFrom('send@example.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                        $this->renderView(
+                            
+                            //TODO Registration Template 
+                            // templates/emails/registration.html.twig
+                            'emails/registration.html.twig',
+                            ['name' => $user->getfirstName()]
+                        ),
+            'text/html'
+                    );
+
+        $mailer->send($message);
 
         return $this->json(Response::HTTP_CREATED);
     }
