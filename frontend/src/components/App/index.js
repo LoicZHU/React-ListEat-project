@@ -8,6 +8,8 @@ import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
 import TicketForm from 'src/components/TicketForm';
 import PasswordForgotten from 'src/components/PasswordForgotten';
+import Validation from 'src/components/Validation';
+import Confirmation from 'src/components/Confirmation';
 
 // == Import
 import './styles.css';
@@ -19,7 +21,8 @@ const App = () => (
     {/* <Login /> */}
     {/* <Home /> */}
     {/* <TicketForm /> */}
-    {<PasswordForgotten />}
+    {/* <PasswordForgotten /> */}
+    <Validation />
     <Footer />
   </div>
 );

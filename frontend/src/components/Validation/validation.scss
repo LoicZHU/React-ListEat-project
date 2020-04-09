@@ -1,0 +1,41 @@
+@import 'src/styles/index.scss';
+
+.ticket__validation {
+  margin: 2em 1em;
+  text-align: center;
+
+  h1 {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  .ticket__validation__infos {
+    margin: 20px 0 40px 0;
+
+    .ticket__validation__info {
+      margin-top: 5px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+
+  .ticket__validation__question {
+    margin-bottom: 20px;
+
+    .yes__button {
+      background-color: green;
+    }
+
+    .no__button {
+      background-color: red;
+    }
+  }
+
+  button {
+    margin: 1em !important;
+    border: none !important;
+    color: #fff;
+    width: 50%;
+  
+  }
+}
