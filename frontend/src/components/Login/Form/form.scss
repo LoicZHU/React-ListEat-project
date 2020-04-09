@@ -25,4 +25,13 @@ form {
     color: $dark-color;
     font-size: 1em;
   }
+
+  #login-error {
+    color: #fff;
+    background-color: red;
+    border-radius: 5px;
+    padding: 1em;
+    border: red 2px solid;
+    margin: 1em auto;
+  }
 }

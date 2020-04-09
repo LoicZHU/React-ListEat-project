@@ -7,6 +7,7 @@ import Home from 'src/components/Home';
 import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
 import TicketForm from 'src/components/TicketForm';
+import PasswordForgotten from 'src/components/PasswordForgotten';
 
 // == Import
 import './styles.css';
@@ -17,7 +18,8 @@ const App = () => (
     <Header />
     {/* <Login /> */}
     {/* <Home /> */}
-    <TicketForm />
+    {/* <TicketForm /> */}
+    {<PasswordForgotten />}
     <Footer />
   </div>
 );
