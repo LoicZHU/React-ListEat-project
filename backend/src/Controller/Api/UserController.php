@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Restaurant;
 use App\Entity\User;
 use App\Repository\RoleRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,49 +19,64 @@ class UserController extends AbstractController
     /**
      * @Route("/api/partner", name="api_user_add", methods={"POST"})
      */
-    public function registrer(Request $request, UserPasswordEncoderInterface $encoder, RoleRepository $roleRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, RoleRepository $roleRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator)
     {
-        
+
         $data = json_decode($request->getContent());
         //dd($data->role);
 
         $user = $denormalizer->denormalize($data, User::class);
+        $errorsUser = $validator->validate($user);
 
-        $errors = $validator->validate($user);
+        $restaurant = $denormalizer->denormalize($data->restaurant, Restaurant::class);
+        // $restaurant= $denormalizer->denormalize($data->restaurant, Restaurant::class);
+        // $errors = [];
+        $errorsRestaurant = $validator->validate($restaurant);
 
+        $jsonErrors = [];
         // $errors est une ConstraintViolationList = se comporte comme un tableau
-        if (count($errors) !== 0) {
-            $jsonErrors = [];
-            foreach ($errors as $error) {
+        if (count($errorsUser) !== 0) {
+            //$jsonErrors = [];
+            foreach ($errorsUser as $error) {
                 $jsonErrors[] = [
                     'field' => $error->getPropertyPath(),
                     'message' => $error->getMessage(),
                 ];
             }
+        }
 
+        // $errors est une ConstraintViolationList = se comporte comme un tableau
+        if (count($errorsRestaurant) !== 0) {
+            //$jsonErrors = [];
+            foreach ($errorsRestaurant as $error) {
+                $jsonErrors[] = [
+                    'field' => $error->getPropertyPath(),
+                    'message' => $error->getMessage(),
+                ];
+            }
+        }
+
+        if(!empty($jsonErrors)){
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-       
+        
+
+
         $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
-        if(!isset($data->role)) {
+        // if $data->role is not set, default role is RESTAURATEUR (id : 1)
+        if (!isset($data->role)) {
             $role = $roleRepository->find(1);
-
         } else {
-        
-            $role = $roleRepository->find($data->role);       
+            $role = $roleRepository->find($data->role);
         }
         $user->setRole($role);
-       
-        //dd($user);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
 
-
-       return $this->json(Response::HTTP_CREATED);
-       
+        return $this->json(Response::HTTP_CREATED);
     }
 }
