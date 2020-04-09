@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class SecurityController extends AbstractController
@@ -31,10 +32,18 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        // controller can be blank: it will never be executed!
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        
+    
     }
 
+    /**
+     * @Route("api/partner/logout/success", name="api_logout_success", methods={"GET"})
+     */
+    public function logoutSuccess(){
+
+    return $this->json(Response::HTTP_OK);
+
+    }
 
     //{
     //"username": "dunglas",

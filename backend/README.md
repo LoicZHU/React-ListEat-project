@@ -166,3 +166,11 @@ Call to a member function getUsername() on null
     "ROLE_USER"
   ]
 }
+
+he autoloader expected class "App\Controller\Api\SecurityController" to be defined in file "/var/www/html/projet-list-eat/backend/vendor/composer/../../src/Controller/Api/SecurityController.php". The file was found but the class was not in it, the class name or namespace probably has a typo.
+
+Expected to find class "App\Controller\Api\SecurityController" in file "/var/www/html/projet-list-eat/backend/src/Controller/Api/SecurityController.php" while importing services from resource "../src/*", but it was not found! Check the namespace prefix used with the resource in /var/www/html/projet-list-eat/backend/config/services.yaml (which is loaded in resource "/var/www/html/projet-list-eat/backend/config/services.yaml").
+
+The autoloader expected class "App\Controller\Api\SecurityController" to be defined in file "/var/www/html/projet-list-eat/backend/vendor/composer/../../src/Controller/Api/SecurityController.php". The file was found but the class was not in it, the class name or namespace probably has a typo.
+
+No route found for "GET /api/partner/login": Method Not Allowed (Allow: POST)
