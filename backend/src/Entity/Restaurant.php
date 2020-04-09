@@ -11,6 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Restaurant
 {
+  
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->tickets = new ArrayCollection();
+    }
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -103,10 +110,6 @@ class Restaurant
      */
     private $qrCode;
 
-    public function __construct()
-    {
-        $this->tickets = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {

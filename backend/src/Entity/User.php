@@ -10,6 +10,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
