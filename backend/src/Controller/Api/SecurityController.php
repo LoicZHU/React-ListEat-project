@@ -17,15 +17,12 @@ class SecurityController extends AbstractController
     public function login(Request $request)
     {
         $user = $this->getUser();
-
-        //dd($request);
-
+        // in order to be authenticated, the login method in SecurityController must retrieve a role that starts with "ROLE_" and that must be stored in an array 
         return $this->json([
             'username' => $user->getUsername(),
             'roles' => $user->getRoles(),
         ]);
     }
-
 
     /**
      * @Route("api/partner/logout", name="api_logout", methods={"GET"})
@@ -33,7 +30,6 @@ class SecurityController extends AbstractController
     public function logout()
     {
         
-    
     }
 
     /**
