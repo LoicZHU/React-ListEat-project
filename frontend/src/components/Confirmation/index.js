@@ -7,10 +7,10 @@ import './confirmation.scss';
 // == Composant
 const Confirmation = () => (
   <main className="ticket__confirmation">
-    <h1>Félicitation, vous êtes sur la liste d'attente !</h1>
+    <h1>Félicitations, vous êtes sur la liste d'attente !</h1>
 
     <div className="ticket__confirmation__message">
-      <p>Vous serez appelez par le restaurateur quand votre tour viendra.</p>
+      <p>Vous serez appelé par le restaurateur quand votre tour viendra.</p>
       <p>Merci de vous présenter au complet dans la file d'attente.</p>
     </div>
 

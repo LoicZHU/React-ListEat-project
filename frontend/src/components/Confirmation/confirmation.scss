@@ -1,7 +1,12 @@
 @import 'src/styles/index.scss';
 
+p {
+  line-height: 1.5em;
+}
+
 .ticket__confirmation {
   text-align: center;
+  margin: 5em 0;
 
   h1 {
     font-weight: bold;
@@ -14,14 +19,6 @@
     p {
       margin-top: 5px;
     }
-  }
-
-  .yes__button {
-    background-color: green;
-  }
-
-  .no__button {
-    background-color: red;
   }
 
   .ticket__confirmation__infos {

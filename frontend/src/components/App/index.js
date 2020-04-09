@@ -10,6 +10,7 @@ import TicketForm from 'src/components/TicketForm';
 import PasswordForgotten from 'src/components/PasswordForgotten';
 import Validation from 'src/components/Validation';
 import Confirmation from 'src/components/Confirmation';
+import Admin from 'src/components/Admin';
 
 // == Import
 import './styles.css';
@@ -22,7 +23,8 @@ const App = () => (
     {/* <Home /> */}
     {/* <TicketForm /> */}
     {/* <PasswordForgotten /> */}
-    <Validation />
+    {/* <Confirmation />  */}
+     <Admin />
     <Footer />
   </div>
 );
