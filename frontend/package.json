@@ -1,5 +1,5 @@
 {
-  "name": "react-modele",
+  "name": "ListEat",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
@@ -49,5 +49,9 @@
     "prop-types": "*",
     "react": "*",
     "react-dom": "*"
-  }
+  },
+  "version": "1.0.0",
+  "description": "ListEat project",
+  "main": "index.js",
+  "license": "MIT"
 }

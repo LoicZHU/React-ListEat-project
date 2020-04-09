@@ -1,0 +1,16 @@
+@import 'src/styles/index.scss';
+
+.login-container {
+  max-width: 700px;
+  width: 90%;
+  margin: 0 auto !important;
+  text-align: center;
+  height: 50vh;
+  padding-top: 10vh; 
+
+  h1 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 auto 1em auto;
+  }
+}
