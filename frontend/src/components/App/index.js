@@ -13,8 +13,8 @@ import './styles.css';
 const App = () => (
   <div className="app">
     <Header />
-    {/* <Home /> */}
-    <Login />
+    <Home />
+    {/* <Login /> */}
     <Footer />
   </div>
 );
