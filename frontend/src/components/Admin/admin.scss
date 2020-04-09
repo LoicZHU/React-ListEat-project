@@ -6,13 +6,16 @@
   width: 100%;
 
   #left-section {
-    width: 60%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
   }
 
   #right-section {
-    width: 40%;
-    height: 100vh;
-    background-color: black;
+    width: 30%;
+    // height: 95vh;
+    // background-color: black;
   }
 }
 
@@ -39,6 +42,8 @@
 
   .left {
     font-weight: bold;
+
+ 
 
     .toggle-name {
       margin-left: 1em;
@@ -115,5 +120,137 @@
 
   .slider.round:before {
     border-radius: 50%;
+  }
+}
+
+#admin-middle-section {
+  // height: 500px;
+  background-color: grey;
+  padding: 2em;
+  margin: 1em auto;
+  width: 95% !important;
+
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .right, .left {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+
+    span {
+      display: block;
+    }
+  }
+
+  .left {
+    #ticket-infos {
+      width: 100%;
+      background-color: #fff;
+      padding: 1em;
+
+        span {
+          line-height: 2em;
+          font-size: 1.5em;
+        }
+
+        #ticket-ref {
+          border: 2px $light-color solid;
+          padding: 1em;
+          margin-top: 2em;
+
+          span {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 2em;
+          }
+
+          .ref {
+            margin-left: 1em;
+          }
+        }
+      }
+    }
+
+    .right {
+      #covers-nb {
+        background-color: $primary-color;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em;
+
+        .covers-title {
+          color: #fff;
+          font-size: 2em;
+          font-weight: bold;
+        }
+
+        .covers {
+          color: #fff;
+          font-size: 5em;
+          font-weight: bold;
+        }
+      }
+    }
+
+}
+
+#admin-bottom-section {
+  display: flex;
+
+  .estimate-waiting-time, .add-ticket {
+    width: 50%;
+    border: 2px $light-color solid;
+    border-bottom: none;
+  }
+
+  .estimate-waiting-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+
+    #more-time, #less-time {
+      font-size: 5em;
+    }
+
+    #time {
+      font-size: 3em;
+      margin: 0 .7em
+    }
+  }
+
+  .add-ticket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+  }
+}
+
+#right-section {
+  #ticket-list {
+    height: 640px;
+    overflow: auto;
+    border-bottom: 2px $light-color solid;
+  }
+
+  .tickets-count {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 0 1em;
+    font-size: 1.7em;
+    box-shadow: 2px -5px 15px rgb(0,0,0,.3);
   }
 }

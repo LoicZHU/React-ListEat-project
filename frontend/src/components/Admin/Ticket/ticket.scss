@@ -1,0 +1,26 @@
+@import 'src/styles/index.scss';
+
+li.ticket {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 2px $light-color solid !important;
+    padding: 1.5em 1em;
+    font-size: 1.5em;
+
+    .fa-user {
+      margin-left: 50%;
+      margin-right: 2%;
+    }
+
+    .fa-info-circle {
+      margin-left: 2%;
+      margin-right: 2%;
+    }
+
+    &:hover {
+      color: #fff;
+      background: $primary-color;
+      transition: .2s;
+    }
+}
