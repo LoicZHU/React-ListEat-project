@@ -6,6 +6,8 @@ import Header from 'src/components/Header';
 import Home from 'src/components/Home';
 import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
+import TicketForm from 'src/components/TicketForm';
+
 // == Import
 import './styles.css';
 
@@ -13,8 +15,9 @@ import './styles.css';
 const App = () => (
   <div className="app">
     <Header />
-    <Home />
     {/* <Login /> */}
+    {/* <Home /> */}
+    <TicketForm />
     <Footer />
   </div>
 );

@@ -3,7 +3,15 @@
 
 footer {
   background-color: $light-color;
+  position: fixed;
+  left: 0;
+  bottom: 0;
   width: 100%;
+
+  // clear: both;
+  // position: relative;
+  // height: 200px;
+  // margin-top: -200px;
 
   #footer-first {
     display: flex;
@@ -53,6 +61,12 @@ footer {
     flex-direction: column !important;
     text-align: center !important;
     align-items: center !important;
+
+
+  }
+
+  footer {
+    position: relative !important;
   }
 
 }

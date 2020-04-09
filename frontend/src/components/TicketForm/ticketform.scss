@@ -1,0 +1,32 @@
+@import 'src/styles/_vars.scss';
+
+.ticket-form--container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 3em 0;
+
+  .ticket-submit {
+    margin-top: 1em;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 auto 1em auto;
+    color: $primary-color;
+    width: 30%;
+    min-width: 300px;
+    line-height: 1.2em;
+    // font-family: 
+  }
+
+  .ticket-form {
+    width: 60%;
+    min-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+

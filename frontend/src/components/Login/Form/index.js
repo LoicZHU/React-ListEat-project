@@ -7,7 +7,7 @@ const Form = () => (
     <input id="user-input" placeholder="Adresse email"/>
     <input id="password-input" placeholder="Mot de passe" type="password"/>
     <span class="bottom-links"><a href="">Identifiant ou mot de passe oublié ?</a></span>
-    <button>Connexion</button>
+    <button className="button">Connexion</button>
     <span class="bottom-links"><a href="">Vous n'avez pas de compte ? Créez-en un en 5 minutes !</a></span>
   </form>
 );
