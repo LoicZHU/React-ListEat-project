@@ -11,7 +11,7 @@ const Cancellation = () => (
 
     <p>Vous avez annulé votre demande.</p>
 
-    <a className="ticket__cancellation__link" href="#">
+    <a className="ticket__cancellation__link" href="/restaurant/:id/tickets/add">
       Revenir sur la page d'inscription à la liste d'attente
     </a>
   </main>

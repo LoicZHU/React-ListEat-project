@@ -3,21 +3,46 @@
 .profile-container {
   display: flex;
   margin: 10px;
+  
+  p {
+    font-weight: bold;
+  }
 
   .infos-container {
     width: 70%;
     border: 1px solid grey;
     margin-right: 15px;
     padding: 1em;
+
+    .postcode__city {
+      display: flex;
+    }
+  }
+
+  .actual-pass {
+    display: flex;
+    align-items: center;
+
+    &-info {
+      font-size: 0.75em;
+      margin-right: 10px;
+    }
+  }
+
+  .save-button {
+    display: block;
+    margin: 10px auto 0;
   }
 
   .qr-container {
     width: 30%;
+    height: 20%;
     padding: 1em;
     border: 1px solid grey;
 
     .download-button {
-
+      display: block;
+      margin: 20px auto 10px;
     }
   }
 }

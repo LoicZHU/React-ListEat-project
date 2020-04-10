@@ -18,12 +18,12 @@ const Top = () => (
 
       <button
         className="home__top__partner__subscribe-button"
-        type="button"
+        type="button"       
       >
-        Inscription
+        <a href="/signup">Inscription</a>
       </button>
 
-      <a className="home__top__partner__link" href="#">
+      <a className="home__top__partner__link" href="/faq">
         Une question ?<br />
         Consultez notre rubrique d'aide
       </a>
