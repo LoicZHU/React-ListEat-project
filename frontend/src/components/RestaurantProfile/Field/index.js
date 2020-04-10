@@ -7,15 +7,13 @@ import './field.scss';
 
 // == Composant
 const Field = ({ name, type, placeholder }) => (
-  <div>
-    <input
-      id={name}
-      type={type}
-      className=""
-      placeholder={placeholder}
-      name={name}
-    />
-  </div>
+  <input
+    id={name}
+    type={type}
+    className="field input"
+    placeholder={placeholder}
+    name={name}
+  />
 );
 
 // == Export

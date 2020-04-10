@@ -17,6 +17,7 @@ import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
 import Faq from 'src/components/Faq';
 import Signup from 'src/components/Signup';
+import RestaurantProfile from 'src/components/RestaurantProfile';
 
 // == Import
 import './styles.css';
@@ -59,9 +60,16 @@ const App = () => (
     </Route>
 
     {/* Admin */}
-    <Route path="/restaurant" >
+    <Route path="/partner/:id/administration" exact >
       <Header />
       <Admin />
+      <Footer />
+    </Route>
+
+    {/* Admin */}
+    <Route path="/partner/:id/administration/edit" >
+      <Header />
+      <RestaurantProfile />
       <Footer />
     </Route>
 
@@ -87,7 +95,7 @@ const App = () => (
       <Footer />
     </Route>
 
-    {/* Client : Cancelllation of ticket */}
+    {/* Client : Cancellation of ticket */}
     <Route path="/tickets/:id/cancel" exact >
       <Header />
       <Confirmation />

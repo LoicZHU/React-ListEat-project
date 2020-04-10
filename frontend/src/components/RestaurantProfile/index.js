@@ -29,6 +29,7 @@ const RestaurantProfile = () => {
             />
 
             <Field
+              className="city"
               name="city"
               placeholder="Ville"
             />
@@ -48,14 +49,38 @@ const RestaurantProfile = () => {
         <div>
           <p>Modifier mes informations personnelles</p>
 
+          <Field
+            name="email"
+            placeholder="Téléphone"
+          />
 
+          <Field
+            name="newpass"
+            placeholder="Nouveau mot de passe"
+          />
+
+          <Field
+            name="newpassconfirmation"
+            placeholder="Confirmation du nouveau mot de passe"
+          />
         </div>
+
+        <div className="actual-pass">
+          <div className="actual-pass-info">
+            Pour valider ces modifications, merci d'indiquer votre mot de passe actuel
+          </div>
+
+          <Field
+            name="actualpass"
+            type="password"
+            placeholder="Mot de passe actuel"
+          />
+        </div>
+        <button className="save-button button-alt" type="button">Enregistrer</button>
       </div>
 
       <div className="qr-container">
         <p>Mon QR code</p>
-
-        LE QR CODE
 
         <button className="download-button button-alt" type="button">Télécharger</button>
       </div>

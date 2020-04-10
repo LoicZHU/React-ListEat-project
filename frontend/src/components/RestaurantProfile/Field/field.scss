@@ -1,2 +1,12 @@
-@import 'src/styles/_vars.scss';
+@import 'src/styles/index.scss';
 
+.field {
+  width: 100%;
+  min-width: 300px;
+  margin: .5em auto;
+  padding: 1em 1em;
+  border-radius: 5px;
+  border: 1px solid $light-color;
+  color: $dark-color;
+  font-size: 1em;
+}
