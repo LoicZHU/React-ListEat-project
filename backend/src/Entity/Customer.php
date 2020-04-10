@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Customer
 {
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

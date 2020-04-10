@@ -76,7 +76,7 @@ class UserController extends AbstractController
         $entityManager->flush();
 
 
-        //We send Email At The New Restaurant
+        // Email sent to the newly created User/Restaurant to confirm the registration
         $message = (new \Swift_Message('Information partenaire ListEat'))
 
             ->setFrom('send@example.com')

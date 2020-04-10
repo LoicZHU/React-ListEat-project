@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ticket
 {
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->status = 0;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
