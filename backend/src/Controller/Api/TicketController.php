@@ -18,7 +18,7 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/tickets", name="api_tickets", methods={"POST"})
      */
-    public function add(Request $request, RestaurantRepository $restaurantRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator)
+    public function add(Request $request, RestaurantRepository $restaurantRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
@@ -69,24 +69,22 @@ class TicketController extends AbstractController
         $entityManager->flush();
 
 
-        //We send Email At The New Restaurant
-        /*$message = (new \Swift_Message('Information partenaire ListEat'))
+         // Email sent to the customer to confirm the subscription to the waiting list
+        $message = (new \Swift_Message('Information client ListEat'))
 
             ->setFrom('send@example.com')
-            ->setTo($user->getEmail())
+            ->setTo($customer->getEmail())
             ->setBody(
                         $this->renderView(
-                            
-                            //TODO Registration Template 
-                            // templates/emails/registration.html.twig
-                            'emails/registration.html.twig',
+                            'emails/subscription.html.twig',
                             ['name' => $customer->getfirstName(),
+                            'restaurantName' => $restaurant->getName(),
                             'ticketId' => $ticket->getId()]
                         ),
-            'text/html'
+                        'text/html'
                     );
 
-        $mailer->send($message);*/
+        $mailer->send($message);
     
     return $this->json(['ticketId' => $ticket->getId()], Response::HTTP_CREATED);
     }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Subscription to the waiting list{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+                <p>{{name}},<br>
+                    Vous êtes bien inscrit sur la liste d'attente du restaurant {{ restaurantName }}.<br>
+                    Votre numéro de ticket est le : {{ ticketId }}<br>
+                    Bon appétit !
+                </p>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
