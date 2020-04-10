@@ -5,12 +5,21 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+// TODO : vérifier les contraintes notamment sur les integers
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RestaurantRepository")
  */
 class Restaurant
 {
+  
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->tickets = new ArrayCollection();
+    }
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,41 +29,49 @@ class Restaurant
 
     /**
      * @ORM\Column(type="string", length=14)
+     * @Assert\NotBlank()
      */
     private $siretCode;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $address;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     private $postcode;
 
     /**
      * @ORM\Column(type="string", length=180)
+     * @Assert\NotBlank()
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=180)
+     * @Assert\NotBlank()
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=15)
+     * @Assert\NotBlank()
      */
     private $phone;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
     private $averageEatingTime;
 
@@ -75,6 +92,8 @@ class Restaurant
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(type="integer")
+     * @Assert\NotBlank()
      */
     private $seatNb;
 
@@ -103,10 +122,6 @@ class Restaurant
      */
     private $qrCode;
 
-    public function __construct()
-    {
-        $this->tickets = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
