@@ -1,0 +1,27 @@
+@import 'src/styles/index.scss';
+
+.ticket__cancellation {
+  text-align: center;
+  margin: 2em 1em;
+
+  h1 {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  p {
+    margin: 20px 0 80px;
+  }
+
+  &__link {
+    cursor: pointer;
+    margin-bottom: 5rem;
+    display: inline-block;
+    color: $alt-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+}
