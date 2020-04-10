@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
  */
 class Ticket
 {
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->status = 0;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,6 +24,8 @@ class Ticket
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(type="integer")
+     * @Assert\Positive
      */
     private $coversNb;
 
@@ -46,6 +54,11 @@ class Ticket
      * @ORM\OneToOne(targetEntity="App\Entity\Customer", mappedBy="ticket", cascade={"persist", "remove"})
      */
     private $customer;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $estimatedWaitingTime;
 
     public function getId(): ?int
     {
@@ -125,6 +138,18 @@ class Ticket
         if ($customer->getTicket() !== $this) {
             $customer->setTicket($this);
         }
+
+        return $this;
+    }
+
+    public function getEstimatedWaitingTime(): ?int
+    {
+        return $this->estimatedWaitingTime;
+    }
+
+    public function setEstimatedWaitingTime(?int $estimatedWaitingTime): self
+    {
+        $this->estimatedWaitingTime = $estimatedWaitingTime;
 
         return $this;
     }
