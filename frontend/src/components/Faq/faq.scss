@@ -1,0 +1,52 @@
+@import 'src/styles/_vars.scss';
+
+.faq {
+  min-width: 400px;
+  width: 60%;
+  margin: 2em auto;
+
+  h1 {
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+
+  &__choice {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  &__links {
+    color: $alt-color;
+    text-align: center;
+    margin: 10px 40px 40px;
+    
+    a {
+      margin-right: 10px;
+    }
+
+    a:hover {
+      color: $primary-color;
+    }
+  }
+
+  &__content {
+    margin: 20px 0;
+    padding-right: 40%;
+
+    .faq__content__question {
+      font-weight: bold;
+    }
+  }
+
+  &__content:nth-child(2n+0) {
+    margin: 20px 0;
+    text-align: right;
+    padding-right: 0;
+    padding-left: 40%;
+
+    .faq__content__question {
+      font-weight: bold;
+    }
+  }
+}
