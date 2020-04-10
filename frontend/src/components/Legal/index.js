@@ -7,7 +7,7 @@ import './legal.scss';
 // == Composant
 const Legal = () => (
   <main className="legal">
-    <h1>Politique de protection des données</h1>
+    <h1>Mentions légales</h1>
 
     <div className="legal__content">
       <div>

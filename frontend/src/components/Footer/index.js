@@ -8,16 +8,16 @@ const Footer = () => {
       <div id="footer-first">
         <nav>
           <ul>
-            <li><a href="#">Mentions légales</a></li>
-            <li><a href="#">Politique de protection des données</a></li>
+            <li><a href="/legal">Mentions légales</a></li>
+            <li><a href="/data-protection">Politique de protection des données</a></li>
           </ul>
         </nav>
         <div id="contact-block">
           <img id="logo" src={Logo}/>
           <div className="contact-infos">
             <span className="title">Pour nous contacter :</span>
-            <span><i class="fa fa-envelope-o" aria-hidden="true"></i> Par mail: <a href="mailto:hello@listeat.io">hello@listeat.io</a></span>
-            <span><i class="fa fa-phone" aria-hidden="true"></i> Par téléphone: <a href="tel:+33158987845">01 58 98 78 45</a></span>
+            <span><i className="fa fa-envelope-o" aria-hidden="true"></i> Par mail: <a href="mailto:hello@listeat.io">hello@listeat.io</a></span>
+            <span><i className="fa fa-phone" aria-hidden="true"></i> Par téléphone: <a href="tel:+33158987845">01 58 98 78 45</a></span>
           </div>
         </div>
       </div>
