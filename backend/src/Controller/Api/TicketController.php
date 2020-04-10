@@ -21,39 +21,14 @@ class TicketController extends AbstractController
     public function add(Request $request, RestaurantRepository $restaurantRepository, DenormalizerInterface $denormalizer, ValidatorInterface $validator)
     {
 
-        /* le JSON attendu est :
-        {
-            "customer": {
-                "lastName": "Oclock",
-                "firstName": "Nicole",
-                "cellPhone": "0612345678",
-                "email": "nicole@oclock.io"		
-            },
-            "ticket": {
-                "coversNb",
-                "status"
-            }
-        }
-        */
-
         $data = json_decode($request->getContent());
-        //dd($data);
 
         $customer = $denormalizer->denormalize($data, Customer::class);
         $errorsCustomer = $validator->validate($customer);
 
         $ticket = $denormalizer->denormalize($data->ticket, Ticket::class);
         $errorsTicket = $validator->validate($ticket);
-
-        //$restaurant = $denormalizer->denormalize($data->restaurant, Restaurant::class);
-        //$errorsTicket = $validator->validate($ticket);
         
-        $restaurant = $restaurantRepository->find($data->restaurant);
-
-        $ticket->setRestaurant($restaurant);
-
-        $ticket->setCustomer($customer);
-
         $jsonErrors = [];
         // $errors est une ConstraintViolationList = se comporte comme un tableau
         if (count($errorsCustomer) !== 0) {
@@ -81,6 +56,12 @@ class TicketController extends AbstractController
         if(!empty($jsonErrors)){
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         } 
+
+        $restaurant = $restaurantRepository->find($data->restaurant);
+
+        $ticket->setRestaurant($restaurant);
+
+        $ticket->setCustomer($customer);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($customer);
