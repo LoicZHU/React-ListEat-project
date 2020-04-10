@@ -45,7 +45,7 @@ class QrCodeGenerator
         $logo = imagecreatefrompng("../ressource/logo/LogoListEat.png"); //Owner logo
 
 
-        //Text on the Qr Code
+        //Text on the Qr Code!
         $texte = "Scanner le Qr code pour prendre un ticket";
 
         // Text color
