@@ -6,6 +6,9 @@ body {
   font-family: $title-font !important;
 
   input {
+    max-height: 40px !important;
+    margin: .5em auto;
+    font-size: 1em;
     &:focus {
       box-shadow: inset 0px 0px 10px rgb(255,132,0,1);
       transition: box-shadow .5s;
@@ -37,7 +40,7 @@ body {
     background-color: $primary-color;
     color: #fff;
     font-size: 1em;
-    max-width: 100px;
+    // max-width: 100px;
     margin: 0 auto;
 
     &:hover {
