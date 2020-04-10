@@ -10,17 +10,23 @@ class Timer
      */
     public function estimatedTime($waitingNb, $averageEatingTime, $seatNb)
     {
-            if($waitingNb <= $seatNb){
+        $d = intval($averageEatingTime/3);
+   
+        $result = ($waitingNb*$averageEatingTime)/$seatNb;
 
-                return $averageEatingTime;
+        //convert result integer because we can get float number
+        $result = intval($result);
 
-            }else{
-                $result = ($waitingNb*$averageEatingTime)/$seatNb;
+        if($result<= $d){
+            $result = $d;
+        }
+        if($result > $d && $result <= ($d*2)){
+            $result = $d*2;
+        }
+        if($result > ($d*2) && $result <= $averageEatingTime){
+            $result = $averageEatingTime;
+        }
 
-                //convert result integer because we can get float number
-                $result = intval($result);
-
-                return $result;
-            }
+        return $result;
     }
 }
