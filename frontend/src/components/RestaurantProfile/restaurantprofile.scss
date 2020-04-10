@@ -1,0 +1,23 @@
+@import 'src/styles/index.scss';
+
+.profile-container {
+  display: flex;
+  margin: 10px;
+
+  .infos-container {
+    width: 70%;
+    border: 1px solid grey;
+    margin-right: 15px;
+    padding: 1em;
+  }
+
+  .qr-container {
+    width: 30%;
+    padding: 1em;
+    border: 1px solid grey;
+
+    .download-button {
+
+    }
+  }
+}
