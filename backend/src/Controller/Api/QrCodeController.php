@@ -2,10 +2,11 @@
 
 namespace App\Controller\Api;
 
+use App\Service\CryptoService;
+use App\Service\QrCodeGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Service\QrCodeGenerator;
 
 
 class QrCodeController extends AbstractController
@@ -17,9 +18,9 @@ class QrCodeController extends AbstractController
     {
         $response = QrCodeGenerator::generate();
 
-        if($response){
+        if ($response) {
             return $this->json(Response::HTTP_OK);
-        }else{
+        } else {
             return $this->json(Response::HTTP_BAD_REQUEST);
         }
     }
