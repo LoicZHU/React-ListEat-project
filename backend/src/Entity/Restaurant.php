@@ -112,6 +112,7 @@ class Restaurant
      */
     private $updatedAt;
 
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="restaurant", orphanRemoval=true)
      */
