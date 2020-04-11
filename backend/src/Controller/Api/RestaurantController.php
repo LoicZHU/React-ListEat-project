@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Restaurant;
+use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,18 +13,31 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class RestaurantController extends AbstractController
 {
+
     /**
-     * @Route("api/partner/{id}", name="api_restaurant_update",  methods={"PUT"})
+     * @Route("/api/partner/{id}", name="api_restaurant_show", methods={"GET"})
      */
-    public function edit($id, Request $request, ?Restaurant $restaurant,  DenormalizerInterface $denormalizer, ValidatorInterface $validator)
+    public function show($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository)
     {
         if($request->get('restaurant') === null){
             return $this->json( Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $restaurant = $this->getDoctrine()
-            ->getRepository(Restaurant::class)
-            ->find($id);
+        $restaurant = $restaurantRepository->find($id);
+        
+        return $this->json($restaurant, 200, [], ['groups' => 'restaurant_get']);
+    }
+
+    /**
+     * @Route("api/partner/{id}", name="api_restaurant_update",  methods={"PUT"})
+     */
+    public function edit($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository , DenormalizerInterface $denormalizer, ValidatorInterface $validator)
+    {
+        if($request->get('restaurant') === null){
+            return $this->json( Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $restaurant = $restaurantRepository->find($id);
 
         $data = json_decode($request->getContent());
 
