@@ -40,10 +40,8 @@ class ExceptionListener
                                   'request'=> $data,
         ]));
 
-
         // sends the modified response object to the event
         $event->setResponse($response);
-        //return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
         
     }
 }

@@ -23,7 +23,9 @@ class SiretService
         }if(strlen($siretCode) === 9){
             $response = Request::get('https://api.insee.fr/entreprises/sirene/V3/siren/'.$siretCode ,$opts);
         }
-        
+        if(!isset($response)){
+            return false;
+        }
         if($response->code == 200){
             return true;
         }else{
