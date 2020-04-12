@@ -118,7 +118,8 @@ class UserController extends AbstractController
 
         $mailer->send($message);
 
-        return $this->json(Response::HTTP_CREATED);
+        return $this->json(['message' => 'Votre inscription est finalisé.',
+                            'code' => Response::HTTP_CREATED]);
     }
 
 }
