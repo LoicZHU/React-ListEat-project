@@ -19,6 +19,25 @@ class TicketRepository extends ServiceEntityRepository
         parent::__construct($registry, Ticket::class);
     }
 
+    // SQL query:
+    // SELECT SUM(`covers_nb`) FROM `ticket` WHERE `restaurant_id` = 5 AND `ticket`.`status` = 1
+
+    public function findWaitingNb($restaurantId)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT SUM(t.coversNb)
+            FROM App\Entity\Ticket t
+            WHERE t.restaurant = :restaurantId
+            AND t.status = 1'
+        );
+        $query->setParameter('restaurantId', $restaurantId);
+
+        // returns total number of covers for active tickets, for a given restaurant
+        return $query->getSingleScalarResult();;
+    }
+    
     // /**
     //  * @return Ticket[] Returns an array of Ticket objects
     //  */
