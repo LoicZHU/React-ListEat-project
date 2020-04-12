@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\QrCode;
 use App\Entity\Restaurant;
+use App\Service\GeocodingService;
 use App\Service\CryptoService;
 use App\Service\QrCodeGenerator;
 use App\Repository\RestaurantRepository;
@@ -75,6 +76,22 @@ class QrCodeController extends AbstractController
         $em->refresh($QrCode);
         
     return $this->json(['QrCodeUrl' => $QrCode->getUrl()], Response::HTTP_CREATED);
+    }
+
+    /**
+     * test get information gps by address
+     * @Route("/api/qr/test", name="api_qr_test", methods={"GET"} )
+     */
+    public function generate()
+    {
+        $data = GeocodingService::geocodeAddress('3 rue de la victoire 71200 Le breuil');
+
+        dd($data);
+        if ($data !== false) {
+            return $this->json( $data,Response::HTTP_OK);
+        } else {
+            return $this->json(Response::HTTP_BAD_REQUEST);
+        }
     }
 
 
