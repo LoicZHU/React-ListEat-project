@@ -12,6 +12,7 @@ class Timer
      */
     public function estimatedTime($waitingNb, $averageEatingTime, $seatNb)
     {
+
         $d = intval($averageEatingTime/3);
    
         $result = ($waitingNb*$averageEatingTime)/$seatNb;

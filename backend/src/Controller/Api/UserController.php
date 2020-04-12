@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\User;
 use App\Entity\Restaurant;
+use App\Service\GeocodingService;
 use App\Repository\RoleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -61,6 +62,20 @@ class UserController extends AbstractController
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+
+
+            $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
+            
+            $restaurantPosition = GeocodingService::geocodeAddress($address);
+            //dd($restaurantPosition);
+            if(empty($restaurantPosition['lat'])){
+                return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
+            }else{
+                $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
+                $user->setRestaurant($restaurant->setLatitude($restaurantPosition['lat']));
+            } 
+
+
         $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
         // if $data->role is not set, default role is RESTAURATEUR (id : 1)
@@ -70,6 +85,9 @@ class UserController extends AbstractController
             $role = $roleRepository->find($data->role);
         }
         $user->setRole($role);
+
+        //dd($user->getRestaurant()->getCity());
+        //die();
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);

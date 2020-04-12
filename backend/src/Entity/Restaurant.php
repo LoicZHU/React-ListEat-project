@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 // TODO : vérifier les contraintes notamment sur les integers
 
 /**
@@ -24,54 +25,63 @@ class Restaurant
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("restaurant_get")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=14)
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $siretCode;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $address;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $postcode;
 
     /**
      * @ORM\Column(type="string", length=180)
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=180)
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=15)
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $phone;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $averageEatingTime;
 
@@ -94,11 +104,13 @@ class Restaurant
      * @ORM\Column(type="integer")
      * @Assert\Type(type="integer")
      * @Assert\NotBlank()
+     * @Groups("restaurant_get")
      */
     private $seatNb;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups("restaurant_get")
      */
     private $status;
 
@@ -120,6 +132,7 @@ class Restaurant
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\QrCode", inversedBy="restaurant", cascade={"persist", "remove"})
+     * @Groups("restaurant_get")
      */
     private $qrCode;
 
