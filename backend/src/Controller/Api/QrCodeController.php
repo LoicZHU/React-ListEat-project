@@ -3,18 +3,13 @@
 namespace App\Controller\Api;
 
 use App\Entity\QrCode;
-use App\Entity\Restaurant;
-use App\Service\GeocodingService;
-use App\Service\CryptoService;
 use App\Service\QrCodeGenerator;
 use App\Repository\RestaurantRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+
 
 
 class QrCodeController extends AbstractController
@@ -38,12 +33,10 @@ class QrCodeController extends AbstractController
     /**
      * @Route("api/partner/{id}/qrcode", name="api_QrCode_add", methods={"POST"})
      */
-    public function add($id,ValidatorInterface $validator)
+    public function add($id,ValidatorInterface $validator, RestaurantRepository $restaurantRepository)
     {
 
-        $restaurant = $this->getDoctrine()
-                    ->getRepository(Restaurant::class)
-                    ->find($id);
+        $restaurant = $restaurantRepository->find($id);
 
         if (!$restaurant) {
             return $this->json(Response::HTTP_BAD_REQUEST);
@@ -77,22 +70,4 @@ class QrCodeController extends AbstractController
         
     return $this->json(['QrCodeUrl' => $QrCode->getUrl()], Response::HTTP_CREATED);
     }
-
-    /**
-     * test get information gps by address
-     * @Route("/api/qr/test", name="api_qr_test", methods={"GET"} )
-     */
-    public function generate()
-    {
-        $data = GeocodingService::geocodeAddress('3 rue de la victoire 71200 Le breuil');
-
-        dd($data);
-        if ($data !== false) {
-            return $this->json( $data,Response::HTTP_OK);
-        } else {
-            return $this->json(Response::HTTP_BAD_REQUEST);
-        }
-    }
-
-
 }

@@ -19,12 +19,12 @@ class GeocodingService
         //on enregistre les résultats recherchés
         if ($json->status == 'OK' && count($json->results) > 0) {
             $res = $json->results[0];
-            //adresse complète et latitude/longitude
+            //full address  and latitude/longitude
             $data['address'] = $res->formatted_address;
             $data['lat'] = $res->geometry->location->lat;
             $data['lng'] = $res->geometry->location->lng;
             foreach ($res->address_components as $component) {
-                //ville
+                //City
                 if ($component->types[0] == 'locality') {
                     $data['city'] = $component->long_name;
                 }

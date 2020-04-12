@@ -6,6 +6,8 @@ use App\Entity\Ticket;
 use App\Entity\Customer;
 use App\Entity\Restaurant;
 use App\Repository\RestaurantRepository;
+use App\Repository\TicketRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

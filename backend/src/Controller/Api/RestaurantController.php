@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Restaurant;
 use App\Repository\RestaurantRepository;
+use App\Service\GeocodingService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +44,24 @@ class RestaurantController extends AbstractController
 
         $Newdata = $denormalizer->denormalize($data->restaurant, Restaurant::class);
 
+        $errorsNewdata = $validator->validate($Newdata);
+
+        $jsonErrors = [];
+        // $errors est une ConstraintViolationList = se comporte comme un tableau
+        if (count($errorsNewdata) !== 0) {
+            //$jsonErrors = [];
+            foreach ($errorsNewdata as $error) {
+                $jsonErrors[] = [
+                    'field' => $error->getPropertyPath(),
+                    'message' => $error->getMessage(),
+                ];
+            }
+        }
+
+        if(!empty($jsonErrors)){
+            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         if(!empty($Newdata->getName())){
             $restaurant->setName($Newdata->getName());
         }
@@ -51,15 +70,19 @@ class RestaurantController extends AbstractController
         }
         if(!empty($Newdata->getAddress())){
             $restaurant->setAddress($Newdata->getAddress());
+            $updatePosition = true;
         }
         if(!empty($Newdata->getPostcode())){
             $restaurant->setPostcode($Newdata->getPostcode());
+            $updatePosition = true;
         }
         if(!empty($Newdata->getCity())){
             $restaurant->setCity($Newdata->getCity());
+            $updatePosition = true;
         }
         if(!empty($Newdata->getCountry())){
             $restaurant->setCountry($Newdata->getCountry());
+            $updatePosition = true;
         }
         if(!empty($Newdata->getPhone())){
             $restaurant->setPhone($Newdata->getPhone());
@@ -73,17 +96,21 @@ class RestaurantController extends AbstractController
         if(!empty($Newdata->getStatus())){
             $restaurant->setStatus($Newdata->getStatus());
         }
-        if(!empty($Newdata->getLatitude())){
-            $restaurant->setLatitude($Newdata->getLatitude());
-        }
-        if(!empty($Newdata->getLongitude())){
-            $restaurant->setLongitude($Newdata->getLongitude());
-        }
         if(!empty($Newdata->getMenuURL())){
             $restaurant->setMenuURL($Newdata->getMenuURL());
         }
-        if(!empty($Newdata->getLongitude())){
-            $restaurant->setLongitude($Newdata->getLongitude());
+
+        if(isset($updatePosition)){
+            $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
+            
+            $restaurantPosition = GeocodingService::geocodeAddress($address);
+            //dd($restaurantPosition);
+            if(empty($restaurantPosition['lat'])){
+
+                return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
+            }else{
+                $restaurant->setLongitude($restaurantPosition['lng']);
+            }   $restaurant->setLatitude($restaurantPosition['lat']);
         }
 
         $restaurant->setUpdatedAt(new \DateTime);
