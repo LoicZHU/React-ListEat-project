@@ -5,6 +5,8 @@ namespace App\Controller\Api;
 use App\Entity\Ticket;
 use App\Entity\Customer;
 use App\Entity\Restaurant;
+use App\Repository\CustomerRepository;
+use App\Repository\TicketRepository;
 use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,25 +69,61 @@ class TicketController extends AbstractController
         $entityManager->persist($customer);
         $entityManager->persist($ticket);
         $entityManager->flush();
+    
+    return $this->json(['ticketId' => $ticket->getId(), 'estimatedWaitingTime' => 30], Response::HTTP_CREATED);
+    }
 
+    /**
+     * @Route("/api/tickets/id", name="api_tickets_edit", methods={"PUT"})
+     */
+    public function edit(Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
+    {
 
-         // Email sent to the customer to confirm the subscription to the waiting list
+        $data = json_decode($request->getContent());
+        
+        $ticket = $ticketRepository->find($data->ticket->id);
+        
+        if ($ticket) {
+        $customer = $customerRepository->findBy(['ticket' => $ticket->getId()]);
+        // when findBy is used, it returns an array in which the results/objects are stored, therefore, in order to use methods on an object (impossible on an array) we have to retrieve the object with its key
+        $customer = $customer[0];
+        $restaurant = $restaurantRepository->findBy(['id' => $ticket->getRestaurant()]);
+        $restaurant = $restaurant[0];
+        } else {
+            return $this->json(['message' => 'Le ticket n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($data->ticket->validation == "validate") {
+            $ticket->setStatus(1);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+        // Email sent to the customer to confirm the subscription to the waiting list
         $message = (new \Swift_Message('Information client ListEat'))
 
-            ->setFrom('send@example.com')
-            ->setTo($customer->getEmail())
-            ->setBody(
-                        $this->renderView(
-                            'emails/subscription.html.twig',
-                            ['name' => $customer->getfirstName(),
-                            'restaurantName' => $restaurant->getName(),
-                            'ticketId' => $ticket->getId()]
-                        ),
-                        'text/html'
-                    );
+        ->setFrom('send@example.com')
+        ->setTo($customer->getEmail())
+        ->setBody(
+                    $this->renderView(
+                        'emails/subscription.html.twig',
+                        ['name' => $customer->getfirstName(),
+                        'restaurantName' => $restaurant->getName(),
+                        'ticketId' => $ticket->getId()]
+                    ),
+                    'text/html'
+                );
 
         $mailer->send($message);
-    
-    return $this->json(['ticketId' => $ticket->getId()], Response::HTTP_CREATED);
+
+        return $this->json(['ticketId' => $ticket->getId(), 'estimatedWaitingTime' => 30], Response::HTTP_OK);
+
+        } elseif ($data->ticket->validation == "cancel") {
+            $ticket->setStatus(0);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            return $this->json(['ticketId' => $ticket->getId()], Response::HTTP_OK);
+        }
+
+
     }
 }
