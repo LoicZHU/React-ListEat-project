@@ -43,3 +43,19 @@ Requêtes JSON
 }
 
 ------------------------------------------
+/api/partner/login
+
+{ 
+	"username": "toto@toto.fr", "password": "toto" 
+}
+------------------------------------------
+/api/tickets/id PUT
+
+{
+	"ticket": {
+		"id": 4,
+		"validation": "cancel" / "validate"
+	}
+} 
+
+-------------------------------------------
