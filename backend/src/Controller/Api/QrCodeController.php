@@ -5,7 +5,6 @@ namespace App\Controller\Api;
 use App\Entity\QrCode;
 use App\Service\QrCodeGenerator;
 use App\Repository\RestaurantRepository;
-use App\Service\SiretService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
