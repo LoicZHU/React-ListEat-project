@@ -38,9 +38,15 @@ class QrCode
      */
     private $restaurant;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->status = 0;
     }
 
     public function getId(): ?int
@@ -98,6 +104,18 @@ class QrCode
         if ($restaurant->getQrCode() !== $newQrCode) {
             $restaurant->setQrCode($newQrCode);
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

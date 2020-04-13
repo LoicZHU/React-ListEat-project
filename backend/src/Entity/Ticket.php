@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
@@ -19,6 +20,7 @@ class Ticket
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("tickets_get")
      */
     private $id;
 
@@ -26,11 +28,13 @@ class Ticket
      * @ORM\Column(type="integer")
      * @Assert\Type(type="integer")
      * @Assert\Positive
+     * @Groups("tickets_get")
      */
     private $coversNb;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Groups("tickets_get")
      */
     private $status;
 
@@ -52,11 +56,13 @@ class Ticket
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Customer", mappedBy="ticket", cascade={"persist", "remove"})
+     * @Groups("tickets_get")
      */
     private $customer;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("tickets_get")
      */
     private $estimatedWaitingTime;
 

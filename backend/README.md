@@ -48,10 +48,8 @@ Requêtes JSON
 /api/tickets/id PUT
 
 {
-	"ticket": {
-		"id": 4,
-		"validation": "cancel" / "validate"
-	}
+	"validation": "cancel"
 } 
+
 
 -------------------------------------------

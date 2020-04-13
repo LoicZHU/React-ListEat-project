@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
@@ -19,24 +20,28 @@ class Customer
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("tickets_get")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
+     * @Groups("tickets_get")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
+     * @Groups("tickets_get")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=12)
      * @Assert\NotBlank()
+     * @Groups("tickets_get")
      */
     private $cellPhone;
 
@@ -44,6 +49,7 @@ class Customer
      * @ORM\Column(type="string", length=180)
      * @Assert\Email()
      * @Assert\NotBlank()
+     * @Groups("tickets_get")
      */
     private $email;
 

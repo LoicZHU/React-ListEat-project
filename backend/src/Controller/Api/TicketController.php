@@ -8,7 +8,6 @@ use App\Entity\Customer;
 use App\Repository\TicketRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\RestaurantRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,17 +81,17 @@ class TicketController extends AbstractController
     }
 
     /**
-     * @Route("/api/tickets/id", name="api_tickets_edit", methods={"PUT"})
+     * @Route("/api/tickets/{id<\d+>}", name="api_tickets_edit", methods={"PUT"})
      */
-    public function edit(Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
+    public function edit($id, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
         
-        $ticket = $ticketRepository->find($data->ticket->id);
+        $ticket = $ticketRepository->find($id);
         
         if ($ticket) {
-        $customer = $customerRepository->findBy(['ticket' => $ticket->getId()]);
+        $customer = $customerRepository->findBy(['ticket' => $ticket]);
         // when findBy is used, it returns an array in which the results/objects are stored, therefore, in order to use methods on an object (impossible on an array) we have to retrieve the object with its key
         $customer = $customer[0];
         $restaurant = $restaurantRepository->findBy(['id' => $ticket->getRestaurant()]);
@@ -103,7 +102,7 @@ class TicketController extends AbstractController
 
         // depending on the value of "validation" ("validate" or "cancel" - can be changed later) in the JSON, the ticket's status will be set to Active (1) or Inactive (0) and an emailing to the customer will be triggered or not
 
-        if ($data->ticket->validation == "validate") {
+        if ($data->validation == "validate") {
             $ticket->setStatus(1);
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
@@ -130,7 +129,7 @@ class TicketController extends AbstractController
 
         return $this->json(['message' => 'Votre inscription à la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime()], Response::HTTP_OK);
 
-        } elseif ($data->ticket->validation == "cancel") {
+        } elseif ($data->validation == "cancel") {
             $ticket->setStatus(0);
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
@@ -139,5 +138,22 @@ class TicketController extends AbstractController
         }
 
     }
+
+     /**
+     * @Route("/api/partner/{id<\d+>}/tickets", name="api_tickets_show", methods={"GET"})
+     */
+    public function showAll($id, TicketRepository $ticketRepository, RestaurantRepository $restaurantRepository)
+    {
+        $restaurant = $restaurantRepository->find($id);
+
+        if (!$restaurant) {
+            return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+        
+        $tickets = $ticketRepository->findBy(['restaurant' => $restaurant]);
+
+        return $this->json($tickets, 200, [], ['groups' => 'tickets_get']);
+    }
+
 
 }
