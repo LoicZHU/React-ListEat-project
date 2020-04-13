@@ -5,6 +5,10 @@
   flex-direction: row;
   width: 100%;
 
+  span {
+    margin-bottom: 0!important;
+  }
+
   #left-section {
     width: 70%;
     display: flex;

@@ -40,35 +40,38 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
 
-    // case CHECK_LOGGED_RESTAURANT:
-    //   axios({
-    //     method: 'post',
-    //     url: 'http://localhost:3001/isLogged',
-    //     withCredentials: true,
-    //   })
-    //     .then((response) => {
-    //       store.dispatch(logUser(response.data.logged));
-    //     })
-    //     .catch((error) => {
-    //       console.warn(error);
-    //     });
-    //   next(action);
-    //   break;
+    case CHECK_LOGGED_RESTAURANT:
+      axios({
+        method: 'post',
+        url: 'http://localhost:8001/api/partner/islogged',
+        withCredentials: true,
+      })
+        .then((response) => {
+          store.dispatch(logUser(response.data.logged));
+          // console.log(response);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
 
-    // case LOG_OUT:
-    //   axios({
-    //     method: 'post',
-    //     url: 'http://localhost:3001/logout',
-    //     withCredentials: true,
-    //   })
-    //     .then((response) => {
-    //       // store.dispatch(logOut(response.data.logged));
-    //     })
-    //     .catch((error) => {
-    //       console.warn(error);
-    //     });
-    //   next(action);
-    //   break;
+    case LOG_OUT:
+      axios({
+        method: 'get',
+        url: 'http://localhost:8001/logout'
+      })
+        .then((response) => {
+          store.dispatch(logOut());
+          window.location.replace('/');
+          console.log('ok');
+
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
 
     default:
       next(action);

@@ -29,7 +29,7 @@ const userReducer = (state = initialState, action = {}) => {
     case LOG_OUT:
       return {
         ...state,
-        isLogged: action.isLogged,
+        isLogged: false,
       };
 
     case SHOW_LOGIN_ERROR:

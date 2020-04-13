@@ -32,7 +32,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
 
   return (
     <div className="app">
-      {checkingLoggedRestaurant && (
+      
         <>
           {/* Home */}
           <Route path="/" exact>
@@ -44,8 +44,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
-            {!isRestaurantLogged && <Login />}
-            {isRestaurantLogged && <Redirect to="/" />}
+            <Login />
             <Footer />
           </Route>
 
@@ -67,44 +66,36 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           <Route path="/partner/:id/administration" exact>
             <Header />
             <Admin />
-            {!isRestaurantLogged && <Home />}
-            <Footer />
           </Route>
 
           {/* Admin */}
           <Route path="/partner/:id/administration/edit">
             <Header />
             <RestaurantProfile />
-            {!isRestaurantLogged && <Home />}
-            <Footer />
           </Route>
 
           {/* Client : Get a ticket */}
           <Route path="/restaurant/:id/tickets/add" exact>
             <Header />
             <TicketForm />
-            <Footer />
           </Route>
 
           {/* Client : Validate the ticket */}
           <Route path="/restaurant/:id/tickets/validate" exact>
             <Header />
             <Validation />
-            <Footer />
           </Route>
 
           {/* Client : Confirmation of ticket */}
           <Route path="/tickets/:id" exact>
             <Header />
             <Confirmation />
-            <Footer />
           </Route>
 
           {/* Client : Cancellation of ticket */}
           <Route path="/tickets/:id/cancel" exact>
             <Header />
             <Cancellation />
-            <Footer />
           </Route>
 
           {/* FAQ */}
@@ -128,7 +119,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
         </>
-      )}
+     
     </div>
   );
 };
