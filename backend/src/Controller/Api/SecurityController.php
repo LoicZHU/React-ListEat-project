@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class SecurityController extends AbstractController
 {
@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("api/partner/logout", name="api_logout", methods={"GET"})
+     * @Route("/logout", name="api_logout", methods={"GET"})
      */
     public function logout()
     {
@@ -46,5 +46,21 @@ class SecurityController extends AbstractController
     //"username": "dunglas",
     //"password": ""
     //}
+
+    /**
+     * @Route("api/partner/islogged", name="api_", methods={"POST"})
+     * @IsGranted("ROLE_RESTAURATEUR")
+     */
+    public function islogged(){
+
+        $user = $this->getUser();
+
+        return $this->json([
+            'username' => $user->getUsername(),
+            'restaurantId' => $user->getRestaurant()->getId(),
+            'restaurantStatus' => $user->getRestaurant()->getStatus()
+        ], Response::HTTP_OK);
+    
+        }
 
 }

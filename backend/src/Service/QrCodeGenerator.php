@@ -68,6 +68,8 @@ class QrCodeGenerator
         //Remove the Qr-code with Out Logo
         unlink($_SERVER['PWD'].'/file/temp/Qrcode'.$restaurantId.'.png');
 
+        
+
 
         if (file_exists($UrlImage)) {
             return $UrlImage;

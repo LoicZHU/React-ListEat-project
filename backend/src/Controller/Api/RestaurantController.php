@@ -44,24 +44,6 @@ class RestaurantController extends AbstractController
 
         $Newdata = $denormalizer->denormalize($data->restaurant, Restaurant::class);
 
-        $errorsNewdata = $validator->validate($Newdata);
-
-        $jsonErrors = [];
-        // $errors est une ConstraintViolationList = se comporte comme un tableau
-        if (count($errorsNewdata) !== 0) {
-            //$jsonErrors = [];
-            foreach ($errorsNewdata as $error) {
-                $jsonErrors[] = [
-                    'field' => $error->getPropertyPath(),
-                    'message' => $error->getMessage(),
-                ];
-            }
-        }
-
-        if(!empty($jsonErrors)){
-            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
         if(!empty($Newdata->getName())){
             $restaurant->setName($Newdata->getName());
         }
@@ -111,6 +93,24 @@ class RestaurantController extends AbstractController
             }else{
                 $restaurant->setLongitude($restaurantPosition['lng']);
             }   $restaurant->setLatitude($restaurantPosition['lat']);
+        }
+
+        $errorsNewdata = $validator->validate($restaurant);
+
+        $jsonErrors = [];
+        // $errors est une ConstraintViolationList = se comporte comme un tableau
+        if (count($errorsNewdata) !== 0) {
+            //$jsonErrors = [];
+            foreach ($errorsNewdata as $error) {
+                $jsonErrors[] = [
+                    'field' => $error->getPropertyPath(),
+                    'message' => $error->getMessage(),
+                ];
+            }
+        }
+
+        if(!empty($jsonErrors)){
+            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $restaurant->setUpdatedAt(new \DateTime);

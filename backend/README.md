@@ -34,7 +34,6 @@ Requêtes JSON
 	"phone": "0620323333",
 	"average_eating_time": 45,
 	"seat_nb": 60,
-	"status" : 1
 	}
 }
 
@@ -53,3 +52,15 @@ Requêtes JSON
 
 
 -------------------------------------------
+
+
+$vote = $authenticatedVoter->vote($token, $object, ['IS_AUTHENTICATED_FULLY']);
+
+                // Le user est-il MODERATOR
+                if ($this->security->isGranted('ROLE_MODERATOR')) {
+                    return true;
+                }
+
+				$this->denyAccessUnlessGranted('can-answer', $question);
+
+				@IsGranted("ROLE_RESTAURATEUR")
