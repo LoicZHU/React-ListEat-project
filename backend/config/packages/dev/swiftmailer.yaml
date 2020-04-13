@@ -4,4 +4,5 @@ swiftmailer:
     delivery_addresses: ['team@listeat.io']
 
     #bin/console doctrine:database:create
-    
+
+    #bin/console doctrine:database:create

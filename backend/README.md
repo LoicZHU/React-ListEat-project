@@ -29,6 +29,7 @@ Requêtes JSON
 	"address": "2 Place de la République",
 	"postcode": 69002,
 	"city": "Lyon",
+          
 	"country": "FRANCE",
 	"phone": "0620323333",
 	"average_eating_time": 45,
@@ -41,7 +42,7 @@ Requêtes JSON
 /api/partner/login
 
 { 
-	"username": "toto@toto.fr", "password": "toto" 
+	"username": "damiende@gmil.om", "password": "toto" 
 }
 ------------------------------------------
 /api/tickets/id PUT
@@ -54,16 +55,3 @@ Requêtes JSON
 } 
 
 -------------------------------------------
-
-bin/console d:m:m
-
-composer require nelmio/cors-bundle
-
-CORS_ALLOW_ORIGIN=^https?://localhost:?[0-9]*$
-
-
-    Content-Type: application/json
-    
-	siretcode : 49066714400011
-
-	http://localhost:8001/_profiler/83f5b0

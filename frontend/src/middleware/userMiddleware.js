@@ -16,17 +16,19 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN:
       axios({
         method: 'post',
-        url: 'http://localhost:3001/login',
+        url: 'http://localhost:8001/api/partner/login',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         data: {
-          email: store.getState().user.email,
+          username: store.getState().user.email,
           password: store.getState().user.password,
         },
-        // cookies
-        withCredentials: true,
+        withCredentials: true, // handle cookies ;
       })
         .then((response) => {
           console.log(response);
-          store.dispatch(logUser(response.data.logged));
+          // store.dispatch(logUser(response.data.logged));
         })
         .catch((error) => {
           console.warn(error);
@@ -34,20 +36,20 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
 
-    case CHECK_LOGGED_RESTAURANT:
-      axios({
-        method: 'post',
-        url: 'http://localhost:3001/isLogged',
-        withCredentials: true,
-      })
-        .then((response) => {
-          store.dispatch(logUser(response.data.logged));
-        })
-        .catch((error) => {
-          console.warn(error);
-        });
-      next(action);
-      break;
+    // case CHECK_LOGGED_RESTAURANT:
+    //   axios({
+    //     method: 'post',
+    //     url: 'http://localhost:3001/isLogged',
+    //     withCredentials: true,
+    //   })
+    //     .then((response) => {
+    //       store.dispatch(logUser(response.data.logged));
+    //     })
+    //     .catch((error) => {
+    //       console.warn(error);
+    //     });
+    //   next(action);
+    //   break;
 
     case LOG_OUT:
       axios({

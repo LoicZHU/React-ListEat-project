@@ -13,6 +13,7 @@ import TicketForm from 'src/components/TicketForm';
 import PasswordForgotten from 'src/components/PasswordForgotten';
 import Validation from 'src/components/Validation';
 import Confirmation from 'src/components/Confirmation';
+import Cancellation from 'src/components/Cancellation';
 import Admin from 'src/components/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
@@ -31,7 +32,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
 
   return (
     <div className="app">
-      {!checkingLoggedRestaurant && (
+      {checkingLoggedRestaurant && (
         <>
           {/* Home */}
           <Route path="/" exact>
@@ -102,7 +103,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           {/* Client : Cancellation of ticket */}
           <Route path="/tickets/:id/cancel" exact>
             <Header />
-            <Confirmation />
+            <Cancellation />
             <Footer />
           </Route>
 

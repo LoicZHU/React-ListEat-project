@@ -29,6 +29,7 @@ const Header = ({ isRestaurantLogged, handleLogout }) => {
           <a href="/"><img src={Logo}/></a>
         </div>
 
+
         {!isRestaurantLogged && (
           <a href="/login"><span className="header-nav-button button">Connexion</span></a>
         )}
