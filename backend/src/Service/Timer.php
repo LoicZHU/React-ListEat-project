@@ -32,4 +32,15 @@ class Timer
 
         return $result;
     }
+
+     /**
+     * returns a time
+     * estimated hour
+     */
+    public function estimatedHour($estimatedTime)
+    {
+        $result = date("d/m/Y H:i:s", strtotime('now +'.$estimatedTime.' Minutes')); 
+       
+        return $result;
+    }
 }

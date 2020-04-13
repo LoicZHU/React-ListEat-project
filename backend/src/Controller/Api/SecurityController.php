@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
     //}
 
     /**
-     * @Route("api/partner/islogged", name="api_", methods={"POST"})
+     * @Route("api/partner/islogged", name="api_islogged", methods={"POST"})
      * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function islogged(){
