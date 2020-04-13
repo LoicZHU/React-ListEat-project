@@ -18,22 +18,17 @@ Requêtes JSON
 /api/partner
 
 {
-"role": {
-    "id": 1,
-  "name": "ROLE_USER",
-  "label": "ROLE_USER"
-  },
 "email": "anTHIuvfvfvoipR@gmail.com",
 "password": "toto",
 "lastName": "HUGUENY",
 "firstName": "damien",
 
  "restaurant":{
-	"siret_code": "12345678912345",
+	"siret_code": "49066714400011",
 	"name": "CHEZ BABA",
-	"address": "3 rue du slip",
-	"postcode": 71200,
-	"city": "lille",
+	"address": "2 Place de la République",
+	"postcode": 69002,
+	"city": "Lyon",
 	"country": "FRANCE",
 	"phone": "0620323333",
 	"average_eating_time": 45,
@@ -59,3 +54,16 @@ Requêtes JSON
 } 
 
 -------------------------------------------
+
+bin/console d:m:m
+
+composer require nelmio/cors-bundle
+
+CORS_ALLOW_ORIGIN=^https?://localhost:?[0-9]*$
+
+
+    Content-Type: application/json
+    
+	siretcode : 49066714400011
+
+	http://localhost:8001/_profiler/83f5b0

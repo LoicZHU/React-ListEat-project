@@ -1,5 +1,7 @@
 # See https://symfony.com/doc/current/email/dev_environment.html
 swiftmailer:
     # send all emails to a specific address
-    delivery_addresses: ['shapi94@gmail.com']
-#damienhugueny7
+    delivery_addresses: ['team@listeat.io']
+
+    #bin/console doctrine:database:create
+    

@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "endroid/qr-code": "^3.7",
         "mashape/unirest-php": "^3.0",
+        "nelmio/cors-bundle": "^2.0",
         "phpseclib/phpseclib": "~2.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.0.*",
