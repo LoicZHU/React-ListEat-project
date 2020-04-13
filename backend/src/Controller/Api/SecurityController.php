@@ -58,7 +58,8 @@ class SecurityController extends AbstractController
         return $this->json([
             'username' => $user->getUsername(),
             'restaurantId' => $user->getRestaurant()->getId(),
-            'restaurantStatus' => $user->getRestaurant()->getStatus()
+            'restaurantStatus' => $user->getRestaurant()->getStatus(),
+            'logged' => true
         ], Response::HTTP_OK);
     
         }
