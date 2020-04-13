@@ -32,11 +32,11 @@ const Header = ({ isRestaurantLogged, handleLogout }) => {
         </div>
 
 
-        {isRestaurantLogged && (
+        {!isRestaurantLogged && (
           <a href="/login"><span className="header-nav-button button">Connexion</span></a>
         )}
 
-        {!isRestaurantLogged && (
+        {isRestaurantLogged && (
           <a onClick={handleClick}><span className="header-nav-button button">Déconnexion</span></a>
         )}
 
@@ -48,6 +48,7 @@ const Header = ({ isRestaurantLogged, handleLogout }) => {
 // props check
 Header.propTypes = {
   isRestaurantLogged: PropTypes.bool.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 // export
