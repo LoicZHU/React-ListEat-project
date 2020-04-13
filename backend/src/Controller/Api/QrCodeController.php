@@ -43,7 +43,7 @@ class QrCodeController extends AbstractController
         } 
 
         //we generat the QRccode if the restaurant exist
-        $lien = QrCodeGenerator::generate($id);
+        $lien = QrCodeGenerator::generate($id,$restaurant->getName());
 
         $QrCode = new QrCode;
         $QrCode->setUrl($lien);
