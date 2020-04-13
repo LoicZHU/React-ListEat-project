@@ -1,15 +1,21 @@
 // import npm
-import { createStore } from 'redux';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import
 import reducer from 'src/reducers';
+import userMiddleware from 'src/middleware/userMiddleware';
 
+const enhancers = composeWithDevTools(
+  applyMiddleware(
+    userMiddleware,
+  ),
+);
+
+// store
 const store = createStore(
-  // reducer
-  reducer,
-  // enhancer
-  devToolsEnhancer(),
+  reducer, // reducer
+  enhancers, // enhancers
 );
 
 // export

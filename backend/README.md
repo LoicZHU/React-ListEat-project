@@ -18,22 +18,18 @@ Requêtes JSON
 /api/partner
 
 {
-"role": {
-    "id": 1,
-  "name": "ROLE_USER",
-  "label": "ROLE_USER"
-  },
 "email": "anTHIuvfvfvoipR@gmail.com",
 "password": "toto",
 "lastName": "HUGUENY",
 "firstName": "damien",
 
  "restaurant":{
-	"siret_code": "12345678912345",
+	"siret_code": "49066714400011",
 	"name": "CHEZ BABA",
-	"address": "3 rue du slip",
-	"postcode": 71200,
-	"city": "lille",
+	"address": "2 Place de la République",
+	"postcode": 69002,
+	"city": "Lyon",
+          
 	"country": "FRANCE",
 	"phone": "0620323333",
 	"average_eating_time": 45,
@@ -46,7 +42,7 @@ Requêtes JSON
 /api/partner/login
 
 { 
-	"username": "toto@toto.fr", "password": "toto" 
+	"username": "damiende@gmil.om", "password": "toto" 
 }
 ------------------------------------------
 /api/tickets/id PUT

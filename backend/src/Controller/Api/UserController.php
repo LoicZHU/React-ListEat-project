@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use App\Entity\Restaurant;
 use App\Service\GeocodingService;
+use App\Service\SiretService;
 use App\Repository\RoleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -25,17 +26,16 @@ class UserController extends AbstractController
     {
 
         $data = json_decode($request->getContent());
-        //dd($data->role);
-
+       
         $user = $denormalizer->denormalize($data, User::class);
         $errorsUser = $validator->validate($user);
 
         $restaurant = $denormalizer->denormalize($data->restaurant, Restaurant::class);
-        // $restaurant= $denormalizer->denormalize($data->restaurant, Restaurant::class);
-        // $errors = [];
+       
         $errorsRestaurant = $validator->validate($restaurant);
 
         $jsonErrors = [];
+
         // $errors est une ConstraintViolationList = se comporte comme un tableau
         if (count($errorsUser) !== 0) {
             //$jsonErrors = [];
@@ -62,18 +62,24 @@ class UserController extends AbstractController
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        //Checking siret or siren code call service
+        $response = SiretService::checkSiret($user->getRestaurant()->getSiretCode());
 
-
-            $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
-            
-            $restaurantPosition = GeocodingService::geocodeAddress($address);
-            //dd($restaurantPosition);
-            if(empty($restaurantPosition['lat'])){
-                return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
-            }else{
-                $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
-                $user->setRestaurant($restaurant->setLatitude($restaurantPosition['lat']));
-            } 
+        //dd($response);
+        if ($response == false) {
+            return $this->json(['message' => 'Numéro siret ou siren invalide.'],Response::HTTP_BAD_REQUEST);
+        }
+    
+        $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
+        
+        $restaurantPosition = GeocodingService::geocodeAddress($address);
+        //dd($restaurantPosition);
+        if(empty($restaurantPosition['lat'])){
+            return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
+        }else{
+            $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
+            $user->setRestaurant($restaurant->setLatitude($restaurantPosition['lat']));
+        } 
 
 
         $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
@@ -112,7 +118,8 @@ class UserController extends AbstractController
 
         $mailer->send($message);
 
-        return $this->json(Response::HTTP_CREATED);
+        return $this->json(['message' => 'Votre inscription est finalisé.',
+                            'code' => Response::HTTP_CREATED]);
     }
 
 }

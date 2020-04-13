@@ -71,3 +71,5 @@ class QrCodeController extends AbstractController
     return $this->json(['QrCodeUrl' => $QrCode->getUrl()], Response::HTTP_CREATED);
     }
 }
+
+

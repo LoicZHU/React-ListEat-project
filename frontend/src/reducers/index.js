@@ -1,14 +1,14 @@
 // import npm
 import { combineReducers } from 'redux';
 
-// combined reducers
+// reducers
 import ticketsReducer from './tickets';
-import userReducer from './users';
+import userReducer from './user';
 
-
+// rootReducer
 const rootReducer = combineReducers({
   tickets: ticketsReducer,
-  users: userReducer,
+  user: userReducer,
 });
 
 // export

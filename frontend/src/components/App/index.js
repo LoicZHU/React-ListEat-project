@@ -1,10 +1,11 @@
 // == Import npm
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
-// == Import Components 
-import Header from 'src/components/Header';
+// == Import Components
+import Header from 'src/containers/Header';
 import Home from 'src/components/Home';
 import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
@@ -12,6 +13,7 @@ import TicketForm from 'src/components/TicketForm';
 import PasswordForgotten from 'src/components/PasswordForgotten';
 import Validation from 'src/components/Validation';
 import Confirmation from 'src/components/Confirmation';
+import Cancellation from 'src/components/Cancellation';
 import Admin from 'src/components/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
@@ -23,128 +25,120 @@ import RestaurantProfile from 'src/components/RestaurantProfile';
 import './styles.css';
 
 // == Composant
-const App = () => (
-  <div className="app">
-    {/* <Login /> */}
-    {/* <TicketForm /> */}
-    {/* <PasswordForgotten /> */}
-    {/* <Confirmation />  */}
-     {/* <Admin /> */}
+const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaurant }) => {
+  useEffect(() => {
+    checkLoggedRestaurant();
+  }, []);
 
-    {/* Home */}
-    <Route path="/" exact >
-      <Header />
-      <Home />
-      <Footer />
-    </Route>
+  return (
+    <div className="app">
+      {checkingLoggedRestaurant && (
+        <>
+          {/* Home */}
+          <Route path="/" exact>
+            <Header />
+            <Home />
+            <Footer />
+          </Route>
 
-    {/* Log in */}
-    <Route path="/login" exact >
-      <Header />
-      <Login />
-      <Footer />
-    </Route>
+          {/* Log in */}
+          <Route path="/login" exact>
+            <Header />
+            {!isRestaurantLogged && <Login />}
+            {isRestaurantLogged && <Redirect to="/" />}
+            <Footer />
+          </Route>
 
-    {/* Subscribe */}
-    <Route path="/signup" exact >
-      <Header />
-      <Signup />
-      <Footer />
-    </Route>
+          {/* Subscribe */}
+          <Route path="/signup" exact>
+            <Header />
+            <Signup />
+            <Footer />
+          </Route>
 
-    {/* Forgotten pass */}
-    <Route path="/forgotten-password" exact >
-      <Header />
-      <PasswordForgotten />
-      <Footer />
-    </Route>
+          {/* Forgotten pass */}
+          <Route path="/forgotten-password" exact>
+            <Header />
+            <PasswordForgotten />
+            <Footer />
+          </Route>
 
-    {/* Admin */}
-    <Route path="/partner/:id/administration" exact >
-      <Header />
-      <Admin />
-      <Footer />
-    </Route>
+          {/* Admin */}
+          <Route path="/partner/:id/administration" exact>
+            <Header />
+            <Admin />
+            {!isRestaurantLogged && <Home />}
+            <Footer />
+          </Route>
 
-    {/* Admin */}
-    <Route path="/partner/:id/administration/edit" >
-      <Header />
-      <RestaurantProfile />
-      <Footer />
-    </Route>
+          {/* Admin */}
+          <Route path="/partner/:id/administration/edit">
+            <Header />
+            <RestaurantProfile />
+            {!isRestaurantLogged && <Home />}
+            <Footer />
+          </Route>
 
-    {/* Client : Get a ticket */}
-    <Route path="/restaurant/:id/tickets/add" exact >
-      <Header />
-      <TicketForm />
-      <Footer />
-    </Route>
+          {/* Client : Get a ticket */}
+          <Route path="/restaurant/:id/tickets/add" exact>
+            <Header />
+            <TicketForm />
+            <Footer />
+          </Route>
 
-    {/* Client : Validate the ticket */}
-    <Route path="/restaurant/:id/tickets/validate" exact >
-      <Header />
-      <Validation />
-      <Footer />
-    </Route>
-    
+          {/* Client : Validate the ticket */}
+          <Route path="/restaurant/:id/tickets/validate" exact>
+            <Header />
+            <Validation />
+            <Footer />
+          </Route>
 
-    {/* Client : Confirmation of ticket */}
-    <Route path="/tickets/:id" exact >
-      <Header />
-      <Confirmation />
-      <Footer />
-    </Route>
+          {/* Client : Confirmation of ticket */}
+          <Route path="/tickets/:id" exact>
+            <Header />
+            <Confirmation />
+            <Footer />
+          </Route>
 
-    {/* Client : Cancellation of ticket */}
-    <Route path="/tickets/:id/cancel" exact >
-      <Header />
-      <Confirmation />
-      <Footer />
-    </Route>
+          {/* Client : Cancellation of ticket */}
+          <Route path="/tickets/:id/cancel" exact>
+            <Header />
+            <Cancellation />
+            <Footer />
+          </Route>
 
-    {/* FAQ */}
-    <Route path="/faq" exact >
-      <Header />
-      <Faq />
-      <Footer />
-    </Route>
+          {/* FAQ */}
+          <Route path="/faq" exact>
+            <Header />
+            <Faq />
+            <Footer />
+          </Route>
 
-    {/* Legal mentions */}
-    <Route path="/legal" exact >
-      <Header />
-      <Legal />
-      <Footer />
-    </Route>
+          {/* Legal mentions */}
+          <Route path="/legal" exact>
+            <Header />
+            <Legal />
+            <Footer />
+          </Route>
 
-    {/* Data protection */}
-    <Route path="/data-protection" exact >
-      <Header />
-      <Data />
-      <Footer />
-    </Route>
-    
+          {/* Data protection */}
+          <Route path="/data-protection" exact>
+            <Header />
+            <Data />
+            <Footer />
+          </Route>
+        </>
+      )}
+    </div>
+  );
+};
 
-    
-{/*
- /
-/login
-/signup
-/forgotten-password
-/forgotten-password/confirmation
-/restaurant/id/tickets/add
-/restaurant/id/tickets/validate
-/tickets/id/
-/tickets/cancel
-/tickets/id/cancel
-/faq
-/legal
-/data-protection */}
-
-
-
-
-  </div>
-);
+// props check
+App.propTypes = {
+  isRestaurantLogged: PropTypes.bool.isRequired,
+  checkLoggedRestaurant: PropTypes.func.isRequired,
+  checkingLoggedRestaurant: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;
