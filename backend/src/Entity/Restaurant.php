@@ -19,6 +19,7 @@ class Restaurant
     {
         $this->createdAt = new \DateTime;
         $this->tickets = new ArrayCollection();
+        $this->status = 0;
     }
     
     /**
