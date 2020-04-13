@@ -1,5 +1,5 @@
 // import
-import { CHANGE_INPUT_VALUE, LOG_USER, LOG_OUT } from 'src/actions/user';
+import { CHANGE_INPUT_VALUE, LOG_USER, LOG_OUT, SHOW_LOGIN_ERROR } from 'src/actions/user';
 
 // initial state
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
   password: '',
   isLogged: false,
   checking: true,
+  loginErrorMessage: false,
 };
 
 // reducer
@@ -29,6 +30,12 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: action.isLogged,
+      };
+
+    case SHOW_LOGIN_ERROR:
+      return {
+        ...state,
+        loginErrorMessage: true,
       };
 
     default: return state;

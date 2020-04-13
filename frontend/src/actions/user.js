@@ -4,6 +4,7 @@ export const LOG_IN = 'LOG_IN';
 export const LOG_USER = 'LOG_USER';
 export const CHECK_LOGGED_RESTAURANT = 'CHECK_LOGGED_RESTAURANT';
 export const LOG_OUT = 'LOG_OUT';
+export const SHOW_LOGIN_ERROR = 'SHOW_LOGIN_ERROR';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -29,3 +30,8 @@ export const logOut = (isLogged) => ({
   type: LOG_OUT,
   isLogged,
 });
+
+export const showLoginError = () => ({
+  type: SHOW_LOGIN_ERROR,
+});
+

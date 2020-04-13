@@ -12,6 +12,7 @@ const Form = ({
   password,
   changeInputValue,
   handleLogin,
+  errorMessage,
 }) => {
   // handle input change
   const handleChange = (evt) => {
@@ -43,7 +44,7 @@ const Form = ({
         onChange={handleChange}
       />
 
-      {false && <ErrorMessage />}
+      {errorMessage && <ErrorMessage />}
 
       <span className="bottom-links"><a href="/forgotten-password">Identifiant ou mot de passe oublié ?</a></span>
 
