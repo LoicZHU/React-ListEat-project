@@ -8,7 +8,7 @@ import store from 'src/store';
 
 // == Import : local
 // Composants
-import App from 'src/components/App';
+import App from 'src/containers/App';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
