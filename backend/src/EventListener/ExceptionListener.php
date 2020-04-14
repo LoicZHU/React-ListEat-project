@@ -11,13 +11,15 @@ class ExceptionListener
 {
     public function onKernelException(ExceptionEvent $event)
     {
+        //dd($event);
         // You get the exception object from the received event
         $exception = $event->getThrowable();
         $message = sprintf(
             'message: %s ',
             $exception->getMessage()
+            
         );
-
+       
         // Customize your response object to display the exception details
         $response = new Response();
         $response->setContent($message);

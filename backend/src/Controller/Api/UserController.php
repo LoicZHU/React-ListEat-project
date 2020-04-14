@@ -162,6 +162,7 @@ class UserController extends AbstractController
                     );
 
         $mailer->send($message);
+
         } else {
             return $this->json(['message' => 'Cet identifiant n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
