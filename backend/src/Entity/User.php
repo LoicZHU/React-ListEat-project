@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,6 +20,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->token = new ArrayCollection();
     }
     /**
      * @ORM\Id()
@@ -79,6 +82,11 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $restaurant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", orphanRemoval=true)
+     */
+    private $token;
 
     public function getId(): ?int
     {
@@ -225,6 +233,37 @@ class User implements UserInterface
     public function setRestaurant(Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Token[]
+     */
+    public function getToken(): Collection
+    {
+        return $this->token;
+    }
+
+    public function addToken(Token $token): self
+    {
+        if (!$this->token->contains($token)) {
+            $this->token[] = $token;
+            $token->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeToken(Token $token): self
+    {
+        if ($this->token->contains($token)) {
+            $this->token->removeElement($token);
+            // set the owning side to null (unless already changed)
+            if ($token->getUser() === $this) {
+                $token->setUser(null);
+            }
+        }
 
         return $this;
     }
