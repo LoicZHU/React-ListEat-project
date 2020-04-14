@@ -29,12 +29,35 @@ const Signup = ({
   const handleChange = (evt) => {
     changeSignUpInputValue(evt.target.value, evt.target.name);
   };
+  
+  // const areSamePassword = false;
 
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleSubscribe();
+    // if (password === passwordConfirmation) {
+    //   handleSubscribe();
+    // }
+    // else {
+    //   console.log(areSamePassword);
+    //   areSamePassword = true;
+    //   console.log(areSamePassword);
+    // }
   };
+  // const checkedError = true;
+  
+  // const checkError = (evt) => {
+  //   if (evt.target.value == password) {
+  //     handleChange(evt);
+  //     checkedError = true;
+  //     return false;
+  //   } else {
+  //     handleChange(evt);
+  //     checkedError = false;
+  //     return true;
+  //   }
+  // }
   
   return (
     <div className="signup-wrapper">
@@ -63,7 +86,6 @@ const Signup = ({
           id="email"
           value={email}
           onChange={handleChange}
-
         />
         <input
           name="password" 
@@ -72,7 +94,6 @@ const Signup = ({
           id="password"
           value={password}
           onChange={handleChange}
-          type="password"
         />
         <input
           name="passwordConfirmation" 
@@ -81,8 +102,9 @@ const Signup = ({
           id="password-confirmation"  
           value={passwordConfirmation}
           onChange={handleChange}
-          type="password"
         />
+
+        {/* {!checkedError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>} */}
 
         <span>Concernant votre restaurant</span>
         <input

@@ -21,3 +21,11 @@
   button {
     margin: 2em auto!important;
   }
+
+  #password-error {
+    background-color: red;
+    margin: .5em auto;
+    padding: 1em;
+    border-radius: 5px;
+    color: white;
+  }

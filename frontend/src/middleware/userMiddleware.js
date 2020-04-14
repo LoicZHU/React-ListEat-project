@@ -30,7 +30,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true, // handle cookies ;
       })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
@@ -47,7 +47,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
@@ -87,33 +87,17 @@ const userMiddleware = (store) => (next) => (action) => {
             name: store.getState().user.signupInput.restaurantName,
             address: store.getState().user.signupInput.address,
             postcode: Number(store.getState().user.signupInput.postcode),
-            city: store.getState().user.signupInput.coversNumber,
-                    
+            city: store.getState().user.signupInput.coversNumber,   
             country: store.getState().user.signupInput.country,
             phone: store.getState().user.signupInput.phone,
             average_eating_time: Number(store.getState().user.signupInput.averageEatingTime),
             seat_nb: Number(store.getState().user.signupInput.coversNumber),
-
-            // !!!!!!!!!!!!!!!!!!!!!
-
-            // lastname: state.user.signupInput.lastname,
-            // firstname: state.user.signupInput.firstname,
-            // email: state.user.signupInput.email,
-            // password: state.user.signupInput.password,
-            // passwordConfirmation: state.user.signupInput.passwordConfirmation,
-            // restaurantName: state.user.signupInput.restaurantName,
-            // address: state.user.signupInput.address,
-            // postcode: state.user.signupInput.postcode,
-            // city: state.user.signupInput.city,
-            // country: state.user.signupInput.country,
-            // cis: state.user.signupInput.cis,
-            // averageEatingTime: state.user.signupInput.averageEatingTime,
-            // coversNumber: state.user.signupInput.coversNumber,
             },
           },
         })
           .then((response) => {
             console.log(response);
+            console.log(response.data.message);
           })
           .catch((error) => {
             console.warn(error);
