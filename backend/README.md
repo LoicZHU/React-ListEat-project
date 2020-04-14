@@ -18,7 +18,7 @@ Requêtes JSON
 /api/partner
 
 {
-"email": "anTHIuvfvfvoipR@gmail.com",
+"email": "toto@gmail.com",
 "password": "toto",
 "lastName": "HUGUENY",
 "firstName": "damien",
@@ -33,7 +33,7 @@ Requêtes JSON
 	"country": "FRANCE",
 	"phone": "0620323333",
 	"average_eating_time": 45,
-	"seat_nb": 60,
+	"seat_nb": 60
 	}
 }
 
