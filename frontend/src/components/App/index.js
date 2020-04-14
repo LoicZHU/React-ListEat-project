@@ -18,7 +18,7 @@ import Admin from 'src/components/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
 import Faq from 'src/components/Faq';
-import Signup from 'src/components/Signup';
+import Signup from 'src/containers/Signup';
 import RestaurantProfile from 'src/components/RestaurantProfile';
 
 // == Import

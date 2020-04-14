@@ -10,6 +10,7 @@ import {
   logOut,
   showLoginError,
   changeCheckingRestaurantLogged,
+  SIGN_UP
 } from 'src/actions/user';
 
 // middleware
@@ -71,6 +72,55 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       next(action);
       break;
+
+      case SIGN_UP:
+        axios({
+          method: 'post',
+          url: 'http://localhost:8001/api/partner',
+          data: {
+            email: store.getState().user.signupInput.email,
+            password: store.getState().user.signupInput.password,
+            lastName: store.getState().user.signupInput.lastname,
+            firstName: store.getState().user.signupInput.firstname,
+            
+            restaurant:{
+            siret_code: store.getState().user.signupInput.cis,
+            name: store.getState().user.signupInput.restaurantName,
+            address: store.getState().user.signupInput.address,
+            postcode: store.getState().user.signupInput.postcode,
+            city: store.getState().user.signupInput.coversNumber,
+                    
+            country: store.getState().user.signupInput.country,
+            phone: store.getState().user.signupInput.phone,
+            average_eating_time: store.getState().user.signupInput.averageEatingTime,
+            seat_nb: store.getState().user.signupInput.coversNumber,
+
+            ////////////////////////////////////////
+
+            // lastname: state.user.signupInput.lastname,
+            // firstname: state.user.signupInput.firstname,
+            // email: state.user.signupInput.email,
+            // password: state.user.signupInput.password,
+            // passwordConfirmation: state.user.signupInput.passwordConfirmation,
+            // restaurantName: state.user.signupInput.restaurantName,
+            // address: state.user.signupInput.address,
+            // postcode: state.user.signupInput.postcode,
+            // city: state.user.signupInput.city,
+            // country: state.user.signupInput.country,
+            // cis: state.user.signupInput.cis,
+            // averageEatingTime: state.user.signupInput.averageEatingTime,
+            // coversNumber: state.user.signupInput.coversNumber,
+            }
+          },
+        })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.warn(error);
+          });
+        next(action);
+        break;
 
     default:
       next(action);
