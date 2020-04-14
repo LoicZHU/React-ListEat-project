@@ -15,7 +15,7 @@ class QrCodeGenerator
      * returns booleen
      * Generate
      */
-    public function generate($restaurantId)
+    public function generate($restaurantId,$restaurantName)
     {
 
         //We crypt restaurant Id
@@ -35,7 +35,7 @@ class QrCodeGenerator
         $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
         //$qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
         
-        //$qrCode->setLogoPath('../ressource/logo/LogoListEat.png');
+        $qrCode->setLogoPath($_SERVER['PWD']."/ressource/logo/QrcodeCalqueV3.png");
         //$qrCode->setLogoSize(150, 200);
         $qrCode->setRoundBlockSize(false);
         $qrCode->setValidateResult(false);
@@ -49,26 +49,24 @@ class QrCodeGenerator
         $qrCode->writeFile($_SERVER['PWD']."/file/temp/Qrcode".$restaurantId.".png");
 
         $image = imagecreatefrompng($_SERVER['PWD']."/file/temp/Qrcode".$restaurantId.".png"); // this is a source image
-        //$logo = imagecreatefrompng($_SERVER['PWD']."/ressource/logo/LogoListEat.png"); //Owner logo
-
+        //$calque = imagecreatefrompng("$_SERVER['PWD']."/ressource/logo/QrcodeCalque.png"); //Calque
 
         //Text on the Qr Code!
-        $texte = "BIENVENUE";
-        $texte1 = "Scanner le Qr code pour prendre un ticket";
+        $texte = $restaurantName;
+  
         // Text color
         $color = imagecolorallocate($image, 0, 0, 0);
 
         //We put a font style
-        imagettftext($image, 18, 0, 60, 70, 1, $_SERVER['PWD'].'/ressource/police/OpenSans-Regular.ttf', $texte);
-        imagettftext($image, 18, 0, 60, 120, 1, $_SERVER['PWD'].'/ressource/police/OpenSans-Regular.ttf', $texte1);
+        imagettftext($image, 18, 0, 55, 95, 1, $_SERVER['PWD'].'/ressource/police/OpenSans-Regular.ttf', $texte);
+     
         //we save image on server
+        //imagecopymerge($image, $calque, 0, 0, 0, 0, 100, 47, 75);
         $UrlImage = $_SERVER['PWD']."/file/qr_code/qrcode-".$restaurantId.".jpg";
         imagejpeg($image, $_SERVER['PWD']."/file/qr_code/qrcode-".$restaurantId.".jpg");
 
         //Remove the Qr-code with Out Logo
         unlink($_SERVER['PWD'].'/file/temp/Qrcode'.$restaurantId.'.png');
-
-
 
 
         if (file_exists($UrlImage)) {
