@@ -122,4 +122,12 @@ class UserController extends AbstractController
                             'code' => Response::HTTP_CREATED]);
     }
 
+    /**
+     * @Route("/forgotten-password", name="api_user_pwd", methods={"POST"})
+     */
+    public function forgottenPwd()
+    {
+
+    }
+
 }
