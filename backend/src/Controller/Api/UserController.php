@@ -3,10 +3,12 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
+use App\Entity\Token;
 use App\Entity\Restaurant;
-use App\Service\GeocodingService;
 use App\Service\SiretService;
+use App\Service\GeocodingService;
 use App\Repository\RoleRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -125,9 +127,46 @@ class UserController extends AbstractController
     /**
      * @Route("/forgotten-password", name="api_user_pwd", methods={"POST"})
      */
-    public function forgottenPwd()
+    public function forgottenPwd(Request $request, UserRepository $userRepository, DenormalizerInterface $denormalizer, \Swift_Mailer $mailer)
     {
+        /*
+        {"username": "blabla@bla.com"}
+        */
+        $data = json_decode($request->getContent());
+        $user = $userRepository->findBy(['email' => $data->username]);
+       
 
+        if($user) {
+            $user = $user[0];
+            $token = $denormalizer->denormalize($data, Token::class);
+            $tokenString = random_bytes(10);
+            $tokenforbdd= rtrim(strtr(base64_encode($tokenString), '+/', '-_'), '=');
+            $token->setTokenString($tokenforbdd);
+            $token->setUser($user);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($token);
+            $entityManager->flush();
+
+             // Email sent to the user with the security code needed to set a new password
+            $message = (new \Swift_Message('Information partenaire ListEat'))
+
+            ->setFrom('send@example.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                        $this->renderView(
+                            'emails/forgotten-password.html.twig',
+                            ['name' => $user->getfirstName(),
+                            'token' => $token->getTokenString()]
+                        ),
+            'text/html'
+                    );
+
+        $mailer->send($message);
+        } else {
+            return $this->json(['message' => 'Cet identifiant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->json(['message' => 'Code de sécurité envoyé'], Response::HTTP_CREATED);
     }
 
 }

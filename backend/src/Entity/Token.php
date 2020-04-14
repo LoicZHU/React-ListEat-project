@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Token
 {
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -17,7 +21,7 @@ class Token
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $tokenString;
 

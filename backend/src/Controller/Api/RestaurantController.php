@@ -35,7 +35,7 @@ class RestaurantController extends AbstractController
     public function edit($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository , DenormalizerInterface $denormalizer, ValidatorInterface $validator)
     {
         if($request->get('restaurant') === null){
-            return $this->json( Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->json( Response::HTTP_NOT_FOUND);
         }
 
         $restaurant = $restaurantRepository->find($id);
