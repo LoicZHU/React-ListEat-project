@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Logo from 'src/assets/img/logo.svg';
 import './header.scss';
 
-const Header = ({ isRestaurantLogged, handleLogout }) => {
+const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
   const handleClick = () => {
     handleLogout();
   };
@@ -27,6 +27,12 @@ const Header = ({ isRestaurantLogged, handleLogout }) => {
         </div>
 
         <ul>
+
+          {/* if not logged */}
+          {!isRestaurantLogged && (
+            <a href="/signup"><li className="header-nav-button button">Inscription</li></a>
+          )}
+
           {/* if not logged */}
           {!isRestaurantLogged && (
             <a href="/login"><li className="header-nav-button button">Connexion</li></a>
@@ -34,12 +40,12 @@ const Header = ({ isRestaurantLogged, handleLogout }) => {
 
         {/* if logged */}
           {isRestaurantLogged && (
-            <a href="/partner/:id/administration/">
+            <a href={`/partner/${restaurantId}/administration/`}>
               <li id="help-button" className="header-nav-button button">Mon espace</li>
             </a>
           )}
           {isRestaurantLogged && (
-            <a href="/partner/:id/administration/edit">
+            <a href={`/partner/${restaurantId}/administration/edit`}>
               <li id="help-button" className="header-nav-button button">Mon profil</li>
             </a>
           )}

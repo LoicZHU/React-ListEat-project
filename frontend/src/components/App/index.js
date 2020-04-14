@@ -44,8 +44,8 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
-            {!isRestaurantLogged && <Login />}
-            {isRestaurantLogged && <Redirect to="/" />}
+            {!isRestaurantLogged && <Login /> }
+            {isRestaurantLogged && <Redirect to="/partner/:id/administration" />}
             <Footer />
           </Route>
 
@@ -63,22 +63,18 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
 
-          {/* {!isRestaurantLogged && 
-          <Redirect from ="/partner/" to="/login" />
-          } */}
-
           {/* Restaurant (Admin) */}
           <Route path="/partner/:id/administration" exact>
             <Header />
             {isRestaurantLogged && <Admin />}
-            {!isRestaurantLogged && <Redirect to="/login" />}
+            {!isRestaurantLogged && <Redirect from="/partner/:id/administration" to="/" />}
           </Route>
 
           {/* Restaurant (Admin) */}
           <Route path="/partner/:id/administration/edit">
             <Header />
             {isRestaurantLogged && <RestaurantProfile />}
-            {!isRestaurantLogged && <Redirect to="/login" />}
+            {!isRestaurantLogged && <Redirect from="/partner/:id/administration/edit" to="/" />}
           </Route>
 
           {/* Client : Get a ticket */}

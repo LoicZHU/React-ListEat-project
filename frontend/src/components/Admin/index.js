@@ -12,9 +12,9 @@ const Admin = () => {
       <div id="left-section">
         <div id="admin-top-section">
           <div className="left">
-            <label class="switch">
+            <label className="switch">
             <input type="checkbox" />
-            <span class="slider round"></span>
+            <span className="slider round"></span>
             </label>
             <span className="toggle-name">SERVICE : </span>
             <span className="toggle-state on">ON</span>

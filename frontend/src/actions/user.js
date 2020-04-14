@@ -28,9 +28,8 @@ export const checkLoggedRestaurant = () => ({
   type: CHECK_LOGGED_RESTAURANT,
 });
 
-export const logOut = (isLogged) => ({
+export const logOut = () => ({
   type: LOG_OUT,
-  isLogged,
 });
 
 export const showLoginError = () => ({
