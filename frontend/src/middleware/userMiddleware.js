@@ -47,7 +47,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
@@ -65,7 +65,6 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           store.dispatch(logOut());
-          // window.location.replace('/');
         })
         .catch((error) => {
           console.warn(error);
@@ -83,19 +82,19 @@ const userMiddleware = (store) => (next) => (action) => {
             lastName: store.getState().user.signupInput.lastname,
             firstName: store.getState().user.signupInput.firstname,
             
-            restaurant:{
+            restaurant: {
             siret_code: store.getState().user.signupInput.cis,
             name: store.getState().user.signupInput.restaurantName,
             address: store.getState().user.signupInput.address,
-            postcode: store.getState().user.signupInput.postcode,
+            postcode: Number(store.getState().user.signupInput.postcode),
             city: store.getState().user.signupInput.coversNumber,
                     
             country: store.getState().user.signupInput.country,
             phone: store.getState().user.signupInput.phone,
-            average_eating_time: store.getState().user.signupInput.averageEatingTime,
-            seat_nb: store.getState().user.signupInput.coversNumber,
+            average_eating_time: Number(store.getState().user.signupInput.averageEatingTime),
+            seat_nb: Number(store.getState().user.signupInput.coversNumber),
 
-            ////////////////////////////////////////
+            // !!!!!!!!!!!!!!!!!!!!!
 
             // lastname: state.user.signupInput.lastname,
             // firstname: state.user.signupInput.firstname,
@@ -110,7 +109,7 @@ const userMiddleware = (store) => (next) => (action) => {
             // cis: state.user.signupInput.cis,
             // averageEatingTime: state.user.signupInput.averageEatingTime,
             // coversNumber: state.user.signupInput.coversNumber,
-            }
+            },
           },
         })
           .then((response) => {

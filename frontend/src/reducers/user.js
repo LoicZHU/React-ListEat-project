@@ -31,7 +31,8 @@ const initialState = {
     postcode: '', // int
     city: '',
     country: '',
-    cis: '', // int
+    phone: '',
+    cis: '',
     averageEatingTime: '', // int
     coversNumber: '', // int
   },
@@ -80,12 +81,6 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         checking: false,
       }
-
-    case SIGN_UP:
-      return {
-        ...state,
-      }
-
 
     default: return state;
   }

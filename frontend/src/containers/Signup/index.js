@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Signup from 'src/components/Signup';
-import { changeSignUpInputValue } from 'src/actions/user';
+import { changeSignUpInputValue, signUp } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   lastname: state.user.signupInput.lastname,
@@ -10,11 +10,11 @@ const mapStateToProps = (state) => ({
   password: state.user.signupInput.password,
   passwordConfirmation: state.user.signupInput.passwordConfirmation,
   restaurantName: state.user.signupInput.restaurantName,
-  phone: state.user.signupInput.phone,
   address: state.user.signupInput.address,
   postcode: state.user.signupInput.postcode,
   city: state.user.signupInput.city,
   country: state.user.signupInput.country,
+  phone: state.user.signupInput.phone,
   cis: state.user.signupInput.cis,
   averageEatingTime: state.user.signupInput.averageEatingTime,
   coversNumber: state.user.signupInput.coversNumber,
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeSignUpInputValue: (newValue, fieldName) => {
     dispatch(changeSignUpInputValue(newValue, fieldName));
-    // console.log('container ok');
+
   },
   handleSubscribe: () => {
     dispatch(signUp());

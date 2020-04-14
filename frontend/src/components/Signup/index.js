@@ -13,27 +13,26 @@ const Signup = ({
   password,
   passwordConfirmation,
   restaurantName,
-  phone,
   address,
   postcode,
   city,
   country,
+  phone,
   cis,
   averageEatingTime,
   coversNumber, 
   changeSignUpInputValue,
-  handleLogin,
+  handleSubscribe,
 }) => {
+  
   // handle input change
   const handleChange = (evt) => {
-    // console.log('on est ds handleChange');
     changeSignUpInputValue(evt.target.value, evt.target.name);
   };
 
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // console.log('on est ds le handleSubmit');
     handleSubscribe();
   };
   
@@ -151,9 +150,11 @@ const Signup = ({
           value={coversNumber}
           onChange={handleChange}
         />
+
+        <button type="submit" className="button-alt">Inscription</button>
       </form>
       
-      <button className="button-alt">Inscription</button>
+
     </div>
   );
 };
@@ -170,7 +171,8 @@ Signup.propTypes = {
   postcode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // number
   city: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
-  cis: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // number
+  phone: PropTypes.string.isRequired,
+  cis: PropTypes.PropTypes.string.isRequired,
   averageEatingTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // number
   coversNumber: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // number 
   changeSignUpInputValue: PropTypes.func.isRequired,
