@@ -46,8 +46,8 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          // console.log(response);
-          store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
+          console.log(response);
+          store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
           // console.warn(error);
