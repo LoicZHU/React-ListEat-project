@@ -5,6 +5,7 @@ export const LOG_USER = 'LOG_USER';
 export const CHECK_LOGGED_RESTAURANT = 'CHECK_LOGGED_RESTAURANT';
 export const LOG_OUT = 'LOG_OUT';
 export const SHOW_LOGIN_ERROR = 'SHOW_LOGIN_ERROR';
+export const CHANGE_CHECKING_RESTAURANT_LOGGED = 'CHANGE_CHECKING_RESTAURANT_LOGGED';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -17,9 +18,10 @@ export const logIn = () => ({
   type: LOG_IN,
 });
 
-export const logUser = (isLogged) => ({
+export const logUser = (isLogged, restaurantId) => ({
   type: LOG_USER,
   isLogged,
+  restaurantId,
 });
 
 export const checkLoggedRestaurant = () => ({
@@ -33,5 +35,9 @@ export const logOut = (isLogged) => ({
 
 export const showLoginError = () => ({
   type: SHOW_LOGIN_ERROR,
+});
+
+export const changeCheckingRestaurantLogged = () => ({
+  type: CHANGE_CHECKING_RESTAURANT_LOGGED,
 });
 

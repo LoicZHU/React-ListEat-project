@@ -9,6 +9,7 @@ import {
   LOG_OUT,
   logOut,
   showLoginError,
+  changeCheckingRestaurantLogged,
 } from 'src/actions/user';
 
 // middleware
@@ -29,9 +30,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          const id = response.data.restaurantId;
-          window.location.replace('/partner/' + id + '/administration');
-          // store.dispatch(logUser(response.data.logged));
+          store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
           console.warn(error);
@@ -47,11 +46,12 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          store.dispatch(logUser(response.data.logged));
-          // console.log(response);
+          console.log(response);
+          store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
           console.warn(error);
+          store.dispatch(changeCheckingRestaurantLogged());
         });
       next(action);
       break;
@@ -59,13 +59,12 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: 'http://localhost:8001/logout'
+        url: 'http://localhost:8001/logout',
+        withCredentials: true,
       })
         .then((response) => {
           store.dispatch(logOut());
           window.location.replace('/');
-          console.log('ok');
-
         })
         .catch((error) => {
           console.warn(error);

@@ -21,24 +21,35 @@ const Header = ({ isRestaurantLogged, handleLogout }) => {
             <li id="help-button" className="header-nav-button button">Aide <span id="help-button-span">?</span></li>
             <li id="help-button-mobile">?</li>
           </a>
-          {isRestaurantLogged && (
-              <a href="/partner/:id/administration">
-                <li id="help-button" className="header-nav-button button">Mon profil</li>
-              </a>
-          )}
         </ul>
         <div id="logo-container">
           <a href="/"><img src={Logo}/></a>
         </div>
 
+        <ul>
+          {/* if not logged */}
+          {!isRestaurantLogged && (
+            <a href="/login"><li className="header-nav-button button">Connexion</li></a>
+          )}
 
-        {!isRestaurantLogged && (
-          <a href="/login"><span className="header-nav-button button">Connexion</span></a>
-        )}
+        {/* if logged */}
+          {isRestaurantLogged && (
+            <a href="/partner/:id/administration/">
+              <li id="help-button" className="header-nav-button button">Mon espace</li>
+            </a>
+          )}
+          {isRestaurantLogged && (
+            <a href="/partner/:id/administration/edit">
+              <li id="help-button" className="header-nav-button button">Mon profil</li>
+            </a>
+          )}
 
-        {isRestaurantLogged && (
-          <a onClick={handleClick}><span className="header-nav-button button">Déconnexion</span></a>
-        )}
+          {isRestaurantLogged && (
+            <a onClick={handleClick}>
+              <li className="header-nav-button button">Déconnexion</li>
+            </a>
+          )}
+        </ul>
 
       </nav>
     </header>

@@ -1,13 +1,19 @@
 // import
-import { CHANGE_INPUT_VALUE, LOG_USER, LOG_OUT, SHOW_LOGIN_ERROR } from 'src/actions/user';
+import { CHANGE_INPUT_VALUE, LOG_USER, LOG_OUT, SHOW_LOGIN_ERROR, CHANGE_CHECKING_RESTAURANT_LOGGED } from 'src/actions/user';
 
 // initial state
 const initialState = {
+  // login
   email: '',
   password: '',
   isLogged: false,
-  checking: true,
   loginErrorMessage: false,
+
+  // checking if logged
+  checking: true,
+
+  // restaurant
+  restaurantId: '',
 };
 
 // reducer
@@ -24,6 +30,7 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         isLogged: action.isLogged,
         checking: false,
+        restaurantId: action.restaurantId,
       };
 
     case LOG_OUT:
@@ -37,6 +44,12 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         loginErrorMessage: true,
       };
+
+    case CHANGE_CHECKING_RESTAURANT_LOGGED:
+      return {
+        ...state,
+        checking: false,
+      }
 
     default: return state;
   }

@@ -32,7 +32,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
 
   return (
     <div className="app">
-      
+      {!checkingLoggedRestaurant && (
         <>
           {/* Home */}
           <Route path="/" exact>
@@ -44,7 +44,8 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
-            <Login />
+            {!isRestaurantLogged && <Login />}
+            {isRestaurantLogged && <Redirect to="/" />}
             <Footer />
           </Route>
 
@@ -62,16 +63,22 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
 
-          {/* Admin */}
+          {/* {!isRestaurantLogged && 
+          <Redirect from ="/partner/" to="/login" />
+          } */}
+
+          {/* Restaurant (Admin) */}
           <Route path="/partner/:id/administration" exact>
             <Header />
-            <Admin />
+            {isRestaurantLogged && <Admin />}
+            {!isRestaurantLogged && <Redirect to="/login" />}
           </Route>
 
-          {/* Admin */}
+          {/* Restaurant (Admin) */}
           <Route path="/partner/:id/administration/edit">
             <Header />
-            <RestaurantProfile />
+            {isRestaurantLogged && <RestaurantProfile />}
+            {!isRestaurantLogged && <Redirect to="/login" />}
           </Route>
 
           {/* Client : Get a ticket */}
@@ -119,7 +126,7 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
         </>
-     
+      )}
     </div>
   );
 };
