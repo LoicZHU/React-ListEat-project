@@ -13,7 +13,7 @@ const initialState = {
   checking: true,
 
   // restaurant
-  restaurantId: '',
+  restaurantId: null,
 };
 
 // reducer
