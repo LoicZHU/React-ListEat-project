@@ -137,6 +137,7 @@ App.propTypes = {
   isRestaurantLogged: PropTypes.bool.isRequired,
   checkLoggedRestaurant: PropTypes.func.isRequired,
   checkingLoggedRestaurant: PropTypes.bool.isRequired,
+  restaurantId: PropTypes.number,
 };
 
 // == Export

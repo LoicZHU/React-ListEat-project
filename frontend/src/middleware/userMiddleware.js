@@ -29,9 +29,8 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true, // handle cookies ;
       })
         .then((response) => {
-          console.log(response);
-          // window.location.replace('/id/eaz');
-          store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
+          // console.log(response);
+          store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
           console.warn(error);
@@ -47,7 +46,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
