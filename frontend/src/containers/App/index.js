@@ -7,6 +7,7 @@ import { checkLoggedRestaurant } from 'src/actions/user';
 const mapStateToProps = (state) => ({
   isRestaurantLogged: state.user.isLogged,
   checkingLoggedRestaurant: state.user.checking,
+  restaurantId: state.user.restaurantId,
 });
 
 const mapDispatchToProps = (dispatch) => ({

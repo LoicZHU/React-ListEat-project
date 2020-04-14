@@ -30,6 +30,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
+          // window.location.replace('/id/eaz');
           store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
@@ -50,7 +51,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(logUser(true, response.data.restaurantId)); // TODO modif true
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
           store.dispatch(changeCheckingRestaurantLogged());
         });
       next(action);
@@ -64,7 +65,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           store.dispatch(logOut());
-          window.location.replace('/');
+          // window.location.replace('/');
         })
         .catch((error) => {
           console.warn(error);
