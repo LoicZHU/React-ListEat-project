@@ -6,8 +6,9 @@ namespace App\Controller\Api;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SecurityController extends AbstractController
 {
@@ -48,11 +49,12 @@ class SecurityController extends AbstractController
     //"password": ""
     //}
 
-    /**
-     * @Route("api/partner/islogged", name="api_islogged", methods={"POST"})
-     * @IsGranted("ROLE_RESTAURATEUR")
-     */
-    public function islogged(){
+    
+   // /**
+   //  * @Route("api/partner/islogged", name="api_islogged", methods={"POST"})
+   //  * @Security("is_granted('ROLE_RESTAURATEUR')", statusCode=200, message="false")
+   //  */
+    /*public function islogged2(){
 
         $user = $this->getUser();
 
@@ -63,6 +65,25 @@ class SecurityController extends AbstractController
             'restaurantStatus' => $user->getRestaurant()->getStatus(),
             'logged' => true
         ], Response::HTTP_OK);
+        }
+    }*/
+
+    /**
+     * @Route("api/partner/islogged", name="api_islogged", methods={"POST"})
+     */
+    public function islogged(){
+
+        $user = $this->getUser();
+        
+        if ($user) {
+        return $this->json([
+            'username' => $user->getUsername(),
+            'restaurantId' => $user->getRestaurant()->getId(),
+            'restaurantStatus' => $user->getRestaurant()->getStatus(),
+            'logged' => true
+        ]);
+        } else {
+            return $this->json(['logged' => false]);
         }
     }
 }

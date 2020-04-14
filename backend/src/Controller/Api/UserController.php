@@ -170,4 +170,17 @@ class UserController extends AbstractController
         return $this->json(['message' => 'Code de sécurité envoyé'], Response::HTTP_CREATED);
     }
 
+     /**
+     * @Route("/forgotten-password/confirmation", name="api_new_pwd", methods={"POST"})
+     */
+    public function newPwd(Request $request, UserRepository $userRepository, DenormalizerInterface $denormalizer, \Swift_Mailer $mailer)
+    {
+        /*
+        {"securityCode":"blabla",
+        "newPwd":EGRGE"
+        ""}
+        */
+        
+    }
+    
 }
