@@ -27,7 +27,6 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
         </div>
 
         <ul>
-
           {/* if not logged */}
           {!isRestaurantLogged && (
             <a href="/signup"><li className="header-nav-button button">Inscription</li></a>
@@ -38,7 +37,7 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
             <a href="/login"><li className="header-nav-button button">Connexion</li></a>
           )}
 
-        {/* if logged */}
+          {/* if logged */}
           {isRestaurantLogged && (
             <a href={`/partner/${restaurantId}/administration/`}>
               <li id="help-button" className="header-nav-button button">Mon espace</li>

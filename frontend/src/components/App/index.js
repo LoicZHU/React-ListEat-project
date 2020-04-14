@@ -25,7 +25,12 @@ import RestaurantProfile from 'src/components/RestaurantProfile';
 import './styles.css';
 
 // == Composant
-const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaurant }) => {
+const App = ({
+  isRestaurantLogged,
+  checkLoggedRestaurant,
+  checkingLoggedRestaurant, 
+  restaurantId
+}) => {
   useEffect(() => {
     checkLoggedRestaurant();
   }, []);
@@ -41,11 +46,32 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
 
+          {/* FAQ */}
+          <Route path="/faq" exact>
+            <Header />
+            <Faq />
+            <Footer />
+          </Route>
+
+          {/* Legal mentions */}
+          <Route path="/legal" exact>
+            <Header />
+            <Legal />
+            <Footer />
+          </Route>
+
+          {/* Data protection */}
+          <Route path="/data-protection" exact>
+            <Header />
+            <Data />
+            <Footer />
+          </Route>
+
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
             {!isRestaurantLogged && <Login /> }
-            {isRestaurantLogged && <Redirect to="/partner/:id/administration" />}
+            {isRestaurantLogged && <Redirect to={`/partner/${restaurantId}/administration`} />}
             <Footer />
           </Route>
 
@@ -64,17 +90,17 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           </Route>
 
           {/* Restaurant (Admin) */}
-          <Route path="/partner/:id/administration" exact>
+          <Route path={`/partner/${restaurantId}/administration`} exact>
             <Header />
             {isRestaurantLogged && <Admin />}
-            {!isRestaurantLogged && <Redirect from="/partner/:id/administration" to="/" />}
+            {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration`} to="/" />}
           </Route>
 
           {/* Restaurant (Admin) */}
-          <Route path="/partner/:id/administration/edit">
+          <Route path={`/partner/${restaurantId}/administration/edit`}>
             <Header />
             {isRestaurantLogged && <RestaurantProfile />}
-            {!isRestaurantLogged && <Redirect from="/partner/:id/administration/edit" to="/" />}
+            {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration/edit`} to="/" />}
           </Route>
 
           {/* Client : Get a ticket */}
@@ -99,27 +125,6 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
           <Route path="/tickets/:id/cancel" exact>
             <Header />
             <Cancellation />
-          </Route>
-
-          {/* FAQ */}
-          <Route path="/faq" exact>
-            <Header />
-            <Faq />
-            <Footer />
-          </Route>
-
-          {/* Legal mentions */}
-          <Route path="/legal" exact>
-            <Header />
-            <Legal />
-            <Footer />
-          </Route>
-
-          {/* Data protection */}
-          <Route path="/data-protection" exact>
-            <Header />
-            <Data />
-            <Footer />
           </Route>
         </>
       )}
