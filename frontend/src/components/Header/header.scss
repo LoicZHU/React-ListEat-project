@@ -53,7 +53,7 @@ header {
 
       a {
         margin-right: 1em;
-        &:last-of-type a {
+        &:last-of-type a {
           margin-right: 0 !important;
         }
       }
@@ -94,6 +94,15 @@ header {
   }
   #mobile-nav{
     display: block!important;
+
+    #home-button-mobile {
+      &::before {
+        width: 20px;
+        height: 20px;
+        background-color: black;
+        color: black;
+      }
+    }
 
     #menu-wrapper {
       height: calc(100vh-73px);
