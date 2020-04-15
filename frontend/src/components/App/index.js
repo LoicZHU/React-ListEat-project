@@ -29,11 +29,16 @@ const App = ({
   isRestaurantLogged,
   checkLoggedRestaurant,
   checkingLoggedRestaurant, 
-  restaurantId
+  restaurantId,
+  fetchRestaurantData,
 }) => {
   useEffect(() => {
     checkLoggedRestaurant();
   }, []);
+
+  if (!checkingLoggedRestaurant && isRestaurantLogged) {
+      console.log('DDD');
+  };
 
   return (
     <div className="app">

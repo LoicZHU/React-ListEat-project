@@ -23,6 +23,8 @@ const Signup = ({
   coversNumber, 
   changeSignUpInputValue,
   handleSubscribe,
+  showPasswordError,
+  handleChangePasswordConfirmation
 }) => {
   
   // handle input change
@@ -36,6 +38,10 @@ const Signup = ({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleSubscribe();
+
+ 
+
+
     // if (password === passwordConfirmation) {
     //   handleSubscribe();
     // }
@@ -45,17 +51,33 @@ const Signup = ({
     //   console.log(areSamePassword);
     // }
   };
-  // const checkedError = true;
-  
-  // const checkError = (evt) => {
-  //   if (evt.target.value == password) {
+
+  const checkPasswordConfirmation = (e) => {
+    if (e.target.value == password) {
+      handleChangePasswordConfirmation(false);
+      handleChange(e);
+    } else {
+      handleChangePasswordConfirmation(true);
+      handleChange(e);
+    }
+  }
+
+
+  // const passwordVerify = {
+  //   showError: false,
+  //   checkError: function(evt, handleChange) {
+  //     if (evt.target.value == password) {
+  //       passwordVerify.showError = false;
+  //       passwordVerify.handleChange(evt);
+  //       return false;
+  //     } else {
+  //       passwordVerify.showError = true;
+  //       passwordVerify.handleChange(evt);
+  //       return true;
+  //     }
+  //   },
+  //   handleChange: function(evt){
   //     handleChange(evt);
-  //     checkedError = true;
-  //     return false;
-  //   } else {
-  //     handleChange(evt);
-  //     checkedError = false;
-  //     return true;
   //   }
   // }
   
@@ -101,10 +123,10 @@ const Signup = ({
           placeholder="Confirmation du mot de passe" 
           id="password-confirmation"  
           value={passwordConfirmation}
-          onChange={handleChange}
+          onChange={checkPasswordConfirmation}
         />
 
-        {/* {!checkedError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>} */}
+        { showPasswordError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>}
 
         <span>Concernant votre restaurant</span>
         <input

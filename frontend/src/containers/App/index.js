@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
   checkLoggedRestaurant: () => {
     dispatch(checkLoggedRestaurant());
   },
+  fetchRestaurantData: () => {
+    dispatch(fetchRestaurantData());
+  },
 });
 
 export default connect(
