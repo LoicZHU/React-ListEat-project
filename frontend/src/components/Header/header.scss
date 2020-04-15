@@ -2,18 +2,15 @@
 
 header {
 
-  nav {
+  #desktop-menu {
     z-index: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em 2em;
+    height: 73px;
     // border-bottom: $primary-color 2px solid;
     box-shadow: 0px 5px 20px rgb(0,0,0,.1);
-
-    .header-mobile-nav-button, #help-button-mobile {
-      display: none;
-    }
 
     #help-button-mobile {
       background-color: $dark-color;
@@ -65,7 +62,7 @@ header {
 
     #logo-container {
       position: absolute;
-      left: calc(50vw-75px);
+      left: calc(50vw-73px);
     }
   }
   #mobile-nav{
@@ -76,6 +73,10 @@ header {
 
 @media (max-width: $mobile-breakpoint) {
 
+  #desktop-menu {
+    display: none!important;
+  }
+
   .header-mobile-nav-button {
     display: inline-block !important;
     font-size: 2.5em !important;
@@ -85,24 +86,175 @@ header {
     display: inline-block !important;
   }
 
-  #home-button, #help-button {
-    display: none;
-  }
-
-  #desktop-left-nav, #desktop-right-nav {
-    display: none;
-  }
   #mobile-nav{
-    display: block!important;
+    display: flex !important;
 
-    #home-button-mobile {
-      &::before {
-        width: 20px;
-        height: 20px;
-        background-color: black;
-        color: black;
+      .header {
+          display: flex;
+          margin: 0 auto;
+          width: 100%;
+          max-width: 100%;
+          box-shadow: none;
+          position: relative;
+          background-color: #fff;
+          left: 0;
+          top: 0;
+          height: 73px!important;
+          overflow: hidden;
+          z-index: 10;
+
+          #logo-container img {
+            width: 150px;
+            position: absolute;
+            top: 9.5px;
+            left: calc(50vw-73px);
+          }
+
+          #logo-container, label {
+            align-self: center;
+          }
+
+          label {
+            margin-top: 8px;
+          }
+
       }
-    }
+      .main {
+          margin: 0 auto;
+          display: block;
+          height: 100%;
+          margin-top: 60px;
+      }
+      .mainInner{
+          display: table;
+          height: 100%;
+          width: 100%;
+          text-align: center;
+      }
+      .mainInner div{
+          display:table-cell;
+          vertical-align: middle;
+          font-size: 3em;
+          font-weight: bold;
+          letter-spacing: 1.25px;
+      }
+      #sidebarMenu {
+        z-index:2;
+          height: 100%;
+          position: fixed;
+          left: 0;
+          width: 250px;
+          margin-top: 73px;
+          transform: translateX(-250px);
+          transition: transform 250ms ease-in-out;
+      }
+      .sidebarMenuInner{
+        display: flex;
+        flex-direction: column;
+          margin:0;
+          padding:0;
+          border-top: 1px solid rgba(255, 255, 255, 0.10);
+          background-color: #fff;
+          height: calc(100vh-73px);
+
+          #help span {
+            color: #fff;
+            background: $dark-color;
+            display: inline;
+            margin-left: .5em;
+            padding: 5px 11px;
+            border-radius: 50%;
+          }
+
+      }
+      .sidebarMenuInner li{
+          list-style: none;
+          color: #000;
+          text-transform: uppercase;
+          font-weight: bold;
+          padding: 20px;
+          cursor: pointer;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+      }
+      .sidebarMenuInner li span{
+          display: block;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.50);
+      }
+      .sidebarMenuInner li a{
+          color: #000;
+          text-transform: uppercase;
+          font-weight: bold;
+          cursor: pointer;
+          text-decoration: none;
+      }
+      input[type="checkbox"]:checked ~ #sidebarMenu {
+          transform: translateX(0);
+      }
+
+      input[type=checkbox] {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          display: none;
+      }
+      .sidebarIconToggle {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          cursor: pointer;
+          position: absolute;
+          z-index: 99;
+          height: 100%;
+          width: 100%;
+          top: 22px;
+          left: 15px;
+          height: 22px;
+          width: 22px;
+      }
+      .spinner {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          position: absolute;
+          height: 3px;
+          width: 100%;
+          background-color: $primary-color;
+      }
+      .horizontal {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          position: relative;
+          float: left;
+          margin-top: 3px;
+      }
+      .diagonal.part-1 {
+          position: relative;
+          transition: all 0.3s;
+          box-sizing: border-box;
+          float: left;
+      }
+      .diagonal.part-2 {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          position: relative;
+          float: left;
+          margin-top: 3px;
+      }
+      input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          opacity: 0;
+      }
+      input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          transform: rotate(135deg);
+          margin-top: 8px;
+      }
+      input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          transform: rotate(-135deg);
+          margin-top: -9px;
+      }
 
     #menu-wrapper {
       height: calc(100vh-73px);
