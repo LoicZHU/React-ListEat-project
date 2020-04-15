@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Logo from 'src/assets/img/logo.svg';
+import Logo from 'src/assets/img/logo.png';
 import './header.scss';
 
 const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
