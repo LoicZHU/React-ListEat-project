@@ -12,7 +12,20 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
   return (
     <header>
       <nav>
-        <ul>
+      <ul id="mobile-nav">
+          <div id="menu-icon">
+            <li id="home-button-mobile" className="header-mobile-nav-button"><i class="fa fa-bars" aria-hidden="true"></i></li>
+          </div>
+          <div id="menu-wrapper">
+            <ul>
+            <a href="/"><li>Accueil</li></a>
+            <a href="/login"><li>Connexion</li></a>
+            <a href="/signup"><li>Inscription</li></a>
+            <a href="/faq"><li>Aide <span id="help-button-span">?</span> </li></a>
+            </ul>
+          </div>
+      </ul>
+        <ul id="desktop-left-nav">
           <a href="/">
             <li id="home-button" className="header-nav-button button">Accueil</li>
             <li id="home-button-mobile" className="header-mobile-nav-button"><i className="fa fa-home" aria-hidden="true"></i></li>
@@ -26,7 +39,7 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
           <a href="/"><img src={Logo}/></a>
         </div>
 
-        <ul>
+        <ul id="desktop-right-nav">
           {/* if not logged */}
           {!isRestaurantLogged && (
             <a href="/signup"><li className="header-nav-button button">Inscription</li></a>
