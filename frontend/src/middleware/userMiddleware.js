@@ -74,7 +74,7 @@ const userMiddleware = (store) => (next) => (action) => {
           console.warn(error);
         });
       next(action);
-      break;
+      break;yarn
 
     case SIGN_UP:
       axios({
