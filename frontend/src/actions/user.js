@@ -63,8 +63,9 @@ export const changeShowPasswordError = (newValue) => ({
   newValue,
 });
 
-export const fetchRestaurantData = () => ({
+export const fetchRestaurantData = (restaurantId) => ({
   type: FETCH_RESTAURANT_DATA,
+  restaurantId,
 });
 
 export const signUp = () => ({

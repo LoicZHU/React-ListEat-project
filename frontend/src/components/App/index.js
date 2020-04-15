@@ -37,7 +37,8 @@ const App = ({
   }, []);
 
   if (!checkingLoggedRestaurant && isRestaurantLogged) {
-      console.log('DDD');
+    console.log('DDD');
+    fetchRestaurantData(restaurantId);
   };
 
   return (

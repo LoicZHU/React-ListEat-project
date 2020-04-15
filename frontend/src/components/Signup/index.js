@@ -62,6 +62,16 @@ const Signup = ({
     }
   }
 
+  const checkPassword = (e) => {
+    if (e.target.value == passwordConfirmation) {
+      handleChangePasswordConfirmation(false);
+      handleChange(e);
+    } else {
+      handleChangePasswordConfirmation(true);
+      handleChange(e);
+    }
+  }
+
 
   // const passwordVerify = {
   //   showError: false,
@@ -115,7 +125,7 @@ const Signup = ({
           placeholder="Mot de passe" 
           id="password"
           value={password}
-          onChange={handleChange}
+          onChange={handleChange, checkPassword}
         />
         <input
           name="passwordConfirmation" 

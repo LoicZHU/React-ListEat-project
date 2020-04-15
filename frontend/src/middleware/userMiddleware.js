@@ -12,6 +12,7 @@ import {
   changeCheckingRestaurantLogged,
   SIGN_UP,
   EDIT_RESTAURANT,
+  FETCH_RESTAURANT_DATA,
 } from 'src/actions/user';
 
 const baseUrl = 'localhost';
@@ -135,6 +136,20 @@ const userMiddleware = (store) => (next) => (action) => {
     //     });
     //   next(action);
     //   break;
+
+    case FETCH_RESTAURANT_DATA:
+      axios({
+        method: 'get',
+        url: 'http://' + baseUrl + ':8001/api/partner/id',
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
 
     default:
       next(action);
