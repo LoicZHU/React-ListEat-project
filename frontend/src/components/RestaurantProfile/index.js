@@ -18,7 +18,7 @@ const RestaurantProfile = ({
   newPassConfirmation,
   actualPass,
   changeRestaurantProfileInputValue,
-  handleRestaurantEdit
+  handleRestaurantEdit,
 }) => {
   // handle submit
   const handleSubmit = (evt) => {

@@ -32,7 +32,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
+          store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
           console.warn(error);
@@ -49,7 +49,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          store.dispatch(logUser(response.data.logged, response.data.restaurantId)); // TODO modif true
+          store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
           // console.warn(error);
