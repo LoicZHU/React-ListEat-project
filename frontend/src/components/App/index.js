@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 // == Import Components
 import Header from 'src/containers/Header';
@@ -20,6 +20,7 @@ import Data from 'src/components/Data';
 import Faq from 'src/components/Faq';
 import Signup from 'src/containers/Signup';
 import RestaurantProfile from 'src/containers/RestaurantProfile';
+import NotFound from 'src/components/NotFound';
 
 // == Import
 import './styles.css';
@@ -29,7 +30,8 @@ const App = ({
   isRestaurantLogged,
   checkLoggedRestaurant,
   checkingLoggedRestaurant, 
-  restaurantId
+  restaurantId,
+  fetchRestaurantData,
 }) => {
   useEffect(() => {
     checkLoggedRestaurant();
@@ -38,7 +40,7 @@ const App = ({
   return (
     <div className="app">
       {!checkingLoggedRestaurant && (
-        <>
+        <Switch>
           {/* Home */}
           <Route path="/" exact>
             <Header />
@@ -70,8 +72,8 @@ const App = ({
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
-            {!isRestaurantLogged && <Login /> }
-            {isRestaurantLogged && <Redirect to={`/partner/${restaurantId}/administration`} />}
+            {!isRestaurantLogged && <Login />}
+            {isRestaurantLogged && fetchRestaurantData(restaurantId) && <Redirect to={`/partner/${restaurantId}/administration`} />}
             <Footer />
           </Route>
 
@@ -126,7 +128,13 @@ const App = ({
             <Header />
             <Cancellation />
           </Route>
-        </>
+
+          <Route>
+            <Header />
+            <NotFound />
+            <Footer />
+          </Route>
+        </Switch>
       )}
     </div>
   );

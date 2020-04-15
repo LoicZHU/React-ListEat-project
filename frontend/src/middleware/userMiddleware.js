@@ -12,6 +12,7 @@ import {
   changeCheckingRestaurantLogged,
   SIGN_UP,
   EDIT_RESTAURANT,
+  FETCH_RESTAURANT_DATA,
 } from 'src/actions/user';
 
 const baseUrl = 'localhost';
@@ -22,7 +23,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN:
       axios({
         method: 'post',
-        url: 'http://' + baseUrl + '/api/partner/login',
+        url: `http://${baseUrl}:8001/api/partner/login`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -33,7 +34,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true, // handle cookies ;
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
@@ -46,11 +47,11 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: 'http://' + baseUrl + '/api/partner/islogged',
+        url: `http://${baseUrl}:8001/api/partner/islogged`,
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
@@ -63,7 +64,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: 'http://' + baseUrl + '/logout',
+        url: `http://${baseUrl}:8001/logout`,
         withCredentials: true,
       })
         .then((response) => {
@@ -78,7 +79,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case SIGN_UP:
       axios({
         method: 'post',
-        url: 'http://' + baseUrl + '/api/partner',
+        url: `http://${baseUrl}:8001/api/partner`,
         data: {
           email: store.getState().user.signupInput.email,
           password: store.getState().user.signupInput.password,
@@ -100,7 +101,6 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          console.log(response.data.message);
         })
         .catch((error) => {
           console.warn(error);
@@ -111,7 +111,7 @@ const userMiddleware = (store) => (next) => (action) => {
     // case EDIT_RESTAURANT:
     //   axios({
     //     method: 'put',
-    //     url: 'http://localhost:8001/api/partner',
+    //     url: `http://${baseUrl}:8001/api/partner`,
     //     data: {
 
 
@@ -136,6 +136,22 @@ const userMiddleware = (store) => (next) => (action) => {
     //     });
     //   next(action);
     //   break;
+
+    case FETCH_RESTAURANT_DATA:
+      const id = store.getState().user.restaurantId;
+      
+      axios({
+        method: 'get',
+        url: `http://${baseUrl}:8001/api/partner/${id}`,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
 
     default:
       next(action);

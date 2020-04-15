@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import App from 'src/components/App';
-import { checkLoggedRestaurant } from 'src/actions/user';
+import { checkLoggedRestaurant, fetchRestaurantData } from 'src/actions/user';
 
 
 const mapStateToProps = (state) => ({
@@ -13,6 +13,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   checkLoggedRestaurant: () => {
     dispatch(checkLoggedRestaurant());
+  },
+  fetchRestaurantData: () => {
+    dispatch(fetchRestaurantData());
   },
 });
 

@@ -7,6 +7,7 @@ import {
   CHANGE_CHECKING_RESTAURANT_LOGGED,
   CHANGE_SIGNUP_INPUT_VALUE,
   CHANGE_RESTAURANT_PROFILE_INPUT_VALUE,
+  CHANGE_SHOW_PASSWORD_ERROR,
 } from 'src/actions/user';
 
 // initial state
@@ -34,7 +35,8 @@ const initialState = {
     phone: '',
     cis: '',
     averageEatingTime: '', // int
-    coversNumber: '', // int
+    coversNumber: '',
+    showPasswordError: false, // int
   },
 
   // restaurant profile edit infos
@@ -92,17 +94,22 @@ const userReducer = (state = initialState, action = {}) => {
         isLogged: false,
       };
 
-    case SHOW_LOGIN_ERROR:
-      return {
-        ...state,
-        loginErrorMessage: true,
-      };
-
     case CHANGE_CHECKING_RESTAURANT_LOGGED:
       return {
         ...state,
         checking: false,
       };
+
+      case CHANGE_SHOW_PASSWORD_ERROR:
+          console.log(action.newValue);
+        return {
+          ...state,
+          signupInput: {
+            ...state.signupInput,
+            showPasswordError: action.newValue,
+          },
+        }
+
 
     default: return state;
   }

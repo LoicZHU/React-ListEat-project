@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Signup from 'src/components/Signup';
-import { changeSignUpInputValue, signUp } from 'src/actions/user';
+import { changeSignUpInputValue, signUp, changeShowPasswordError } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   lastname: state.user.signupInput.lastname,
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => ({
   cis: state.user.signupInput.cis,
   averageEatingTime: state.user.signupInput.averageEatingTime,
   coversNumber: state.user.signupInput.coversNumber,
+  showPasswordError: state.user.signupInput.showPasswordError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,6 +29,10 @@ const mapDispatchToProps = (dispatch) => ({
   handleSubscribe: () => {
     dispatch(signUp());
   },
+
+  handleChangePasswordConfirmation: (newValue) => {
+    dispatch(changeShowPasswordError(newValue));
+  }
 });
 
 export default connect(

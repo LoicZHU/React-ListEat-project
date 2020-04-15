@@ -8,6 +8,8 @@ export const CHECK_LOGGED_RESTAURANT = 'CHECK_LOGGED_RESTAURANT';
 export const LOG_OUT = 'LOG_OUT';
 export const SHOW_LOGIN_ERROR = 'SHOW_LOGIN_ERROR';
 export const CHANGE_CHECKING_RESTAURANT_LOGGED = 'CHANGE_CHECKING_RESTAURANT_LOGGED';
+export const FETCH_RESTAURANT_DATA = 'FETCH_RESTAURANT_DATA';
+export const CHANGE_SHOW_PASSWORD_ERROR = 'CHANGE_SHOW_PASSWORD_ERROR';
 export const SIGN_UP = 'SIGN_UP';
 export const EDIT_RESTAURANT = 'EDIT_RESTAURANT';
 
@@ -54,6 +56,16 @@ export const showLoginError = () => ({
 
 export const changeCheckingRestaurantLogged = () => ({
   type: CHANGE_CHECKING_RESTAURANT_LOGGED,
+});
+
+export const changeShowPasswordError = (newValue) => ({
+  type: CHANGE_SHOW_PASSWORD_ERROR,
+  newValue,
+});
+
+export const fetchRestaurantData = (restaurantId) => ({
+  type: FETCH_RESTAURANT_DATA,
+  restaurantId,
 });
 
 export const signUp = () => ({
