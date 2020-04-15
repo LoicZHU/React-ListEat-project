@@ -19,7 +19,7 @@ import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
 import Faq from 'src/components/Faq';
 import Signup from 'src/containers/Signup';
-import RestaurantProfile from 'src/components/RestaurantProfile';
+import RestaurantProfile from 'src/containers/RestaurantProfile';
 
 // == Import
 import './styles.css';

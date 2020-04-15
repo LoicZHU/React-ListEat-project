@@ -10,7 +10,8 @@ import {
   logOut,
   showLoginError,
   changeCheckingRestaurantLogged,
-  SIGN_UP
+  SIGN_UP,
+  EDIT_RESTAURANT,
 } from 'src/actions/user';
 
 // middleware
@@ -72,38 +73,67 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
 
-      case SIGN_UP:
-        axios({
-          method: 'post',
-          url: 'http://localhost:8001/api/partner',
-          data: {
-            email: store.getState().user.signupInput.email,
-            password: store.getState().user.signupInput.password,
-            lastName: store.getState().user.signupInput.lastname,
-            firstName: store.getState().user.signupInput.firstname,
-            
-            restaurant: {
+    case SIGN_UP:
+      axios({
+        method: 'post',
+        url: 'http://localhost:8001/api/partner',
+        data: {
+          email: store.getState().user.signupInput.email,
+          password: store.getState().user.signupInput.password,
+          lastName: store.getState().user.signupInput.lastname,
+          firstName: store.getState().user.signupInput.firstname,
+
+          restaurant: {
             siret_code: store.getState().user.signupInput.cis,
             name: store.getState().user.signupInput.restaurantName,
             address: store.getState().user.signupInput.address,
             postcode: Number(store.getState().user.signupInput.postcode),
-            city: store.getState().user.signupInput.coversNumber,   
+            city: store.getState().user.signupInput.coversNumber,
             country: store.getState().user.signupInput.country,
             phone: store.getState().user.signupInput.phone,
             average_eating_time: Number(store.getState().user.signupInput.averageEatingTime),
             seat_nb: Number(store.getState().user.signupInput.coversNumber),
-            },
           },
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.message);
         })
-          .then((response) => {
-            console.log(response);
-            console.log(response.data.message);
-          })
-          .catch((error) => {
-            console.warn(error);
-          });
-        next(action);
-        break;
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    // case EDIT_RESTAURANT:
+    //   axios({
+    //     method: 'put',
+    //     url: 'http://localhost:8001/api/partner',
+    //     data: {
+
+
+    //       : {
+    //         restaurantName: store.getState().user.restaurantProfileEditInput.restaurantName,
+    //         address: store.getState().user.restaurantProfileEditInput.address,
+    //         postcode: Number(store.getState().user.restaurantProfileEditInput.postcode), // int
+    //         city: store.getState().user.restaurantProfileEditInput.city,
+    //         country: store.getState().user.restaurantProfileEditInput.country,
+    //         phone: store.getState().user.restaurantProfileEditInput.phone,
+    //         newPass: store.getState().user.restaurantProfileEditInput.newPass,
+    //         actualPass: store.getState().user.restaurantProfileEditInput.actualPass,
+    //       },
+    //     },
+    //   })
+    //     .then((response) => {
+    //       console.log(response);
+    //       console.log(response.data.message);
+    //     })
+    //     .catch((error) => {
+    //       console.warn(error);
+    //     });
+    //   next(action);
+    //   break;
 
     default:
       next(action);
