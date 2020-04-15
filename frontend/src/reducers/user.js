@@ -1,13 +1,13 @@
 // import
-import { 
+import {
   CHANGE_INPUT_VALUE,
   LOG_USER,
   LOG_OUT,
   SHOW_LOGIN_ERROR,
   CHANGE_CHECKING_RESTAURANT_LOGGED,
   CHANGE_SIGNUP_INPUT_VALUE,
-  SIGN_UP,
- } from 'src/actions/user';
+  CHANGE_RESTAURANT_PROFILE_INPUT_VALUE,
+} from 'src/actions/user';
 
 // initial state
 const initialState = {
@@ -36,6 +36,19 @@ const initialState = {
     averageEatingTime: '', // int
     coversNumber: '', // int
   },
+
+  // restaurant profile edit infos
+  restaurantProfileEditInput: {
+    restaurantName: '',
+    address: '',
+    postcode: '', // int
+    city: '',
+    country: '',
+    phone: '',
+    newPass: '',
+    newPassConfirmation: '',
+    actualPass: '',
+  },
 };
 
 // reducer
@@ -47,14 +60,23 @@ const userReducer = (state = initialState, action = {}) => {
         [action.fieldName]: action.newValue,
       };
 
-      case CHANGE_SIGNUP_INPUT_VALUE:
-        return {
-          ...state,
-          signupInput: {
-            ...state.signupInput,
-            [action.fieldName]: action.newValue,
-          },
-        };
+    case CHANGE_SIGNUP_INPUT_VALUE:
+      return {
+        ...state,
+        signupInput: {
+          ...state.signupInput,
+          [action.fieldName]: action.newValue,
+        },
+      };
+
+    case CHANGE_RESTAURANT_PROFILE_INPUT_VALUE:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          [action.fieldName]: action.newValue,
+        },
+      };
 
     case LOG_USER:
       return {
@@ -80,7 +102,7 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         checking: false,
-      }
+      };
 
     default: return state;
   }
