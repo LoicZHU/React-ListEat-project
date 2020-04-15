@@ -61,7 +61,11 @@ class UserController extends AbstractController
         }
 
         if(!empty($jsonErrors)){
-            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+
+            return $this->json(['code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                                'Message'=> 'Les valeurs des inputs ne sont pas correct',
+                                'errors' => $jsonErrors]);
+            
         }
 
         //Checking siret or siren code call service
@@ -69,7 +73,10 @@ class UserController extends AbstractController
 
         //dd($response);
         if ($response == false) {
-            return $this->json(['message' => 'Numéro siret ou siren invalide.'],Response::HTTP_BAD_REQUEST);
+
+            return $this->json(['code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                                'Message'=> 'Les valeurs des inputs ne sont pas correct',
+                                'errors' => 'Numéro siret ou siren invalide.']);
         }
     
         $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
@@ -77,7 +84,11 @@ class UserController extends AbstractController
         $restaurantPosition = GeocodingService::geocodeAddress($address);
         //dd($restaurantPosition);
         if(empty($restaurantPosition['lat'])){
-            return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
+
+            return $this->json(['code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                                'Message'=> 'Les valeurs des inputs ne sont pas correct',
+                                'errors' => 'Adresse invalide.']);
+
         }else{
             $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
             $user->setRestaurant($restaurant->setLatitude($restaurantPosition['lat']));

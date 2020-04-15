@@ -1,0 +1,1 @@
+here the file of qrcode generated
