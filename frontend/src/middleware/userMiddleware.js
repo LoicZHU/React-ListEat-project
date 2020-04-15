@@ -14,13 +14,15 @@ import {
   EDIT_RESTAURANT,
 } from 'src/actions/user';
 
+const baseUrl = '54.162.210.163';
+
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case LOG_IN:
       axios({
         method: 'post',
-        url: 'http://localhost:8001/api/partner/login',
+        url: 'http://' + baseUrl + '/api/partner/login',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -44,7 +46,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: 'http://localhost:8001/api/partner/islogged',
+        url: 'http://' + baseUrl + '/api/partner/islogged',
         withCredentials: true,
       })
         .then((response) => {
@@ -61,7 +63,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: 'http://localhost:8001/logout',
+        url: 'http://' + baseUrl + '/logout',
         withCredentials: true,
       })
         .then((response) => {
@@ -76,7 +78,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case SIGN_UP:
       axios({
         method: 'post',
-        url: 'http://localhost:8001/api/partner',
+        url: 'http://' + baseUrl + '/api/partner',
         data: {
           email: store.getState().user.signupInput.email,
           password: store.getState().user.signupInput.password,
