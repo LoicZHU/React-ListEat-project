@@ -60,6 +60,10 @@ class TicketController extends AbstractController
 
         $restaurant = $restaurantRepository->find($data->restaurant);
 
+        if ($restaurant->getStatus() === 0) {
+            return $this->json(['message' => 'Le restaurant est fermé ou ne peut plus accepter de nouveaux clients.'], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         $ticket->setRestaurant($restaurant);
 
         $ticket->setCustomer($customer);
@@ -69,15 +73,19 @@ class TicketController extends AbstractController
         $waitingNb = $ticketRepository->findWaitingNb($data->restaurant);
 
         $estimatedWaitingTime = Timer::estimatedTime($waitingNb, $averageEatingTime, $seatNb);
-
+        dump($estimatedWaitingTime);
         $ticket->setEstimatedWaitingTime($estimatedWaitingTime);
+
+        $estimatedEntryTime = Timer::estimatedEntryTime($estimatedWaitingTime);
+
+        $ticket->setEstimatedEntryTime($estimatedEntryTime);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($customer);
         $entityManager->persist($ticket);
         $entityManager->flush();
     
-    return $this->json(['ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $estimatedWaitingTime], Response::HTTP_CREATED);
+    return $this->json(['ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $estimatedWaitingTime, 'estimatedEntryTime' => $estimatedEntryTime], Response::HTTP_CREATED);
     }
 
     /**
