@@ -15,7 +15,7 @@ import {
   FETCH_RESTAURANT_DATA,
 } from 'src/actions/user';
 
-const baseUrl = 'localhost';
+const baseUrl = '54.162.210.163';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
