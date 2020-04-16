@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use App\Entity\Restaurant;
 use App\Service\GeocodingService;
+use App\Service\CryptoService;
 use App\Repository\RestaurantRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,22 @@ class RestaurantController extends AbstractController
         
         return $this->json($restaurant, 200, [], ['groups' => 'restaurant_get']);
     }
+
+    /**
+     * @Route("/api/decrypt", name="api_restaurant_decrypt_id", methods={"GET"})
+     */
+    public function decryptId(Request $request, RestaurantRepository $restaurantRepository)
+    {
+   
+        $data = json_decode($request->getContent());
+
+        $RestaurantId = CryptoService::decrypt($data->restaurant);
+
+        $restaurant = $restaurantRepository->find($RestaurantId);
+
+        return $this->json($restaurant, 200, [], ['groups' => 'restaurant_decrypt']);
+    }
+
 
     /**
      * @Route("api/partner/{id}", name="api_restaurant_update",  methods={"PUT"})
@@ -203,7 +220,7 @@ class RestaurantController extends AbstractController
         $em->flush();
 
         //If we are here, all processus succes we can send email
-        if(isset($data->user)){
+        if(isset($data->user->email) || isset($data->user->password)){
             $user = $user[0];
             //dd($messages);
             $message = (new \Swift_Message('Information partenaire ListEat'))
