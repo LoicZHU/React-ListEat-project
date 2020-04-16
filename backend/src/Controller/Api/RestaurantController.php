@@ -40,14 +40,12 @@ class RestaurantController extends AbstractController
      */
     public function decryptId(Request $request, RestaurantRepository $restaurantRepository)
     {
-   
         $data = json_decode($request->getContent());
 
         $RestaurantId = CryptoService::decrypt($data->restaurant);
 
         $restaurant = $restaurantRepository->find($RestaurantId);
 
-        dd($restaurant);
         return $this->json($restaurant, 200, [], ['groups' => 'restaurant_decrypt']);
     }
 
