@@ -94,9 +94,6 @@ class UserController extends AbstractController
         }
         $user->setRole($role);
 
-        //dd($user->getRestaurant()->getCity());
-        //die();
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
@@ -133,8 +130,11 @@ class UserController extends AbstractController
         {"username": "blabla@bla.com"}
         */
         $data = json_decode($request->getContent());
+
+        // looking for the existence of the user in the database based on the provided email
         $user = $userRepository->findBy(['email' => $data->username]);
        
+        // if the user exists, a token is created
         if($user) {
             $user = $user[0];
             $token = $denormalizer->denormalize($data, Token::class);
@@ -146,7 +146,7 @@ class UserController extends AbstractController
             $entityManager->persist($token);
             $entityManager->flush();
 
-             // Email sent to the user with the security code needed to set a new password
+             // Email sent to the user with the token/security code needed to set a new password
             $message = (new \Swift_Message('Information partenaire ListEat'))
 
             ->setFrom('send@example.com')
@@ -184,12 +184,15 @@ class UserController extends AbstractController
         $data = json_decode($request->getContent());
         $securityCode = $data->securityCode;
         $user = $userRepository->find($data->userId);
+
+        // looking for a token for which the provided security code and user id match
         $token = $tokenRepository->findBy(['tokenString' => $securityCode, 'user' => $user ]);
         
         if (!$token) {
             return $this->json(['Votre code de sécurité est erroné.'], Response::HTTP_NOT_FOUND);
         }
 
+        // calculating the difference between the creation time of the token and the input time of this same token
         $tokenCreationTime = $token[0]->getCreatedAt();
         $tokenInputTime = new \DateTime();
         $dateInterval = $tokenCreationTime->diff($tokenInputTime);
@@ -199,7 +202,7 @@ class UserController extends AbstractController
         $totalMinutes = $daysInMin + $hoursInMin + $minutes;
         $interval = $totalMinutes;
 
-
+        // if the difference is greater than 10 minutes (can be changed), the token is considered expired and therefore destroyed, the user can't change the password and has to ask for a new token
         if ($interval > 10) {
             $user->removeToken($token[0]);
             $entityManager = $this->getDoctrine()->getManager();
@@ -207,11 +210,9 @@ class UserController extends AbstractController
             return $this->json(['Votre code de sécurité a expiré.'], Response::HTTP_NOT_FOUND);
         }
         
+        // if the token is valid and the password deemed acceptable (for the time being "not blank"), the new password is set and the token destroyed
         if ($token[0]) {
             $errors = $validator->validate($data->newPassword, new Assert\NotBlank());
-            //dd($errors);
-            
-            //$errorsUser = $validator->validate($user, null, ['Newpassword']);
 
             if (count($errors) !== 0) {
                 //$jsonErrors = [];

@@ -7,7 +7,7 @@ namespace App\Service;
 class Timer
 {
     /**
-     * returns a integer
+     * returns an integer
      * estimated waiting time
      */
     public function estimatedTime($waitingNb, $averageEatingTime, $seatNb)
@@ -38,6 +38,8 @@ class Timer
      */
     public function estimatedEntryTime($estimatedWaitingTime)
     {
+        // getting the estimated entry time by adding the estimated waiting time to the current time then transforming it into a datetime object (required for the database to process the data)
+
         $result = date("d-m-Y H:i:s", strtotime('now +'.$estimatedWaitingTime.' Minutes'));
         $datetime = new \DateTime($result);
        
