@@ -66,6 +66,11 @@ class Ticket
      */
     private $estimatedWaitingTime;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $estimatedEntryTime;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -156,6 +161,18 @@ class Ticket
     public function setEstimatedWaitingTime(?int $estimatedWaitingTime): self
     {
         $this->estimatedWaitingTime = $estimatedWaitingTime;
+
+        return $this;
+    }
+
+    public function getEstimatedEntryTime(): ?\DateTimeInterface
+    {
+        return $this->estimatedEntryTime;
+    }
+
+    public function setEstimatedEntryTime(?\DateTimeInterface $estimatedEntryTime): self
+    {
+        $this->estimatedEntryTime = $estimatedEntryTime;
 
         return $this;
     }

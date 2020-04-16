@@ -33,14 +33,14 @@ class Timer
         return $result;
     }
 
-     /**
-     * returns a time
-     * estimated hour
+    /**
+     * returns an estimated entry time
      */
-    public function estimatedHour($estimatedTime)
+    public function estimatedEntryTime($estimatedWaitingTime)
     {
-        $result = date("d/m/Y H:i:s", strtotime('now +'.$estimatedTime.' Minutes')); 
+        $result = date("d-m-Y H:i:s", strtotime('now +'.$estimatedWaitingTime.' Minutes'));
+        $datetime = new \DateTime($result);
        
-        return $result;
+        return $datetime;
     }
 }
