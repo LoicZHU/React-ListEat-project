@@ -10,6 +10,7 @@ import {
   CHANGE_SHOW_PASSWORD_ERROR,
   SAVE_RESTAURANT_DATA,
   SAVE_INCREASED_AVERAGE_TIME,
+  SAVE_DECREASED_AVERAGE_TIME,
   SAVE_SIGN_UP_ERRORS,
 } from 'src/actions/user';
 
@@ -141,6 +142,15 @@ const userReducer = (state = initialState, action = {}) => {
         restaurantProfileEditInput: {
           ...state.restaurantProfileEditInput,
           averageEatingTime: action.increasedAverageEatingTime,
+        },
+      };
+
+    case SAVE_DECREASED_AVERAGE_TIME:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          averageEatingTime: action.decreasedAverageEatingTime,
         },
       };
 

@@ -13,12 +13,12 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
     <header>
       <nav>
       <div id="mobile-nav">
-        <div class="header">
-          <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu"/>
-          <label for="openSidebarMenu" class="sidebarIconToggle">
-            <div class="spinner diagonal part-1"></div>
-            <div class="spinner horizontal"></div>
-            <div class="spinner diagonal part-2"></div>
+        <div className="header">
+          <input type="checkbox" className="openSidebarMenu" id="openSidebarMenu"/>
+          <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
+            <div className="spinner diagonal part-1"></div>
+            <div className="spinner horizontal"></div>
+            <div className="spinner diagonal part-2"></div>
           </label>
 
           <div id="logo-container">
@@ -26,7 +26,7 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
           </div>
 
           <div id="sidebarMenu">
-            <ul class="sidebarMenuInner">
+            <ul className="sidebarMenuInner">
 
             <a href="/">
               <li>Accueil</li>

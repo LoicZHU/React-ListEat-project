@@ -17,7 +17,7 @@ import {
   saveRestaurantData,
   INCREASE_MINUTE,
   saveIncreasedAverageEatingTime,
-  DECREASED_MINUTE,
+  DECREASE_MINUTE,
   saveDecreasedAverageEatingTime,
 } from 'src/actions/user';
 
@@ -26,6 +26,8 @@ const baseUrl = 'localhost:8001';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
+  const id = store.getState().user.restaurantId;
+
   switch (action.type) {
     case LOG_IN:
       axios({
@@ -155,8 +157,6 @@ const userMiddleware = (store) => (next) => (action) => {
     //   break;
 
     case FETCH_RESTAURANT_DATA:
-      const id = store.getState().user.restaurantId;
-
       axios({
         method: 'get',
         url: `http://${baseUrl}/api/partner/${id}`,
@@ -186,23 +186,46 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case INCREASE_MINUTE:
-      const restaurantId = store.getState().user.restaurantId;
-      let newAverageEatingTime = store.getState().user.restaurantProfileEditInput.averageEatingTime;
-      newAverageEatingTime++;
+      let increasedAverageEatingTime = store.getState().user.restaurantProfileEditInput.averageEatingTime;
+      increasedAverageEatingTime++;
 
       axios({
         method: 'put',
-        url: `http://${baseUrl}/api/partner/${restaurantId}`,
+        url: `http://${baseUrl}/api/partner/${id}`,
         data: {
           restaurant: {
-            average_eating_time: newAverageEatingTime,
+            average_eating_time: increasedAverageEatingTime,
           },
         },
         withCredentials: true,
       })
         .then((response) => {
           // console.log(response);
-          store.dispatch(saveIncreasedAverageEatingTime(newAverageEatingTime));
+          store.dispatch(saveIncreasedAverageEatingTime(increasedAverageEatingTime));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    case DECREASE_MINUTE:
+      let decreasedAverageEatingTime = store.getState().user.restaurantProfileEditInput.averageEatingTime;
+      decreasedAverageEatingTime--;
+
+      axios({
+        method: 'put',
+        url: `http://${baseUrl}/api/partner/${id}`,
+        data: {
+          restaurant: {
+            average_eating_time: decreasedAverageEatingTime,
+          },
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          // console.log(response);
+          store.dispatch(saveDecreasedAverageEatingTime(decreasedAverageEatingTime));
         })
         .catch((error) => {
           console.warn(error);
