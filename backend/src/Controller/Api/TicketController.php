@@ -59,7 +59,8 @@ class TicketController extends AbstractController
         } 
 
         $restaurant = $restaurantRepository->find($data->restaurant);
-
+        
+        // if restaurant's status is inactive, the customer will be unable to subscribe to the waiting list and get a ticket
         if ($restaurant->getStatus() === 0) {
             return $this->json(['message' => 'Le restaurant est fermé ou ne peut plus accepter de nouveaux clients.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
@@ -68,14 +69,16 @@ class TicketController extends AbstractController
 
         $ticket->setCustomer($customer);
 
+        // getting all data needed in order to calculate the estimated waiting time
         $averageEatingTime = $restaurant->getAverageEatingTime();
         $seatNb = $restaurant->getSeatNb();
         $waitingNb = $ticketRepository->findWaitingNb($data->restaurant);
 
         $estimatedWaitingTime = Timer::estimatedTime($waitingNb, $averageEatingTime, $seatNb);
-        dump($estimatedWaitingTime);
+
         $ticket->setEstimatedWaitingTime($estimatedWaitingTime);
 
+        // getting the estimated entry time by adding the estimated waiting time to the current time
         $estimatedEntryTime = Timer::estimatedEntryTime($estimatedWaitingTime);
 
         $ticket->setEstimatedEntryTime($estimatedEntryTime);
@@ -158,6 +161,7 @@ class TicketController extends AbstractController
             return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
         
+        // finds all tickets related to a single restaurant
         $tickets = $ticketRepository->findBy(['restaurant' => $restaurant]);
 
         return $this->json($tickets, 200, [], ['groups' => 'tickets_get']);
