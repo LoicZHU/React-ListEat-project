@@ -16,6 +16,7 @@
 
 #mobile-nav{
   display: flex !important;
+  
 
     .header {
         display: flex;
@@ -32,10 +33,10 @@
         z-index: 10;
 
         #logo-container img {
-          width: 150px;
+          width: 100px;
           position: absolute;
-          top: 9.5px;
-          left: calc(50vw-73px);
+          top: 20px;
+          left: calc(50vw-50px);
         }
 
         #logo-container, label {
@@ -82,22 +83,22 @@
         margin:0;
         padding:0;
         border-top: 1px solid rgba(255, 255, 255, 0.10);
-        background-color: #fff;
+        background-color: $primary-color;
         height: calc(100vh-73px);
 
         #help span {
           color: #fff;
-          background: $dark-color;
           display: inline;
           margin-left: .5em;
           padding: 5px 11px;
           border-radius: 50%;
+          border: 1px #fff solid;
         }
 
     }
     .sidebarMenuInner li{
         list-style: none;
-        color: #000;
+        color: #fff;
         text-transform: uppercase;
         font-weight: bold;
         padding: 20px;
@@ -110,7 +111,7 @@
         color: rgba(255, 255, 255, 0.50);
     }
     .sidebarMenuInner li a{
-        color: #000;
+        color: #fff;
         text-transform: uppercase;
         font-weight: bold;
         cursor: pointer;
@@ -222,11 +223,11 @@
       display: flex !important;
       justify-content: space-between;
       align-items: center;
-      padding: 1em 2em;
+      padding: 1em 5em;
       height: 73px;
       // border-bottom: $primary-color 2px solid;
       box-shadow: 0px 5px 20px rgb(0,0,0,.1);
-  
+
       #help-button-mobile {
         background-color: $dark-color;
         font-weight: bold;
@@ -239,22 +240,23 @@
       }
   
       #help-button-span {
-        background-color: $dark-color;
         font-weight: bold;
         font-size: .8em;
-        color: #fff;
+        color: #000;
         border-radius: 50%;
         width: 3em;
-        padding: .1em .6em;
+        padding: 0 .5em;
         margin-left: .2em;
+        border: 1px solid black;
       }
   
       #help-button {
         &:hover {
           span {
             transition: transform .1s;
-            color: $dark-color;
-            background-color: #fff;
+            color: #fff;
+            background-color: $primary-color;
+            border: 1px solid #fff;
           }
         }
       }
@@ -272,12 +274,12 @@
       }
   
       #logo-container img {
-        width: 130px;
+        width: 120px;
       }
   
       #logo-container {
         position: absolute;
-        left: calc(50vw-76px);
+        left: calc(50vw-60px);
       }
     }
 

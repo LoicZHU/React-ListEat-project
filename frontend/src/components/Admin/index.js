@@ -11,17 +11,22 @@ const Admin = ({
   averageEatingTime,
   handleDecreaseMinute,
   handleIncreaseMinute,
+  handleChangeServiceStatus,
 }) => {
-  console.log(averageEatingTime);
-  console.log(status);
-
+  // handle click on '+'
   const handleRemoveClick = () => {
     handleDecreaseMinute();
   };
 
+  // handle click on '-'
   const handleAddClick = () => {
     handleIncreaseMinute();
   };
+
+  // handle click on the toggle
+  const handleServiceClick = () => {
+    handleChangeServiceStatus();
+  }
 
   return (
     <div id="admin-wrapper">
@@ -31,7 +36,7 @@ const Admin = ({
         <div id="admin-top-section">
           <div className="left">
             <label className="switch">
-              <input type="checkbox" checked={status} />
+              <input type="checkbox" checked={status} onClick={handleServiceClick} />
               <span className="slider round" />
             </label>
             <span className="toggle-name">SERVICE : </span>

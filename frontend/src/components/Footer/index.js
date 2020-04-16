@@ -13,11 +13,9 @@ const Footer = () => {
           </ul>
         </nav>
         <div id="contact-block">
-          <img id="logo" src={Logo}/>
           <div className="contact-infos">
             <span className="title">Pour nous contacter :</span>
             <span><i className="fa fa-envelope-o" aria-hidden="true"></i> Par mail: <a href="mailto:hello@listeat.io">hello@listeat.io</a></span>
-            <span><i className="fa fa-phone" aria-hidden="true"></i> Par téléphone: <a href="tel:+33158987845">01 58 98 78 45</a></span>
           </div>
         </div>
       </div>
