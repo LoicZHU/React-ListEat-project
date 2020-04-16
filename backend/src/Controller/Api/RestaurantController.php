@@ -203,7 +203,7 @@ class RestaurantController extends AbstractController
         $em->flush();
 
         //If we are here, all processus succes we can send email
-        if(isset($data->user)){
+        if(isset($data->user->email) || isset($data->user->password)){
             $user = $user[0];
             //dd($messages);
             $message = (new \Swift_Message('Information partenaire ListEat'))
