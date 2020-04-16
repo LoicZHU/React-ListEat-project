@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 // == Import Components
 import Header from 'src/containers/Header';
@@ -18,22 +18,29 @@ import Admin from 'src/components/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
 import Faq from 'src/components/Faq';
-import Signup from 'src/components/Signup';
-import RestaurantProfile from 'src/components/RestaurantProfile';
+import Signup from 'src/containers/Signup';
+import RestaurantProfile from 'src/containers/RestaurantProfile';
+import NotFound from 'src/components/NotFound';
 
 // == Import
 import './styles.css';
 
 // == Composant
-const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaurant }) => {
+const App = ({
+  isRestaurantLogged,
+  checkLoggedRestaurant,
+  checkingLoggedRestaurant, 
+  restaurantId,
+  fetchRestaurantData,
+}) => {
   useEffect(() => {
     checkLoggedRestaurant();
   }, []);
 
   return (
     <div className="app">
-      
-        <>
+      {!checkingLoggedRestaurant && (
+        <Switch>
           {/* Home */}
           <Route path="/" exact>
             <Header />
@@ -41,10 +48,32 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
 
+          {/* FAQ */}
+          <Route path="/faq" exact>
+            <Header />
+            <Faq />
+            <Footer />
+          </Route>
+
+          {/* Legal mentions */}
+          <Route path="/legal" exact>
+            <Header />
+            <Legal />
+            <Footer />
+          </Route>
+
+          {/* Data protection */}
+          <Route path="/data-protection" exact>
+            <Header />
+            <Data />
+            <Footer />
+          </Route>
+
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
-            <Login />
+            {!isRestaurantLogged && <Login />}
+            {isRestaurantLogged && fetchRestaurantData(restaurantId) && <Redirect to={`/partner/${restaurantId}/administration`} />}
             <Footer />
           </Route>
 
@@ -62,16 +91,18 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Footer />
           </Route>
 
-          {/* Admin */}
-          <Route path="/partner/:id/administration" exact>
+          {/* Restaurant (Admin) */}
+          <Route path={`/partner/${restaurantId}/administration`} exact>
             <Header />
-            <Admin />
+            {isRestaurantLogged && <Admin />}
+            {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration`} to="/" />}
           </Route>
 
-          {/* Admin */}
-          <Route path="/partner/:id/administration/edit">
+          {/* Restaurant (Admin) */}
+          <Route path={`/partner/${restaurantId}/administration/edit`}>
             <Header />
-            <RestaurantProfile />
+            {isRestaurantLogged && <RestaurantProfile />}
+            {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration/edit`} to="/" />}
           </Route>
 
           {/* Client : Get a ticket */}
@@ -98,28 +129,13 @@ const App = ({ isRestaurantLogged, checkLoggedRestaurant, checkingLoggedRestaura
             <Cancellation />
           </Route>
 
-          {/* FAQ */}
-          <Route path="/faq" exact>
+          <Route>
             <Header />
-            <Faq />
+            <NotFound />
             <Footer />
           </Route>
-
-          {/* Legal mentions */}
-          <Route path="/legal" exact>
-            <Header />
-            <Legal />
-            <Footer />
-          </Route>
-
-          {/* Data protection */}
-          <Route path="/data-protection" exact>
-            <Header />
-            <Data />
-            <Footer />
-          </Route>
-        </>
-     
+        </Switch>
+      )}
     </div>
   );
 };
@@ -129,6 +145,7 @@ App.propTypes = {
   isRestaurantLogged: PropTypes.bool.isRequired,
   checkLoggedRestaurant: PropTypes.func.isRequired,
   checkingLoggedRestaurant: PropTypes.bool.isRequired,
+  restaurantId: PropTypes.number,
 };
 
 // == Export

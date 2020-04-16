@@ -1,0 +1,16 @@
+@import 'src/styles/index.scss';
+
+main {
+  margin: 5em 20px 5em;
+
+  .link {
+    cursor: pointer;
+    margin: 5rem 0 0;
+    display: inline-block;
+    color: $alt-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

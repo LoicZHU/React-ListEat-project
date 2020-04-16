@@ -9,7 +9,13 @@ import {
   LOG_OUT,
   logOut,
   showLoginError,
+  changeCheckingRestaurantLogged,
+  SIGN_UP,
+  EDIT_RESTAURANT,
+  FETCH_RESTAURANT_DATA,
 } from 'src/actions/user';
+
+const baseUrl = '54.162.210.163';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
@@ -17,7 +23,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN:
       axios({
         method: 'post',
-        url: 'http://localhost:8001/api/partner/login',
+        url: `http://${baseUrl}:8080/api/partner/login`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -28,10 +34,8 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true, // handle cookies ;
       })
         .then((response) => {
-          console.log(response);
-          const id = response.data.restaurantId;
-          window.location.replace('/partner/' + id + '/administration');
-          // store.dispatch(logUser(response.data.logged));
+          // console.log(response);
+          store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
           console.warn(error);
@@ -43,15 +47,16 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: 'http://localhost:8001/api/partner/islogged',
+        url: `http://${baseUrl}:8080/api/partner/islogged`,
         withCredentials: true,
       })
         .then((response) => {
-          store.dispatch(logUser(response.data.logged));
           // console.log(response);
+          store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
+          store.dispatch(changeCheckingRestaurantLogged());
         });
       next(action);
       break;
@@ -59,13 +64,88 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: 'http://localhost:8001/logout'
+        url: `http://${baseUrl}:8080/logout`,
+        withCredentials: true,
       })
         .then((response) => {
           store.dispatch(logOut());
-          window.location.replace('/');
-          console.log('ok');
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;yarn
 
+    case SIGN_UP:
+      axios({
+        method: 'post',
+        url: `http://${baseUrl}:8080/api/partner`,
+        data: {
+          email: store.getState().user.signupInput.email,
+          password: store.getState().user.signupInput.password,
+          lastName: store.getState().user.signupInput.lastname,
+          firstName: store.getState().user.signupInput.firstname,
+
+          restaurant: {
+            siret_code: store.getState().user.signupInput.cis,
+            name: store.getState().user.signupInput.restaurantName,
+            address: store.getState().user.signupInput.address,
+            postcode: Number(store.getState().user.signupInput.postcode),
+            city: store.getState().user.signupInput.coversNumber,
+            country: store.getState().user.signupInput.country,
+            phone: store.getState().user.signupInput.phone,
+            average_eating_time: Number(store.getState().user.signupInput.averageEatingTime),
+            seat_nb: Number(store.getState().user.signupInput.coversNumber),
+          },
+        },
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    // case EDIT_RESTAURANT:
+    //   axios({
+    //     method: 'put',
+    //     url: `http://${baseUrl}:8080/api/partner`,
+    //     data: {
+
+
+    //       : {
+    //         restaurantName: store.getState().user.restaurantProfileEditInput.restaurantName,
+    //         address: store.getState().user.restaurantProfileEditInput.address,
+    //         postcode: Number(store.getState().user.restaurantProfileEditInput.postcode), // int
+    //         city: store.getState().user.restaurantProfileEditInput.city,
+    //         country: store.getState().user.restaurantProfileEditInput.country,
+    //         phone: store.getState().user.restaurantProfileEditInput.phone,
+    //         newPass: store.getState().user.restaurantProfileEditInput.newPass,
+    //         actualPass: store.getState().user.restaurantProfileEditInput.actualPass,
+    //       },
+    //     },
+    //   })
+    //     .then((response) => {
+    //       console.log(response);
+    //       console.log(response.data.message);
+    //     })
+    //     .catch((error) => {
+    //       console.warn(error);
+    //     });
+    //   next(action);
+    //   break;
+
+    case FETCH_RESTAURANT_DATA:
+      const id = store.getState().user.restaurantId;
+      
+      axios({
+        method: 'get',
+        url: `http://${baseUrl}:8080/api/partner/${id}`,
+      })
+        .then((response) => {
+          console.log(response);
         })
         .catch((error) => {
           console.warn(error);
