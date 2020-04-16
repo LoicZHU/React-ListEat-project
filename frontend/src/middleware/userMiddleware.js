@@ -11,11 +11,18 @@ import {
   showLoginError,
   changeCheckingRestaurantLogged,
   SIGN_UP,
+  saveSignUpErrors,
   EDIT_RESTAURANT,
   FETCH_RESTAURANT_DATA,
+  saveRestaurantData,
+  INCREASE_MINUTE,
+  saveIncreasedAverageEatingTime,
+  DECREASED_MINUTE,
+  saveDecreasedAverageEatingTime,
 } from 'src/actions/user';
 
-const baseUrl = '54.162.210.163';
+// const baseUrl = '54.162.210.163:8080';
+const baseUrl = 'localhost:8001';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
@@ -23,7 +30,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN:
       axios({
         method: 'post',
-        url: `http://${baseUrl}:8080/api/partner/login`,
+        url: `http://${baseUrl}/api/partner/login`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -31,7 +38,7 @@ const userMiddleware = (store) => (next) => (action) => {
           username: store.getState().user.email,
           password: store.getState().user.password,
         },
-        withCredentials: true, // handle cookies ;
+        withCredentials: true, // handle cookies
       })
         .then((response) => {
           // console.log(response);
@@ -47,7 +54,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: `http://${baseUrl}:8080/api/partner/islogged`,
+        url: `http://${baseUrl}/api/partner/islogged`,
         withCredentials: true,
       })
         .then((response) => {
@@ -64,7 +71,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: `http://${baseUrl}:8080/logout`,
+        url: `http://${baseUrl}/logout`,
         withCredentials: true,
       })
         .then((response) => {
@@ -79,7 +86,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case SIGN_UP:
       axios({
         method: 'post',
-        url: `http://${baseUrl}:8080/api/partner`,
+        url: `http://${baseUrl}/api/partner`,
         data: {
           email: store.getState().user.signupInput.email,
           password: store.getState().user.signupInput.password,
@@ -101,9 +108,19 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
+          console.log('resp');
+          console.log(response.json());
         })
+        // .then((error) => {
+        //   console.warn(error);
+        //   console.log('test err');
+        //   console.log(error);
+        // })
         .catch((error) => {
-          console.warn(error);
+          console.log('test err');
+          console.log(error.response);
+          console.log(error.response.data);
+          store.dispatch(saveSignUpErrors(error.response.data));
         });
       next(action);
       break;
@@ -111,7 +128,7 @@ const userMiddleware = (store) => (next) => (action) => {
     // case EDIT_RESTAURANT:
     //   axios({
     //     method: 'put',
-    //     url: `http://${baseUrl}:8080/api/partner`,
+    //     url: `http://${baseUrl}api/partner`,
     //     data: {
 
 
@@ -139,13 +156,53 @@ const userMiddleware = (store) => (next) => (action) => {
 
     case FETCH_RESTAURANT_DATA:
       const id = store.getState().user.restaurantId;
-      
+
       axios({
         method: 'get',
-        url: `http://${baseUrl}:8080/api/partner/${id}`,
+        url: `http://${baseUrl}/api/partner/${id}`,
+        // data: {
+
+
+          //       : {
+          //         restaurantName: store.getState().user.restaurantProfileEditInput.restaurantName,
+          //         address: store.getState().user.restaurantProfileEditInput.address,
+          //         postcode: Number(store.getState().user.restaurantProfileEditInput.postcode), // int
+          //         city: store.getState().user.restaurantProfileEditInput.city,
+          //         country: store.getState().user.restaurantProfileEditInput.country,
+          //         phone: store.getState().user.restaurantProfileEditInput.phone,
+          //         newPass: store.getState().user.restaurantProfileEditInput.newPass,
+          //         actualPass: store.getState().user.restaurantProfileEditInput.actualPass,
+          //       },
+          //     },
       })
         .then((response) => {
           console.log(response);
+          store.dispatch(saveRestaurantData(response.data.averageEatingTime, response.data.status));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    case INCREASE_MINUTE:
+      const restaurantId = store.getState().user.restaurantId;
+      let newAverageEatingTime = store.getState().user.restaurantProfileEditInput.averageEatingTime;
+      newAverageEatingTime++;
+
+      axios({
+        method: 'put',
+        url: `http://${baseUrl}/api/partner/${restaurantId}`,
+        data: {
+          restaurant: {
+            average_eating_time: newAverageEatingTime,
+          },
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          // console.log(response);
+          store.dispatch(saveIncreasedAverageEatingTime(newAverageEatingTime));
         })
         .catch((error) => {
           console.warn(error);

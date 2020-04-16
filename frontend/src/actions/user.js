@@ -11,7 +11,13 @@ export const CHANGE_CHECKING_RESTAURANT_LOGGED = 'CHANGE_CHECKING_RESTAURANT_LOG
 export const FETCH_RESTAURANT_DATA = 'FETCH_RESTAURANT_DATA';
 export const CHANGE_SHOW_PASSWORD_ERROR = 'CHANGE_SHOW_PASSWORD_ERROR';
 export const SIGN_UP = 'SIGN_UP';
+export const SAVE_SIGN_UP_ERRORS = 'SAVE_SIGN_UP_ERRORS';
 export const EDIT_RESTAURANT = 'EDIT_RESTAURANT';
+export const SAVE_RESTAURANT_DATA = 'SAVE_RESTAURANT_DATA';
+export const INCREASE_MINUTE = 'INCREASE_MINUTE';
+export const SAVE_INCREASED_AVERAGE_TIME = 'SAVE_INCREASED_AVERAGE_TIME';
+export const DECREASE_MINUTE = 'DECREASE_MINUTE';
+export const SAVE_DECREASED_AVERAGE_TIME = 'SAVE_DECREASED_AVERAGE_TIME';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -72,6 +78,35 @@ export const signUp = () => ({
   type: SIGN_UP,
 });
 
+export const saveSignUpErrors = (errors) => ({
+  type: SAVE_SIGN_UP_ERRORS,
+  errors,
+});
+
 export const editRestaurant = () => ({
   type: EDIT_RESTAURANT,
+});
+
+export const saveRestaurantData = (averageEatingTime, status) => ({
+  type: SAVE_RESTAURANT_DATA,
+  averageEatingTime,
+  status,
+});
+
+export const increaseMinute = () => ({
+  type: INCREASE_MINUTE,
+});
+
+export const saveIncreasedAverageEatingTime = (increasedAverageEatingTime) => ({
+  type: SAVE_INCREASED_AVERAGE_TIME,
+  increasedAverageEatingTime,
+});
+
+export const decreaseMinute = () => ({
+  type: DECREASE_MINUTE,
+});
+
+export const saveDecreasedAverageEatingTime = (decreasedAverageEatingTime) => ({
+  type: SAVE_DECREASED_AVERAGE_TIME,
+  decreasedAverageEatingTime,
 });

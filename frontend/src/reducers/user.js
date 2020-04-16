@@ -8,6 +8,9 @@ import {
   CHANGE_SIGNUP_INPUT_VALUE,
   CHANGE_RESTAURANT_PROFILE_INPUT_VALUE,
   CHANGE_SHOW_PASSWORD_ERROR,
+  SAVE_RESTAURANT_DATA,
+  SAVE_INCREASED_AVERAGE_TIME,
+  SAVE_SIGN_UP_ERRORS,
 } from 'src/actions/user';
 
 // initial state
@@ -39,6 +42,9 @@ const initialState = {
     showPasswordError: false, // int
   },
 
+  // sign up errors
+  signupErrors: {},
+
   // restaurant profile edit infos
   restaurantProfileEditInput: {
     restaurantName: '',
@@ -50,6 +56,9 @@ const initialState = {
     newPass: '',
     newPassConfirmation: '',
     actualPass: '',
+    // page "administration" (mon espace)
+    averageEatingTime: '', // int
+    status: '', // int
   },
 };
 
@@ -100,16 +109,46 @@ const userReducer = (state = initialState, action = {}) => {
         checking: false,
       };
 
-      case CHANGE_SHOW_PASSWORD_ERROR:
-          console.log(action.newValue);
-        return {
-          ...state,
-          signupInput: {
-            ...state.signupInput,
-            showPasswordError: action.newValue,
-          },
-        }
+    case CHANGE_CHECKING_RESTAURANT_LOGGED:
+      return {
+        ...state,
+        checking: false,
+      };
 
+    case CHANGE_SHOW_PASSWORD_ERROR:
+      console.log(action.newValue);
+      return {
+        ...state,
+        signupInput: {
+          ...state.signupInput,
+          showPasswordError: action.newValue,
+        },
+      };
+
+    case SAVE_RESTAURANT_DATA:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          averageEatingTime: action.averageEatingTime,
+          status: action.status,
+        },
+      };
+
+    case SAVE_INCREASED_AVERAGE_TIME:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          averageEatingTime: action.increasedAverageEatingTime,
+        },
+      };
+
+    case SAVE_SIGN_UP_ERRORS:
+      return {
+        ...state,
+        signupErrors: action.errors,
+      };
 
     default: return state;
   }

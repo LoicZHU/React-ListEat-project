@@ -1,7 +1,15 @@
 @import 'src/styles/_vars.scss';
 
 .home {
-  margin: 10px;
+  margin: 0;
+
+  #desktop-slogan-description {
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+  }
 
   h2 {
     font-size: 1.125em;
@@ -11,51 +19,47 @@
   // top
   &__top {
     display: flex;
-    border: 1px solid $borderColor;
-    position: relative;
-    background-color: $light-color;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50vh;
+    width: 100%;
+
+
+    #layer-opacity {
+      height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      background-color: rgb(0,0,0,.2);
+    }
+
+
   
     &__slogan {
-      width: $sloganWidth;
-      background-color: $light-color;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
       p {
-        position: absolute;
-        left: 0;
-        right: 0;
         bottom: 2rem;
-        text-align: center;
-        background: rgba(0,0,0,0.5);
+        text-align: left;
         color: white;
         padding: 1.25rem;
-        width: calc(#{$sloganWidth} - 2px);
+        width: 90%;
+        font-size: 2em;
+        font-weight: bold;
+        text-shadow: $dark-color 0px 0px 10px;
       }
     }
   
     &__partner {
-      width: $partnerWidth;
-      background-color: $primary-color;
-      padding: 20px 10px;
-      text-align: center;
-      margin: 5px;
-  
-      &__subscribe-button {
-        display: block;
-        margin: 10px auto 20px ;
-        padding: 10px ;
-        background-color: $validate-color;
-        border: none;
-        font-weight: bold;
-        color: white;
-      }
-  
-      &__link {
-        cursor: pointer;
-
-        &:hover {
-          color: $alt-color;
-        }
-      }
+      display: none;
     }
   }
 
@@ -122,3 +126,82 @@
 
 }
 
+@media (min-width: $mobile-breakpoint) {
+  .home {
+    &__top {
+    
+    }
+
+    .button-alt.mobile{
+      display: none !important;
+    }
+
+
+    #layer-opacity {
+    width: 70%!important;
+
+      .home__top__slogan{
+        width: 70%;
+        p {
+        text-align: center !important;
+        padding-bottom: 0;
+        }
+
+        #desktop-slogan-description{
+          display: inline !important;
+          padding-top: 10px;
+          font-size: 1em !important;
+          font-weight: normal;
+        }
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+
+&__top__partner {
+  display: flex!important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  background-color: $primary-color;
+  padding: 20px 10px;
+  text-align: center;
+  color: #fff;
+  line-height: 1.3em;
+  font-size: 1.2em;
+  padding: 20px;
+
+  .partner-argument {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+
+
+
+  &__subscribe-button {
+    font-weight: bold;
+    color: $primary-color !important;
+    background: #fff !important;
+
+    &:hover {
+      background-color: $dark-color!important;
+      color: $primary-color!important;
+    }
+  }
+
+  &__link {
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+      color: $dark-color!important;
+    }
+  }
+}
+  }
+}

@@ -14,7 +14,7 @@ import PasswordForgotten from 'src/components/PasswordForgotten';
 import Validation from 'src/components/Validation';
 import Confirmation from 'src/components/Confirmation';
 import Cancellation from 'src/components/Cancellation';
-import Admin from 'src/components/Admin';
+import Admin from 'src/containers/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
 import Faq from 'src/components/Faq';
@@ -36,6 +36,10 @@ const App = ({
   useEffect(() => {
     checkLoggedRestaurant();
   }, []);
+
+  if (isRestaurantLogged) {
+    fetchRestaurantData(restaurantId);
+  }
 
   return (
     <div className="app">
@@ -73,7 +77,7 @@ const App = ({
           <Route path="/login" exact>
             <Header />
             {!isRestaurantLogged && <Login />}
-            {isRestaurantLogged && fetchRestaurantData(restaurantId) && <Redirect to={`/partner/${restaurantId}/administration`} />}
+            {isRestaurantLogged && <Redirect to={`/partner/${restaurantId}/administration`} />}
             <Footer />
           </Route>
 
@@ -129,11 +133,11 @@ const App = ({
             <Cancellation />
           </Route>
 
-          <Route>
+          <Route path="*">
             <Header />
             <NotFound />
             <Footer />
-          </Route>
+          </Route> 
         </Switch>
       )}
     </div>
@@ -146,6 +150,7 @@ App.propTypes = {
   checkLoggedRestaurant: PropTypes.func.isRequired,
   checkingLoggedRestaurant: PropTypes.bool.isRequired,
   restaurantId: PropTypes.number,
+  fetchRestaurantData: PropTypes.func.isRequired,
 };
 
 // == Export
