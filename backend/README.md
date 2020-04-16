@@ -52,15 +52,15 @@ Requêtes JSON
 
 
 -------------------------------------------
+/forgotten-password
 
+{"username": "blabla@bla.com"}
 
-$vote = $authenticatedVoter->vote($token, $object, ['IS_AUTHENTICATED_FULLY']);
+--------------------------------------------
+/forgotten-password/confirmation
 
-                // Le user est-il MODERATOR
-                if ($this->security->isGranted('ROLE_MODERATOR')) {
-                    return true;
-                }
-
-				$this->denyAccessUnlessGranted('can-answer', $question);
-
-				@IsGranted("ROLE_RESTAURATEUR")
+{
+"securityCode":"NwE4Ajfs45fe",
+"userId": 4,
+"newPassword":"blabla"
+}
