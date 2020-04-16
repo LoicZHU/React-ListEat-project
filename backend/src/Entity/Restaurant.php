@@ -27,6 +27,7 @@ class Restaurant
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("restaurant_get")
+     * @Groups("restaurant_decrypt")
      */
     private $id;
 
@@ -41,6 +42,7 @@ class Restaurant
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
      * @Groups("restaurant_get")
+     * @Groups("restaurant_decrypt")
      */
     private $name;
 
@@ -112,6 +114,7 @@ class Restaurant
     /**
      * @ORM\Column(type="smallint")
      * @Groups("restaurant_get")
+     * @Groups("restaurant_decrypt")
      */
     private $status;
 

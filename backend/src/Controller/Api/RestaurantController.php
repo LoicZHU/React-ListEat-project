@@ -4,18 +4,19 @@ namespace App\Controller\Api;
 
 use App\Entity\User;
 use App\Entity\Restaurant;
+use App\Service\CryptoService;
 use App\Service\GeocodingService;
-use App\Repository\RestaurantRepository;
 use App\Repository\UserRepository;
+use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 class RestaurantController extends AbstractController
 {
@@ -46,6 +47,7 @@ class RestaurantController extends AbstractController
 
         $restaurant = $restaurantRepository->find($RestaurantId);
 
+        dd($restaurant);
         return $this->json($restaurant, 200, [], ['groups' => 'restaurant_decrypt']);
     }
 
