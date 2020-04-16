@@ -34,6 +34,21 @@ class RestaurantController extends AbstractController
         return $this->json($restaurant, 200, [], ['groups' => 'restaurant_get']);
     }
 
+     /**
+     * @Route("/api/decrypt", name="api_restaurant_decrypt_id", methods={"GET"})
+     */
+    public function decryptId(Request $request, RestaurantRepository $restaurantRepository)
+    {
+   
+        $data = json_decode($request->getContent());
+
+        $RestaurantId = CryptoService::decrypt($data->restaurant);
+
+        $restaurant = $restaurantRepository->find($RestaurantId);
+
+        return $this->json($restaurant, 200, [], ['groups' => 'restaurant_decrypt']);
+    }
+
     /**
      * @Route("api/partner/{id}", name="api_restaurant_update",  methods={"PUT"})
      */
