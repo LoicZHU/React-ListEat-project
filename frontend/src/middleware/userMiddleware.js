@@ -22,8 +22,8 @@ import {
   CHANGE_SERVICE_STATUS,
 } from 'src/actions/user';
 
-// const baseUrl = '54.162.210.163:8080';
-const baseUrl = 'localhost:8001';
+const baseUrl = '54.162.210.163:8080';
+// const baseUrl = 'localhost:8001';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
