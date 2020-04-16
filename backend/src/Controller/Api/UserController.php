@@ -135,7 +135,6 @@ class UserController extends AbstractController
         $data = json_decode($request->getContent());
         $user = $userRepository->findBy(['email' => $data->username]);
        
-
         if($user) {
             $user = $user[0];
             $token = $denormalizer->denormalize($data, Token::class);
@@ -170,7 +169,7 @@ class UserController extends AbstractController
         return $this->json(['message' => 'Code de sécurité envoyé'], Response::HTTP_CREATED);
     }
 
-      /**
+    /**
      * @Route("/forgotten-password/confirmation", name="api_new_pwd", methods={"POST"})
      */
     public function newPwd(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $userRepository, TokenRepository $tokenRepository, DenormalizerInterface $denormalizer, \Swift_Mailer $mailer, ValidatorInterface $validator)
@@ -231,14 +230,28 @@ class UserController extends AbstractController
             $user->removeToken($token[0]);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+
+            // Email sent to the user confirming the new password has been set
+            $message = (new \Swift_Message('Information client ListEat'))
+
+            ->setFrom('send@example.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                        $this->renderView(
+                            'emails/forgotten-password-confirmation.html.twig',
+                            ['name' => $user->getfirstName()]
+                        ),
+            'text/html'
+                    );
+
+            $mailer->send($message);
+
             return $this->json(['message' => 'mot de passe modifié'], Response::HTTP_OK);
         }
     }
     
 }
-// @Assert\Length(min=7, groups={"registration"})
 
+// @Assert\Length(min=7, groups={"registration"})
 // @Assert\Length(min=8)
 // https://symfony.com/doc/current/validation/groups.html
-
-//AdYvlh1M3BvpNg
