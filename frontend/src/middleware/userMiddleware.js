@@ -19,6 +19,7 @@ import {
   saveIncreasedAverageEatingTime,
   DECREASE_MINUTE,
   saveDecreasedAverageEatingTime,
+  CHANGE_SERVICE_STATUS,
 } from 'src/actions/user';
 
 // const baseUrl = '54.162.210.163:8080';
@@ -130,7 +131,7 @@ const userMiddleware = (store) => (next) => (action) => {
     // case EDIT_RESTAURANT:
     //   axios({
     //     method: 'put',
-    //     url: `http://${baseUrl}api/partner`,
+    //     url: `http://${baseUrl}/api/partner`,
     //     data: {
 
 
@@ -230,6 +231,30 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error);
         });
+      next(action);
+      break;
+
+    case CHANGE_SERVICE_STATUS:
+      let changedStatus = !(store.getState().user.restaurantProfileEditInput.status);
+      // TODO: EN ATTENTE DU BACK
+
+      // axios({
+      //   method: 'put',
+      //   url: `http://${baseUrl}/api/partner/${id}`,
+      //   data: {
+      //     restaurant: {
+      //       status: changedStatus,
+      //     },
+      //   },
+      //   withCredentials: true,
+      // })
+      //   .then((response) => {
+      //     // console.log(response);
+      //     store.dispatch(saveChangedServiceStatus(changedStatus));
+      //   })
+      //   .catch((error) => {
+      //     console.warn(error);
+      //   });
       next(action);
       break;
 

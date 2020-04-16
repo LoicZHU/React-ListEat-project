@@ -17,7 +17,9 @@ export const SAVE_RESTAURANT_DATA = 'SAVE_RESTAURANT_DATA';
 export const INCREASE_MINUTE = 'INCREASE_MINUTE';
 export const SAVE_INCREASED_AVERAGE_TIME = 'SAVE_INCREASED_AVERAGE_TIME';
 export const DECREASE_MINUTE = 'DECREASE_MINUTE';
-export const SAVE_DECREASED_AVERAGE_TIME = 'SAVE_DECREASED_AVERAGE_TIME';
+export const SAVE_DECREASED_AVERAGE_TIME = 'SAVE_DECREASED_AVERAGE_TIME'
+export const CHANGE_SERVICE_STATUS = 'CHANGE_SERVICE_STATUS';
+export const SAVE_CHANGED_SERVICE_STATUS = 'SAVE_CHANGED_SERVICE_STATUS';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -110,3 +112,21 @@ export const saveDecreasedAverageEatingTime = (decreasedAverageEatingTime) => ({
   type: SAVE_DECREASED_AVERAGE_TIME,
   decreasedAverageEatingTime,
 });
+
+export const changeServiceStatus = () => ({
+  type: CHANGE_SERVICE_STATUS,
+});
+
+export const saveChangedServiceStatus = (newStatusService) => ({
+  type: SAVE_CHANGED_SERVICE_STATUS,
+  newStatusService,
+});
+
+export const changeTicketInputValue = (newValue, fieldName) => ({
+  type: CHANGE_TICKET_INPUT_VALUE,
+  newValue,
+  fieldName,
+});
+
+
+

@@ -12,6 +12,7 @@ import {
   SAVE_INCREASED_AVERAGE_TIME,
   SAVE_DECREASED_AVERAGE_TIME,
   SAVE_SIGN_UP_ERRORS,
+  SAVE_CHANGED_SERVICE_STATUS,
 } from 'src/actions/user';
 
 // initial state
@@ -153,11 +154,20 @@ const userReducer = (state = initialState, action = {}) => {
           averageEatingTime: action.decreasedAverageEatingTime,
         },
       };
-
+      
     case SAVE_SIGN_UP_ERRORS:
       return {
         ...state,
         signupErrors: action.errors,
+      };
+
+    case SAVE_CHANGED_SERVICE_STATUS:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          status: newStatusService,
+        },
       };
 
     default: return state;

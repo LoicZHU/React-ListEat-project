@@ -8,6 +8,8 @@ import './home.scss';
 // == Composant
 const Argument = () => (
   <section className="home__argument">
+    <span id="arguments-title">Votre métier, notre priorité.</span>
+    <div className="content">
       <article className="home__argument__article">
         <h1>Argument 1</h1>
         <p>
@@ -28,6 +30,7 @@ const Argument = () => (
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium et accusamus iste atque magni eaque sit excepturi consectetur ut sequi, dignissimos autem, eos dolores ea veniam quia omnis dolorem sed.
         </p>
       </article>
+      </div>
   </section>
 );
 
