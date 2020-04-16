@@ -220,7 +220,20 @@
     padding: 2em;
 
     #more-time, #less-time {
-      font-size: 5em;
+      text-align: center;
+      font-size: 4em;
+      width: 100px;
+      height: 100px;
+      border: 1px solid $alt-color;
+      border-radius: 50%;
+    }
+
+    #more-time {
+      color: green;
+    }
+
+    #less-time {
+      color: red;
     }
 
     #time {

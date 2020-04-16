@@ -7,10 +7,6 @@
     display: none;
   }
 
-  a {
-    text-decoration: underline;
-  }
-
   h2 {
     font-size: 1.125em;
     font-weight: bold;
@@ -25,6 +21,7 @@
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+    
     height: 50vh;
     width: 100%;
 
@@ -122,6 +119,16 @@
     margin-top: 40px;
     border-top: 1px solid $borderColor;
     padding-top: 10px;
+  }
+
+  .home__argument {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .home__argument__article {
+      width: 80%;
+    }
   }
 
 }
