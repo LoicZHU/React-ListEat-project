@@ -9,11 +9,11 @@ use App\Service\SiretService;
 use App\Service\GeocodingService;
 use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
+use App\Repository\TokenRepository;
 use Symfony\Component\HttpFoundation\Request;
-use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -170,17 +170,75 @@ class UserController extends AbstractController
         return $this->json(['message' => 'Code de sécurité envoyé'], Response::HTTP_CREATED);
     }
 
-     /**
+      /**
      * @Route("/forgotten-password/confirmation", name="api_new_pwd", methods={"POST"})
      */
-    public function newPwd(Request $request, UserRepository $userRepository, DenormalizerInterface $denormalizer, \Swift_Mailer $mailer)
+    public function newPwd(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $userRepository, TokenRepository $tokenRepository, DenormalizerInterface $denormalizer, \Swift_Mailer $mailer, ValidatorInterface $validator)
     {
-        /*
-        {"securityCode":"blabla",
-        "newPwd":EGRGE"
-        ""}
+         /*
+        {
+        "securityCode":"blabla",
+        "userId": 4,
+        "newPassword":"EGRGE"
+        }
         */
+        $data = json_decode($request->getContent());
+        $securityCode = $data->securityCode;
+        $user = $userRepository->find($data->userId);
+        $token = $tokenRepository->findBy(['tokenString' => $securityCode, 'user' => $user ]);
         
+        if (!$token) {
+            return $this->json(['Votre code de sécurité est erroné.'], Response::HTTP_NOT_FOUND);
+        }
+
+        $tokenCreationTime = $token[0]->getCreatedAt();
+        $tokenInputTime = new \DateTime();
+        $dateInterval = $tokenCreationTime->diff($tokenInputTime);
+        $daysInMin = $dateInterval->d * 24 * 60;
+        $hoursInMin = $dateInterval->h * 60;
+        $minutes = $dateInterval->i;
+        $totalMinutes = $daysInMin + $hoursInMin + $minutes;
+        $interval = $totalMinutes;
+
+
+        if ($interval > 10) {
+            $user->removeToken($token[0]);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            return $this->json(['Votre code de sécurité a expiré.'], Response::HTTP_NOT_FOUND);
+        }
+        
+        if ($token[0]) {
+            $errors = $validator->validate($data->newPassword, new Assert\NotBlank());
+            //dd($errors);
+            
+            //$errorsUser = $validator->validate($user, null, ['Newpassword']);
+
+            if (count($errors) !== 0) {
+                //$jsonErrors = [];
+                foreach ($errors as $error) {
+                    $jsonErrors[] = [
+                        'field' => $error->getPropertyPath(),
+                        'message' => $error->getMessage(),
+                    ];
+                }
+            }
+
+            if(!empty($jsonErrors)){
+                return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            $user->setPassword($encoder->encodePassword($user, $data->newPassword));
+            $user->removeToken($token[0]);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            return $this->json(['message' => 'mot de passe modifié'], Response::HTTP_OK);
+        }
     }
     
 }
+// @Assert\Length(min=7, groups={"registration"})
+
+// @Assert\Length(min=8)
+// https://symfony.com/doc/current/validation/groups.html
+
+//AdYvlh1M3BvpNg
