@@ -62,7 +62,7 @@ class RestaurantController extends AbstractController
         // I decode the json
         $data = json_decode($request->getContent());
 
-        //We get a array of user
+        //We get an array of user
         $user = $userRepository->findBy(['restaurant' => $restaurant]);
         //we check the current password of user password on BDD 
         $CurrentPasswordVerifie = password_verify($data->currentpassword , $user[0]->getpassword());
@@ -76,27 +76,27 @@ class RestaurantController extends AbstractController
        
         //if json argument is empty we send back a error
         if(!isset($data->user) && !isset($data->restaurant)){
-            return $this->json(['message' => 'Aucuns champs a mettres à jour.'],Response::HTTP_I_AM_A_TEAPOT);
+            return $this->json(['message' => 'Aucun champs à mettre à jour.'],Response::HTTP_I_AM_A_TEAPOT);
         }
         //dd($data->restaurant);
-        //if the argument of restaurant is setup we creat a class of restaurant
+        //if the argument of restaurant is setup we create a class of restaurant
         if(isset($data->restaurant)){
           
             $restaurant = $restaurantRepository->find($id);
             $Newdata = $denormalizer->denormalize($data->restaurant, Restaurant::class);
             $restaurant->setUpdatedAt(new \DateTime);
         }else{
-            //else we creat a empty new class of restaurant
+            //else we create a empty new class of restaurant
             $Newdata = new Restaurant;
         }
 
        
-        //if the argument of user is setup we creat a class of user
+        //if the argument of user is setup we create a class of user
         if(isset($data->user)){
             $NewdatasUser = $denormalizer->denormalize($data->user, User::class);
             $user[0]->setUpdatedAt(new \DateTime);
         }else{
-            //else we creat a empty new class of user
+            //else we create a empty new class of user
             $NewdatasUser = new User;
         }
        
@@ -153,7 +153,7 @@ class RestaurantController extends AbstractController
             $restaurant->setMenuURL($Newdata->getMenuURL());
         }
         
-        //we can check if we need to update the gps position of restaurant with $updatePosition if the adress change
+        //we can check if we need to update the gps position of restaurant with $updatePosition if the address changes
         if(isset($updatePosition)){
             $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
             
@@ -244,5 +244,39 @@ class RestaurantController extends AbstractController
 
 
         return $this->json(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Route("/api/partner/{id<\d+>}/status", name="api_restaurant_status", methods={"PUT"})
+     */
+    public function editStatus($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository)
+    {
+        /*
+        {
+            "status": "on" / "off"
+        }
+        */
+        $data = json_decode($request->getContent());
+
+        $restaurant = $restaurantRepository->find($id);
+
+        if (!$restaurant) {
+           return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($data->status == "on") {
+            $restaurant->setStatus(1);         
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->json(['message' => 'Le statut de votre restaurant est désormais actif.'], Response::HTTP_OK);
+        }
+
+        if ($data->status == "off") {
+            $restaurant->setStatus(0);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->json(['message' => 'Le statut de votre restaurant est désormais inactif.'], Response::HTTP_OK);
+        }
+
     }
 }

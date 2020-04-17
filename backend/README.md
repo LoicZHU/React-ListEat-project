@@ -64,3 +64,10 @@ Requêtes JSON
 "userId": 4,
 "newPassword":"blabla"
 }
+
+--------------------------------------------
+/api/partner/{id<\d+>}/status PUT
+
+{
+	"status": "on" / "off"
+}
