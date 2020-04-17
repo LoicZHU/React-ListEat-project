@@ -77,7 +77,11 @@ const Admin = ({
               <div id="ticket-infos">
                 <span>Nom : {currentTicket.customer.lastName} </span>
                 <span>Prénom : {currentTicket.customer.firstName}</span>
-                <span>Horaire estimé : 16h45</span>
+                <span>Horaire estimé : {
+                      currentTicket.estimatedEntryTime.substring
+                      (currentTicket.estimatedEntryTime.indexOf('T') + 1, 
+                      currentTicket.estimatedEntryTime.indexOf('T') + 6)
+                    }</span>
                 <div id="ticket-ref">
                   <span>Ref ticket : </span>
                   <span className="ref"> {currentTicket.id}</span>
