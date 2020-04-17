@@ -10,8 +10,8 @@ const Ticket = ({ ticket }) => {
 
   return (
     <li className="ticket">
-      <i className="fa fa-info-circle" aria-hidden="true"></i>{customer.firstName}<i className="fa fa-user" aria-hidden="true"></i>
-      <span>{coversNb}</span>
+      <i className="fa fa-info-circle" aria-hidden="true"></i>{customer.firstName}<i className="fa fa-user" aria-hidden="true">
+      <span>{coversNb}</span> </i>
     </li>
   )
 };

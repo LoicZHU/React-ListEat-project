@@ -23,6 +23,7 @@ export const SAVE_CHANGED_SERVICE_STATUS = 'SAVE_CHANGED_SERVICE_STATUS';
 export const CHANGE_TICKET_INPUT_VALUE = 'CHANGE_TICKET_INPUT_VALUE';
 export const FETCH_TICKETS_DATA = 'FETCH_TICKETS_DATA';
 export const SAVE_TICKETS_DATA = 'SAVE_TICKETS_DATA';
+export const REFRESH_TIME = 'REFRESH_TIME';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -141,5 +142,6 @@ export const changeTicketInputValue = (newValue, fieldName) => ({
   fieldName,
 });
 
-
-
+export const refreshTime = () => ({
+  type: REFRESH_TIME,
+});

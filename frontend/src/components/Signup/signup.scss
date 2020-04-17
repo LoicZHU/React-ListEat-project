@@ -8,7 +8,7 @@
 
   .signup-wrapper {
     text-align: center;
-    width: 60%;
+    width: 30%;
     min-width: 300px;
     margin: 20px auto 0;
   }
@@ -23,9 +23,41 @@
   }
 
   #password-error {
-    background-color: red;
-    margin: .5em auto;
+    background-color: rgba(255, 0, 0, 0.726);
+    padding: .5em;
+    border-radius: 0px 0px 5px 5px;
+    color: #000;
+    margin-top: -10px;
+    font-size: .9em;
+  }
+
+  input {
+    width: 100% !important;
+  }
+
+  #errors {
+    background-color: $primary-color;
     padding: 1em;
+    font-size: .9em;
     border-radius: 5px;
-    color: white;
+
+    ul {
+      list-style-type: circle;
+      list-style-position: inside;
+
+      li {
+        line-height: 1.2em;
+        text-align: left;
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      h4 {
+        font-size: 1.5em !important;
+        margin: 1em auto;
+        font-weight: bold;
+      }
+    }
   }

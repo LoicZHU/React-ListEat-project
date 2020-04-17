@@ -51,7 +51,7 @@ const App = ({
 
   return (
     <div className="app">
-      {!checkingLoggedRestaurant && !loadingTicketsData && (
+      {!checkingLoggedRestaurant && (
         <Switch>
           {/* Home */}
           <Route path="/" exact>
@@ -145,7 +145,7 @@ const App = ({
             <Header />
             <NotFound />
             <Footer />
-          </Route> 
+          </Route>
         </Switch>
       )}
     </div>
