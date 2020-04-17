@@ -265,7 +265,8 @@ class RestaurantController extends AbstractController
         }
 
         if ($data->status == "on") {
-            $restaurant->setStatus(1);         
+            $restaurant->setStatus(1);
+            $restaurant->setUpdatedAt(new \DateTime());    
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->json(['message' => 'Le statut de votre restaurant est désormais actif.'], Response::HTTP_OK);
@@ -273,6 +274,7 @@ class RestaurantController extends AbstractController
 
         if ($data->status == "off") {
             $restaurant->setStatus(0);
+            $restaurant->setUpdatedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->json(['message' => 'Le statut de votre restaurant est désormais inactif.'], Response::HTTP_OK);
@@ -306,7 +308,7 @@ class RestaurantController extends AbstractController
         }
 
         $restaurant->setAverageEatingTime($newAverageEatingTime);
-
+        $restaurant->setUpdatedAt(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
