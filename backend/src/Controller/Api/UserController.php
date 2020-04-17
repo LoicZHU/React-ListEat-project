@@ -13,6 +13,7 @@ use App\Repository\TokenRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +62,9 @@ class UserController extends AbstractController
         }
 
         if(!empty($jsonErrors)){
-            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+            if(!empty($jsonErrors)){
+                return $this->json($jsonErrors,Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
         }
 
         //Checking siret or siren code call service
