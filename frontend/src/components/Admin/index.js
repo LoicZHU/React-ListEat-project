@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // == Import
-import Ticket from './Ticket';
+import Ticket from 'src/containers/Admin/Ticket';
 import './admin.scss';
 
 // == Composant
@@ -16,6 +16,7 @@ const Admin = ({
   tickets,
   currentTime,
   refreshTime,
+  currentTicket,
 }) => {
   // handle click on '+'
   const handleRemoveClick = () => {
@@ -74,19 +75,20 @@ const Admin = ({
           <div id="admin-middle-section">
             <div className="left">
               <div id="ticket-infos">
-                <span>Nom : {tickets[0].customer.lastName} </span>
-                <span>Prénom : {tickets[0].customer.firstName}</span>
+                <span>Nom : {currentTicket.customer.lastName} </span>
+                <span>Prénom : {currentTicket.customer.firstName}</span>
                 <span>Horaire estimé : 16h45</span>
                 <div id="ticket-ref">
                   <span>Ref ticket : </span>
-                  <span className="ref"> {tickets[0].id}</span>
+                  <span className="ref"> {currentTicket.id}</span>
                 </div>
               </div>
             </div>
             <div className="right">
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
-                <span className="covers">{tickets[0].coversNb}</span>
+                <span className="covers">{currentTicket.coversNb}</span>
+                <span></span>
               </div>
             </div>
           </div>
