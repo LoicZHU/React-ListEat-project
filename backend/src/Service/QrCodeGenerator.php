@@ -27,8 +27,6 @@ class QrCodeGenerator
         $trimmed = trim($baseUrl,  $binary);
         $baseUrl = '/'.$trimmed;
     
-
-        
         // Create a basic QR code
         $lien='http://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
         $qrCode = new QrCode($lien);
@@ -42,7 +40,7 @@ class QrCodeGenerator
         $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
         //$qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
         
-        $qrCode->setLogoPath($_SERVER['PWD']."/ressource/logo/QrcodeCalqueV3.png");
+        $qrCode->setLogoPath($baseUrl."/ressource/logo/QrcodeCalqueV3.png");
         //$qrCode->setLogoSize(150, 200);
         $qrCode->setRoundBlockSize(false);
         $qrCode->setValidateResult(false);
