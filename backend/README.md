@@ -71,3 +71,10 @@ Requêtes JSON
 {
 	"status": "on" / "off"
 }
+
+-----------------------------------------
+/api/partner/{id<\d+>}/eating-time PUT
+
+{
+	"addedTime": 25
+}
