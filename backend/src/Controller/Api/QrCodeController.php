@@ -39,7 +39,7 @@ class QrCodeController extends AbstractController
         $restaurant = $restaurantRepository->find($id);
 
         if (!$restaurant) {
-            return $this->json(Response::HTTP_BAD_REQUEST);
+            return $this->json(["message" =>"Aucun restaurant pour cet Id"],Response::HTTP_BAD_REQUEST);
         } 
 
         //we generat the QRccode if the restaurant exist
@@ -51,15 +51,36 @@ class QrCodeController extends AbstractController
 
         //TODO VERIFICATION
         $errors = $validator->validate($QrCode);
-        if (count($errors) > 0) {
-            return $this->json(Response::HTTP_BAD_REQUEST);
+        $jsonErrors = [];
+        // $errors est une ConstraintViolationList = se comporte comme un tableau
+        if (count($errors) !== 0) {
+            //$jsonErrors = [];
+            foreach ($errors as $error) {
+                $jsonErrors[] = [
+                    'field' => $error->getPropertyPath(),
+                    'message' => $error->getMessage(),
+                ];
+            }
+        }
+        if(!empty($jsonErrors)){
+            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $restaurant->setQrCode($QrCode);
 
         $errors = $validator->validate($restaurant);
-        if (count($errors) > 0) {
-            return $this->json(Response::HTTP_BAD_REQUEST);
+
+         if (count($errors) !== 0) {
+            //$jsonErrors = [];
+            foreach ($errors as $error) {
+                $jsonErrors[] = [
+                    'field' => $error->getPropertyPath(),
+                    'message' => $error->getMessage(),
+                ];
+            }
+        }
+        if(!empty($jsonErrors)){
+            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -68,7 +89,8 @@ class QrCodeController extends AbstractController
         $em->flush();
         $em->refresh($QrCode);
         
-    return $this->json(['QrCodeUrl' => $QrCode->getUrl()], Response::HTTP_CREATED);
+    return $this->json(['QrCodeUrl' => $QrCode->getUrl(),
+                        'message' => 'Qrcode généré' ], Response::HTTP_CREATED);
     }
 }
 
