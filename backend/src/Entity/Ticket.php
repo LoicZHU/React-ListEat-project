@@ -68,6 +68,7 @@ class Ticket
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("tickets_get")
      */
     private $estimatedEntryTime;
 
