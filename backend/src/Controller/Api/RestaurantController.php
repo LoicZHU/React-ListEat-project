@@ -249,7 +249,7 @@ class RestaurantController extends AbstractController
     /**
      * @Route("/api/partner/{id<\d+>}/status", name="api_restaurant_status", methods={"PUT"})
      */
-    public function editStatus($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository)
+    public function editStatus($id, Request $request, RestaurantRepository $restaurantRepository)
     {
         /*
         {
