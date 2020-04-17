@@ -6,19 +6,26 @@ namespace App\Controller\Api;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("api/partner/login", name="api_login", methods={"POST"})
      */
-    public function login(Request $request)
+    public function login(Request $request, SessionInterface $session)
     {
         $user = $this->getUser();
         // in order to be authenticated, the login method in SecurityController must retrieve a role that starts with "ROLE_" and that must be stored in an array 
+
+        //we put some information in session
+        $session->set('UserId', $user->getId());
+        $session->set('RestaurantId', $user->getRestaurant()->getId());
+
         return $this->json([
             'username' => $user->getUsername(),
             'roles' => $user->getRoles(),
