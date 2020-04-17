@@ -36,7 +36,7 @@ class QrCodeGenerator
         //dd($lien);
         // Set advanced options
         $qrCode->setWriterByName('png');
-        $qrCode->setMargin(150);
+        $qrCode->setMargin(200);
         $qrCode->setEncoding('UTF-8');
         $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
         $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
@@ -65,7 +65,7 @@ class QrCodeGenerator
         $color = imagecolorallocate($image, 0, 0, 0);
 
         //We put a font style
-        imagettftext($image, 18, 0, 55, 95, 1,  $baseUrl.'/ressource/police/OpenSans-Regular.ttf', $texte);
+        imagettftext($image, 18, 0, 110, 145, 1,  $baseUrl.'/ressource/police/OpenSans-Regular.ttf', $texte);
      
         //we save image on server
         //imagecopymerge($image, $calque, 0, 0, 0, 0, 100, 47, 75);
@@ -76,7 +76,7 @@ class QrCodeGenerator
         unlink( $baseUrl.'/file/temp/Qrcode'.$restaurantId.'.png');
 
         $pdflib = new PDFLib;
-        $imagePaths = [$baseUrl."/file/qr_code/qrcode-".$restaurantId.".png"];
+        $imagePaths = [$baseUrl."/file/qr_code/qrcode-".$restaurantId.".png",$baseUrl."/ressource/logo/QrcodeCalqueV3.png"];
         $pdflib->makePDF($baseUrl."/file/qr_code/qrcode-".$restaurantId.".pdf",$imagePaths);
         unlink( $baseUrl."/file/qr_code/qrcode-".$restaurantId.".png");
 
