@@ -77,7 +77,7 @@ const Admin = ({
               <div id="ticket-infos">
                 <span>Nom : {currentTicket.customer.lastName} </span>
                 <span>Prénom : {currentTicket.customer.firstName}</span>
-                <span>Horaire estimé : 
+                <span>Horaire estimé :&nbsp;
                   {
                     currentTicket.estimatedEntryTime.substring
                     (currentTicket.estimatedEntryTime.indexOf('T') + 1, 
@@ -94,7 +94,10 @@ const Admin = ({
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
                 <span className="covers">{currentTicket.coversNb}</span>
-                <span></span>
+                <div className="add-ticket">
+                  <span id="confirm">Confirmer</span>
+                  <span id="cancel">Annuler</span>
+                </div>
               </div>
               
             </div>
@@ -107,10 +110,6 @@ const Admin = ({
               <span id="time">{averageEatingTime} mn</span>
               <span id="more-time" onClick={handleAddClick}></span>
             </div>
-            </div>
-            <div className="add-ticket">
-              <span>Ajouter un ticket</span>
-              <button className="button">Ajouter</button>
             </div>
           </div>
         </div>

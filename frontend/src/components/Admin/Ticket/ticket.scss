@@ -4,9 +4,9 @@ li.ticket {
     height: 40px;
     display: flex;
     align-items: center;
-    border: 2px $light-color solid !important;
+    border: 2px $light-color solid;
     padding: 1.5em 1em;
-    font-size: 1.5em;
+    font-size: 1.8em;
     position: relative;
 
     .fa-user {
@@ -27,5 +27,10 @@ li.ticket {
       color: #fff;
       background: $primary-color;
       transition: .2s;
+      cursor: pointer;
+    }
+
+    &.active {
+      background-color: $primary-color solid 2px !important;
     }
 }
