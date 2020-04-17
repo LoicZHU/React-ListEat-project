@@ -246,7 +246,7 @@ class RestaurantController extends AbstractController
         return $this->json(Response::HTTP_CREATED);
     }
 
-    /**
+     /**
      * @Route("/api/partner/{id<\d+>}/status", name="api_restaurant_status", methods={"PUT"})
      */
     public function editStatus($id, Request $request, RestaurantRepository $restaurantRepository)
@@ -277,6 +277,39 @@ class RestaurantController extends AbstractController
             $em->flush();
             return $this->json(['message' => 'Le statut de votre restaurant est désormais inactif.'], Response::HTTP_OK);
         }
-
     }
+
+    /**
+     * @Route("/api/partner/{id<\d+>}/eating-time", name="api_restaurant_eating_time", methods={"PUT"})
+     */
+    public function editEatingTime($id, Request $request, RestaurantRepository $restaurantRepository)
+    {
+        /*
+        {
+            "addedTime": 25
+        }
+        */
+        $data = json_decode($request->getContent());
+
+        $restaurant = $restaurantRepository->find($id);
+
+        if (!$restaurant) {
+           return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        $currentAverageEatingTime = $restaurant->getAverageEatingTime();
+
+        $newAverageEatingTime = $currentAverageEatingTime + $data->addedTime;
+
+        if ($newAverageEatingTime < 0) {
+            return $this->json(['message' => 'Le temps moyen d\'un repas ne peut pas être inférieur à zéro.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $restaurant->setAverageEatingTime($newAverageEatingTime);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->json(['message' => 'Le temps moyen d\'un repas a bien été modifié', 'averageEatingTime' => $restaurant->getAverageEatingTime()], Response::HTTP_OK);
+        }
 }
