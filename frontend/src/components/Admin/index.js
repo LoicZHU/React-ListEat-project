@@ -51,6 +51,10 @@ const Admin = ({
   // date = new Date();
   // console.log(date);
 
+  const element = document.querySelector('#ticket-list > li');
+console.log(element);
+  // const x = element.classList.add("current");
+
   return (
     (!loadingTicketsData && (
       <div id="admin-wrapper">
@@ -95,8 +99,8 @@ const Admin = ({
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
                 <span className="covers">{currentTicket.coversNb}</span>
                 <div className="add-ticket">
-                  <span id="confirm">Confirmer</span>
-                  <span id="cancel">Annuler</span>
+                  <span id="confirm">Placé</span>
+                  <span id="cancel">Absent</span>
                 </div>
               </div>
               

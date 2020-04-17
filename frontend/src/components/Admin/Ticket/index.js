@@ -10,12 +10,12 @@ const Ticket = ({ ticket, updateCurrentTicket }) => {
 
   const handleClick = (e) => {
     updateCurrentTicket(ticket);
-    const elements = querySelectorAll('.active');
+    const elements = document.querySelectorAll('.current');
     elements.forEach(element => {
-      element.classList.remove('active');
+      element.classList.remove('current');
     });
     const element = e.target;
-    element.classList.toggle('active');
+    element.classList.toggle('current');
   };
 
   return (
