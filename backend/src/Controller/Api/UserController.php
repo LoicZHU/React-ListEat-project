@@ -195,7 +195,7 @@ class UserController extends AbstractController
             return $this->json(['Votre code de sécurité est erroné.'], Response::HTTP_NOT_FOUND);
         }
 
-        // calculating the difference between the creation time of the token and the input time of this same token
+        // calculating the time difference between the creation time of the token and the input time of this same token
         $tokenCreationTime = $token[0]->getCreatedAt();
         $tokenInputTime = new \DateTime();
         $dateInterval = $tokenCreationTime->diff($tokenInputTime);
