@@ -155,11 +155,11 @@ class RestaurantController extends AbstractController
         
         //we can check if we need to update the gps position of restaurant with $updatePosition if the address changes
         if(isset($updatePosition)){
-            $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
-            
-            $restaurantPosition = GeocodingService::geocodeAddress($address);
-            //dd($restaurantPosition);
-            if(empty($restaurantPosition['lat'])){
+ 
+            $restaurantPosition = GeocodingService::geocodeAddress($restaurant->getAddress(), $restaurant->getPostcode(), $restaurant->getCity(),$restaurant->getCountry());
+
+            //if the value is false or empty we have a problème on User address
+            if($restaurantPosition === false){
 
                 return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
             }else{
@@ -265,7 +265,8 @@ class RestaurantController extends AbstractController
         }
 
         if ($data->status == "on") {
-            $restaurant->setStatus(1);         
+            $restaurant->setStatus(1);
+            $restaurant->setUpdatedAt(new \DateTime());    
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->json(['message' => 'Le statut de votre restaurant est désormais actif.'], Response::HTTP_OK);
@@ -273,6 +274,7 @@ class RestaurantController extends AbstractController
 
         if ($data->status == "off") {
             $restaurant->setStatus(0);
+            $restaurant->setUpdatedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->json(['message' => 'Le statut de votre restaurant est désormais inactif.'], Response::HTTP_OK);
@@ -306,7 +308,7 @@ class RestaurantController extends AbstractController
         }
 
         $restaurant->setAverageEatingTime($newAverageEatingTime);
-
+        $restaurant->setUpdatedAt(new \DateTime());
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 

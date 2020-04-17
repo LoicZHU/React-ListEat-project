@@ -136,16 +136,14 @@ class TicketController extends AbstractController
 
         $mailer->send($message);
 
-        // TODO: prevent the emailing if the ticket status is being changed from Inactive to Active after a faulty handling from the restaurateur
-
-        return $this->json(['message' => 'Votre inscription à la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime()], Response::HTTP_OK);
+        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
 
         } elseif ($data->validation == "cancel") {
-            $ticket->setStatus(0);
+            $ticket->setStatus(3);
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
-            return $this->json(['message' => 'Votre inscription à la liste d\'attente a bien été annulée.','ticketId' => $ticket->getId()], Response::HTTP_OK);
+            return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été annulée.','ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
         }
 
     }
@@ -167,5 +165,67 @@ class TicketController extends AbstractController
         return $this->json($tickets, 200, [], ['groups' => 'tickets_get']);
     }
 
+    /**
+     * @Route("api/partner/{id<\d+>}/tickets/{ticketId<\d+>}", name="api_tickets_partner_edit", methods={"PUT"})
+     */
+    public function partnerEdit($id, $ticketId, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository)
+    {
+        /*
+        {
+            "status": "seated" / "cancelled" / "restored"
+        }
+        */
+        $data = json_decode($request->getContent());
+
+    
+        $ticket = $ticketRepository->findBy(['restaurant' => $restaurantRepository->find($id), 'id' => $ticketId]);
+        
+        if (!$ticket) {
+            return $this->json(['Ce ticket n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+        $ticket = $ticket[0];
+        
+        if ($data->status == "seated") {
+            $ticket->setStatus(0);
+            $ticket->setUpdatedAt(new \DateTime());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->json(['message' => 'Les clients du ticket ont été installés.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
+        }
+
+        if ($data->status == "cancelled") {
+            $ticket->setStatus(3);
+            $ticket->setUpdatedAt(new \DateTime());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->json(['message' => 'Le ticket a été annulé.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
+        }
+
+        // calculating the time difference between the last updated time of the ticket and the restoration time of this same ticket
+        // TODO: put the below calculation in a service
+        $lastUpdatedTime = $ticket->getUpdatedAt();
+        $restoreTime = new \DateTime();
+        $dateInterval = $lastUpdatedTime->diff($restoreTime);
+        $daysInMin = $dateInterval->d * 24 * 60;
+        $hoursInMin = $dateInterval->h * 60;
+        $minutes = $dateInterval->i;
+        $totalMinutes = $daysInMin + $hoursInMin + $minutes;
+        $interval = $totalMinutes;
+
+        // TODO: see if we only allow this function to be performed on tickets which statuses are 0
+        if ($data->status == "restored" && $interval < 5) {
+            $ticket->setStatus(1);
+            $ticket->setUpdatedAt(new \DateTime());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->json(['message' => 'Le ticket a été restauré.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
+        } else {
+            return $this->json(['message' => 'Ce ticket ne peut plus être restauré. Veuillez en créer un nouveau.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
+        }
+
+    }
 
 }

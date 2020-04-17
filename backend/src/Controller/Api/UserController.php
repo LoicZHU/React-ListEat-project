@@ -71,15 +71,13 @@ class UserController extends AbstractController
         $response = SiretService::checkSiret($user->getRestaurant()->getSiretCode());
 
         //dd($response);
-        if ($response == false) {
+        if ($response === false) {
             return $this->json(['message' => 'Numéro siret ou siren invalide.'],Response::HTTP_BAD_REQUEST);
         }
     
-        $address = $restaurant->getAddress()." ".$restaurant->getPostcode()." ".$restaurant->getCountry();
-        
-        $restaurantPosition = GeocodingService::geocodeAddress($address);
+        $restaurantPosition = GeocodingService::geocodeAddress($restaurant->getAddress(), $restaurant->getPostcode(), $restaurant->getCity(),$restaurant->getCountry());
         //dd($restaurantPosition);
-        if(empty($restaurantPosition['lat'])){
+        if($restaurantPosition == false ){
             return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
         }else{
             $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
@@ -195,7 +193,7 @@ class UserController extends AbstractController
             return $this->json(['Votre code de sécurité est erroné.'], Response::HTTP_NOT_FOUND);
         }
 
-        // calculating the difference between the creation time of the token and the input time of this same token
+        // calculating the time difference between the creation time of the token and the input time of this same token
         $tokenCreationTime = $token[0]->getCreatedAt();
         $tokenInputTime = new \DateTime();
         $dateInterval = $tokenCreationTime->diff($tokenInputTime);

@@ -78,3 +78,10 @@ Requêtes JSON
 {
 	"addedTime": 25
 }
+
+------------------------------------------
+/api/partner/{id<\d+>}/tickets/{ticketId<\d+>} PUT
+
+ {
+    "status": "seated" / "cancelled" / "restored"
+}
