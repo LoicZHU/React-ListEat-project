@@ -1,5 +1,5 @@
 // == Import npm
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // == Import
 import './ticketform.scss';
@@ -14,13 +14,18 @@ const TicketForm = ({
   cutlery,
   changeTicketInputValue,
   handleTicketSubscribe,
+  errors,
 }) => {
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleTicketSubscribe();
   };
-  
+
+  if (errors && errors.field=='coversNb') {
+    console.log(errors.message);
+  }
+
   return (
     <main className="ticket-form--container">
       <h1>S'inscrire sur la liste d'attente du restaurant XXXXXXXXXXXX</h1>
@@ -31,7 +36,6 @@ const TicketForm = ({
           placeholder="Nom"
           onChange={changeTicketInputValue}
           value={lastName}
-          required
         />
 
         <Field
@@ -39,7 +43,6 @@ const TicketForm = ({
           placeholder="Prénom"
           onChange={changeTicketInputValue}
           value={firstName}
-          required
         />
 
         <Field
@@ -48,7 +51,6 @@ const TicketForm = ({
           placeholder="Adresse Email"
           onChange={changeTicketInputValue}
           value={email}
-          required
         />
 
         <Field
@@ -56,7 +58,6 @@ const TicketForm = ({
           placeholder="Téléphone"
           onChange={changeTicketInputValue}
           value={phone}
-          required
         />
 
         <Field
@@ -65,8 +66,11 @@ const TicketForm = ({
           placeholder="Nombre de couverts"
           onChange={changeTicketInputValue}
           value={cutlery}
-          required
         />
+
+        {errors && errors.field=='coversNb' && (
+            <span className="cover-error">{errors.message}</span>
+        )}
 
         <button className="ticket-submit button-alt" type="submit">Inscription</button>
       </form>

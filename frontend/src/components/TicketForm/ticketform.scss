@@ -26,6 +26,15 @@
     width: 60%;
     min-width: 300px;
     margin: 0 auto;
+
+    .cover-error {
+      background-color: red;
+      margin: .5em auto;
+      padding: 1em;
+      border-radius: 5px;
+      color: white;
+      width: 60%;
+    }
   }
 }
 

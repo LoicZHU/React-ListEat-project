@@ -108,7 +108,16 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
       </ul>
     </div>
     </nav>
+
+
+
+
+
+
+
   </header>
+
+
   );
 };
 

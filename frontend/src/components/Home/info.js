@@ -1,15 +1,21 @@
 // == Import npm
 import React from 'react';
 import imgComp from 'src/assets/img/1529835299686.jpeg';
+import { Parallax } from 'react-scroll-parallax';
 
 // == Import
 import './home.scss';
 
 // == Composant
-const Info = () => (
+const Info = () => {
+
+
+  return (
   <section className="home__info">
-    <div className="home__info__image" style={{ backgroundImage:`url(${imgComp})` }} >
-    </div>
+    <Parallax className="desktop-parallax" y={[-30, 30]} tagOuter="figure">
+      <img src={imgComp} />
+    </Parallax>
+    <img className="mobile-parallax" src={imgComp} />
 
     <div className="home__info__content">
       <div className="home__info__content__detail">
@@ -29,7 +35,8 @@ const Info = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 // == Export
 export default Info;

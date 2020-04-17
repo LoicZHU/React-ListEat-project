@@ -20,10 +20,13 @@ import {
   DECREASE_MINUTE,
   saveDecreasedAverageEatingTime,
   CHANGE_SERVICE_STATUS,
+  saveChangedServiceStatus,
+  FETCH_TICKETS_DATA,
+  saveTicketsData,
 } from 'src/actions/user';
 
-const baseUrl = '54.162.210.163:8080';
-// const baseUrl = 'localhost:8001';
+// const baseUrl = '54.162.210.163:8080';
+const baseUrl = 'localhost:8001';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
@@ -235,26 +238,56 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case CHANGE_SERVICE_STATUS:
-      let changedStatus = !(store.getState().user.restaurantProfileEditInput.status);
-      // TODO: EN ATTENTE DU BACK
+      let changedStatus = store.getState().user.restaurantProfileEditInput.status;
+      
+      // toggle the changedStatus (ex: 1 (activate) turns into off (deactivate))
+      if (changedStatus === 1) {
+        changedStatus = 'off';
+      } else {
+        changedStatus = 'on';
+      }
+      // console.log(changedStatus);
 
-      // axios({
-      //   method: 'put',
-      //   url: `http://${baseUrl}/api/partner/${id}`,
-      //   data: {
-      //     restaurant: {
-      //       status: changedStatus,
-      //     },
-      //   },
-      //   withCredentials: true,
-      // })
-      //   .then((response) => {
-      //     // console.log(response);
-      //     store.dispatch(saveChangedServiceStatus(changedStatus));
-      //   })
-      //   .catch((error) => {
-      //     console.warn(error);
-      //   });
+      axios({
+        method: 'put',
+        url: `http://${baseUrl}/api/partner/${id}/status`,
+        data: {
+          status: changedStatus,
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          // console.log(response);
+
+          // convert the changeStatus (ex: 'on' = 1)
+          if (changedStatus === 'on') {
+            changedStatus = 1;
+          } else {
+            changedStatus = 0;
+          }
+          // console.log(changedStatus);
+
+          store.dispatch(saveChangedServiceStatus(changedStatus));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    case FETCH_TICKETS_DATA:
+      axios({
+        method: 'get',
+        url: `http://${baseUrl}/api/partner/${id}/tickets`,
+        withCredentials: true,
+      })
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(saveTicketsData(response.data));
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
       next(action);
       break;
 

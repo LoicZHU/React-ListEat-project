@@ -8,6 +8,7 @@ import { increaseMinute, decreaseMinute, changeServiceStatus } from 'src/actions
 const mapStateToProps = (state) => ({
   status: state.user.restaurantProfileEditInput.status,
   averageEatingTime: state.user.restaurantProfileEditInput.averageEatingTime,
+  tickets: state.user.restaurantTicketsData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

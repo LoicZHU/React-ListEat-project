@@ -28,6 +28,7 @@ const Field = ({
         name={name}
         value={value}
         onChange={handleChange}
+        required
       />
     </div>
   );

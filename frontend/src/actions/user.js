@@ -20,6 +20,9 @@ export const DECREASE_MINUTE = 'DECREASE_MINUTE';
 export const SAVE_DECREASED_AVERAGE_TIME = 'SAVE_DECREASED_AVERAGE_TIME'
 export const CHANGE_SERVICE_STATUS = 'CHANGE_SERVICE_STATUS';
 export const SAVE_CHANGED_SERVICE_STATUS = 'SAVE_CHANGED_SERVICE_STATUS';
+export const CHANGE_TICKET_INPUT_VALUE = 'CHANGE_TICKET_INPUT_VALUE';
+export const FETCH_TICKETS_DATA = 'FETCH_TICKETS_DATA';
+export const SAVE_TICKETS_DATA = 'SAVE_TICKETS_DATA';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -120,6 +123,16 @@ export const changeServiceStatus = () => ({
 export const saveChangedServiceStatus = (newStatusService) => ({
   type: SAVE_CHANGED_SERVICE_STATUS,
   newStatusService,
+});
+
+
+export const fetchTicketsData = () => ({
+  type: FETCH_TICKETS_DATA,
+});
+
+export const saveTicketsData = (ticketsData) => ({
+  type: SAVE_TICKETS_DATA,
+  ticketsData,
 });
 
 export const changeTicketInputValue = (newValue, fieldName) => ({
