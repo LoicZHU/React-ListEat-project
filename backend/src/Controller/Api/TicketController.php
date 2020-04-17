@@ -138,14 +138,14 @@ class TicketController extends AbstractController
 
         // TODO: prevent the emailing if the ticket status is being changed from Inactive to Active after a faulty handling from the restaurateur
 
-        return $this->json(['message' => 'Votre inscription à la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime()], Response::HTTP_OK);
+        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
 
         } elseif ($data->validation == "cancel") {
-            $ticket->setStatus(0);
+            $ticket->setStatus(3);
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
-            return $this->json(['message' => 'Votre inscription à la liste d\'attente a bien été annulée.','ticketId' => $ticket->getId()], Response::HTTP_OK);
+            return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été annulée.','ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
         }
 
     }
