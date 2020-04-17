@@ -24,7 +24,8 @@ const Signup = ({
   changeSignUpInputValue,
   handleSubscribe,
   showPasswordError,
-  handleChangePasswordConfirmation
+  handleChangePasswordConfirmation,
+  signupErrors
 }) => {
   
   // handle input change
@@ -37,19 +38,13 @@ const Signup = ({
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleSubscribe();
 
- 
-
-
-    // if (password === passwordConfirmation) {
-    //   handleSubscribe();
-    // }
-    // else {
-    //   console.log(areSamePassword);
-    //   areSamePassword = true;
-    //   console.log(areSamePassword);
-    // }
+    if (password === passwordConfirmation && password.length > 0 ) {
+      handleSubscribe();
+    }
+    else {
+    }
+    
   };
 
   const checkPasswordConfirmation = (e) => {
@@ -70,33 +65,46 @@ const Signup = ({
       handleChangePasswordConfirmation(true);
       handleChange(e);
     }
-  }
+  }    
 
-
-  // const passwordVerify = {
-  //   showError: false,
-  //   checkError: function(evt, handleChange) {
-  //     if (evt.target.value == password) {
-  //       passwordVerify.showError = false;
-  //       passwordVerify.handleChange(evt);
-  //       return false;
-  //     } else {
-  //       passwordVerify.showError = true;
-  //       passwordVerify.handleChange(evt);
-  //       return true;
-  //     }
-  //   },
-  //   handleChange: function(evt){
-  //     handleChange(evt);
-  //   }
-  // }
-  
   return (
     <div className="signup-wrapper">
       <h1>Inscription</h1>
-
+      
       <form id="signup-form" onSubmit={handleSubmit}>
+        
         <span>Vous concernant</span>
+        { signupErrors.length > 0 && 
+        <div id="errors">
+          <h4>Des erreurs ont été détectées :</h4>
+          <ul>
+          {signupErrors.map((error) => {
+            if(error.field === "email") {
+              return <li><span>Email :</span> {error.message}</li>;
+            } else if (error.field === "password") {
+              return <li><span>Mot de passe :</span> {error.message}</li>;
+            } else if (error.field === "lastname") {
+              return <li><span>Nom :</span> {error.message}</li>;
+            } else if (error.field === "firstname") {
+              return <li><span>Prénom :</span> {error.message}</li>;
+            } else if (error.field === "siretCode") {
+              return <li><span>SIRET :</span> {error.message}</li>;
+            } else if (error.field === "name") {
+              return <li><span>Nom du restaurant :</span> {error.message}</li>;
+            } else if (error.field === "address") {
+              return <li><span>Adresse restaurant :</span> {error.message}</li>;
+            } else if (error.field === "city") {
+              return <li><span>Ville :</span> {error.message}</li>;
+            } else if (error.field === "country") {
+              return <li><span>Pays :</span> {error.message}</li>;
+            } else if (error.field === "phone") {
+              return <li><span>Téléphone :</span> {error.message}</li>;
+            }
+          })
+          }
+          </ul>
+        </div> }
+
         <input
           name="lastname" 
           placeholder="Nom" 

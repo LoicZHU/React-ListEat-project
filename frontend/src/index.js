@@ -16,10 +16,10 @@ import App from 'src/containers/App';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 const rootReactElement = (
   <Provider store={store}>
-     <ParallaxProvider>
-    <Router>
-      <App />
-    </Router>
+    <ParallaxProvider>
+      <Router>
+        <App />
+      </Router>
     </ParallaxProvider>
   </Provider>
 );

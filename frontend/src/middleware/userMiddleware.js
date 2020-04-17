@@ -114,8 +114,6 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          console.log('resp');
-          console.log(response.json());
         })
         // .then((error) => {
         //   console.warn(error);
@@ -123,7 +121,7 @@ const userMiddleware = (store) => (next) => (action) => {
         //   console.log(error);
         // })
         .catch((error) => {
-          console.log('test err');
+          console.log('test err' + error.response.data);
           console.log(error.response);
           console.log(error.response.data);
           store.dispatch(saveSignUpErrors(error.response.data));
@@ -210,6 +208,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error);
         });
+        
       next(action);
       break;
 

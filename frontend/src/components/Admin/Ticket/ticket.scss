@@ -7,10 +7,15 @@ li.ticket {
     border: 2px $light-color solid !important;
     padding: 1.5em 1em;
     font-size: 1.5em;
+    position: relative;
 
     .fa-user {
-      margin-left: 50%;
-      margin-right: 2%;
+      position: absolute;
+      left: 80%;
+
+      span {
+        margin-left: 10px;
+      }
     }
 
     .fa-info-circle {

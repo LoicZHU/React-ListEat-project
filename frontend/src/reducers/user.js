@@ -14,6 +14,7 @@ import {
   SAVE_SIGN_UP_ERRORS,
   SAVE_CHANGED_SERVICE_STATUS,
   SAVE_TICKETS_DATA,
+  REFRESH_TIME,
 } from 'src/actions/user';
 
 // initial state
@@ -46,7 +47,7 @@ const initialState = {
   },
 
   // sign up errors
-  signupErrors: {},
+  signupErrors: [],
 
   // restaurant profile edit infos
   restaurantProfileEditInput: {
@@ -63,6 +64,9 @@ const initialState = {
     averageEatingTime: '', // int
     status: '', // int
   },
+
+  // time
+  currentTime: new Date().toLocaleTimeString("fr-FR", {hour: '2-digit', minute:'2-digit'}),
 
   // restaurant tickets data
   loadingTickets: true,
@@ -116,12 +120,6 @@ const userReducer = (state = initialState, action = {}) => {
         checking: false,
       };
 
-    case CHANGE_CHECKING_RESTAURANT_LOGGED:
-      return {
-        ...state,
-        checking: false,
-      };
-
     case CHANGE_SHOW_PASSWORD_ERROR:
       console.log(action.newValue);
       return {
@@ -159,7 +157,7 @@ const userReducer = (state = initialState, action = {}) => {
           averageEatingTime: action.decreasedAverageEatingTime,
         },
       };
-      
+
     case SAVE_SIGN_UP_ERRORS:
       return {
         ...state,
@@ -181,7 +179,12 @@ const userReducer = (state = initialState, action = {}) => {
         loadingTickets: false,
         restaurantTicketsData: action.ticketsData,
       };
-  
+
+    case REFRESH_TIME:
+      return {
+        ...state,
+        currentTime: new Date().toLocaleTimeString("fr-FR", {hour: '2-digit', minute:'2-digit'}),
+      };
 
     default: return state;
   }

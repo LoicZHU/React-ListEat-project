@@ -16,7 +16,6 @@ const mapStateToProps = (state) => ({
   restaurantId: state.user.restaurantId,
   isTemporarySubscribedTicket: state.tickets.isTemporarySubscribedTicket,
   checkingTemporarySubscribedTicket: state.tickets.checkingTemporarySubscribedTicket,
-  loadingTicketsData: state.user.loadingTickets,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchTicketsData: () => {
     dispatch(fetchTicketsData());
-  }
+  },
   // checkTemporarySubscribedTicket: () => {
   //   dispatch(changeCheckingTemporarySubscribedTicket());
   // },

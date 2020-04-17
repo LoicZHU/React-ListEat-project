@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 
 // import
 import Admin from 'src/components/Admin';
-import { increaseMinute, decreaseMinute, changeServiceStatus } from 'src/actions/user';
+import {
+  increaseMinute,
+  decreaseMinute,
+  changeServiceStatus,
+  refreshTime,
+} from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   status: state.user.restaurantProfileEditInput.status,
   averageEatingTime: state.user.restaurantProfileEditInput.averageEatingTime,
   tickets: state.user.restaurantTicketsData,
+  loadingTicketsData: state.user.loadingTickets,
+  // hour
+  currentTime: state.user.currentTime,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,6 +28,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleChangeServiceStatus: () => {
     dispatch(changeServiceStatus());
+  },
+  refreshTime: () => {
+    dispatch(refreshTime());
   },
 });
 

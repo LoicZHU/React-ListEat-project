@@ -19,6 +19,7 @@ const mapStateToProps = (state) => ({
   averageEatingTime: state.user.signupInput.averageEatingTime,
   coversNumber: state.user.signupInput.coversNumber,
   showPasswordError: state.user.signupInput.showPasswordError,
+  signupErrors: state.user.signupErrors,
 });
 
 const mapDispatchToProps = (dispatch) => ({
