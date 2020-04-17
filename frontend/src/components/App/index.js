@@ -32,18 +32,26 @@ const App = ({
   checkingLoggedRestaurant, 
   restaurantId,
   fetchRestaurantData,
+  fetchTicketsData,
+  checkFetchedTicketsData,
+  loadingTicketsData,
+  // isTemporarySubscribedTicket,
+  // checkTemporarySubscribedTicket,
+  // checkingTemporarySubscribedTicket
 }) => {
   useEffect(() => {
     checkLoggedRestaurant();
+    // checkTemporarySubscribedTicket();
   }, []);
 
   if (isRestaurantLogged) {
     fetchRestaurantData(restaurantId);
+    fetchTicketsData();
   }
 
   return (
     <div className="app">
-      {!checkingLoggedRestaurant && (
+      {!checkingLoggedRestaurant && !loadingTicketsData && (
         <Switch>
           {/* Home */}
           <Route path="/" exact>

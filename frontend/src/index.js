@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 import store from 'src/store';
 
@@ -15,9 +16,11 @@ import App from 'src/containers/App';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 const rootReactElement = (
   <Provider store={store}>
+     <ParallaxProvider>
     <Router>
       <App />
     </Router>
+    </ParallaxProvider>
   </Provider>
 );
 

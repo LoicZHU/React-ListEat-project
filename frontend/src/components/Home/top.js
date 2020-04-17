@@ -26,12 +26,14 @@ const Top = () => (
     <div className="home__top__partner">
       <p className="partner-title">Devenez restaurateur partenaire</p><p className="partner-argument">EN MOINS DE 5 MINUTES !</p>
 
-      <button
-        className="home__top__partner__subscribe-button button-alt"
-        type="button"       
-      >
-        <a href="/signup">Inscription</a>
-      </button>
+      <a href="/signup">
+        <button
+          className="home__top__partner__subscribe-button button-alt"
+          type="button"       
+        >
+          <span>Inscription</span>
+        </button>
+      </a>
 
       <a className="home__top__partner__link" href="/faq">
         Une question ?<br />

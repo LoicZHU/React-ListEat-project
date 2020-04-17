@@ -13,6 +13,7 @@ import {
   SAVE_DECREASED_AVERAGE_TIME,
   SAVE_SIGN_UP_ERRORS,
   SAVE_CHANGED_SERVICE_STATUS,
+  SAVE_TICKETS_DATA,
 } from 'src/actions/user';
 
 // initial state
@@ -62,6 +63,10 @@ const initialState = {
     averageEatingTime: '', // int
     status: '', // int
   },
+
+  // restaurant tickets data
+  loadingTickets: true,
+  restaurantTicketsData: [],
 };
 
 // reducer
@@ -166,9 +171,17 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         restaurantProfileEditInput: {
           ...state.restaurantProfileEditInput,
-          status: newStatusService,
+          status: action.newStatusService,
         },
       };
+
+    case SAVE_TICKETS_DATA:
+      return {
+        ...state,
+        loadingTickets: false,
+        restaurantTicketsData: action.ticketsData,
+      };
+  
 
     default: return state;
   }

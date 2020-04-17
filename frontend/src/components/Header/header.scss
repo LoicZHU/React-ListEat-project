@@ -68,7 +68,7 @@
         letter-spacing: 1.25px;
     }
     #sidebarMenu {
-      z-index:2;
+      z-index:20;
         height: 100%;
         position: fixed;
         left: 0;
@@ -218,15 +218,86 @@
 
 @media (min-width: $mobile-breakpoint) {
   header {
-    #desktop-menu {
-      z-index: 2;
-      display: flex !important;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1em 5em;
-      height: 73px;
-      // border-bottom: $primary-color 2px solid;
-      box-shadow: 0px 5px 20px rgb(0,0,0,.1);
+
+
+/** Start Old CSS Menu */
+      // #desktop-menu {
+      //   z-index: 2;
+      //   display: flex !important;
+      //   justify-content: space-between;
+      //   align-items: center;
+      //   padding: 1em 5em;
+      //   height: 73px;
+      //   box-shadow: 0px 5px 20px rgb(0,0,0,.1);
+
+      // #help-button-mobile {
+      //   background-color: $dark-color;
+      //   font-weight: bold;
+      //   color: #fff;
+      //   text-align: center;
+      //   border-radius: 50%;
+      //   width: 2.5em;
+      //   padding: .7em;
+      //   margin-left: .2em;
+      // }
+  
+      // #help-button-span {
+      //   font-weight: bold;
+      //   font-size: .8em;
+      //   color: #000;
+      //   border-radius: 50%;
+      //   width: 3em;
+      //   padding: 0 .5em;
+      //   margin-left: .2em;
+      //   border: 1px solid black;
+      // }
+/** End Old CSS Menu */
+
+/** New CSS Menu */
+
+      .button {
+        border: none!important;
+        box-shadow: none!important;
+      }
+
+      #desktop-menu {
+        z-index: 2;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em 0em;
+        height: 50px;
+        box-shadow: 0px 5px 20px rgb(0,0,0,.1);
+
+        #desktop-left-nav a, #desktop-right-nav a {
+          height: 50px !important;
+          display: flex;
+          align-items: center;
+          margin: 0 !important;
+          padding: 0 1.6em;
+          li {
+            padding: 0!important;
+          }
+
+          &:hover { 
+            background-color: $primary-color;
+            color: #fff;
+
+            li {
+              padding: 0!important;
+              background-color: $primary-color;
+
+              span {
+                color: #fff;
+                border-color: #fff;
+              }
+            }            
+          }
+        }
+
+        ul {
+          align-items: stretch!important;
+        }
 
       #help-button-mobile {
         background-color: $dark-color;
@@ -249,6 +320,8 @@
         margin-left: .2em;
         border: 1px solid black;
       }
+
+/** End New CSS Menu */
   
       #help-button {
         &:hover {
@@ -274,12 +347,12 @@
       }
   
       #logo-container img {
-        width: 120px;
+        width: 100px;
       }
   
       #logo-container {
-        position: absolute;
-        left: calc(50vw-60px);
+        position: relative;
+        // left: calc(50vw-50px);
       }
     }
 

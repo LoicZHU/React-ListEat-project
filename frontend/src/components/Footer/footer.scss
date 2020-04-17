@@ -3,8 +3,17 @@
 
 footer {
   background-color: $light-color;
-  font-size: .9em !important;
-  width: 100%;
+  font-size: .9em;
+  width: 100% !important;
+  position: absolute !important;
+  bottom: 0px !important;
+  left: 0px !important;
+
+  #footer-first, #contact-block, #contact-block .contact-infos span {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
 
   #footer-first {
     display: flex;
@@ -16,6 +25,11 @@ footer {
     text-align: right;
     line-height: 2em;
 
+    nav ul li {
+      margin: 0 auto !important;
+      text-align: center !important;
+    }
+
     .nav, #contact-block {
       padding: 1em 3em;
     }
@@ -26,8 +40,8 @@ footer {
 
       .contact-infos span {
         display: block;
-        text-align: left;
-        margin: 0 auto !important;
+        text-align: center;
+        margin: 0 auto;
 
       }
 
@@ -51,15 +65,64 @@ footer {
 }
 
 
-@media (max-width: $mobile-breakpoint) {
-  #footer-first, #contact-block, #contact-block .contact-infos span {
-    flex-direction: column !important;
-    text-align: center !important;
-    align-items: center !important;
-  }
+@media (min-width: $mobile-breakpoint) {
+
 
   footer {
-    position: relative !important;
+    background-color: $light-color;
+    font-size: .9em !important;
+    width: 100%;
+    margin-top: 50px !important;
+  
+    #footer-first {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 900px;
+      padding: 1em 2em;
+      text-align: right;
+      line-height: 2em;
+  
+      .nav, #contact-block {
+        padding: 1em 3em;
+        flex-direction: column !important;
+      }
+
+      nav ul li {
+        text-align: right !important;
+      
+      }
+  
+      #contact-block {
+        display: flex;
+        flex-direction: column;
+  
+        .contact-infos span {
+          display: block;
+          text-align: left;
+          margin: 0 auto !important;
+  
+        }
+  
+        .title {
+          font-weight: bold;
+        }
+      }
+  
+      #logo {
+        width: 150px;
+      }
+  
+    }
+  
+    #footer-last {
+      padding: 1em 2em;
+      background-color: $dark-color;
+      color: #fff;
+      text-align: center;
+    }
   }
+
 
 }

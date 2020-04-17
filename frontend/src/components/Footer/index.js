@@ -15,7 +15,7 @@ const Footer = () => {
         <div id="contact-block">
           <div className="contact-infos">
             <span className="title">Pour nous contacter :</span>
-            <span><i className="fa fa-envelope-o" aria-hidden="true"></i> Par mail: <a href="mailto:hello@listeat.io">hello@listeat.io</a></span>
+            <span><i className="fa fa-envelope-o" aria-hidden="true"></i> Par mail&nbsp;: <a href="mailto:hello@listeat.io">hello@listeat.io</a></span>
           </div>
         </div>
       </div>

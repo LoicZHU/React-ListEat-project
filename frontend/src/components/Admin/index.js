@@ -12,6 +12,7 @@ const Admin = ({
   handleDecreaseMinute,
   handleIncreaseMinute,
   handleChangeServiceStatus,
+  tickets,
 }) => {
   // handle click on '+'
   const handleRemoveClick = () => {
@@ -28,6 +29,11 @@ const Admin = ({
     handleChangeServiceStatus();
   }
 
+  // get local time
+  const time = new Date();
+  const h = time.getHours();
+  const mn = time.getMinutes();
+
   return (
     <div id="admin-wrapper">
 
@@ -36,41 +42,45 @@ const Admin = ({
         <div id="admin-top-section">
           <div className="left">
             <label className="switch">
-              <input type="checkbox" checked={status} onClick={handleServiceClick} />
+              <input type="checkbox" checked={status} onChange={handleServiceClick} />
               <span className="slider round" />
             </label>
             <span className="toggle-name">SERVICE : </span>
             <span className="toggle-state on">ON</span>
           </div>
           <div className="right">
-            <span>15h03</span>
+            <span></span>
           </div>
         </div>
 
         <div id="admin-middle-section">
           <div className="left">
             <div id="ticket-infos">
-              <span>Nom : DUPONT</span>
-              <span>Prénom : JEAN</span>
+              <span>Nom : {tickets[0].customer.lastName} </span>
+              <span>Prénom : {tickets[0].customer.firstName}</span>
               <span>Horaire estimé : 16h45</span>
               <div id="ticket-ref">
                 <span>Ref ticket : </span>
-                <span className="ref"> 547</span>
+                <span className="ref"> {tickets[0].id}</span>
               </div>
             </div>
           </div>
           <div className="right">
             <div id="covers-nb">
-              <span className="covers-title">Nombre de couverts :</span>
-              <span className="covers">4</span>
+              <span className="covers-title">Nombre de couverts&nbsp;:</span>
+              <span className="covers">{tickets[0].coversNb}</span>
+              <span></span>
             </div>
           </div>
         </div>
         <div id="admin-bottom-section">
+            <div className="first">
+            <h3>Temps d'attente actuel&nbsp;:</h3>
           <div className="estimate-waiting-time">
-            <span id="less-time" onClick={handleRemoveClick}>-</span>
+            <span id="less-time" onClick={handleRemoveClick}></span>
             <span id="time">{averageEatingTime} mn</span>
-            <span id="more-time" onClick={handleAddClick}>+</span>
+            <span id="more-time" onClick={handleAddClick}></span>
+          </div>
           </div>
           <div className="add-ticket">
             <span>Ajouter un ticket</span>
@@ -83,34 +93,11 @@ const Admin = ({
       <div id="right-section">
         <div id="admin-side-section">
           <ul id="ticket-list">
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
-            <Ticket />
+           {tickets.map((ticket) => (
+            <Ticket key={ticket.id} ticket={ticket} />
+           ))} 
           </ul>
+
           <div className="tickets-count">
             <span>Tickets en attente : 32 tickets</span>
           </div>
