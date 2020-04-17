@@ -8,6 +8,8 @@ use Endroid\QrCode\LabelAlignment;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\Response\QrCodeResponse;
 use Symfony\Component\HttpFoundation\Response;
+use ImalH\PDFLib\PDFLib;
+
 
 class QrCodeGenerator
 {
@@ -67,13 +69,18 @@ class QrCodeGenerator
      
         //we save image on server
         //imagecopymerge($image, $calque, 0, 0, 0, 0, 100, 47, 75);
-        $UrlImage =  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".jpg";
-        imagejpeg($image,  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".jpg");
+        
+        imagejpeg($image,  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".png");
 
         //Remove the Qr-code with Out Logo
         unlink( $baseUrl.'/file/temp/Qrcode'.$restaurantId.'.png');
 
+        $pdflib = new PDFLib;
+        $imagePaths = [$baseUrl."/file/qr_code/qrcode-".$restaurantId.".png"];
+        $pdflib->makePDF($baseUrl."/file/qr_code/qrcode-".$restaurantId.".pdf",$imagePaths);
+        unlink( $baseUrl."/file/qr_code/qrcode-".$restaurantId.".png");
 
+        $UrlImage =  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".pdf";
         if (file_exists($UrlImage)) {
             return $UrlImage;
         } else {
