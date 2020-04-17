@@ -21,6 +21,13 @@ class QrCodeGenerator
         //We crypt restaurant Id
         $cryptedId = CryptoService::crypt($restaurantId);
 
+        //We define server base url
+        $baseUrl= getcwd();
+        $binary = "\x09/public\x0A";
+        $trimmed = trim($baseUrl,  $binary);
+        $baseUrl = '/'.$trimmed;
+    
+
         
         // Create a basic QR code
         $lien='http://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
@@ -46,9 +53,9 @@ class QrCodeGenerator
         // dd$qrCode->writeString();
 
         // Save it to a file
-        $qrCode->writeFile($_SERVER['PWD']."/file/temp/Qrcode".$restaurantId.".png");
+        $qrCode->writeFile( $baseUrl."/file/temp/Qrcode".$restaurantId.".png");
 
-        $image = imagecreatefrompng($_SERVER['PWD']."/file/temp/Qrcode".$restaurantId.".png"); // this is a source image
+        $image = imagecreatefrompng( $baseUrl."/file/temp/Qrcode".$restaurantId.".png"); // this is a source image
         //$calque = imagecreatefrompng("$_SERVER['PWD']."/ressource/logo/QrcodeCalque.png"); //Calque
 
         //Text on the Qr Code!
@@ -58,15 +65,15 @@ class QrCodeGenerator
         $color = imagecolorallocate($image, 0, 0, 0);
 
         //We put a font style
-        imagettftext($image, 18, 0, 55, 95, 1, $_SERVER['PWD'].'/ressource/police/OpenSans-Regular.ttf', $texte);
+        imagettftext($image, 18, 0, 55, 95, 1,  $baseUrl.'/ressource/police/OpenSans-Regular.ttf', $texte);
      
         //we save image on server
         //imagecopymerge($image, $calque, 0, 0, 0, 0, 100, 47, 75);
-        $UrlImage = $_SERVER['PWD']."/file/qr_code/qrcode-".$restaurantId.".jpg";
-        imagejpeg($image, $_SERVER['PWD']."/file/qr_code/qrcode-".$restaurantId.".jpg");
+        $UrlImage =  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".jpg";
+        imagejpeg($image,  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".jpg");
 
         //Remove the Qr-code with Out Logo
-        unlink($_SERVER['PWD'].'/file/temp/Qrcode'.$restaurantId.'.png');
+        unlink( $baseUrl.'/file/temp/Qrcode'.$restaurantId.'.png');
 
 
         if (file_exists($UrlImage)) {
