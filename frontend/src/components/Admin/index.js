@@ -1,9 +1,11 @@
 // == Import npm
 import React, { useEffect } from 'react';
+import Modal from 'react-modal';
 
 // == Import
 import Ticket from 'src/containers/Admin/Ticket';
 import './admin.scss';
+import Field from 'src/components/TicketForm/Field';
 
 // == Composant
 const Admin = ({
@@ -17,12 +19,22 @@ const Admin = ({
   currentTime,
   refreshTime,
   currentTicket,
+
+  // modal (ticket add)
+  lastName,
+  firstName,
+  email,
+  phone,
+  cutlery,
+  errors,
+  changeTicketInputValue,
+  // handleTicketSubscribe, TODO
 }) => {
   useEffect(() => {
     // refresh the showed time
     setInterval(() => {
       refreshTime();
-    }, 60000);
+    }, 10000);
   }, []);
 
   // handle click on '+'
@@ -41,8 +53,53 @@ const Admin = ({
   };
 
   const element = document.querySelector('#ticket-list > li');
-console.log(element);
+  console.log(element);
   // const x = element.classList.add("current");
+
+  // handle submit the ticket add
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    // handleTicketSubscribe(); TODO
+  };
+
+  // bind modal to the app div : root
+  Modal.setAppElement('#root');
+
+  // modal styles
+  const customStyles = {
+    overlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  // modal mecanism
+  let modalTitle;
+  const [open, setOpen] = React.useState(false);
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const handleOpen = () => {
+    modalTitle.style.color = '#ff8400';
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     (!loadingTicketsData && (
@@ -116,7 +173,67 @@ console.log(element);
 
             <div className="tickets-count">
               <span>Total en attente : {tickets.length}</span>
-              <span id="add-ticket">Ajouter</span>
+
+              <span id="add-ticket" onClick={openModal}>Ajouter</span>
+
+              <Modal
+                isOpen={open}
+                onAfterOpen={handleOpen}
+                onRequestClose={handleClose}
+                style={customStyles}
+                shouldFocusAfterRender
+                shouldCloseOnEsc
+                contentLabel="Ticket adding modal" // for screenreaders
+              >
+                <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2>
+                <button onClick={handleClose}>close</button>
+
+                <div className="ticket-form--container">
+                  <form className="ticket-form" onSubmit={handleSubmit}>
+                    <Field
+                      name="lastName"
+                      placeholder="Nom"
+                      onChange={changeTicketInputValue}
+                      value={lastName}
+                    />
+
+                    <Field
+                      name="firstName"
+                      placeholder="Prénom"
+                      onChange={changeTicketInputValue}
+                      value={firstName}
+                    />
+
+                    <Field
+                      name="email"
+                      type="email"
+                      placeholder="Adresse Email"
+                      onChange={changeTicketInputValue}
+                      value={email}
+                    />
+
+                    <Field
+                      name="phone"
+                      placeholder="Téléphone"
+                      onChange={changeTicketInputValue}
+                      value={phone}
+                    />
+
+                    <Field
+                      name="cutlery"
+                      type="number"
+                      placeholder="Nombre de couverts"
+                      onChange={changeTicketInputValue}
+                      value={cutlery}
+                    />
+
+                    {errors && errors.field=='coversNb' && (
+                        <span className="cover-error">{errors.message}</span>
+                    )}
+                    <button className="ticket-submit button-alt" type="submit">Inscription</button>
+                  </form>
+                </div>
+              </Modal>
             </div>
           </div>
         </div>

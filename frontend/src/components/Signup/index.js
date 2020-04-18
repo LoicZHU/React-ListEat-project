@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // == Import
 import './signup.scss';
 
-// == Composant d 
+// == Composant
 const Signup = ({
   lastname,
   firstname,

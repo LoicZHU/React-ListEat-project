@@ -50,6 +50,7 @@
     "prop-types": "*",
     "react": "*",
     "react-dom": "*",
+    "react-modal": "^3.11.2",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scroll-parallax": "^2.3.2",

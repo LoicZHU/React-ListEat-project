@@ -9,15 +9,23 @@ import {
   changeServiceStatus,
   refreshTime,
 } from 'src/actions/user';
+import { changeTicketInputValue, subscribeToWaitingList } from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
   status: state.user.restaurantProfileEditInput.status,
   averageEatingTime: state.user.restaurantProfileEditInput.averageEatingTime,
   tickets: state.user.restaurantTicketsData,
   loadingTicketsData: state.user.loadingTickets,
-  // hour
   currentTime: state.user.currentTime,
   currentTicket: state.tickets.currentTicket,
+
+  // ticket add (modal)
+  lastName: state.tickets.ticketInscriptionInput.lastName,
+  firstName: state.tickets.ticketInscriptionInput.firstName,
+  email: state.tickets.ticketInscriptionInput.email,
+  phone: state.tickets.ticketInscriptionInput.phone,
+  cutlery: state.tickets.ticketInscriptionInput.cutlery,
+  errors: state.tickets.ticketSubscriptionErrors[0],
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,6 +40,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
   refreshTime: () => {
     dispatch(refreshTime());
+  },
+
+  // ticket add (modal)
+  changeTicketInputValue: (newValue, fieldName) => {
+    dispatch(changeTicketInputValue(newValue, fieldName));
+  },
+  handleTicketSubscribe: () => {
+    dispatch(subscribeToWaitingList());
   },
 });
 
