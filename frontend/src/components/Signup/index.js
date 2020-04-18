@@ -25,14 +25,14 @@ const Signup = ({
   handleSubscribe,
   showPasswordError,
   handleChangePasswordConfirmation,
-  signupErrors
+  signupErrors,
 }) => {
-  
+
   // handle input change
   const handleChange = (evt) => {
     changeSignUpInputValue(evt.target.value, evt.target.name);
   };
-  
+
   // const areSamePassword = false;
 
   // handle submit
@@ -42,9 +42,6 @@ const Signup = ({
     if (password === passwordConfirmation && password.length > 0 ) {
       handleSubscribe();
     }
-    else {
-    }
-    
   };
 
   const checkPasswordConfirmation = (e) => {
@@ -55,91 +52,104 @@ const Signup = ({
       handleChangePasswordConfirmation(true);
       handleChange(e);
     }
-  }
+  };
 
   const checkPassword = (e) => {
     if (e.target.value == passwordConfirmation) {
       handleChangePasswordConfirmation(false);
       handleChange(e);
-    } else {
+    }
+    else {
       handleChangePasswordConfirmation(true);
       handleChange(e);
     }
-  }    
+  };
 
   return (
     <div className="signup-wrapper">
       <h1>Inscription</h1>
-      
+
       <form id="signup-form" onSubmit={handleSubmit}>
-        
+
         <span>Vous concernant</span>
-        { signupErrors.length > 0 && 
+        { signupErrors.length > 0 && (
         <div id="errors">
           <h4>Des erreurs ont été détectées :</h4>
           <ul>
-          {signupErrors.map((error) => {
-            if(error.field === "email") {
-              return <li><span>Email :</span> {error.message}</li>;
-            } else if (error.field === "password") {
-              return <li><span>Mot de passe :</span> {error.message}</li>;
-            } else if (error.field === "lastname") {
-              return <li><span>Nom :</span> {error.message}</li>;
-            } else if (error.field === "firstname") {
-              return <li><span>Prénom :</span> {error.message}</li>;
-            } else if (error.field === "siretCode") {
-              return <li><span>SIRET :</span> {error.message}</li>;
-            } else if (error.field === "name") {
-              return <li><span>Nom du restaurant :</span> {error.message}</li>;
-            } else if (error.field === "address") {
-              return <li><span>Adresse restaurant :</span> {error.message}</li>;
-            } else if (error.field === "city") {
-              return <li><span>Ville :</span> {error.message}</li>;
-            } else if (error.field === "country") {
-              return <li><span>Pays :</span> {error.message}</li>;
-            } else if (error.field === "phone") {
-              return <li><span>Téléphone :</span> {error.message}</li>;
-            }
-          })
-          }
+            {signupErrors.map((error) => {
+              if (error.field === 'email') {
+                return <li><span>Email :</span> {error.message}</li>;
+              }
+              if (error.field === 'password') {
+                return <li><span>Mot de passe :</span> {error.message}</li>;
+              }
+              if (error.field === 'lastname') {
+                return <li><span>Nom :</span> {error.message}</li>;
+              }
+              if (error.field === 'firstname') {
+                return <li><span>Prénom :</span> {error.message}</li>;
+              }
+              if (error.field === 'siretCode') {
+                return <li><span>SIRET :</span> {error.message}</li>;
+              }
+              if (error.field === 'name') {
+                return <li><span>Nom du restaurant :</span> {error.message}</li>;
+              }
+              if (error.field === 'address') {
+                return <li><span>Adresse restaurant :</span> {error.message}</li>;
+              }
+              if (error.field === 'city') {
+                return <li><span>Ville :</span> {error.message}</li>;
+              }
+              if (error.field === 'country') {
+                return <li><span>Pays :</span> {error.message}</li>;
+              }
+              if (error.field === 'phone') {
+                return <li><span>Téléphone :</span> {error.message}</li>;
+              }
+            })}
           </ul>
-        </div> }
+        </div>
+        )}
 
         <input
-          name="lastname" 
-          placeholder="Nom" 
+          name="lastname"
+          placeholder="Nom"
           id="lastname"
           value={lastname}
           onChange={handleChange}
+          required
         />
         <input
-          name="firstname" 
-          placeholder="Prénom" 
+          name="firstname"
+          placeholder="Prénom"
           id="firstname"
           value={firstname}
           onChange={handleChange}
+          required
         />
         <input
-          name="email" 
+          name="email"
           type="email"
-          placeholder="Adresse email" 
+          placeholder="Adresse email"
           id="email"
           value={email}
           onChange={handleChange}
+          required
         />
         <input
           name="password" 
           type="password"
-          placeholder="Mot de passe" 
+          placeholder="Mot de passe"
           id="password"
           value={password}
           onChange={handleChange, checkPassword}
         />
         <input
-          name="passwordConfirmation" 
+          name="passwordConfirmation"
           type="password"
-          placeholder="Confirmation du mot de passe" 
-          id="password-confirmation"  
+          placeholder="Confirmation du mot de passe"
+          id="password-confirmation"
           value={passwordConfirmation}
           onChange={checkPasswordConfirmation}
         />
@@ -149,74 +159,81 @@ const Signup = ({
         <span>Concernant votre restaurant</span>
         <input
           name="restaurantName"
-          placeholder="Nom de votre restaurant" 
+          placeholder="Nom de votre restaurant"
           id="name"
           value={restaurantName}
           onChange={handleChange}
+          required
         />
         <input
           name="address"
-          placeholder="Adresse" 
+          placeholder="Adresse"
           id="address"
           value={address}
           onChange={handleChange}
+          required
         />
         <input
           name="postcode"
-          placeholder="Code postal" 
+          placeholder="Code postal"
           id="postcode"
           value={postcode}
           onChange={handleChange}
+          required
         />
         <input
           name="city"
-          placeholder="Ville" 
+          placeholder="Ville"
           id="city"
           value={city}
           onChange={handleChange}
+          required
         />
         <input
           name="country"
-          placeholder="Pays" 
+          placeholder="Pays"
           id="country"
           value={country}
           onChange={handleChange}
+          required
         />
         <input
           name="phone"
-          placeholder="Téléphone" 
+          placeholder="Téléphone"
           id="phone"
           value={phone}
           onChange={handleChange}
+          required
         />
         <input
           name="cis"
-          placeholder="N°SIRET" 
+          placeholder="N°SIRET"
           id="cis"
           value={cis}
           onChange={handleChange}
+          required
         />
         <input
           name="averageEatingTime"
-          placeholder="Temps moyen de repas en minutes" 
-          id="average-eating-time" 
+          placeholder="Temps moyen de repas en minutes"
+          id="average-eating-time"
           type="number"
           value={averageEatingTime}
           onChange={handleChange}
+          required
         />
         <input
           name="coversNumber"
-          placeholder="Nombre de couverts" 
-          id="covers-number" 
+          placeholder="Nombre de couverts"
+          id="covers-number"
           type="number"
           value={coversNumber}
           onChange={handleChange}
+          required
         />
 
         <button type="submit" className="button-alt">Inscription</button>
       </form>
-      
-
     </div>
   );
 };
