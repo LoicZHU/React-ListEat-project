@@ -1,4 +1,4 @@
-# Requêtes JSON![Logo legalistEat](./ressource/logo/LogoListEat.png)
+# Requêtes JSON API ![Logo legalistEat](./ressource/logo/LogoListEat.png)
 
 URL|Contrôleur|Méthode|Paramètres|Description|
 |---|---|---|---|---|
@@ -54,7 +54,6 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 >}
 >}
 
-
 ------------------------------------------
 ### /api/partner/login **POST**
 >{
@@ -66,8 +65,6 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 >{
 >	"validation": "cancel"
 >}
-
-
 -------------------------------------------
 ### /forgotten-password **POST**
 
