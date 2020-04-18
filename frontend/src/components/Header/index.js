@@ -65,6 +65,7 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
           </div>
       </div>
     </div>
+    <div id="divider"></div>
     <div id="desktop-menu">
       <ul id="desktop-left-nav">
         <a href="/">
