@@ -18,6 +18,13 @@ const Admin = ({
   refreshTime,
   currentTicket,
 }) => {
+  useEffect(() => {
+    // refresh the showed time
+    setInterval(() => {
+      refreshTime();
+    }, 60000);
+  }, []);
+
   // handle click on '+'
   const handleRemoveClick = () => {
     handleDecreaseMinute();
@@ -32,24 +39,6 @@ const Admin = ({
   const handleServiceClick = () => {
     handleChangeServiceStatus();
   };
-
-  // get local time
-  // const time = new Date();
-  // const h = time.getHours();
-  // const mn = time.getMinutes();
-
-  useEffect(() => {
-    setInterval(() => {
-      refreshTime();
-    }, 60000);
-  }, []);
-
-  // const refresh = setInterval(() => {
-  //   refreshTime();
-  // }, 1000);
-  // console.log(date.toLocaleTimeString());
-  // date = new Date();
-  // console.log(date);
 
   const element = document.querySelector('#ticket-list > li');
 console.log(element);
@@ -72,7 +61,6 @@ console.log(element);
             </div>
             <div className="right">
               <span>{currentTime}</span>
-              {/* <span>{refresh}</span> */}
             </div>
           </div>
 
@@ -82,11 +70,10 @@ console.log(element);
                 <span>Nom : {currentTicket.customer.lastName} </span>
                 <span>Prénom : {currentTicket.customer.firstName}</span>
                 <span>Horaire estimé :&nbsp;
-                  {
-                    currentTicket.estimatedEntryTime.substring
-                    (currentTicket.estimatedEntryTime.indexOf('T') + 1, 
-                    currentTicket.estimatedEntryTime.indexOf('T') + 6)
-                  }
+                  {currentTicket.estimatedEntryTime.substring(
+                    currentTicket.estimatedEntryTime.indexOf('T') + 1,
+                    currentTicket.estimatedEntryTime.indexOf('T') + 6,
+                  )}
                 </span>
                 <div id="ticket-ref">
                   <span>Ref ticket : </span>
@@ -103,17 +90,17 @@ console.log(element);
                   <span id="cancel">Absent</span>
                 </div>
               </div>
-              
             </div>
           </div>
           <div id="admin-bottom-section">
-              <div className="first">
+            <div className="first">
               <h3>Temps d'attente actuel&nbsp;:</h3>
-            <div className="estimate-waiting-time">
-              <span id="less-time" onClick={handleRemoveClick}></span>
-              <span id="time">{averageEatingTime} mn</span>
-              <span id="more-time" onClick={handleAddClick}></span>
-            </div>
+
+              <div className="estimate-waiting-time">
+                <span id="less-time" onClick={handleRemoveClick} />
+                <span id="time">{averageEatingTime} mn</span>
+                <span id="more-time" onClick={handleAddClick} />
+              </div>
             </div>
           </div>
         </div>
@@ -128,7 +115,8 @@ console.log(element);
             </ul>
 
             <div className="tickets-count">
-              <span>Total en attente : 32</span><span id="add-ticket">Ajouter</span>
+              <span>Total en attente : {tickets.length}</span>
+              <span id="add-ticket">Ajouter</span>
             </div>
           </div>
         </div>
