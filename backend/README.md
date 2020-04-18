@@ -45,7 +45,7 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 
 >{
 >	"restaurant":{
->		"name":"chez couscous"
+>		"name":"chez O'restaurant"
 >	},
 >	"user":{
 >			"password":"toto12345"
