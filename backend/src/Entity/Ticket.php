@@ -72,6 +72,11 @@ class Ticket
      */
     private $estimatedEntryTime;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $statusnotification;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -174,6 +179,18 @@ class Ticket
     public function setEstimatedEntryTime(?\DateTimeInterface $estimatedEntryTime): self
     {
         $this->estimatedEntryTime = $estimatedEntryTime;
+
+        return $this;
+    }
+
+    public function getStatusnotification(): ?int
+    {
+        return $this->statusnotification;
+    }
+
+    public function setStatusnotification(?int $statusnotification): self
+    {
+        $this->statusnotification = $statusnotification;
 
         return $this;
     }

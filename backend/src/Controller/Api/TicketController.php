@@ -82,7 +82,6 @@ class TicketController extends AbstractController
         $estimatedEntryTime = Timer::estimatedEntryTime($estimatedWaitingTime);
 
         $ticket->setEstimatedEntryTime($estimatedEntryTime);
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($customer);
         $entityManager->persist($ticket);

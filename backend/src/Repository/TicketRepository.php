@@ -38,6 +38,25 @@ class TicketRepository extends ServiceEntityRepository
         return $query->getSingleScalarResult();;
     }
     
+    public function findWhereEstimated($current)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT t
+            FROM App\Entity\Ticket t
+            WHERE t.status = :status
+            AND t.statusnotification = :statusnotification
+            AND t.estimatedWaitingTime <= :estimatedWaitingTime'
+    
+        );
+        $query->setParameter('status', 1);
+        $query->setParameter('statusnotification', 0);
+        $query->setParameter('estimatedWaitingTime', $current);
+        // returns total number of covers for active tickets, for a given restaurant
+        return  $query->getResult();
+    }
+
     // /**
     //  * @return Ticket[] Returns an array of Ticket objects
     //  */
