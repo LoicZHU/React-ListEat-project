@@ -26,7 +26,7 @@ import {
 } from 'src/actions/user';
 
 import {
-  updateCurrentTicket
+  updateCurrentTicket,
 } from 'src/actions/ticket';
 
 // const baseUrl = '54.162.210.163:8080';
@@ -212,7 +212,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error);
         });
-        
+
       next(action);
       break;
 
@@ -242,11 +242,12 @@ const userMiddleware = (store) => (next) => (action) => {
 
     case CHANGE_SERVICE_STATUS:
       let changedStatus = store.getState().user.restaurantProfileEditInput.status;
-      
+
       // toggle the changedStatus (ex: 1 (activate) turns into off (deactivate))
       if (changedStatus === 1) {
         changedStatus = 'off';
-      } else {
+      }
+      else {
         changedStatus = 'on';
       }
       // console.log(changedStatus);
