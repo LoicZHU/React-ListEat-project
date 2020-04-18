@@ -1,87 +1,121 @@
-Requêtes JSON
+# Requêtes JSON![Logo legalistEat](./ressource/logo/LogoListEat.png)
+
+URL|Contrôleur|Méthode|Paramètres|Description|
+|---|---|---|---|---|
+|/api/tickets |TicketController|POST|JSON|Création d'un ticket|
+|/api/partner|RestaurantController|POST|JSON|Création d'un restaurant et d'user|
+|api/partner/{id}|PUT|JSON+Id restaurant|Modification données User et restaurant|
+
+//TODO NEXT
 
 -------------------------------------
-/api/tickets
+### /api/tickets **POST**
 
-{
-	"lastName": "Oclock",
-	"firstName": "Jean",
-	"cellPhone": "0612345678",
-	"email": "jean@oclock.io",
-	"restaurant": 1,
-	"ticket": {
-		"coversNb": 10
-	}
-} 
+>{
+>	"lastName": "Oclock",
+>	"firstName": "Jean",
+>	"email": "jean@oclock.io",
+>	"restaurant": 1,
+>	"ticket": {
+>		"coversNb": 10
+>	}
+>}
 -------------------------------------
 
-/api/partner
+### /api/partner **POST**
 
-{
-"email": "toto@gmail.com",
-"password": "toto",
-"lastName": "HUGUENY",
-"firstName": "damien",
-
- "restaurant":{
-	"siret_code": "49066714400011",
-	"name": "CHEZ BABA",
-	"address": "2 Place de la République",
-	"postcode": 69002,
-	"city": "Lyon",
-          
-	"country": "FRANCE",
-	"phone": "0620323333",
-	"average_eating_time": 45,
-	"seat_nb": 60
-	}
-}
+> {
+> "email": "toto@gmail.com",
+> "lastName": "HUGUENY",
+> "firstName": "damien",
+> "restaurant":{
+>	"siret_code": "49066714400011",
+>	"name": "CHEZ BABA",
+>	"postcode": 69002,
+>	"city": "Lyon",
+>	"country": "FRANCE",
+>	"phone": "0620323333",
+>	"average_eating_time": 45,
+>	"seat_nb": 60
+>	}
+>}
 
 ------------------------------------------
-/api/partner/login
+### api/partner/{id} **PUT**
 
-{ 
-	"username": "damiende@gmil.om", "password": "toto" 
-}
+>{
+>	"restaurant":{
+>		"name":"chez couscous"
+>	},
+>	"user":{
+>			"password":"toto12345"
+>	},
+>	"currentpassword":"toto1234"
+>}
+>}
+
+
 ------------------------------------------
-/api/tickets/id PUT
+### /api/partner/login **POST**
+>{
+>	"username": "damiende@gmil.om", "password": "toto"
+>}
+------------------------------------------
+### /api/tickets/id **PUT**
 
-{
-	"validation": "cancel"
-} 
+>{
+>	"validation": "cancel"
+>}
 
 
 -------------------------------------------
-/forgotten-password
+### /forgotten-password **POST**
 
-{"username": "blabla@bla.com"}
-
---------------------------------------------
-/forgotten-password/confirmation
-
-{
-"securityCode":"NwE4Ajfs45fe",
-"userId": 4,
-"newPassword":"blabla"
-}
+> {"username": "blabla@bla.com"}
 
 --------------------------------------------
-/api/partner/{id<\d+>}/status PUT
+### /forgotten-password/confirmation **POST**
 
-{
-	"status": "on" / "off"
-}
+> {
+> securityCode":"NwE4Ajfs45fe",
+> "userId": 4,
+> "newPassword":"blabla"
+> }
+
+--------------------------------------------
+### /api/partner/{id<\d+>}/status **PUT**
+
+> {
+>	"status": "on" / "off"
+> }
 
 -----------------------------------------
-/api/partner/{id<\d+>}/eating-time PUT
+### /api/partner/{id<\d+>}/eating-time **PUT**
 
-{
-	"addedTime": 25
-}
+> {
+>	"addedTime": 25
+> }
 
 ------------------------------------------
-/api/partner/{id<\d+>}/tickets/{ticketId<\d+>} PUT
+### /api/partner/{id<\d+>}/tickets/{ticketId<\d+>} **PUT**
 
- {
-    "status": "seated" / "cancelled" / "restored"
-}
+> {
+>    "status": "seated" / "cancelled" / "restored"
+> }
+
+-------------------------------------------
+### /api/decrypt **GET**
+
+> {"restaurant": "**MA CHAINE A DECRYPTER**"}
+
+-------------------------------------------
+### /api/partner/{id>\d+>}/qrcode **POST**
+
+**id correspond à celui du restaurant**
+
+### return
+
+>{
+>  "QrCodeUrl": "**adresse du Qrcode sur le serveur**",
+>  "message": "Qrcode généré"
+>}
