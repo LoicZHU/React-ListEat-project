@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // == Import
-import Ticket from './Ticket';
+import Ticket from 'src/containers/Admin/Ticket';
 import './admin.scss';
 
 // == Composant
@@ -16,6 +16,7 @@ const Admin = ({
   tickets,
   currentTime,
   refreshTime,
+  currentTicket,
 }) => {
   // handle click on '+'
   const handleRemoveClick = () => {
@@ -50,6 +51,10 @@ const Admin = ({
   // date = new Date();
   // console.log(date);
 
+  const element = document.querySelector('#ticket-list > li');
+console.log(element);
+  // const x = element.classList.add("current");
+
   return (
     (!loadingTicketsData && (
       <div id="admin-wrapper">
@@ -74,20 +79,31 @@ const Admin = ({
           <div id="admin-middle-section">
             <div className="left">
               <div id="ticket-infos">
-                <span>Nom : {tickets[0].customer.lastName} </span>
-                <span>Prénom : {tickets[0].customer.firstName}</span>
-                <span>Horaire estimé : 16h45</span>
+                <span>Nom : {currentTicket.customer.lastName} </span>
+                <span>Prénom : {currentTicket.customer.firstName}</span>
+                <span>Horaire estimé :&nbsp;
+                  {
+                    currentTicket.estimatedEntryTime.substring
+                    (currentTicket.estimatedEntryTime.indexOf('T') + 1, 
+                    currentTicket.estimatedEntryTime.indexOf('T') + 6)
+                  }
+                </span>
                 <div id="ticket-ref">
                   <span>Ref ticket : </span>
-                  <span className="ref"> {tickets[0].id}</span>
+                  <span className="ref"> {currentTicket.id}</span>
                 </div>
               </div>
             </div>
             <div className="right">
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
-                <span className="covers">{tickets[0].coversNb}</span>
+                <span className="covers">{currentTicket.coversNb}</span>
+                <div className="add-ticket">
+                  <span id="confirm">Placé</span>
+                  <span id="cancel">Absent</span>
+                </div>
               </div>
+              
             </div>
           </div>
           <div id="admin-bottom-section">
@@ -98,10 +114,6 @@ const Admin = ({
               <span id="time">{averageEatingTime} mn</span>
               <span id="more-time" onClick={handleAddClick}></span>
             </div>
-            </div>
-            <div className="add-ticket">
-              <span>Ajouter un ticket</span>
-              <button className="button">Ajouter</button>
             </div>
           </div>
         </div>
@@ -116,7 +128,7 @@ const Admin = ({
             </ul>
 
             <div className="tickets-count">
-              <span>Tickets en attente : 32</span>
+              <span>Total en attente : 32</span><span id="add-ticket">Ajouter</span>
             </div>
           </div>
         </div>

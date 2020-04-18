@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
   loadingTicketsData: state.user.loadingTickets,
   // hour
   currentTime: state.user.currentTime,
+  currentTicket: state.tickets.currentTicket,
 });
 
 const mapDispatchToProps = (dispatch) => ({

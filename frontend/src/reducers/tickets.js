@@ -2,6 +2,7 @@
 import {
   CHANGE_TICKET_INPUT_VALUE,
   SAVE_SUBSCRIBE_TICKET_ERRORS,
+  UPDATE_CURRENT_TICKET,
   // SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
   // CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,
 } from 'src/actions/ticket';
@@ -24,6 +25,21 @@ const initialState = {
 
   // subscribe ticket (subscription)
   // isTemporarySubscribedTicket: false,
+
+  currentTicket: {
+    id: 0,
+    coversNb: 0,
+    status: 0,
+    customer: {
+      id: 0,
+      lastName: '',
+      firstName: '',
+      cellPhone: '',
+      email: '',
+    },
+    estimatedWaitingTime: 0,
+    estimatedEntryTime: "2020-04-16T21:20:18+02:00"
+  },
 };
 
 // reducer
@@ -43,6 +59,12 @@ const ticketsReducer = (state = initialState, action = {}) => {
         ...state,
         ticketSubscriptionErrors: action.errors,
       };
+
+      case UPDATE_CURRENT_TICKET:
+        return {
+          ...state,
+          currentTicket: action.newValue,
+        };
 
     // case SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION:
     //   return {

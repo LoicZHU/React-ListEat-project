@@ -25,6 +25,10 @@ import {
   saveTicketsData,
 } from 'src/actions/user';
 
+import {
+  updateCurrentTicket
+} from 'src/actions/ticket';
+
 // const baseUrl = '54.162.210.163:8080';
 const baseUrl = 'localhost:8001';
 
@@ -283,6 +287,9 @@ const userMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response.data);
           store.dispatch(saveTicketsData(response.data));
+          if (response.data.length > 0) {
+            store.dispatch(updateCurrentTicket(response.data[0]));
+          }
         })
         .catch((error) => {
           console.warn(error);
