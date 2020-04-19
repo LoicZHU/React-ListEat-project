@@ -4,6 +4,7 @@ namespace App\Command;
 
 use DateTime;
 use DateInterval;
+use Twig\Environment;
 use App\Entity\Ticket;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class SendNotifComeCommand extends Command
 {
@@ -20,18 +22,21 @@ class SendNotifComeCommand extends Command
 
     private $ticketRepository;
     private $entityManager;
+    private $mailer;
+    private $twig;
 
     /**
      * On récupère nos services via le constructeur
      * (car la commande est elle aussi un service)
      */
-    public function __construct(TicketRepository $ticketRepository, EntityManagerInterface $entityManager)
+    public function __construct(ContainerInterface $container,TicketRepository $ticketRepository, EntityManagerInterface $entityManager, \Swift_Mailer $mailer, Environment $twig )
     {
         $this->ticketRepository = $ticketRepository;
         $this->entityManager = $entityManager;
+        $this->mailer = $mailer;
+        $this->twig = $twig;
+        $this->container = $container;
 
-        // On appelle le constructeur du parent qui contient du code
-        // si non exécuté => bug
         parent::__construct();
     }
 
@@ -53,61 +58,51 @@ class SendNotifComeCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->title('Listing all tickets coming shedull');
+        $io->title('Listing all tickets coming soon -5min');
 
-        $time = new DateTime();
-        $time->add(new DateInterval('PT' . 5 . 'M'));
-        $stamp = $time->format('Y-m-d H:i');
-   
+        $currentTime = new DateTime();
+        $stamp = $currentTime->add(new DateInterval('PT' . 5 . 'M'))->format('Y-m-d H:i');
+        $currentStamp = $currentTime->format('Y-m-d H:i');
         // 1. Aller chercher les ticket depuis la BDD
         $tickets = $this->ticketRepository->findWhereEstimated($stamp);
 
-dd($tickets);
+        //We send mail at all tickets
+        foreach ($tickets as $ticket) {
 
-        // 2. Parcourir chaque film
-        // foreach ($tickets as $movie) {
+            echo ($ticket->getCustomer()->getEmail()); 
 
+            $message = (new \Swift_Message('Votre passage est imminent'))
 
-        //     $message = (new \Swift_Message('Information client ListEat'))
+            ->setFrom('send@example.com')
+            ->setTo($ticket->getCustomer()->getEmail())
+            ->setBody(
+                        $this->twig->render(
+                            'emails/subscription.html.twig',
+                            ['name' => $ticket->getCustomer()->getFirstName(),
+                            'restaurantName' => $ticket->getRestaurant()->getName(),
+                            'ticketId' => $ticket->getId(),
+                            'CoverNb'=> $ticket->getCoversNb()]
+                        ),
+                        'text/html'
+                    );
+            $this->mailer->send($message);
 
-        //     ->setFrom('send@example.com')
-        //     ->setTo($customer->getEmail())
-        //     ->setBody(
-        //                 $this->renderView(
-        //                     'emails/subscription.html.twig',
-        //                     ['name' => $customer->getfirstName(),
-        //                     'restaurantName' => $restaurant->getName(),
-        //                     'ticketId' => $ticket->getId()]
-        //                 ),
-        //                 'text/html'
-        //             );
+        }       //$container = $this->getContainer();
+                 
+        //we change statusNotification at 1 for don't send agant in other result
+        foreach ($tickets as $ticket) {
+           $ticket->setStatusnotification(1);
+           $ticket->setUpdatedAt(new \DateTime());
+           $em = $this->container->get('doctrine')->getManager();
+           $em->flush();
+        }          
+
+        //We writed a history sample of notification sended a='write at the end'
+        $fichier = fopen('diary/Notification.txt', 'a','c+b');
+        foreach ($tickets as $ticket) {
+                   fwrite($fichier,'to'.$ticket->getCustomer()->getEmail().'at'.$currentStamp.'  ');
     
-        //     $mailer->send($message);
-
-
-
-            // 3. Pour chaque film, lire le JSON depuis OMDBAPI avec la clé
-            // 4. Lire l'attribut "Poster"
-        //     $url = $this->getPosterUrlFromMovie($movie);
-
-        //     // 5. Télécharger l'image en local (dans le dossier public par ex.)
-        //     if ($url !== null) {
-        //         $filename = $this->downloadFromUrl($url, $movie->getId());
-        //     } else {
-        //         $filename = null;
-        //     }
-        //     // 6. Mettre à jour l'entité $movie avec son nom d'image
-        //     $movie->setPoster($filename);
-
-        //     // Dump
-        //     if ($input->getOption('dump')) {
-        //         $io->text($movie->getTitle() . ' image=' . $filename);
-        //     }
-        // }
-        // // On flush tous les films
-        // $this->entityManager->flush();
-
-//        $io->success('Posters downloaded');
+        }
 
         return 0;
     }

@@ -116,3 +116,14 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 >  "QrCodeUrl": "**adresse du Qrcode sur le serveur**",
 >  "message": "Qrcode généré"
 >}
+
+-------------------------------------------
+
+## Command
+
+> bin/console app:send:notif
+
+**Permet d'envoyer une notification par mail à tous les tickets dont 'estimated hour' est inférieur à current time + 5 min
+et dont le status = 1 et que le statusNotification = 0.
+Cette commande change le status notification à 1 et écrit dans le fichier diary/notification.txt les notifs envoyer ainsi que l'heure.
+Elle sera éxécuté toutes les 5 minutes par le biai  d'une tâche crone.** 
