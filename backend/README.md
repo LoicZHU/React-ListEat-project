@@ -4,7 +4,8 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 |---|---|---|---|---|
 |/api/tickets |TicketController|POST|JSON|Création d'un ticket|
 |/api/partner|RestaurantController|POST|JSON|Création d'un restaurant et d'user|
-|api/partner/{id}|PUT|JSON+Id restaurant|Modification données User et restaurant|
+|api/partner/{id}|RestaurantController|PUT|JSON+Id restaurant|Modification données User et restaurant|
+|api/partner/{id}|RestaurantController|GET|Id restaurant|Visualiser le profil du restaurateur|
 
 //TODO NEXT
 
@@ -24,11 +25,11 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 
 ### /api/partner **POST**
 
-> {
+> {  
 > "email": "toto@gmail.com",
 > "lastName": "HUGUENY",
 > "firstName": "damien",
-> "restaurant":{
+> "restaurant":{  
 >	"siret_code": "49066714400011",
 >	"name": "CHEZ BABA",
 >	"postcode": 69002,
@@ -119,7 +120,7 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 
 -------------------------------------------
 
-## Command
+# Command
 
 > bin/console app:send:notif
 
@@ -135,5 +136,18 @@ pour éditer le fichier des taches cron
 mettre cette ligne dedant
 > 5 * * * *  /usr/bin/php   /var/www/html/projet-list-eat/backend/bin/console app:send:notif --env=prod
 
-> Connaitre le  chemin absolu vers le binaire PHP CLI
->  which php ou whereis php
+> Connaitre le  chemin absolu vers le binaire PHP CLI  
+>  **which php** ou **whereis php**
+
+## Modifier le fuseau horaire via .htaccess
+Rajouter cet ligne
+> SetEnv TZ Europe/Paris
+
+# Dépendances Utilisés
+
+> phpseclib/phpseclib:~2.0 : cryptage Encryptage  
+> mashape/unirest-php : facilite l'appel d'un api  
+> nelmio: gestion des CORS  
+> endroid/qrcode : pour la création de QR codes  
+> imal-h/pdf-box : pour convertir jpg to pdf  
+
