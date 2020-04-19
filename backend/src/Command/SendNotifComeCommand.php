@@ -2,8 +2,6 @@
 
 namespace App\Command;
 
-use DateTime;
-use DateInterval;
 use Twig\Environment;
 use App\Entity\Ticket;
 use App\Repository\TicketRepository;
@@ -52,7 +50,7 @@ class SendNotifComeCommand extends Command
     }
 
     /**
-     * Que fait la commande
+     * Sending mail and chaging status of statusnotification and write on Notification.txt
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -60,34 +58,37 @@ class SendNotifComeCommand extends Command
 
         $io->title('Listing all tickets coming soon -5min');
 
-        $currentTime = new DateTime();
-        $stamp = $currentTime->add(new DateInterval('PT' . 5 . 'M'))->format('Y-m-d H:i');
-        $currentStamp = $currentTime->format('Y-m-d H:i');
+        $currentTime = date("d/m/Y H:i:s", strtotime('now')); 
+        $stamp = date("d/m/Y H:i:s", strtotime('now +5 Minutes')); 
+
         // 1. Aller chercher les ticket depuis la BDD
         $tickets = $this->ticketRepository->findWhereEstimated($stamp);
 
         //We send mail at all tickets
         foreach ($tickets as $ticket) {
 
-            echo ($ticket->getCustomer()->getEmail()); 
+            if($ticket->getCustomer()->getEmail()){
 
-            $message = (new \Swift_Message('Votre passage est imminent'))
+                echo ($ticket->getCustomer()->getEmail()); 
 
-            ->setFrom('send@example.com')
-            ->setTo($ticket->getCustomer()->getEmail())
-            ->setBody(
-                        $this->twig->render(
-                            'emails/subscription.html.twig',
-                            ['name' => $ticket->getCustomer()->getFirstName(),
-                            'restaurantName' => $ticket->getRestaurant()->getName(),
-                            'ticketId' => $ticket->getId(),
-                            'CoverNb'=> $ticket->getCoversNb()]
-                        ),
-                        'text/html'
-                    );
-            $this->mailer->send($message);
+                $message = (new \Swift_Message('Votre passage est imminent'))
 
-        }       //$container = $this->getContainer();
+                ->setFrom('send@example.com')
+                ->setTo($ticket->getCustomer()->getEmail())
+                ->setBody(
+                            $this->twig->render(
+                                'emails/subscription.html.twig',
+                                ['name' => $ticket->getCustomer()->getFirstName(),
+                                'restaurantName' => $ticket->getRestaurant()->getName(),
+                                'ticketId' => $ticket->getId(),
+                                'CoverNb'=> $ticket->getCoversNb()]
+                            ),
+                            'text/html'
+                        );
+                $this->mailer->send($message);
+
+            }
+        }       
                  
         //we change statusNotification at 1 for don't send agant in other result
         foreach ($tickets as $ticket) {
@@ -98,10 +99,10 @@ class SendNotifComeCommand extends Command
         }          
 
         //We writed a history sample of notification sended a='write at the end'
-        $fichier = fopen('diary/Notification.txt', 'a','c+b');
+        //Must write the absolut way of the file for when cron execut it
+        $fichier = fopen('/var/www/html/projet-list-eat/backend/diary/Notification.txt', 'a','c+b');
         foreach ($tickets as $ticket) {
-                   fwrite($fichier,'to'.$ticket->getCustomer()->getEmail().'at'.$currentStamp.'  ');
-    
+            fwrite($fichier,'to'.$ticket->getCustomer()->getEmail().'at'.$currentTime.'  ');
         }
 
         return 0;

@@ -127,3 +127,13 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 et dont le status = 1 et que le statusNotification = 0.
 Cette commande change le status notification à 1 et écrit dans le fichier diary/notification.txt les notifs envoyer ainsi que l'heure.
 Elle sera éxécuté toutes les 5 minutes par le biai  d'une tâche crone.** 
+
+pour éditer le fichier des taches cron 
+
+> crontab -e
+
+mettre cette ligne dedant
+> 5 * * * *  /usr/bin/php   /var/www/html/projet-list-eat/backend/bin/console app:send:notif --env=prod
+
+> Connaitre le  chemin absolu vers le binaire PHP CLI
+>  which php ou whereis php
