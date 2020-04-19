@@ -364,10 +364,8 @@
         cursor: pointer;
       }
     }
-
   }
 }
-
 
 // modal
 // .ticket-form--container {
@@ -406,3 +404,24 @@
 //     }
 //   }
 // }
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    padding: 15px 0;
+  }
+
+  .close-button {
+    color: black;
+    padding: 15px 1px 15px 15px;
+  }
+
+  .close-button:hover {
+    cursor: pointer;
+    color: red;
+  }
+}
+
+
