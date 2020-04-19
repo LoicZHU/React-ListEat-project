@@ -185,8 +185,10 @@ const Admin = ({
                 shouldCloseOnEsc
                 contentLabel="Ticket adding modal" // for screenreaders
               >
-                <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2>
-                <button onClick={handleClose}>close</button>
+                <div className="modal-title">
+                  <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2>
+                  <div className="close-button" onClick={handleClose}>&#x274C;</div>
+                </div>
 
                 <div className="ticket-form--container">
                   <form className="ticket-form" onSubmit={handleSubmit}>
