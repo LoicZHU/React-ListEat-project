@@ -36,7 +36,7 @@ class RestaurantController extends AbstractController
     }
 
      /**
-     * @Route("/api/decrypt", name="api_restaurant_decrypt_id", methods={"GET"})
+     * @Route("/api/decrypt", name="api_restaurant_decrypt_id", methods={"POST"})
      */
     public function decryptId(Request $request, RestaurantRepository $restaurantRepository)
     {
