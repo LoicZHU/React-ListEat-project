@@ -91,7 +91,7 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 ### /api/partner/{id<\d+>}/eating-time **PUT**
 
 > {
->	"addedTime": 25
+>	"addedTime": 5 / -5
 > }
 
 ------------------------------------------

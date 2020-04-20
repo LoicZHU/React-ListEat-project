@@ -19,6 +19,8 @@ const Admin = ({
   currentTime,
   refreshTime,
   currentTicket,
+  cancelCurrentTicket,
+  confirmCurrentTicket,
 
   // modal (ticket add)
   lastName,
@@ -61,6 +63,16 @@ const Admin = ({
     evt.preventDefault();
     // handleTicketSubscribe(); TODO
   };
+
+  const handleConfirm = () => {
+    let ticketId = currentTicket.id;
+    confirmCurrentTicket(ticketId);
+  }
+
+  const handleCancel = () => {
+    let ticketId = currentTicket.id;
+    cancelCurrentTicket(ticketId);
+  }
 
   // bind modal to the app div : root
   Modal.setAppElement('#root');
@@ -114,7 +126,15 @@ const Admin = ({
                 <span className="slider round" />
               </label>
               <span className="toggle-name">SERVICE : </span>
+
+              {(status === 1) &&
               <span className="toggle-state on">ON</span>
+              }
+
+              {!(status === 1) &&
+              <span className="toggle-state off">OFF</span>
+              }
+
             </div>
             <div className="right">
               <span>{currentTime}</span>
@@ -143,8 +163,8 @@ const Admin = ({
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
                 <span className="covers">{currentTicket.coversNb}</span>
                 <div className="add-ticket">
-                  <span id="confirm">Placé</span>
-                  <span id="cancel">Absent</span>
+                  <span id="confirm" onClick={handleConfirm}>Placé</span>
+                  <span id="cancel" onClick={handleCancel}>Absent</span>
                 </div>
               </div>
             </div>

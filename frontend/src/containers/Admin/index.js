@@ -9,7 +9,12 @@ import {
   changeServiceStatus,
   refreshTime,
 } from 'src/actions/user';
-import { changeTicketInputValue, subscribeToWaitingList } from 'src/actions/ticket';
+import {
+  changeTicketInputValue,
+  subscribeToWaitingList,
+  confirmCurrentTicket,
+  cancelCurrentTicket,
+} from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
   status: state.user.restaurantProfileEditInput.status,
@@ -40,6 +45,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   refreshTime: () => {
     dispatch(refreshTime());
+  },
+  cancelCurrentTicket: () => {
+    dispatch(cancelCurrentTicket());
+  },  
+  confirmCurrentTicket: () => {
+    dispatch(confirmCurrentTicket());
   },
 
   // ticket add (modal)
