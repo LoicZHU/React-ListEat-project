@@ -33,6 +33,8 @@ import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
+const FileDownload = require('js-file-download');
+
 // const baseUrl = '54.162.210.163:8080';
 const baseUrl = 'localhost:8001';
 
@@ -306,15 +308,17 @@ const userMiddleware = (store) => (next) => (action) => {
       case QRCODE_DOWNLOAD:
         axios({
           method: 'post',
-          url: `http://${baseUrl}/api/partner/${id}/qrcode`,
-          // /file/qr_code/qrcode-${id}.pdf
+          url: `http://${baseUrl}/api/partner/${id}/qrcode`, 
           withCredentials: true,
+          responseType: 'blob', // important
+        }).then((response) => {
+           const url = window.URL.createObjectURL(new Blob([response.data]));
+           const link = document.createElement('a');
+           link.href = url;
+           link.setAttribute('download', 'QrCode.pdf'); //or any other extension
+           document.body.appendChild(link);
+           link.click();
         })
-          .then((response) => {
-            console.log(response);
-                      // window.open(QrCode);
-
-          })
           .catch((error) => {
             console.warn(error);
 
