@@ -1,6 +1,5 @@
 // import npm
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 // import
 import {
@@ -8,6 +7,8 @@ import {
   CONFIRM_CURRENT_TICKET,
   CANCEL_CURRENT_TICKET,
   saveSubscribeTicketErrors,
+  GET_RESTAURANT_NAME,
+  saveRestaurantName,
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -25,11 +26,32 @@ const url = 'localhost:8080';
 
 // middleware
 const ticketMiddleware = (store) => (next) => (action) => {
-  
+
   const id = store.getState().user.restaurantId;
   const ticketId = store.getState().tickets.currentTicket.id;
 
+  const restaurantHashedId = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
+
   switch (action.type) {
+    case GET_RESTAURANT_NAME:
+      axios({
+        method: 'post',
+        url: `http://${baseUrl}/api/decrypt`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          restaurant: restaurantHashedId,
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          store.dispatch(saveRestaurantName(response.data.name));
+        })
+        .catch((error) => {
+          console.warn(error.response);
+        });
+
     case SUBSCRIBE_TO_WAITING_LIST:
 
       const puree = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
