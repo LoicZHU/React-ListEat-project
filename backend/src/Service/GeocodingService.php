@@ -53,7 +53,11 @@ class GeocodingService
                 }
             }
         }
+        //dd($component);
         //VERIFIER LE NUMERO  
+        if(!isset($data['street'])){
+             return false;
+        }
         $t=stristr($address1, $data['street']);
         $c=stristr($address1, $data['postal_code']);
         $z=stristr($address1, $data['city']);

@@ -72,13 +72,15 @@ class UserController extends AbstractController
 
         //dd($response);
         if ($response === false) {
-            return $this->json(['message' => 'Numéro siret ou siren invalide.'],Response::HTTP_BAD_REQUEST);
+            return $this->json([['field' => 'siret code',
+                                'message' => 'Numéro siret ou siren invalide.']],Response::HTTP_BAD_REQUEST);
         }
     
         $restaurantPosition = GeocodingService::geocodeAddress($restaurant->getAddress(), $restaurant->getPostcode(), $restaurant->getCity(),$restaurant->getCountry());
         //dd($restaurantPosition);
         if($restaurantPosition == false ){
-            return $this->json(['message' => 'Adresse invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->json([['field' => 'adresse postale',
+                                'message' => 'Adresse postale invalide']],Response::HTTP_UNPROCESSABLE_ENTITY);
         }else{
             $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
             $user->setRestaurant($restaurant->setLatitude($restaurantPosition['lat']));
