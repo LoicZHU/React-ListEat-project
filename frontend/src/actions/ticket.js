@@ -4,6 +4,8 @@ export const SUBSCRIBE_TO_WAITING_LIST = 'SUBSCRIBE_TO_WAITING_LIST';
 export const SAVE_SUBSCRIBE_TICKET_ERRORS = 'SAVE_SUBSCRIBE_TICKET_ERRORS';
 export const SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION = 'SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION';
 export const UPDATE_CURRENT_TICKET = 'UPDATE_CURRENT_TICKET';
+export const CONFIRM_CURRENT_TICKET = 'CONFIRM_CURRENT_TICKET';
+export const CANCEL_CURRENT_TICKET = 'CANCEL_CURRENT_TICKET';
 
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
@@ -28,6 +30,13 @@ export const updateCurrentTicket = (newValue) => ({
   newValue,
 });
 
+export const confirmCurrentTicket = () => ({
+  type: CONFIRM_CURRENT_TICKET,
+});
+
+export const cancelCurrentTicket = () => ({
+  type: CANCEL_CURRENT_TICKET,
+});
 
 
 // export const saveSubscribeTicketSubscription = () => ({

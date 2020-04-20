@@ -27,13 +27,9 @@ import {
   QRCODE_DOWNLOAD
 } from 'src/actions/user';
 
-// import QrCode from '../../../backend/file/qr_code/qrcode-3.pdf';
-
 import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
-
-const FileDownload = require('js-file-download');
 
 // const baseUrl = '54.162.210.163:8080';
 const baseUrl = 'localhost:8001';
@@ -129,15 +125,7 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
           store.dispatch(showSignupConfirmation());
         })
-        // .then((error) => {
-        //   console.warn(error);
-        //   console.log('test err');
-        //   console.log(error);
-        // })
         .catch((error) => {
-          console.log('test err' + error.response.data);
-          console.log(error.response);
-          console.log(error.response.data);
           store.dispatch(saveSignUpErrors(error.response.data));
           location.hash = "#" + 'signup-form';
         });
