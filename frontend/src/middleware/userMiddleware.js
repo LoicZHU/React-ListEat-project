@@ -27,8 +27,6 @@ import {
   QRCODE_DOWNLOAD
 } from 'src/actions/user';
 
-// import QrCode from '../../../backend/file/qr_code/qrcode-3.pdf';
-
 import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
@@ -127,15 +125,7 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(response);
           store.dispatch(showSignupConfirmation());
         })
-        // .then((error) => {
-        //   console.warn(error);
-        //   console.log('test err');
-        //   console.log(error);
-        // })
         .catch((error) => {
-          console.log('test err' + error.response.data);
-          console.log(error.response);
-          console.log(error.response.data);
           store.dispatch(saveSignUpErrors(error.response.data));
           location.hash = "#" + 'signup-form';
         });
@@ -306,15 +296,17 @@ const userMiddleware = (store) => (next) => (action) => {
       case QRCODE_DOWNLOAD:
         axios({
           method: 'post',
-          url: `http://${baseUrl}/api/partner/${id}/qrcode`,
-          // /file/qr_code/qrcode-${id}.pdf
+          url: `http://${baseUrl}/api/partner/${id}/qrcode`, 
           withCredentials: true,
+          responseType: 'blob', // important
+        }).then((response) => {
+           const url = window.URL.createObjectURL(new Blob([response.data]));
+           const link = document.createElement('a');
+           link.href = url;
+           link.setAttribute('download', 'QrCode.pdf'); //or any other extension
+           document.body.appendChild(link);
+           link.click();
         })
-          .then((response) => {
-            console.log(response);
-                      // window.open(QrCode);
-
-          })
           .catch((error) => {
             console.warn(error);
 
@@ -326,6 +318,7 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
   }
 };
+
 
 // export
 export default userMiddleware;
