@@ -97,6 +97,9 @@ const userMiddleware = (store) => (next) => (action) => {
       axios({
         method: 'post',
         url: `http://${baseUrl}/api/partner`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         data: {
           email: store.getState().user.signupInput.email,
           password: store.getState().user.signupInput.password,
@@ -108,7 +111,7 @@ const userMiddleware = (store) => (next) => (action) => {
             name: store.getState().user.signupInput.restaurantName,
             address: store.getState().user.signupInput.address,
             postcode: Number(store.getState().user.signupInput.postcode),
-            city: store.getState().user.signupInput.coversNumber,
+            city: store.getState().user.signupInput.city,
             country: store.getState().user.signupInput.country,
             phone: store.getState().user.signupInput.phone,
             average_eating_time: Number(store.getState().user.signupInput.averageEatingTime),
