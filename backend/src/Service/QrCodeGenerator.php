@@ -20,53 +20,41 @@ class QrCodeGenerator
     public function generate($restaurantId,$restaurantName)
     {
 
-        //We crypt restaurant Id
+        //we encrypt the resaturant id, it will be in the QR code Url
         $cryptedId = CryptoService::crypt($restaurantId);
 
-        //We define server base url
+        //we define the base url in $baseUrl by php function getcwd()
         $baseUrl= getcwd();
         $binary = "\x09/public\x0A";
         $trimmed = trim($baseUrl,  $binary);
         $baseUrl = '/'.$trimmed;
     
-        // Create a basic QR code
+        // creating a qrcode with the Qrcode class
         $lien='http://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
         $qrCode = new QrCode($lien);
         $qrCode->setSize(1000);
         //dd($lien);
+
         // Set advanced options
         $qrCode->setWriterByName('png');
         $qrCode->setMargin(50);
         $qrCode->setEncoding('UTF-8');
         $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
         $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
-        //$qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
-        
-        //$qrCode->setLogoPath($baseUrl."/ressource/logo/QrcodeCalqueV3.png");
-        //$qrCode->setLogoSize(150, 200);
+    
         $qrCode->setRoundBlockSize(false);
         $qrCode->setValidateResult(false);
         $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
 
-        // Directly output the QR code
-        //header('Content-Type: ' . $qrCode->getContentType());
-        // dd$qrCode->writeString();
-
-        // Save it to a file
+        // Save it to a folder temp
         $qrCode->writeFile( $baseUrl."/file/temp/Qrcode".$restaurantId.".png");
 
         $image = imagecreatefrompng( $baseUrl."/file/temp/Qrcode".$restaurantId.".png"); // this is a source image
-        //$calque = imagecreatefrompng("$_SERVER['PWD']."/ressource/logo/QrcodeCalque.png"); //Calque
 
         // Text color
         $color = imagecolorallocate($image, 0, 0, 0);
 
-        //We put a font style
-        //imagettftext($image, 18, 0, 110, 145, 1,  $baseUrl.'/ressource/police/OpenSans-Regular.ttf', $texte);
-     
         //we save image on server
-        //imagecopymerge($image, $calque, 0, 0, 0, 0, 100, 47, 75);
-        
         imagejpeg($image,  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".png");
 
         //Remove the Qr-code with Out Logo
@@ -101,6 +89,7 @@ class QrCodeGenerator
 
 
     /////////////////////////////////////////
+        // jpe to pdf
         $pdflib = new PDFLib;
         $imagePaths = [$baseUrl."/file/qr_code/qrcode-".$restaurantId.".png" ];
         $pdflib->makePDF($baseUrl."/file/qr_code/qrcode-".$restaurantId.".pdf",$imagePaths);
@@ -111,8 +100,6 @@ class QrCodeGenerator
             return $UrlImage;
         } else {
             return false;
-        }
-
-        
+        }        
     }
 }

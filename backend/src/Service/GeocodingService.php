@@ -8,17 +8,17 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class GeocodingService
 {
+    //google API key
     private static $apikey = 'AIzaSyAnC8-HtRMV3wBgYeSogDMYWtD-zYRTuRU';
 
-    //TODO
     public static function geocodeAddress($street, $postcode, $city, $country) {
 
         $address1 = $street." ".$postcode." ".$city." ".$country;
-        //valeurs vide par défaut
+        //empty values ​​by default
         $data = array('address' => '', 'lat' => '', 'lng' => '', 'city' => '', 'department' => '', 'region' => '', 'country' => '', 'postal_code' => '');
-        //on formate l'adresse
+        //we format the address for the url
         $address = str_replace(" ", "+", $address1);
-        //on fait l'appel à l'API google map pour géocoder cette adresse
+        //we call the google map API to geocode this address
         $json = file_get_contents("https://maps.google.com/maps/api/geocode/json?key=" . self::$apikey . "&address=$address&sensor=false&region=fr");
         $json = json_decode($json);
 
@@ -54,10 +54,12 @@ class GeocodingService
             }
         }
         //dd($component);
-        //VERIFIER LE NUMERO  
+        // if the street value is empty we return
         if(!isset($data['street'])){
              return false;
         }
+
+        //we check that the results match with the entries
         $t=stristr($address1, $data['street']);
         $c=stristr($address1, $data['postal_code']);
         $z=stristr($address1, $data['city']);
@@ -81,7 +83,7 @@ class GeocodingService
      * Return the distance between two gps entry point by meter 
      */
     public static function distance($lat1, $lng1, $lat2, $lng2) {
-        $earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
+        $earth_radius = 6378137;   //  Earth = sphere of 6378 km radius
         $rlo1 = deg2rad($lng1);
         $rla1 = deg2rad($lat1);
         $rlo2 = deg2rad($lng2);

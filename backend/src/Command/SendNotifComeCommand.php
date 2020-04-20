@@ -61,7 +61,7 @@ class SendNotifComeCommand extends Command
         $currentTime = date("d/m/Y H:i:s", strtotime('now')); 
         $stamp = date("d/m/Y H:i:s", strtotime('now +5 Minutes')); 
 
-        // 1. Aller chercher les ticket depuis la BDD
+        // 1. Get tickets from the BDD
         $tickets = $this->ticketRepository->findWhereEstimated($stamp);
 
         //We send mail at all tickets
