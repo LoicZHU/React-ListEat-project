@@ -120,8 +120,8 @@ class TicketController extends AbstractController
 
         // Email sent to the customer to confirm the subscription to the waiting list
         $message = (new \Swift_Message('Information client ListEat'))
-
-        ->setFrom('send@example.com')
+        
+        ->setFrom('team@listeat.io')
         ->setTo($customer->getEmail())
         ->setBody(
                     $this->renderView(

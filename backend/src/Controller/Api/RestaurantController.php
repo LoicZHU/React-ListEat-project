@@ -223,7 +223,7 @@ class RestaurantController extends AbstractController
             //dd($messages);
             $message = (new \Swift_Message('Information partenaire ListEat'))
 
-            ->setFrom('send@example.com')
+            ->setFrom('team@listeat.io')
             ->setTo($user->getEmail())
             ->setBody(
                         $this->renderView(
