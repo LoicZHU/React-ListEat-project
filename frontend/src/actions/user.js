@@ -27,7 +27,6 @@ export const REFRESH_TIME = 'REFRESH_TIME';
 export const SHOW_SIGNUP_CONFIRMATION = 'SHOW_SIGNUP_CONFIRMATION';
 export const QRCODE_DOWNLOAD = 'QRCODE_DOWNLOAD';
 
-
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
   type: CHANGE_INPUT_VALUE,
@@ -156,3 +155,4 @@ export const refreshTime = () => ({
 export const qrCodeDownload = () => ({
   type: QRCODE_DOWNLOAD,
 });
+

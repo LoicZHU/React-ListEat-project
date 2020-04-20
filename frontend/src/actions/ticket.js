@@ -7,7 +7,8 @@ export const UPDATE_CURRENT_TICKET = 'UPDATE_CURRENT_TICKET';
 export const CONFIRM_CURRENT_TICKET = 'CONFIRM_CURRENT_TICKET';
 export const CANCEL_CURRENT_TICKET = 'CANCEL_CURRENT_TICKET';
 export const MODAL_TICKET_ADD = 'MODAL_TICKET_ADD';
-
+export const GET_RESTAURANT_NAME = 'GET_RESTAURANT_NAME';
+export const SAVE_RESTAURANT_NAME = 'SAVE_RESTAURANT_NAME';
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
 // action creator
@@ -43,6 +44,14 @@ export const modalTicketAdd = () => ({
   type: MODAL_TICKET_ADD,
 });
 
+export const getRestaurantName = () => ({
+  type: GET_RESTAURANT_NAME,
+});
+
+export const saveRestaurantName = (restaurantName) => ({
+  type: SAVE_RESTAURANT_NAME,
+  restaurantName,
+});
 
 // export const saveSubscribeTicketSubscription = () => ({
 //   type: SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
