@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import Ticket from 'src/containers/Admin/Ticket';
 import './admin.scss';
 import Field from 'src/components/TicketForm/Field';
+import { store } from 'react-notifications-component';
 
 // == Composant
 const Admin = ({
@@ -30,7 +31,7 @@ const Admin = ({
   cutlery,
   errors,
   changeTicketInputValue,
-  // handleTicketSubscribe, TODO
+  handleTicketSubscribe,
 }) => {
   useEffect(() => {
     // refresh the showed time
@@ -54,25 +55,38 @@ const Admin = ({
     handleChangeServiceStatus();
   };
 
-  const element = document.querySelector('#ticket-list > li');
-  console.log(element);
-  // const x = element.classList.add("current");
-
   // handle submit the ticket add
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // handleTicketSubscribe(); TODO
+    setOpen(false);
+    store.addNotification({
+      title: "Nouveau ticket",
+      message: "Votre ticket a bien été ajouté !",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 5000,
+        onScreen: true
+      }
+    });
+    
+    handleTicketSubscribe();
   };
 
   const handleConfirm = () => {
     let ticketId = currentTicket.id;
     confirmCurrentTicket(ticketId);
-  }
+  };
 
   const handleCancel = () => {
     let ticketId = currentTicket.id;
     cancelCurrentTicket(ticketId);
-  }
+  };
+
+  
 
   // bind modal to the app div : root
   Modal.setAppElement('#root');
@@ -113,10 +127,9 @@ const Admin = ({
     setOpen(false);
   };
 
-  return (
+  return (    
     (!loadingTicketsData && (
       <div id="admin-wrapper">
-
         {/* left section */}
         <div id="left-section">
           <div id="admin-top-section">
@@ -205,13 +218,13 @@ const Admin = ({
                 shouldCloseOnEsc
                 contentLabel="Ticket adding modal" // for screenreaders
               >
-                <div className="modal-title">
-                  <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2>
-                  <div className="close-button" onClick={handleClose}>&#x274C;</div>
+                <div className="modal-title">                  
+                  <div className="close-button" onClick={handleClose}>Fermer &#x274C;</div>
                 </div>
-
+                  
                 <div className="ticket-form--container">
-                  <form className="ticket-form" onSubmit={handleSubmit}>
+                <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2>
+                  <form className="ticket-form" onSubmit={handleSubmit} >
                     <Field
                       name="lastName"
                       placeholder="Nom"
@@ -252,7 +265,7 @@ const Admin = ({
                     {errors && errors.field=='coversNb' && (
                         <span className="cover-error">{errors.message}</span>
                     )}
-                    <button className="ticket-submit button-alt" type="submit">Inscription</button>
+                    <button className="ticket-submit button-alt" type="submit" >Valider</button>
                   </form>
                 </div>
               </Modal>

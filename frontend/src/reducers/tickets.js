@@ -3,6 +3,7 @@ import {
   CHANGE_TICKET_INPUT_VALUE,
   SAVE_SUBSCRIBE_TICKET_ERRORS,
   UPDATE_CURRENT_TICKET,
+  SAVE_RESTAURANT_NAME,
   // SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
   // CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,
 } from 'src/actions/ticket';
@@ -40,6 +41,9 @@ const initialState = {
     estimatedWaitingTime: 0,
     estimatedEntryTime: "2020-04-16T21:20:18+02:00"
   },
+
+  restaurantName: '',
+  restaurantNameLoaded: false,
 };
 
 // reducer
@@ -78,6 +82,13 @@ const ticketsReducer = (state = initialState, action = {}) => {
     //     ...state,
     //     checkingTemporarySubscribedTicket: false,
     //   };
+
+    case SAVE_RESTAURANT_NAME:
+      return {
+        ...state,
+        restaurantName: action.restaurantName,
+        restaurantNameLoaded: true,
+      };
 
     default: return state;
   }
