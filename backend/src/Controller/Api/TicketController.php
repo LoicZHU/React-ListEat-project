@@ -138,7 +138,7 @@ class TicketController extends AbstractController
         return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
 
         } elseif ($data->validation == "cancel") {
-            $ticket->setStatus(3);
+            $ticket->setStatus(2);
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
@@ -158,8 +158,8 @@ class TicketController extends AbstractController
             return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
         
-        // finds all tickets related to a single restaurant
-        $tickets = $ticketRepository->findBy(['restaurant' => $restaurant]);
+        // finds all active tickets related to a single restaurant, ordered by estimatedEntryTime, sorted in ascending order
+        $tickets = $ticketRepository->findBy(['restaurant' => $restaurant, 'status' => 1], ['estimatedEntryTime' => 'ASC']);
 
         return $this->json($tickets, 200, [], ['groups' => 'tickets_get']);
     }
@@ -194,7 +194,7 @@ class TicketController extends AbstractController
         }
 
         if ($data->status == "cancelled") {
-            $ticket->setStatus(3);
+            $ticket->setStatus(2);
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
