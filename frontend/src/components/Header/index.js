@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  NavLink
+} from 'react-router-dom';
 
 import Logo from 'src/assets/img/logo.png';
 import './header.scss';
@@ -68,43 +71,55 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
     <div id="divider"></div>
     <div id="desktop-menu">
       <ul id="desktop-left-nav">
-        <a href="/">
-          <li id="home-button" className="header-nav-button button">Accueil</li>
-        </a>
-        <a href="/faq">
-          <li id="help-button" className="header-nav-button button">Aide <span id="help-button-span">?</span></li>
-        </a>
+
+      <NavLink exact to="/">
+          <li id="home-button" className="header-nav-button button">
+              Accueil
+          </li>
+      </NavLink>
+
+      <NavLink exact activeClassName="menu-link" to="/faq">
+        <li id="help-button" className="header-nav-button button">
+            Aide <span id="help-button-span">?</span>
+        </li>
+      </NavLink>
       </ul>
+
       <div id="logo-container">
         <a href="/"><img src={Logo}/></a>
       </div>
+
       <ul id="desktop-right-nav">
         {/* if not logged */}
         {!isRestaurantLogged && (
-          <a href="/signup"><li className="header-nav-button button">Inscription</li></a>
+      <NavLink exact activeClassName="menu-link" to="/signup">
+        <li className="header-nav-button button">Inscription</li>
+      </NavLink>
         )}
 
         {/* if not logged */}
         {!isRestaurantLogged && (
-          <a href="/login"><li className="header-nav-button button">Connexion</li></a>
+      <NavLink exact activeClassName="menu-link" to="/login">
+        <li className="header-nav-button button">Connexion</li>
+      </NavLink>
         )}
 
         {/* if logged */}
         {isRestaurantLogged && (
-          <a href={`/partner/${restaurantId}/administration/`}>
+          <NavLink exact activeClassName="menu-link" to={`/partner/${restaurantId}/administration/`}>
             <li id="help-button" className="header-nav-button button">Mon espace</li>
-          </a>
+          </NavLink>
         )}
         {isRestaurantLogged && (
-          <a href={`/partner/${restaurantId}/administration/edit`}>
+          <NavLink exact activeClassName="menu-link" to={`/partner/${restaurantId}/administration/edit`}>
             <li id="help-button" className="header-nav-button button">Mon profil</li>
-          </a>
+          </NavLink>
         )}
 
         {isRestaurantLogged && (
-          <a onClick={handleClick}>
+          <NavLink exact activeClassName="menu-link" to="/" onClick={handleClick}>
             <li className="header-nav-button button">Déconnexion</li>
-          </a>
+          </NavLink>
         )}
       </ul>
     </div>

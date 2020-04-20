@@ -20,6 +20,7 @@ const mapStateToProps = (state) => ({
   coversNumber: state.user.signupInput.coversNumber,
   showPasswordError: state.user.signupInput.showPasswordError,
   signupErrors: state.user.signupErrors,
+  showSignupConfirmation: state.user.signupConfirmation,
 });
 
 const mapDispatchToProps = (dispatch) => ({

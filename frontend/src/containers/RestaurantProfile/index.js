@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // import
 import RestaurantProfile from 'src/components/RestaurantProfile';
-import { changeRestaurantProfileInputValue, editRestaurant } from 'src/actions/user';
+import { changeRestaurantProfileInputValue, editRestaurant, qrCodeDownload } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   restaurantName: state.user.restaurantProfileEditInput.restaurantName,
@@ -24,6 +24,10 @@ const mapDispatchToProps = (dispatch) => ({
   handleRestaurantEdit: () => {
     dispatch(editRestaurant());
   },
+
+  handleQrCode: () => {
+    dispatch(qrCodeDownload());
+  }
 });
 
 // export

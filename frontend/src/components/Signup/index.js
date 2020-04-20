@@ -26,6 +26,7 @@ const Signup = ({
   showPasswordError,
   handleChangePasswordConfirmation,
   signupErrors,
+  showSignupConfirmation,
 }) => {
 
   // handle input change
@@ -218,6 +219,8 @@ const Signup = ({
           placeholder="Temps moyen de repas en minutes"
           id="average-eating-time"
           type="number"
+          step="5"
+          min="0"
           value={averageEatingTime}
           onChange={handleChange}
           required
@@ -227,6 +230,8 @@ const Signup = ({
           placeholder="Nombre de couverts"
           id="covers-number"
           type="number"
+          step="1"
+          min="1"
           value={coversNumber}
           onChange={handleChange}
           required
@@ -234,6 +239,15 @@ const Signup = ({
 
         <button type="submit" className="button-alt">Inscription</button>
       </form>
+
+      { showSignupConfirmation && 
+      <div id="signup-confirmation">
+        <span>Merci, vous avez bien été enregistré ! Vous pouvez désormais vous 
+          <a href="/login"> connecter à votre espace</a>.
+        </span>
+      </div>
+      }
+
     </div>
   );
 };

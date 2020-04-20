@@ -15,6 +15,7 @@ import {
   SAVE_CHANGED_SERVICE_STATUS,
   SAVE_TICKETS_DATA,
   REFRESH_TIME,
+  SHOW_SIGNUP_CONFIRMATION,
 } from 'src/actions/user';
 
 // initial state
@@ -48,6 +49,8 @@ const initialState = {
 
   // sign up errors
   signupErrors: [],
+
+  signupConfirmation: false,
 
   // restaurant profile edit infos
   restaurantProfileEditInput: {
@@ -114,6 +117,12 @@ const userReducer = (state = initialState, action = {}) => {
         isLogged: false,
       };
 
+    case SHOW_LOGIN_ERROR:
+      return {
+        ...state,
+        loginErrorMessage: true,
+      };
+
     case CHANGE_CHECKING_RESTAURANT_LOGGED:
       return {
         ...state,
@@ -178,6 +187,12 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         loadingTickets: false,
         restaurantTicketsData: action.ticketsData,
+      };
+
+    case SHOW_SIGNUP_CONFIRMATION:
+      return {
+        ...state,
+        signupConfirmation: true,
       };
 
     case REFRESH_TIME:
