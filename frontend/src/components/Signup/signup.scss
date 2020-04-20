@@ -22,13 +22,29 @@
     margin: 2em auto!important;
   }
 
-  #password-error {
-    background-color: rgba(255, 0, 0, 0.726);
-    padding: .5em;
-    border-radius: 0px 0px 5px 5px;
+  #signup-confirmation {
+    background-color: rgba(204, 255, 146, 0.884);
+    padding: 1em;
+    border-radius: 5px;
     color: #000;
-    margin-top: -10px;
+    margin-top: 8px;
     font-size: .9em;
+    line-height: 1.4em;
+
+    a {
+      text-decoration: underline !important;
+      font-weight: bold;
+    }
+  }
+
+  #password-error {
+    background-color: rgb(255, 132, 132);
+    padding: 1em;
+    border-radius: 5px;
+    color: #000;
+    line-height: 1.4em;
+    font-size: .9em;
+    margin-top: 8px;
   }
 
   input {

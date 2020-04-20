@@ -23,7 +23,11 @@ import {
   saveChangedServiceStatus,
   FETCH_TICKETS_DATA,
   saveTicketsData,
+  showSignupConfirmation,
+  QRCODE_DOWNLOAD
 } from 'src/actions/user';
+
+// import QrCode from '../../../backend/file/qr_code/qrcode-3.pdf';
 
 import {
   updateCurrentTicket,
@@ -121,6 +125,7 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
+          store.dispatch(showSignupConfirmation());
         })
         // .then((error) => {
         //   console.warn(error);
@@ -132,6 +137,7 @@ const userMiddleware = (store) => (next) => (action) => {
           console.log(error.response);
           console.log(error.response.data);
           store.dispatch(saveSignUpErrors(error.response.data));
+          location.hash = "#" + 'signup-form';
         });
       next(action);
       break;
@@ -296,6 +302,25 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       next(action);
       break;
+
+      case QRCODE_DOWNLOAD:
+        axios({
+          method: 'post',
+          url: `http://${baseUrl}/api/partner/${id}/qrcode`,
+          // /file/qr_code/qrcode-${id}.pdf
+          withCredentials: true,
+        })
+          .then((response) => {
+            console.log(response);
+                      // window.open(QrCode);
+
+          })
+          .catch((error) => {
+            console.warn(error);
+
+          });
+        next(action);
+        break;
 
     default:
       next(action);
