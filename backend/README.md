@@ -102,7 +102,7 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 > }
 
 -------------------------------------------
-### /api/decrypt **GET**
+### /api/decrypt **POST**
 
 > {"restaurant": "**MA CHAINE A DECRYPTER**"}
 
