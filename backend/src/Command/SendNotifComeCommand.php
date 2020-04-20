@@ -73,7 +73,7 @@ class SendNotifComeCommand extends Command
 
                 $message = (new \Swift_Message('Votre passage est imminent'))
 
-                ->setFrom('send@example.com')
+                ->setFrom('team@listeat.io')
                 ->setTo($ticket->getCustomer()->getEmail())
                 ->setBody(
                             $this->twig->render(

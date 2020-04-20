@@ -105,7 +105,7 @@ class UserController extends AbstractController
         // Email sent to the newly created User/Restaurant to confirm the registration
         $message = (new \Swift_Message('Information partenaire ListEat'))
 
-            ->setFrom('send@example.com')
+            ->setFrom('team@listeat.io')
             ->setTo($user->getEmail())
             ->setBody(
                         $this->renderView(
@@ -152,7 +152,7 @@ class UserController extends AbstractController
              // Email sent to the user with the token/security code needed to set a new password
             $message = (new \Swift_Message('Information partenaire ListEat'))
 
-            ->setFrom('send@example.com')
+            ->setFrom('team@listeat.io')
             ->setTo($user->getEmail())
             ->setBody(
                         $this->renderView(
@@ -238,7 +238,7 @@ class UserController extends AbstractController
             // Email sent to the user confirming the new password has been set
             $message = (new \Swift_Message('Information client ListEat'))
 
-            ->setFrom('send@example.com')
+            ->setFrom('team@listeat.io')
             ->setTo($user->getEmail())
             ->setBody(
                         $this->renderView(
