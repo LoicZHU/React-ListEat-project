@@ -24,6 +24,9 @@ export const CHANGE_TICKET_INPUT_VALUE = 'CHANGE_TICKET_INPUT_VALUE';
 export const FETCH_TICKETS_DATA = 'FETCH_TICKETS_DATA';
 export const SAVE_TICKETS_DATA = 'SAVE_TICKETS_DATA';
 export const REFRESH_TIME = 'REFRESH_TIME';
+export const SHOW_SIGNUP_CONFIRMATION = 'SHOW_SIGNUP_CONFIRMATION';
+export const QRCODE_DOWNLOAD = 'QRCODE_DOWNLOAD';
+
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -82,6 +85,10 @@ export const fetchRestaurantData = (restaurantId) => ({
 
 export const signUp = () => ({
   type: SIGN_UP,
+});
+
+export const showSignupConfirmation = () => ({
+  type: SHOW_SIGNUP_CONFIRMATION,
 });
 
 export const saveSignUpErrors = (errors) => ({
@@ -144,4 +151,8 @@ export const changeTicketInputValue = (newValue, fieldName) => ({
 
 export const refreshTime = () => ({
   type: REFRESH_TIME,
+});
+
+export const qrCodeDownload = () => ({
+  type: QRCODE_DOWNLOAD,
 });

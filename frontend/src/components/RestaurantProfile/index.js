@@ -19,6 +19,7 @@ const RestaurantProfile = ({
   actualPass,
   changeRestaurantProfileInputValue,
   handleRestaurantEdit,
+  handleQrCode,
 }) => {
   // handle submit
   const handleSubmit = (evt) => {
@@ -109,13 +110,13 @@ const RestaurantProfile = ({
             value={actualPass}
           />
         </div>
-        <button className="save-button button-alt" type="button">Enregistrer</button>
+        <button className="save-button button-alt" type="submit">Enregistrer</button>
       </form>
 
       <div className="qr-container">
         <p>Mon QR code</p>
 
-        <a href="TODO" download="qr_code" className="download-button button-alt">Télécharger</a>
+        <button className="download-button button-alt" onClick={handleQrCode}>Télécharger</button>
       </div>
     </div>
   );
