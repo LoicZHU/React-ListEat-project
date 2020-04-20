@@ -14,7 +14,7 @@ class SiretService
     {
         //We put token key on the header
         $opts = array(
-            'Authorization' => 'Bearer 7f61f0f7-cf74-3852-8a0b-1d5c925ca296'
+            'Authorization' => 'Bearer e7b58925-32bc-39ca-a975-014fa4706c91'
         );
 
         if(strlen($siretCode) === 14){
