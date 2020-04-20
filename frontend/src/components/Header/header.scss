@@ -283,29 +283,34 @@
         height: 50px;
         box-shadow: 0px 5px 20px rgb(0,0,0,.1);
 
-        #desktop-left-nav a, #desktop-right-nav a {
+                  
+        .menu-link  {
+          li {
+          background-color: $primary-color !important;
+          }
+        }
+
+        #desktop-left-nav, #desktop-right-nav {
+
+          li{ 
           height: 50px !important;
           display: flex;
           align-items: center;
           margin: 0 !important;
           padding: 0 1.6em;
-          li {
-            padding: 0!important;
+          border-radius: 0;
           }
 
-          &:hover { 
+
+          li:hover, .menu-link { 
             background-color: $primary-color;
             color: #fff;
-
-            li {
-              padding: 0!important;
-              background-color: $primary-color;
 
               span {
                 color: #fff;
                 border-color: #fff;
               }
-            }            
+            
           }
         }
 
@@ -328,10 +333,11 @@
         font-weight: bold;
         font-size: .8em;
         color: #000;
+        height: 25px;
         border-radius: 50%;
-        width: 3em;
-        padding: 0 .5em;
-        margin-left: .2em;
+        width: 2em;
+        padding: 5px 0 0px 8px;
+        margin: 12px 0 0 12px;
         border: 1px solid black;
       }
 
