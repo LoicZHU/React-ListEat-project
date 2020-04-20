@@ -7,6 +7,7 @@ use App\Service\QrCodeGenerator;
 use App\Repository\RestaurantRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -89,8 +90,7 @@ class QrCodeController extends AbstractController
         $em->flush();
         $em->refresh($QrCode);
         
-    return $this->json(['QrCodeUrl' => $QrCode->getUrl(),
-                        'message' => 'Qrcode généré' ], Response::HTTP_CREATED);
+        return $this->file($QrCode->getUrl(), 'VotreQrCode.pdf', ResponseHeaderBag::DISPOSITION_ATTACHMENT);
     }
 }
 
