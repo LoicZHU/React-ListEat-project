@@ -33,7 +33,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
   const id = store.getState().user.restaurantId;
   const ticketId = store.getState().tickets.currentTicket.id;
 
-  const restaurantHashedId = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
+  // const restaurantHashedId = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
 
   switch (action.type) {
     case GET_RESTAURANT_NAME:
