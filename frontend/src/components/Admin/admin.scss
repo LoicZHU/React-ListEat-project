@@ -405,23 +405,74 @@
 //   }
 // }
 
-.modal-title {
-  display: flex;
-  justify-content: space-between;
+div.ReactModalPortal {
 
-  h2 {
-    padding: 15px 0;
+  .ReactModal__Content {
+    border: none !important;
+    padding: 0 15px !important;
+    border-radius: 0px !important;
+
+  
+
+    h2 {
+      padding: 15px 0;
+      font-size: 1.5em;
+      line-height: 2em;
+    }
+
+    .modal-title {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1em;
+      
+ 
+    
+      // .close-button {
+      //   color: #fff;
+      //   padding: 15px 15px 15px 15px;
+      //   background-color: $dark-color;
+      //   position: absolute;
+      //   right: 0;
+      //   top: 0;
+      // }
+    
+      // .close-button:hover {
+      //   cursor: pointer;
+      //   color: red;
+      // }
+
+          
+      .close-button {
+        color: #fff;
+        padding: 15px 15px 15px 15px;
+        background-color: $dark-color;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    
+      .close-button:hover {
+        cursor: pointer;
+        color: red;
+      }
+    }
+
+      .ticket-form--container {
+        margin-bottom: 70px !important;
+       
+      
+    
+    .ticket-submit {
+      width: 100% !important;
+      background-color: $primary-color;
+      border-radius: 0;
+      height: 50px;
+      margin: 0 !important;
+      margin-top: 40px !important;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
   }
-
-  .close-button {
-    color: black;
-    padding: 15px 1px 15px 15px;
-  }
-
-  .close-button:hover {
-    cursor: pointer;
-    color: red;
   }
 }
-
-

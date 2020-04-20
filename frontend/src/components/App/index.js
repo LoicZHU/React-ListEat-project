@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Route, Redirect, Switch } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+
 
 // == Import Components
 import Header from 'src/containers/Header';
@@ -51,6 +54,7 @@ const App = ({
 
   return (
     <div className="app">
+      <ReactNotification />
       {!checkingLoggedRestaurant && (
         <Switch>
           {/* Home */}
