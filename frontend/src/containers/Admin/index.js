@@ -14,6 +14,7 @@ import {
   subscribeToWaitingList,
   confirmCurrentTicket,
   cancelCurrentTicket,
+  modalTicketAdd,
 } from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
@@ -58,7 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeTicketInputValue(newValue, fieldName));
   },
   handleTicketSubscribe: () => {
-    dispatch(subscribeToWaitingList());
+    dispatch(modalTicketAdd());
   },
 });
 

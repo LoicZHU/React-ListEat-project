@@ -8,6 +8,7 @@ import {
   CONFIRM_CURRENT_TICKET,
   CANCEL_CURRENT_TICKET,
   saveSubscribeTicketErrors,
+  MODAL_TICKET_ADD,
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -81,6 +82,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         //   console.warn(error.response);
         //   store.dispatch(saveSubscribeTicketErrors(error.response.data));
         // });
+
       next(action);
       break;
 
@@ -115,6 +117,34 @@ const ticketMiddleware = (store) => (next) => (action) => {
               status: "seated",             
             },
           }).then((response) => {
+            console.log(response);
+            store.dispatch(fetchTicketsData());
+          })
+            .catch((error) => {
+              console.warn(error);
+            });
+          next(action);
+          break;
+
+        case MODAL_TICKET_ADD:
+          axios({
+            method: 'post',
+            url:`http://${baseUrl}/api/tickets`, 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            data: {
+                  lastName: store.getState().tickets.ticketInscriptionInput.lastName,
+                  firstName: store.getState().tickets.ticketInscriptionInput.firstName,
+                  cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
+                  email: store.getState().tickets.ticketInscriptionInput.email,
+                  restaurant: store.getState().user.restaurantId,
+                  ticket: {
+                    coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
+                  },
+                }
+              })
+          .then((response) => {
             console.log(response);
             store.dispatch(fetchTicketsData());
           })

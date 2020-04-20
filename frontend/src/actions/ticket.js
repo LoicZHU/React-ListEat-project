@@ -6,6 +6,7 @@ export const SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION = 'SAVE_SUBSCRIBE_TICKET_SUBSCRI
 export const UPDATE_CURRENT_TICKET = 'UPDATE_CURRENT_TICKET';
 export const CONFIRM_CURRENT_TICKET = 'CONFIRM_CURRENT_TICKET';
 export const CANCEL_CURRENT_TICKET = 'CANCEL_CURRENT_TICKET';
+export const MODAL_TICKET_ADD = 'MODAL_TICKET_ADD';
 
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
@@ -36,6 +37,10 @@ export const confirmCurrentTicket = () => ({
 
 export const cancelCurrentTicket = () => ({
   type: CANCEL_CURRENT_TICKET,
+});
+
+export const modalTicketAdd = () => ({
+  type: MODAL_TICKET_ADD,
 });
 
 
