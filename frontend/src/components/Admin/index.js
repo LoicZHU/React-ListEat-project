@@ -126,7 +126,15 @@ const Admin = ({
                 <span className="slider round" />
               </label>
               <span className="toggle-name">SERVICE : </span>
+
+              {(status === 1) &&
               <span className="toggle-state on">ON</span>
+              }
+
+              {!(status === 1) &&
+              <span className="toggle-state off">OFF</span>
+              }
+
             </div>
             <div className="right">
               <span>{currentTime}</span>

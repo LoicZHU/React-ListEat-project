@@ -31,17 +31,20 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case SUBSCRIBE_TO_WAITING_LIST:
+
+      const puree = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
+
+      console.log('purée est égale à ' + puree);
       
       axios({
-        method: 'get',
+        method: 'post',
         url: `http://${baseUrl}/api/decrypt`,
         headers: {
           'Content-Type': 'application/json',
         },
         data: {
-          restaurant: window.location.pathname.match(new RegExp('restaurant/' + "(.*)" + '/tickets'))[1] // hashed restaurant ID
+          restaurant: puree, // hashed restaurant ID
         },
-        withCredentials: true,
       })
         .then((response) => {
           console.log(response);
@@ -89,7 +92,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
             'Content-Type': 'application/json',
           },
           data: {              
-            status: "cancelled",             
+            status: "cancelled",
           },
         }).then((response) => {
           store.dispatch(fetchTicketsData());
