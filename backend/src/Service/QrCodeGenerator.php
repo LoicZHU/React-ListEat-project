@@ -30,7 +30,7 @@ class QrCodeGenerator
         $baseUrl = '/'.$trimmed;
     
         // creating a qrcode with the Qrcode class
-        $lien='http://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
+        $lien='https://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
         $qrCode = new QrCode($lien);
         $qrCode->setSize(1000);
         //dd($lien);
