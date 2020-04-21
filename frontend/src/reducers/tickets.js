@@ -137,6 +137,11 @@ const ticketsReducer = (state = initialState, action = {}) => {
         ticketInscriptionInput: {
           ...state.ticketInscriptionInput,
           showModalTicketValidation: true,
+          errors: {
+            ...state.ticketInscriptionInput.errors,
+            email: false,
+            modal: false,
+          }
       },
     };
 
