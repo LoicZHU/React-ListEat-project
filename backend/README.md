@@ -123,12 +123,12 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 # Command
 
 > bin/console app:send:notif
-                                                                      [CurrentTime+5]                     
-                                                             ________________|  
-                                                            |                |   
-____________________________________________________________|___________|____|______________________timestamp/    
-                                                            |           |  
-                                                      [currentTime]  [Ticket]  
+.                                                                      [CurrentTime+5]                     
+.                                                             ________________|  
+.                                                            |                |   
+.____________________________________________________________|___________|____|______________________timestamp/    
+.                                                            |           |  
+.                                                      [currentTime]  [Ticket]  
 **Permet d'envoyer une notification par mail à tous les tickets dont 'estimated hour' est inférieur à current time + 5 min
 et dont le status = 1 et que le statusNotification = 0.
 Cette commande change le status notification à 1 et écrit dans le fichier diary/notification.txt les notifs envoyer ainsi que l'heure.
