@@ -56,6 +56,10 @@ class TicketController extends AbstractController
 
         if(!empty($jsonErrors)){
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        // the customer's email was set to nullable=true and the NotBlank constraint was removed in case the ticket would be added directly by the restaurant (meaning the customer doesn't use a smartphone and therefore has no immediate access to his/her email). Instead, the following condition was added in order to compel a customer using the QR code (and therefore his/her smartphone) to provide his/her email address.
+        if(empty($data->email)){
+            return $this->json(['message' => 'Veuillez fournir une adresse email valide.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         } 
 
         $restaurant = $restaurantRepository->find($data->restaurant);
@@ -128,14 +132,16 @@ class TicketController extends AbstractController
                         'emails/subscription.html.twig',
                         ['name' => $customer->getfirstName(),
                         'restaurantName' => $restaurant->getName(),
-                        'ticketId' => $ticket->getId()]
+                        'ticketId' => $ticket->getId(),
+                        'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(),
+                        'estimatedEntryTime' => $ticket->getEstimatedEntryTime()]
                     ),
                     'text/html'
                 );
 
         $mailer->send($message);
 
-        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
+        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'estimatedEntryTime' => $ticket->getEstimatedEntryTime()], Response::HTTP_OK);
 
         } elseif ($data->validation == "cancel") {
             $ticket->setStatus(2);
