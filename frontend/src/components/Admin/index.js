@@ -22,6 +22,13 @@ const Admin = ({
   currentTicket,
   cancelCurrentTicket,
   confirmCurrentTicket,
+  handleModalTicketValidate,
+  handleModalTicketCancel,
+  showModalTicketValidation,
+  handleShowModalTicketForm,
+  handleShowModalTicketValidation,
+  showModalErrors,
+  showModalEmailError,
 
   // modal (ticket add)
   lastName,
@@ -32,6 +39,10 @@ const Admin = ({
   errors,
   changeTicketInputValue,
   handleTicketSubscribe,
+  estimatedEntryTime,
+  modalErrors,
+  emailError,
+
 }) => {
   useEffect(() => {
     // refresh the showed time
@@ -86,7 +97,34 @@ const Admin = ({
     cancelCurrentTicket(ticketId);
   };
 
-  
+  const handleTicketValidation = () => {
+    // e.preventDefault();
+    handleModalTicketValidate();
+    handleModalTicketValidation();
+  };
+
+  const handleTicketCancel = () => {
+    handleModalTicketCancel();
+    handleShowModalTicketForm();
+  };
+
+  const handleModalErrors = () => {
+    showModalErrors();
+  };
+
+  const handleModalEmailError = () => {
+    showModalEmailError();
+  };
+
+  const handleModalTicketValidation = () => {
+    if   ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
+      handleModalErrors();
+    } else if (email.length > 0 && !email.includes('@') && !email.includes('.')) {
+      handleModalEmailError();
+    } else {
+      handleShowModalTicketValidation();
+    }
+  };
 
   // bind modal to the app div : root
   Modal.setAppElement('#root');
@@ -212,6 +250,7 @@ const Admin = ({
               <Modal
                 isOpen={open}
                 onAfterOpen={handleOpen}
+                onAfterClose={handleTicketCancel}
                 onRequestClose={handleClose}
                 style={customStyles}
                 shouldFocusAfterRender
@@ -219,12 +258,15 @@ const Admin = ({
                 contentLabel="Ticket adding modal" // for screenreaders
               >
                 <div className="modal-title">                  
-                  <div className="close-button" onClick={handleClose}>Fermer &#x274C;</div>
+                { showModalTicketValidation && <div className="previous-button" onClick={handleShowModalTicketForm}></div> }
+                { !showModalTicketValidation &&<div className="close-button" onClick={handleClose}>Fermer {/* &#x274C; */} </div>}
                 </div>
                   
-                <div className="ticket-form--container">
-                <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2>
+                 <div className="ticket-form--container">
+                  { !showModalTicketValidation && <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2> }
                   <form className="ticket-form" onSubmit={handleSubmit} >
+                  { !showModalTicketValidation &&
+                  <>
                     <Field
                       name="lastName"
                       placeholder="Nom"
@@ -262,12 +304,80 @@ const Admin = ({
                       value={cutlery}
                     />
 
+                  { modalErrors &&
+                    <div id="errors">
+                      <span> Merci de compléter les champs <strong>Nom</strong>, <strong>Prénom</strong> et <strong>Nombre de couverts</strong>.</span>
+                  </div>
+                  }
+
+
+                  { emailError &&
+                    <div id="errors">
+                      <span> Merci de vérifier l'adresse mail.</span>
+                  </div>
+                  }
+
                     {errors && errors.field=='coversNb' && (
-                        <span className="cover-error">{errors.message}</span>
+                      <span className="cover-error">{errors.message}</span>
                     )}
-                    <button className="ticket-submit button-alt" type="submit" >Valider</button>
+                    </>
+                  }
+
+                    { showModalTicketValidation &&
+                    <>
+                    <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Récapitulatif</h2>
+                    <h3>Prénom</h3>
+                    <span>{lastName}</span>
+                    <h3>Nom</h3>
+                    <span>{firstName}</span>
+                    {(email.length > 1) && 
+                      <>
+                        <h3>Email</h3>
+                        <span>{email}</span>
+                      </> 
+                    }
+                    {(phone.length > 1) && 
+                      <>
+                        <h3>Téléphone</h3>
+                        <span>{phone}</span>
+                      </> 
+                    }
+                    <h3>Nombre de couverts</h3>
+                    <span>{cutlery}</span>
+                    <h3>Heure estimée</h3>
+                    <span id="estimated-entry">{estimatedEntryTime}</span>
+
+                    <div className="bottom">
+                      <div className="cancel-button" onClick={handleClose}>Annuler</div>
+                      <button className="ticket-submit button-alt" type="submit" >Valider</button>
+                    </div>
+                    </>
+                    }
+                    
+                    { !showModalTicketValidation &&
+                      <div className="bottom">
+                        <a className="ticket-next button-alt" onClick={handleTicketValidation}>
+                          Suivant
+                        </a>
+                      </div>
+                    }
                   </form>
                 </div>
+                
+
+
+             
+
+
+
+
+
+
+
+
+
+
+
               </Modal>
             </div>
           </div>

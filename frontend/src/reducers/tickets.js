@@ -3,6 +3,15 @@ import {
   CHANGE_TICKET_INPUT_VALUE,
   SAVE_SUBSCRIBE_TICKET_ERRORS,
   UPDATE_CURRENT_TICKET,
+  SAVE_RESTAURANT_NAME,
+  SHOW_MODAL_TICKET_FORM,
+  SHOW_MODAL_TICKET_VALIDATION,
+  MODAL_TICKET_STORE_TEMP,
+  MODAL_TICKET_CANCEL,
+  SHOW_MODAL_EMAIL_ERROR,
+  SHOW_MODAL_ERRORS,
+
+  // SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
   SAVE_RESTAURANT_INFOS,
   SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
   SAVE_TICKET_STATUS,
@@ -20,6 +29,13 @@ const initialState = {
     email: '',
     phone: '',
     cutlery: '', // int
+    showModalTicketValidation: false,
+    estimatedEntryTime: '',
+    ticketId: null,
+    errors:  {
+      modal: false,
+      email: false,
+    },
   },
 
   // ticket subscription errors
@@ -74,11 +90,11 @@ const ticketsReducer = (state = initialState, action = {}) => {
         ticketSubscriptionErrors: action.errors,
       };
 
-      case UPDATE_CURRENT_TICKET:
-        return {
-          ...state,
-          currentTicket: action.newValue,
-        };
+    case UPDATE_CURRENT_TICKET:
+      return {
+        ...state,
+        currentTicket: action.newValue,
+      };
 
     case SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION:
       return {
@@ -105,6 +121,81 @@ const ticketsReducer = (state = initialState, action = {}) => {
         restaurantNameLoaded: true,
       };
 
+    case MODAL_TICKET_STORE_TEMP:
+      return {
+        ...state,
+        ticketInscriptionInput: {
+          ...state.ticketInscriptionInput,
+          estimatedEntryTime: action.estimatedEntryTime,
+          ticketId: action.ticketId,
+      },
+    };
+
+    case SHOW_MODAL_TICKET_VALIDATION:
+      return {
+        ...state,
+        ticketInscriptionInput: {
+          ...state.ticketInscriptionInput,
+          showModalTicketValidation: true,
+      },
+    };
+
+    case SHOW_MODAL_TICKET_FORM:
+      return {
+        ...state,
+        ticketInscriptionInput: {
+          ...state.ticketInscriptionInput,
+          showModalTicketValidation: false,
+      },
+    };
+
+    case MODAL_TICKET_CANCEL:
+      console.log('ticketcancel');
+        return {
+          ...state,
+          ticketInscriptionInput: {
+            ...state.ticketInscriptionInput,
+              lastName: '',
+              firstName: '',
+              email: '',
+              phone: '',
+              cutlery: '', 
+              estimatedEntryTime: '',
+              ticketId: null,
+              errors: {
+                ...state.ticketInscriptionInput.errors,
+                modal: false,
+                email: false,
+              }
+        },
+      };
+
+    case SHOW_MODAL_ERRORS:
+        return {
+          ...state,
+          ticketInscriptionInput: {
+            ...state.ticketInscriptionInput,
+            errors: {
+              ...state.ticketInscriptionInput.errors,
+              modal: true,
+              email: false,
+            }
+        },
+      };
+
+    case SHOW_MODAL_EMAIL_ERROR:
+        return {
+          ...state,
+          ticketInscriptionInput: {
+            ...state.ticketInscriptionInput,
+            errors: {
+              ...state.ticketInscriptionInput.errors,
+              email: true,
+              modal: false,
+            }
+        },
+      };
+      
     case SAVE_TICKET_STATUS:
       return {
         ...state,

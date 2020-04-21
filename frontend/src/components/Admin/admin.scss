@@ -411,8 +411,7 @@ div.ReactModalPortal {
     border: none !important;
     padding: 0 15px !important;
     border-radius: 0px !important;
-
-  
+    overflow: none !important;
 
     h2 {
       padding: 15px 0;
@@ -424,8 +423,6 @@ div.ReactModalPortal {
       display: flex;
       justify-content: space-between;
       font-size: 1em;
-      
- 
     
       // .close-button {
       //   color: #fff;
@@ -441,38 +438,117 @@ div.ReactModalPortal {
       //   color: red;
       // }
 
+      .previous-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: $dark-color;
+
+        height: 50px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 50px;
+
+        &:before {
+          content: '<';
+          color: #fff;
+          font-size: 1.5em;
+        }
+      }
           
       .close-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #fff;
         padding: 15px 15px 15px 15px;
         background-color: $dark-color;
         position: absolute;
         right: 0;
         top: 0;
+        height: 50px;
       }
-    
+          
       .close-button:hover {
         cursor: pointer;
-        color: red;
+        color: $primary-color;
       }
     }
 
       .ticket-form--container {
         margin-bottom: 70px !important;
+
+        #errors {
+          width: 100%;
+          margin-top: 10px;
+
+          strong {
+            font-weight: bold;
+          }
+
+          span { 
+            font-weight: normal !important;
+            font-size: 1em;
+            line-height: 1.3em;
+          }
+        }
        
-      
-    
-    .ticket-submit {
-      width: 100% !important;
-      background-color: $primary-color;
-      border-radius: 0;
-      height: 50px;
-      margin: 0 !important;
-      margin-top: 40px !important;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
+        .ticket-form {
+          span {
+            margin-top: .2em;
+            font-size:1.22em;
+            font-weight: bold;
+          }
+
+          #estimated-entry {
+            font-size: 2em;
+          }
+        }
+
+        .bottom {
+          .ticket-submit {
+            width: 70% !important;
+            background-color: $primary-color;
+            border-radius: 0;
+            height: 50px;
+            margin: 0 !important;
+            margin-top: 40px !important;
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+          }
+
+          .cancel-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            background-color: $dark-color;
+            font-size: 1em;
+            height: 51px;
+            position: absolute;
+            left: 0px;
+            bottom: -1px;
+            width: 30%;
+          }
+
+          .ticket-next {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100% !important;
+            background-color: $primary-color;
+            border-radius: 0;
+            height: 50px;
+            margin: 0 !important;
+            margin-top: 40px !important;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+          }
   }
   }
+}
 }

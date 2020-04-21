@@ -13,8 +13,12 @@ import {
   SEND_TICKET_VALIDATION,
   saveTicketStatus,
   MODAL_TICKET_ADD,
+  MODAL_TICKET_VALIDATE,
   GET_RESTAURANT_NAME,
   saveRestaurantName,
+  modalTicketStoreTemp,
+  MODAL_TICKET_CANCEL,
+  
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -35,6 +39,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
   const id = store.getState().user.restaurantId;
   const ticketId = store.getState().tickets.currentTicket.id;
+  const tempModalTicketId = store.getState().tickets.ticketInscriptionInput.ticketId;
 
   switch (action.type) {
     case GET_RESTAURANT_INFOS:
@@ -162,23 +167,47 @@ const ticketMiddleware = (store) => (next) => (action) => {
           next(action);
           break;
 
+
+          case MODAL_TICKET_VALIDATE:
+            axios({
+              method: 'post',
+              url:`http://${baseUrl}/api/tickets`, 
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              data: {
+                    lastName: store.getState().tickets.ticketInscriptionInput.lastName,
+                    firstName: store.getState().tickets.ticketInscriptionInput.firstName,
+                    cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
+                    email: store.getState().tickets.ticketInscriptionInput.email,
+                    restaurant: store.getState().user.restaurantId,
+                    ticket: {
+                      coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
+                    },
+                  }
+                })
+            .then((response) => {
+              let estimatedEntryTime = response.data.estimatedEntryTime;
+              estimatedEntryTime = estimatedEntryTime.substring(estimatedEntryTime.indexOf('T') + 1, estimatedEntryTime.indexOf('T') + 6);
+
+              store.dispatch(modalTicketStoreTemp(estimatedEntryTime, response.data.ticketId));
+            })
+              .catch((error) => {
+                console.warn(error.response);
+              });
+            next(action);
+            break;
+
         case MODAL_TICKET_ADD:
           axios({
-            method: 'post',
-            url:`http://${baseUrl}/api/tickets`, 
+            method: 'put',
+            url:`http://${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
             headers: {
               'Content-Type': 'application/json',
             },
             data: {
-                  lastName: store.getState().tickets.ticketInscriptionInput.lastName,
-                  firstName: store.getState().tickets.ticketInscriptionInput.firstName,
-                  cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
-                  email: store.getState().tickets.ticketInscriptionInput.email,
-                  restaurant: store.getState().user.restaurantId,
-                  ticket: {
-                    coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
+                    status: "confirmed",
                   },
-                }
               })
           .then((response) => {
             console.log(response);
@@ -190,6 +219,26 @@ const ticketMiddleware = (store) => (next) => (action) => {
           next(action);
           break;
 
+          case MODAL_TICKET_CANCEL:
+              axios({
+                method: 'put',
+                url:`http://${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                data: {
+                        status: "cancelled",
+                      },
+                  })
+              .then((response) => {
+                store.dispatch(fetchTicketsData());
+                console.log(response);
+              })
+                .catch((error) => {
+                  console.warn(error);
+                });
+              next(action);
+              break;
 
     default:
       next(action);
