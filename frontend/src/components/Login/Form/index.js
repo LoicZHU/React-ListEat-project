@@ -34,6 +34,7 @@ const Form = ({
         placeholder="Adresse email"
         value={email}
         onChange={handleChange}
+        required
       />
       <input
         id="password-input"
@@ -42,6 +43,7 @@ const Form = ({
         placeholder="Mot de passe"
         value={password}
         onChange={handleChange}
+        required
       />
 
       {errorMessage && <ErrorMessage />}
