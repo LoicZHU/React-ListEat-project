@@ -47,7 +47,7 @@ class SecurityController extends AbstractController
      */
     public function logoutSuccess(){
 
-    return $this->json(Response::HTTP_OK);
+    return $this->json(['logged' => 'false'],Response::HTTP_OK);
 
     }
 
