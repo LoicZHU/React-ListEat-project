@@ -102,7 +102,6 @@ const ticketMiddleware = (store) => (next) => (action) => {
       break;
 
     case SEND_TICKET_VALIDATION:
-      const ticketId = store.getState().tickets.ticketId;
 
       axios({
         method: 'put',

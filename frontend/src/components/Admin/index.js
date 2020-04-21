@@ -195,24 +195,24 @@ const Admin = ({
           <div id="admin-middle-section">
             <div className="left">
               <div id="ticket-infos">
-                <span>Nom : {currentTicket.customer.lastName} </span>
-                <span>Prénom : {currentTicket.customer.firstName}</span>
-                <span>Horaire estimé :&nbsp;
-                  {currentTicket.estimatedEntryTime.substring(
+                <span>Nom : {tickets.length > 0 ? currentTicket.customer.lastName : ''} </span>
+                <span>Prénom : {tickets.length > 0 ? currentTicket.customer.firstName : ''}</span>
+                <span>Horaire estimé :&nbsp; {tickets.length > 0 ? currentTicket.estimatedEntryTime.substring(
                     currentTicket.estimatedEntryTime.indexOf('T') + 1,
                     currentTicket.estimatedEntryTime.indexOf('T') + 6,
-                  )}
+                  ) : ''}
+                  
                 </span>
                 <div id="ticket-ref">
                   <span>Ref ticket : </span>
-                  <span className="ref"> {currentTicket.id}</span>
+                  <span className="ref"> {tickets.length > 0 ? currentTicket.id : ''}</span>
                 </div>
               </div>
             </div>
             <div className="right">
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
-                <span className="covers">{currentTicket.coversNb}</span>
+                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}</span>
                 <div className="add-ticket">
                   <span id="confirm" onClick={handleConfirm}>Placé</span>
                   <span id="cancel" onClick={handleCancel}>Absent</span>
