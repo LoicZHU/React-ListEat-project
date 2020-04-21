@@ -39,7 +39,7 @@ class Customer
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=12)
+     * @ORM\Column(type="string", length=12, nullable=true)
      * @Assert\NotBlank()
      * @Groups("tickets_get")
      */
