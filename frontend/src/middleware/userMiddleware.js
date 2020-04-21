@@ -31,8 +31,9 @@ import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
-// const baseUrl = '54.162.210.163:8080';
-const baseUrl = 'localhost:8001';
+// const baseUrl = 'localhost:8001';
+const baseUrl = 'https://localhost:8080';
+
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
@@ -42,7 +43,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_IN:
       axios({
         method: 'post',
-        url: `http://${baseUrl}/api/partner/login`,
+        url: `${baseUrl}/api/partner/login`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -66,7 +67,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: `http://${baseUrl}/api/partner/islogged`,
+        url: `${baseUrl}/api/partner/islogged`,
         withCredentials: true,
       })
         .then((response) => {
@@ -83,7 +84,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case LOG_OUT:
       axios({
         method: 'get',
-        url: `http://${baseUrl}/logout`,
+        url: `${baseUrl}/logout`,
         withCredentials: true,
       })
         .then((response) => {
@@ -93,12 +94,12 @@ const userMiddleware = (store) => (next) => (action) => {
           console.warn(error);
         });
       next(action);
-      break;yarn
+      break;
 
     case SIGN_UP:
       axios({
         method: 'post',
-        url: `http://${baseUrl}/api/partner`,
+        url: `${baseUrl}/api/partner`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -135,7 +136,7 @@ const userMiddleware = (store) => (next) => (action) => {
     // case EDIT_RESTAURANT:
     //   axios({
     //     method: 'put',
-    //     url: `http://${baseUrl}/api/partner`,
+    //     url: `${baseUrl}/api/partner`,
     //     data: {
 
 
@@ -164,7 +165,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case FETCH_RESTAURANT_DATA:
       axios({
         method: 'get',
-        url: `http://${baseUrl}/api/partner/${id}`,
+        url: `${baseUrl}/api/partner/${id}`,
         // data: {
 
 
@@ -193,7 +194,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case INCREASE_MINUTE:
       axios({
         method: 'put',
-        url: `http://${baseUrl}/api/partner/${id}/eating-time`,
+        url: `${baseUrl}/api/partner/${id}/eating-time`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -216,7 +217,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case DECREASE_MINUTE:
       axios({
         method: 'put',
-        url: `http://${baseUrl}/api/partner/${id}/eating-time`,
+        url: `${baseUrl}/api/partner/${id}/eating-time`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -249,7 +250,7 @@ const userMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'put',
-        url: `http://${baseUrl}/api/partner/${id}/status`,
+        url: `${baseUrl}/api/partner/${id}/status`,
         data: {
           status: changedStatus,
         },
@@ -277,7 +278,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case FETCH_TICKETS_DATA:
       axios({
         method: 'get',
-        url: `http://${baseUrl}/api/partner/${id}/tickets`,
+        url: `${baseUrl}/api/partner/${id}/tickets`,
         withCredentials: true,
       })
         .then((response) => {
@@ -296,7 +297,7 @@ const userMiddleware = (store) => (next) => (action) => {
       case QRCODE_DOWNLOAD:
         axios({
           method: 'post',
-          url: `http://${baseUrl}/api/partner/${id}/qrcode`, 
+          url: `${baseUrl}/api/partner/${id}/qrcode`, 
           withCredentials: true,
           responseType: 'blob', // important
         }).then((response) => {

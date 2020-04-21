@@ -28,9 +28,8 @@ import {
   fetchTicketsData,
 } from 'src/actions/user';
 
-// const baseUrl = '54.162.210.163:8080';
-const baseUrl = 'localhost:8001';
-const url = 'localhost:8080';
+// const baseUrl = 'http://localhost:8001';
+const baseUrl = 'https://localhost:8080';
 
 // const id = store.getState().user.restaurantId;
 
@@ -47,7 +46,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `http://${baseUrl}/api/decrypt`,
+        url: `${baseUrl}/api/decrypt`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -68,7 +67,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
     case SUBSCRIBE_TO_WAITING_LIST:
       axios({
         method: 'post',
-        url: `http://${baseUrl}/api/tickets`,
+        url: `${baseUrl}/api/tickets`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -105,7 +104,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'put',
-        url: `http://${baseUrl}/api/tickets/${ticketId}`,
+        url: `${baseUrl}/api/tickets/${ticketId}`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -129,7 +128,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
       case CANCEL_CURRENT_TICKET:
         axios({
           method: 'put',
-          url:`http://${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
+          url:`${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
           headers: {
             'Content-Type': 'application/json',
           },
@@ -149,7 +148,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         case CONFIRM_CURRENT_TICKET:
           axios({
             method: 'put',
-            url:`http://${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
+            url:`${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
             headers: {
               'Content-Type': 'application/json',
             },
@@ -166,11 +165,10 @@ const ticketMiddleware = (store) => (next) => (action) => {
           next(action);
           break;
 
-
           case MODAL_TICKET_VALIDATE:
             axios({
               method: 'post',
-              url:`http://${baseUrl}/api/tickets`, 
+              url:`${baseUrl}/api/tickets`, 
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -200,7 +198,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         case MODAL_TICKET_ADD:
           axios({
             method: 'put',
-            url:`http://${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
+            url:`${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
             headers: {
               'Content-Type': 'application/json',
             },
@@ -221,7 +219,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
           case MODAL_TICKET_CANCEL:
               axios({
                 method: 'put',
-                url:`http://${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
+                url:`${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
                 headers: {
                   'Content-Type': 'application/json',
                 },

@@ -505,6 +505,13 @@ div.ReactModalPortal {
           #estimated-entry {
             font-size: 2em;
           }
+
+          input::before {
+            content: 'optionnel' !important;
+            position: relative !important;
+            color: black !important;
+            z-index: 5 !important;
+          }
         }
 
         .bottom {
@@ -518,6 +525,7 @@ div.ReactModalPortal {
             position: absolute;
             bottom: 0px;
             right: 0px;
+            box-shadow: none;
           }
 
           .cancel-button {
@@ -547,6 +555,7 @@ div.ReactModalPortal {
             position: absolute;
             bottom: 0px;
             left: 0px;
+            box-shadow: none;
           }
         }
       }
