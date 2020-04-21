@@ -83,7 +83,7 @@ class QrCodeGenerator
     $texte = $restaurantName;
     $color = imagecolorallocate($source, 42, 42, 42);
     //On met le texte
-    imagettftext($destination, 35, 0, 145, 2500,  $color, $baseUrl.'/ressource/police/OpenSans-Bold.ttf', $texte);
+    imagettftext($destination, 35, 0, 145, 2550,  $color, $baseUrl.'/ressource/police/OpenSans-Bold.ttf', $texte);
 
     imagejpeg($destination, $baseUrl."/file/qr_code/qrcode-".$restaurantId.".png");
 

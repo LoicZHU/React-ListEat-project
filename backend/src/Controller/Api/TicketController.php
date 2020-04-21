@@ -56,6 +56,10 @@ class TicketController extends AbstractController
 
         if(!empty($jsonErrors)){
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        // the customer's email was set to nullable=true and the NotBlank constraint was removed in case the ticket would be added directly by the restaurant (meaning the customer doesn't use a smartphone and therefore has no immediate access to his/her email). Instead, the following condition was added in order to compel a customer using the QR code (and therefore his/her smartphone) to provide his/her email address.
+        if(empty($data->email)){
+            return $this->json(['message' => 'Veuillez fournir une adresse email valide.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         } 
 
         $restaurant = $restaurantRepository->find($data->restaurant);
@@ -128,14 +132,16 @@ class TicketController extends AbstractController
                         'emails/subscription.html.twig',
                         ['name' => $customer->getfirstName(),
                         'restaurantName' => $restaurant->getName(),
-                        'ticketId' => $ticket->getId()]
+                        'ticketId' => $ticket->getId(),
+                        'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(),
+                        'estimatedEntryTime' => $ticket->getEstimatedEntryTime()]
                     ),
                     'text/html'
                 );
 
         $mailer->send($message);
 
-        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
+        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'estimatedEntryTime' => $ticket->getEstimatedEntryTime()], Response::HTTP_OK);
 
         } elseif ($data->validation == "cancel") {
             $ticket->setStatus(2);
@@ -171,7 +177,7 @@ class TicketController extends AbstractController
     {
         /*
         {
-            "status": "seated" / "cancelled" / "restored"
+            "status": "confirmed" / "seated" / "cancelled" / "restored"
         }
         */
         $data = json_decode($request->getContent());
@@ -184,6 +190,17 @@ class TicketController extends AbstractController
         }
         $ticket = $ticket[0];
         
+        // if the ticket was created by the restaurateur, the below condition can be used to confirm the ticket and add the customer to the waiting list (thus not sending an email to the customer, contrary to the validation made by the client him/herself)
+        if ($data->status == "confirmed") {
+            $ticket->setStatus(1);
+            $ticket->setUpdatedAt(new \DateTime());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->json(['message' => 'Le ticket est confirmé. Le client a bien été ajouté à la liste d\attente.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'estimatedEntryTime' => $ticket->getEstimatedEntryTime()], Response::HTTP_OK);
+        }
+
+        // when the restaurateur is seating the clients
         if ($data->status == "seated") {
             $ticket->setStatus(0);
             $ticket->setUpdatedAt(new \DateTime());
@@ -193,6 +210,7 @@ class TicketController extends AbstractController
             return $this->json(['message' => 'Les clients du ticket ont été installés.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
         }
 
+        // when the restaurateur cancels a ticket due to a no-show or a client whose ticket has been created by the restaurateur and deems the wait too long
         if ($data->status == "cancelled") {
             $ticket->setStatus(2);
             $ticket->setUpdatedAt(new \DateTime());

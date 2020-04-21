@@ -12,6 +12,9 @@ import {
   SHOW_MODAL_ERRORS,
 
   // SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
+  SAVE_RESTAURANT_INFOS,
+  SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
+  SAVE_TICKET_STATUS,
   // CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,
 } from 'src/actions/ticket';
 
@@ -38,9 +41,6 @@ const initialState = {
   // ticket subscription errors
   ticketSubscriptionErrors: [],
 
-  // subscribe ticket (subscription)
-  // isTemporarySubscribedTicket: false,
-
   currentTicket: {
     id: 0,
     coversNb: 0,
@@ -56,8 +56,20 @@ const initialState = {
     estimatedEntryTime: "2020-04-16T21:20:18+02:00"
   },
 
+  // client : restaurant infos (on ticket form)
+  restaurantId: '',
   restaurantName: '',
+  restaurantUrlId: '',
   restaurantNameLoaded: false,
+
+  // client : temporary ticket infos (ticket form submit)
+  isTemporarySubscribedTicket: false,
+  ticketId: '',
+  ticketCutlery: '',
+  ticketWaitingTime: '',
+
+  ticketStatus: '',
+  isTicketValidate: '',
 };
 
 // reducer
@@ -84,11 +96,14 @@ const ticketsReducer = (state = initialState, action = {}) => {
         currentTicket: action.newValue,
       };
 
-    // case SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION:
-    //   return {
-    //     ...state,
-    //     isTemporarySubscribedTicket: true,
-    //   };
+    case SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION:
+      return {
+        ...state,
+        ticketId: action.ticketId,
+        ticketCutlery: action.ticketCutlery,
+        ticketWaitingTime: action.ticketWaitingTime,
+        isTemporarySubscribedTicket: true,
+      };
 
     // case CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET:
     //   console.log('change tempo checking');
@@ -97,10 +112,12 @@ const ticketsReducer = (state = initialState, action = {}) => {
     //     checkingTemporarySubscribedTicket: false,
     //   };
 
-    case SAVE_RESTAURANT_NAME:
+    case SAVE_RESTAURANT_INFOS:
       return {
         ...state,
+        restaurantId: action.restaurantId,
         restaurantName: action.restaurantName,
+        restaurantUrlId: action.restaurantUrlId,
         restaurantNameLoaded: true,
       };
 
@@ -179,6 +196,13 @@ const ticketsReducer = (state = initialState, action = {}) => {
         },
       };
       
+    case SAVE_TICKET_STATUS:
+      return {
+        ...state,
+        ticketStatus: action.newValue,
+        isTicketValidate: action.isValidate,
+      };
+
     default: return state;
   }
 };
