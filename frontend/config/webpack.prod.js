@@ -11,7 +11,7 @@ module.exports = merge.smart(common, {
   devtool: false,
   output: {
     path: paths.build,
-    publicPath: './',
+    publicPath: '/',
     filename: 'js/[name].[contenthash].js',
   },
   plugins: [
