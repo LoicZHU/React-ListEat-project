@@ -77,7 +77,7 @@ class SendNotifComeCommand extends Command
                 ->setTo($ticket->getCustomer()->getEmail())
                 ->setBody(
                             $this->twig->render(
-                                'emails/subscription.html.twig',
+                                'emails/notif-passage.html.twig',
                                 ['name' => $ticket->getCustomer()->getFirstName(),
                                 'restaurantName' => $ticket->getRestaurant()->getName(),
                                 'ticketId' => $ticket->getId(),
