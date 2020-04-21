@@ -15,6 +15,7 @@ class Ticket
     {
         $this->createdAt = new \DateTime;
         $this->status = 0;
+        $this->statusnotification = 0;
     }
     /**
      * @ORM\Id()

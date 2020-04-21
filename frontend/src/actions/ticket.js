@@ -10,6 +10,9 @@ export const GET_RESTAURANT_INFOS = 'GET_RESTAURANT_INFOS';
 export const SAVE_RESTAURANT_INFOS = 'SAVE_RESTAURANT_INFOS';
 export const SEND_TICKET_VALIDATION = 'SEND_TICKET_VALIDATION';
 export const SAVE_TICKET_STATUS = 'SAVE_TICKET_STATUS';
+export const MODAL_TICKET_ADD = 'MODAL_TICKET_ADD';
+export const GET_RESTAURANT_NAME = 'GET_RESTAURANT_NAME';
+export const SAVE_RESTAURANT_NAME = 'SAVE_RESTAURANT_NAME';
 
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
@@ -42,6 +45,14 @@ export const cancelCurrentTicket = () => ({
   type: CANCEL_CURRENT_TICKET,
 });
 
+export const modalTicketAdd = () => ({
+  type: MODAL_TICKET_ADD,
+});
+
+export const getRestaurantName = () => ({
+  type: GET_RESTAURANT_NAME,
+  });
+  
 export const getRestaurantInfos = () => ({
   type: GET_RESTAURANT_INFOS,
 });

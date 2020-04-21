@@ -9,6 +9,8 @@
                 <p>{{name}},<br>
                     Vous êtes bien inscrit sur la liste d'attente du restaurant {{ restaurantName }}.<br>
                     Votre numéro de ticket est le : {{ ticketId }}<br>
+                    Votre temps d'attente estimé est de : {{ estimatedWaitingTime }}<br>
+                    Votre horaire de passage estimé est : {{ estimatedEntryTime|date("h:i") }}<br>
                     Bon appétit !
                 </p>
         {% block body %}{% endblock %}

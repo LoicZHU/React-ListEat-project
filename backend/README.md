@@ -91,18 +91,18 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 ### /api/partner/{id<\d+>}/eating-time **PUT**
 
 > {
->	"addedTime": 25
+>	"addedTime": 5 / -5
 > }
 
 ------------------------------------------
 ### /api/partner/{id<\d+>}/tickets/{ticketId<\d+>} **PUT**
 
 > {
->    "status": "seated" / "cancelled" / "restored"
+>    "status": "confirmed" / "seated" / "cancelled" / "restored"
 > }
 
 -------------------------------------------
-### /api/decrypt **GET**
+### /api/decrypt **POST**
 
 > {"restaurant": "**MA CHAINE A DECRYPTER**"}
 
@@ -124,6 +124,8 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 
 > bin/console app:send:notif
 
+_____________[currentTime]_________[Ticket]_____[currentTime+5]___________ 
+
 **Permet d'envoyer une notification par mail à tous les tickets dont 'estimated hour' est inférieur à current time + 5 min
 et dont le status = 1 et que le statusNotification = 0.
 Cette commande change le status notification à 1 et écrit dans le fichier diary/notification.txt les notifs envoyer ainsi que l'heure.
@@ -133,7 +135,7 @@ pour éditer le fichier des taches cron
 
 > crontab -e
 
-mettre cette ligne dedant
+mettre cette ligne dedans
 > 5 * * * *  /usr/bin/php   /var/www/html/projet-list-eat/backend/bin/console app:send:notif --env=prod
 
 > Connaitre le  chemin absolu vers le binaire PHP CLI  
