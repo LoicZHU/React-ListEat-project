@@ -93,7 +93,7 @@ export const showModalEmailError = () => ({
 
 export const showModalErrors = () => ({
   type: SHOW_MODAL_ERRORS,
-)},
+});
 
 export const saveRestaurantInfos = (restaurantId, restaurantName, restaurantUrlId) => ({
   type: SAVE_RESTAURANT_INFOS,
