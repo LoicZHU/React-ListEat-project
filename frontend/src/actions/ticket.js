@@ -9,6 +9,13 @@ export const CANCEL_CURRENT_TICKET = 'CANCEL_CURRENT_TICKET';
 export const MODAL_TICKET_ADD = 'MODAL_TICKET_ADD';
 export const GET_RESTAURANT_NAME = 'GET_RESTAURANT_NAME';
 export const SAVE_RESTAURANT_NAME = 'SAVE_RESTAURANT_NAME';
+export const SHOW_MODAL_TICKET_FORM = 'SHOW_MODAL_TICKET_FORM';
+export const SHOW_MODAL_TICKET_VALIDATION = 'SHOW_MODAL_TICKET_VALIDATION';
+export const MODAL_TICKET_VALIDATE = 'MODAL_TICKET_VALIDATE';
+export const MODAL_TICKET_STORE_TEMP = 'MODAL_TICKET_STORE_TEMP';
+export const MODAL_TICKET_CANCEL = 'MODAL_TICKET_CANCEL';
+export const SHOW_MODAL_EMAIL_ERROR = 'SHOW_MODAL_EMAIL_ERROR';
+export const SHOW_MODAL_ERRORS = 'SHOW_MODAL_ERRORS';
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
 // action creator
@@ -44,13 +51,38 @@ export const modalTicketAdd = () => ({
   type: MODAL_TICKET_ADD,
 });
 
+export const modalTicketValidate = () => ({
+  type: MODAL_TICKET_VALIDATE,
+});
+
+export const modalTicketStoreTemp = (estimatedEntryTime, ticketId) => ({
+  type: MODAL_TICKET_STORE_TEMP,
+  estimatedEntryTime: estimatedEntryTime,
+  ticketId,
+});
+
 export const getRestaurantName = () => ({
   type: GET_RESTAURANT_NAME,
 });
 
-export const saveRestaurantName = (restaurantName) => ({
-  type: SAVE_RESTAURANT_NAME,
-  restaurantName,
+export const showModalTicketForm = () => ({
+  type: SHOW_MODAL_TICKET_FORM,
+});
+
+export const showModalTicketValidation = () => ({
+  type: SHOW_MODAL_TICKET_VALIDATION,
+});
+
+export const handleModalTicketCancel = () => ({
+  type: MODAL_TICKET_CANCEL,
+});
+
+export const showModalEmailError = () => ({
+  type: SHOW_MODAL_EMAIL_ERROR,
+});
+
+export const showModalErrors = () => ({
+  type: SHOW_MODAL_ERRORS,
 });
 
 // export const saveSubscribeTicketSubscription = () => ({

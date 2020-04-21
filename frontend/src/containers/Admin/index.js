@@ -9,12 +9,18 @@ import {
   changeServiceStatus,
   refreshTime,
 } from 'src/actions/user';
+
 import {
   changeTicketInputValue,
-  subscribeToWaitingList,
   confirmCurrentTicket,
   cancelCurrentTicket,
   modalTicketAdd,
+  showModalTicketForm,
+  showModalTicketValidation,
+  modalTicketValidate,
+  handleModalTicketCancel,
+  showModalEmailError,
+  showModalErrors,
 } from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
@@ -32,6 +38,10 @@ const mapStateToProps = (state) => ({
   phone: state.tickets.ticketInscriptionInput.phone,
   cutlery: state.tickets.ticketInscriptionInput.cutlery,
   errors: state.tickets.ticketSubscriptionErrors[0],
+  showModalTicketValidation: state.tickets.ticketInscriptionInput.showModalTicketValidation,
+  estimatedEntryTime: state.tickets.ticketInscriptionInput.estimatedEntryTime,
+  modalErrors: state.tickets.ticketInscriptionInput.errors.modal,
+  emailError: state.tickets.ticketInscriptionInput.errors.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -61,6 +71,31 @@ const mapDispatchToProps = (dispatch) => ({
   handleTicketSubscribe: () => {
     dispatch(modalTicketAdd());
   },
+
+  handleShowModalTicketForm: () => {
+    dispatch(showModalTicketForm());
+  },
+
+  handleShowModalTicketValidation: () => {
+    dispatch(showModalTicketValidation());
+  },
+
+  handleModalTicketValidate: () => {
+    dispatch(modalTicketValidate());
+  },
+
+  handleModalTicketCancel: () => {
+    dispatch(handleModalTicketCancel());
+  },
+
+  showModalErrors: () => {
+    dispatch(showModalErrors());
+  },
+
+  showModalEmailError: () => {
+    dispatch(showModalEmailError());
+  },
+
 });
 
 // export
