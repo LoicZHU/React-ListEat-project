@@ -11,9 +11,9 @@ import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
 import TicketForm from 'src/containers/TicketForm';
 import PasswordForgotten from 'src/components/PasswordForgotten';
-import Validation from 'src/components/Validation';
-import Confirmation from 'src/components/Confirmation';
-import Cancellation from 'src/components/Cancellation';
+import Validation from 'src/containers/Validation';
+import Confirmation from 'src/containers/Confirmation';
+import Cancellation from 'src/containers/Cancellation';
 import Admin from 'src/containers/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
@@ -29,13 +29,14 @@ import './styles.css';
 const App = ({
   isRestaurantLogged,
   checkLoggedRestaurant,
-  checkingLoggedRestaurant, 
+  checkingLoggedRestaurant,
   restaurantId,
   fetchRestaurantData,
   fetchTicketsData,
   checkFetchedTicketsData,
   loadingTicketsData,
-  // isTemporarySubscribedTicket,
+  isTemporarySubscribedTicket,
+  isTicketValidate,
   // checkTemporarySubscribedTicket,
   // checkingTemporarySubscribedTicket
 }) => {
@@ -120,23 +121,28 @@ const App = ({
           {/* Client : Get a ticket */}
           <Route path="/restaurant/:id/tickets/add" exact>
             <Header />
-            <TicketForm />
+            {!isTemporarySubscribedTicket && <TicketForm />}
+            {isTemporarySubscribedTicket && <Redirect to="/restaurant/tickets/validate" />}
           </Route>
 
           {/* Client : Validate the ticket */}
-          <Route path="/restaurant/:id/tickets/validate" exact>
-            <Header />
-            <Validation />
-          </Route>
+          {isTemporarySubscribedTicket && (
+            <Route path="/restaurant/tickets/validate" exact>
+              <Header />
+              {isTicketValidate === '' && <Validation />}
+              {isTicketValidate !== '' && isTicketValidate && <Redirect to="/tickets/confirmation" />}
+              {isTicketValidate !== '' && !isTicketValidate && <Redirect to="/tickets/cancellation" />}
+            </Route>
+          )}
 
           {/* Client : Confirmation of ticket */}
-          <Route path="/tickets/:id" exact>
+          <Route path="/tickets/confirmation" exact>
             <Header />
             <Confirmation />
           </Route>
 
           {/* Client : Cancellation of ticket */}
-          <Route path="/tickets/:id/cancel" exact>
+          <Route path="/tickets/cancellation" exact>
             <Header />
             <Cancellation />
           </Route>

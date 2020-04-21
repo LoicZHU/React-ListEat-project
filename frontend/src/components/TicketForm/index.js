@@ -15,12 +15,12 @@ const TicketForm = ({
   changeTicketInputValue,
   handleTicketSubscribe,
   errors,
-  getRestaurantName,
+  getRestaurantInfos,
   restaurantName,
   restaurantNameLoaded,
 }) => {
   useEffect(() => {
-    getRestaurantName();
+    getRestaurantInfos();
   }, []);
 
   // handle submit

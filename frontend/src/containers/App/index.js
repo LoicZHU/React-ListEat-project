@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // import
 import App from 'src/components/App';
-import { 
+import {
   checkLoggedRestaurant,
   fetchRestaurantData,
   fetchTicketsData,
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => ({
   restaurantId: state.user.restaurantId,
   isTemporarySubscribedTicket: state.tickets.isTemporarySubscribedTicket,
   checkingTemporarySubscribedTicket: state.tickets.checkingTemporarySubscribedTicket,
+  isTicketValidate: state.tickets.isTicketValidate,
 });
 
 const mapDispatchToProps = (dispatch) => ({

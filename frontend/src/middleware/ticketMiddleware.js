@@ -7,9 +7,11 @@ import {
   CONFIRM_CURRENT_TICKET,
   CANCEL_CURRENT_TICKET,
   saveSubscribeTicketErrors,
-  GET_RESTAURANT_NAME,
-  saveRestaurantName,
-  // saveSubscribeTicketSubscription,
+  GET_RESTAURANT_INFOS,
+  saveRestaurantInfos,
+  saveSubscribeTicketSubscription,
+  SEND_TICKET_VALIDATION,
+  saveTicketStatus,
 } from 'src/actions/ticket';
 
 
@@ -30,10 +32,10 @@ const ticketMiddleware = (store) => (next) => (action) => {
   const id = store.getState().user.restaurantId;
   const ticketId = store.getState().tickets.currentTicket.id;
 
-  const restaurantHashedId = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
-
   switch (action.type) {
-    case GET_RESTAURANT_NAME:
+    case GET_RESTAURANT_INFOS:
+      const restaurantUrlId = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
+
       axios({
         method: 'post',
         url: `http://${baseUrl}/api/decrypt`,
@@ -41,68 +43,78 @@ const ticketMiddleware = (store) => (next) => (action) => {
           'Content-Type': 'application/json',
         },
         data: {
-          restaurant: restaurantHashedId,
+          restaurant: restaurantUrlId,
         },
       })
         .then((response) => {
           console.log(response);
-          store.dispatch(saveRestaurantName(response.data.name));
+          store.dispatch(saveRestaurantInfos(response.data.id, response.data.name, restaurantUrlId));
         })
         .catch((error) => {
           console.warn(error.response);
         });
+      next(action);
+      break;
 
     case SUBSCRIBE_TO_WAITING_LIST:
-
-      const puree = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
-
-      console.log('purée est égale à ' + puree);
-      
       axios({
         method: 'post',
-        url: `http://${baseUrl}/api/decrypt`,
+        url: `http://${baseUrl}/api/tickets`,
         headers: {
           'Content-Type': 'application/json',
         },
         data: {
-          restaurant: puree, // hashed restaurant ID
+          lastName: store.getState().tickets.ticketInscriptionInput.lastName,
+          firstName: store.getState().tickets.ticketInscriptionInput.firstName,
+          cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
+          email: store.getState().tickets.ticketInscriptionInput.email,
+          restaurant: store.getState().tickets.restaurantId,
+          ticket: {
+            coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
+          },
         },
+        withCredentials: true,
       })
         .then((response) => {
           console.log(response);
+          store.dispatch(saveSubscribeTicketSubscription(response.data.ticketId, store.getState().tickets.ticketInscriptionInput.cutlery, response.data.estimatedWaitingTime));
+
+          // localStorage.setItem('ticketId', response.data.ticketId);
+          // localStorage.setItem('ticketCutlery', store.getState().tickets.ticketInscriptionInput.cutlery);
+          // localStorage.setItem('ticketEstimatedWaitingTime', response.data.estimatedWaitingTime);
+
+          // window.location.replace(`http://${url}/restaurant/${restaurantId}/tickets/validate`);
+        })
+        .catch((error) => {
+          console.warn(error.response);
+          // store.dispatch(saveSubscribeTicketErrors(error.response.data));
+        });
+      next(action);
+      break;
+
+    case SEND_TICKET_VALIDATION:
+      const ticketId = store.getState().tickets.ticketId;
+
+      axios({
+        method: 'put',
+        url: `http://${baseUrl}/api/tickets/${ticketId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          validation: action.newValue,
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          console.log(response);
+          const isTicketValidate = (response.data.ticketStatus === 1); // boolean
+          store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate));
         })
         .catch((error) => {
           console.warn(error.response);
         });
 
-      // axios({
-      //   method: 'post',
-      //   url: `http://${baseUrl}/api/tickets`,
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   data: {
-      //     lastName: store.getState().tickets.ticketInscriptionInput.lastName,
-      //     firstName: store.getState().tickets.ticketInscriptionInput.firstName,
-      //     cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
-      //     email: store.getState().tickets.ticketInscriptionInput.email,
-      //     restaurant: 'UhhidUvsgLvrEOnA_et-DjNxXOOOcGtXyiJrL1M6ZHmGX2O3t6K408Wz4iW0Tq8UFUH9knPqJXma2OaT52891Q', // TODO: récup l'id
-      //     ticket: {
-      //       coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
-      //     },
-      //   },
-      //   withCredentials: true,
-      // })
-      //   .then((response) => {
-      //     // console.log(response);
-      //     // console.log('save tempo ticket');
-      //     // store.dispatch(saveSubscribeTicketSubscription());
-      //     window.location.replace(`http://${url}/restaurant/UhhidUvsgLvrEOnA_et-DjNxXOOOcGtXyiJrL1M6ZHmGX2O3t6K408Wz4iW0Tq8UFUH9knPqJXma2OaT52891Q/tickets/validate`); // TODO récup id
-      //   })
-        // .catch((error) => {
-        //   console.warn(error.response);
-        //   store.dispatch(saveSubscribeTicketErrors(error.response.data));
-        // });
       next(action);
       break;
 
