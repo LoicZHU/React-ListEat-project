@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // import
 import TicketForm from 'src/components/TicketForm';
-import { changeTicketInputValue, subscribeToWaitingList, getRestaurantName } from 'src/actions/ticket';
+import { changeTicketInputValue, subscribeToWaitingList, getRestaurantInfos } from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
   lastName: state.tickets.ticketInscriptionInput.lastName,
@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleTicketSubscribe: () => {
     dispatch(subscribeToWaitingList());
   },
-  getRestaurantName: () => {
-    dispatch(getRestaurantName());
+  getRestaurantInfos: () => {
+    dispatch(getRestaurantInfos());
   },
 });
 
