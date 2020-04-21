@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Ticket;
 use App\Service\Timer;
+use App\Service\CryptoService;
 use App\Entity\Customer;
 use App\Repository\TicketRepository;
 use App\Repository\CustomerRepository;
@@ -17,6 +18,21 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class TicketController extends AbstractController
 {
+
+    /**
+     * @Route("/api/decrypt/tickets", name="api_restaurant_decrypt_tickets", methods={"POST"})
+     */
+    public function decryptId(Request $request, TicketRepository $ticketRepository)
+    {
+        $data = json_decode($request->getContent());
+
+        $ticketId = CryptoService::decrypt($data->ticket);
+        
+        $ticket = $ticketRepository->find($ticketId);
+        
+        return $this->json($ticket, 200, [], ['groups' => 'ticket_decrypt']);
+    }
+
     /**
      * @Route("/api/tickets", name="api_tickets", methods={"POST"})
      */
@@ -122,9 +138,15 @@ class TicketController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-        // Email sent to the customer to confirm the subscription to the waiting list
-        $message = (new \Swift_Message('Information client ListEat'))
-        
+        //dd($_SERVER);
+        // Cancellation route customer
+        $cryptedId = CryptoService::crypt($id);
+        // /tickets/id/customer-cancellation
+        //////////////////////////////////// TODO RECTIFICATION SERVER HOSTING//////////////////////////////////////
+        $routeCancel = 'http://'.$_SERVER['HTTP_HOST'].'/tickets/'.$cryptedId.'/customer-cancellation';
+    
+         // Email sent to the customer to confirm the subscription to the waiting list
+         $message = (new \Swift_Message('Information client ListEat'))
         ->setFrom('team@listeat.io')
         ->setTo($customer->getEmail())
         ->setBody(
@@ -134,7 +156,9 @@ class TicketController extends AbstractController
                         'restaurantName' => $restaurant->getName(),
                         'ticketId' => $ticket->getId(),
                         'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(),
-                        'estimatedEntryTime' => $ticket->getEstimatedEntryTime()]
+                        'estimatedEntryTime' => $ticket->getEstimatedEntryTime(),
+                        'customerCancellation' => $routeCancel
+                        ]
                     ),
                     'text/html'
                 );

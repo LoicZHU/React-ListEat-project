@@ -12,6 +12,8 @@
                     Votre temps d'attente estimé est de : {{ estimatedWaitingTime }}<br>
                     Votre horaire de passage estimé est : {{ estimatedEntryTime|date("h:i") }}<br>
                     Bon appétit !
+
+                    Si vous souhaitez annuler votre inscription, merci de cliquer ce <a href="{{ customerCancellation }}">lien</a>.
                 </p>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
