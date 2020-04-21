@@ -5,19 +5,22 @@ import ConfirmationMessage from './ConfirmationMessage';
 
 import './passwordforgotten.scss';
 
-const Login = () => {
+const Login = () => (
+  <div className="form-container">
+    <h1>Réinitialisez votre mot de passe</h1>
 
-  return (
-    <div className="form-container">
-      <h1>Réinitialisez votre mot de passe</h1>    
-      <form id="login-form">
-      <input id="user-input" placeholder="Adresse email"/>
+    <form id="login-form">
+      <input
+        id="user-input"
+        placeholder="Nouveau mot de passe"
+        required
+      />
+
       {false && <ConfirmationMessage />}
+
       {true && <button className="button">Envoyer</button>}
     </form>
-    </div>
-  );
-
-};
+  </div>
+);
 
 export default Login;
