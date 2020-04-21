@@ -75,11 +75,11 @@ const Admin = ({
       message: "Votre ticket a bien été ajouté !",
       type: "success",
       insert: "top",
-      container: "top-right",
+      container: "top-center",
       animationIn: ["animated", "fadeIn"],
       animationOut: ["animated", "fadeOut"],
       dismiss: {
-        duration: 5000,
+        duration: 4000,
         onScreen: true
       }
     });
@@ -125,6 +125,22 @@ const Admin = ({
       handleShowModalTicketValidation();
     }
   };
+
+// useEffect(() => {
+//   // refresh the showed time
+
+//   function convertaverageEatingTime(averageEatingTime) {
+//     var hours = Math.floor(averageEatingTime / 60);  
+//     var minutes = averageEatingTime % 60;
+//     var averageEatingTimeConverted = hours + ":" + minutes;
+//     return averageEatingTimeConverted;        
+//   };
+
+//  convertaverageEatingTime();
+// console.log('ok');
+// }, [averageEatingTime]);
+
+
 
   // bind modal to the app div : root
   Modal.setAppElement('#root');
