@@ -40,7 +40,6 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=12, nullable=true)
-     * @Assert\NotBlank()
      * @Groups("tickets_get")
      */
     private $cellPhone;

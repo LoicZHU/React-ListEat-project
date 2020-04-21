@@ -73,10 +73,6 @@ class TicketController extends AbstractController
         if(!empty($jsonErrors)){
             return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-        // the customer's email was set to nullable=true and the NotBlank constraint was removed in case the ticket would be added directly by the restaurant (meaning the customer doesn't use a smartphone and therefore has no immediate access to his/her email). Instead, the following condition was added in order to compel a customer using the QR code (and therefore his/her smartphone) to provide his/her email address.
-        if(empty($data->email)){
-            return $this->json(['message' => 'Veuillez fournir une adresse email valide.'], Response::HTTP_UNPROCESSABLE_ENTITY);
-        } 
 
         $restaurant = $restaurantRepository->find($data->restaurant);
         
