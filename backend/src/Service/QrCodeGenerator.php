@@ -28,7 +28,7 @@ class QrCodeGenerator
         $binary = "\x09/public\x0A";
         $trimmed = trim($baseUrl,  $binary);
         $baseUrl = '/'.$trimmed;
-        $server = 'wwww.listeat.io';
+        $server = 'www.listeat.io';
         // creating a qrcode with the Qrcode class
         //$lien='https://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
 
