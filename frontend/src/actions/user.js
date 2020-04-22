@@ -224,6 +224,7 @@ export const newPasswordSubmit = () => ({
 export const confirmNewPassword = (newValue) => ({
   type: CONFIRM_NEW_PASSWORD,
   newValue,
+});
   
 export const openRestaurantContent = () => ({
   type: OPEN_RESTAURANT_CONTENT,
