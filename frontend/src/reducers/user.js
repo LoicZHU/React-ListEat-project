@@ -17,7 +17,10 @@ import {
   REFRESH_TIME,
   SHOW_SIGNUP_CONFIRMATION,
   MOBILE_MENU_OPENED,
-  CLOSE_MOBILE_MENU
+  CLOSE_MOBILE_MENU,
+  CHANGE_PASSWORDRESET_INPUT_VALUE,
+  SHOW_PASSWORDRESET_EMAIL_ERROR,
+  SHOW_PASSWORDRESET_EMAIL_CONFIRMATION,
 } from 'src/actions/user';
 
 // initial state
@@ -79,6 +82,16 @@ const initialState = {
 
   // mobile menu handling
   mobileMenuOpened: false,
+
+  //password reset 
+  passwordReset: {
+    email: '',
+    newPassword: '',
+    code: '',
+    customerId: '',
+    emailConfirmation: false,
+    emailError: false,
+  },
 };
 
 // reducer
@@ -218,6 +231,33 @@ const userReducer = (state = initialState, action = {}) => {
           ...state,
           mobileMenuOpened: false,
         };
+
+        case CHANGE_PASSWORDRESET_INPUT_VALUE:
+          return {
+            ...state,
+            passwordReset: {
+              ...state.passwordReset,
+              [action.fieldName]: action.newValue,
+            },
+          };
+
+          case SHOW_PASSWORDRESET_EMAIL_ERROR:
+            return {
+              ...state,
+              passwordReset: {
+                ...state.passwordReset,
+                emailError: action.newValue,
+              },
+            };         
+
+            case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
+              return {
+                ...state,
+                passwordReset: {
+                  ...state.passwordReset,
+                  emailConfirmation: action.newValue,
+                },
+              };       
 
     default: return state;
   }

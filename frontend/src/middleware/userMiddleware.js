@@ -25,14 +25,18 @@ import {
   saveTicketsData,
   showSignupConfirmation,
   QRCODE_DOWNLOAD,
+  PASSWORD_RESET_CHECK_EMAIL,
+  showPasswordResetEmailConfirmation,
+  showPasswordResetEmailError,
+  
 } from 'src/actions/user';
 
 import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
-// const baseUrl = 'http://localhost:8001';
-const baseUrl = 'https://www.listeat.io:8080';
+const baseUrl = 'http://localhost:8001';
+// const baseUrl = 'https://www.listeat.io:8080';
 
 
 // middleware
@@ -315,6 +319,28 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       next(action);
       break;
+
+      case PASSWORD_RESET_CHECK_EMAIL:
+        axios({
+          method: 'post',
+          url: `${baseUrl}/forgotten-password`, 
+          data : {
+            username: store.getState().user.passwordReset.email,
+          }
+        }).then((response) => {
+          console.log(response);
+          store.dispatch(showPasswordResetEmailConfirmation(false));
+          store.dispatch(showPasswordResetEmailError(false));
+          store.dispatch(showPasswordResetEmailConfirmation(true));
+        })
+          .catch((error) => {
+            console.warn(error);
+            store.dispatch(showPasswordResetEmailConfirmation(false));
+            store.dispatch(showPasswordResetEmailError(false));
+            store.dispatch(showPasswordResetEmailError(true));
+          });
+        next(action);
+        break;
 
     default:
       next(action);
