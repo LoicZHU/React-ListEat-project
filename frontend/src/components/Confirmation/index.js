@@ -10,7 +10,7 @@ const Confirmation = ({ ticketId, ticketCutlery, ticketWaitingTime }) => (
     <h1>Félicitations, vous êtes sur la liste d'attente !</h1>
 
     <div className="ticket__confirmation__message">
-      <p>Vous serez notifié par e-mail lorsque vous tour sera imminent.<br />Le restaurateur vous invitera à vous installer.</p>
+      <p>Vous serez notifié par e-mail lorsque votre tour sera imminent.<br />Le restaurateur vous invitera à vous installer.</p>
       <p>Merci de vous présenter au complet.</p>
     </div>
 
