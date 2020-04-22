@@ -3,7 +3,11 @@ import React from 'react';
 
 import './passwordforgotten.scss';
 import ConfirmationMessage from './ConfirmationMessage';
+import NewPasswordConfirmationMessage from './NewPasswordConfirmationMessage';
+import NewPasswordErrorMessage from './NewPasswordErrorMessage';
+
 import ErrorMessage from './ErrorMessage'
+import CodeErrorMessage from './CodeErrorMessage'
 
 const Login = ({
   changePasswordResetInputValue,
@@ -11,7 +15,15 @@ const Login = ({
   email,
   emailError,
   emailConfirmation,
-  resetPasswordRequestSent,
+  inputCode,
+  serverCode,
+  showNewPasswordField,
+  showVerificationCodeError,
+  newPasswordField,
+  verificationCodeError,
+  newPassword,
+  newPasswordSubmit,
+  newPasswordConfirmed
 }) => {
 
   // handle input change
@@ -19,19 +31,33 @@ const Login = ({
     changePasswordResetInputValue(evt.target.value, evt.target.name);
   };
 
-    // handle form submit
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      handleSendEmail();
-    };
+  // handle form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSendEmail();
+  };
 
+  // handle verification submit 
+  const handleCodeSubmit = (e) => {
+    e.preventDefault();
+    if (serverCode == inputCode) {
+      showNewPasswordField();
+    } else {
+      showVerificationCodeError();
+    }
+  };
+
+  const handleNewPasswordSubmit = (e) => {
+    e.preventDefault();
+    newPasswordSubmit();
+  };
 
     return (
     <div className="form-container">
       <h1>Réinitialisez votre mot de passe</h1>
 
-      <form id="login-form" onSubmit={handleSubmit}>
-        <p>Merci d'indiquer l'adresse mail rattachée à votre compte </p>
+      {!emailConfirmation && <form id="password-reset-form" onSubmit={handleSubmit}>
+        <p>Merci d'indiquer l'adresse mail rattachée à votre compte.</p>
         <input
           onChange={handleChange}
           value={email}
@@ -42,11 +68,36 @@ const Login = ({
           required
         />
 
-        {emailConfirmation && <ConfirmationMessage />}
         {emailError && <ErrorMessage />}
 
         {true && <button className="button">Envoyer</button>}
-      </form>
+      </form> }
+
+      {emailConfirmation && !newPasswordField && <form id="password-reset-form" onSubmit={handleCodeSubmit}>
+        <p>Merci d'indiquer le code de vérification envoyé par email.</p>
+ 
+        <input placeholder="Code de confirmation" 
+        // type="number" maxLength="6"
+         name="inputCode" onChange={handleChange} value={inputCode} />
+
+        { verificationCodeError && <CodeErrorMessage />}
+
+        {true && <button className="button">Envoyer</button>}
+      </form> }
+
+      {newPasswordField && <form id="password-reset-form" onSubmit={handleNewPasswordSubmit}>
+        <p>Merci d'indiquer votre nouveau mot de passe.</p>
+ 
+        <input placeholder="Nouveau mot de passe" minLength="6"
+         name="newPassword" onChange={handleChange} value={newPassword} />
+
+        {true && <button className="button">Envoyer</button>}
+        { newPasswordConfirmed && <NewPasswordConfirmationMessage />}
+      </form> }
+
+      
+
+
     </div>
     );
   };
