@@ -26,8 +26,14 @@ const Validation = ({
       <h1>{restaurantName}</h1>
 
       <div className="ticket__validation__infos">
-        <p>Nombre de couverts souhaités : <span className="ticket__validation__info">{restaurantName}</span></p>
-        <p>Temps d'attente estimé : <span className="ticket__validation__info">{ticketWaitingTime}</span></p>
+        <p>Nombre de couverts souhaités :
+          <span className="ticket__validation__info"> {ticketCutlery}</span>
+        </p>
+
+        <p>Temps d'attente estimé :
+          <span className="ticket__validation__info"> {ticketWaitingTime} {ticketWaitingTime > 1 ? 'minutes' : 'minute'}
+          </span>
+        </p>
       </div>
 
       <div className="ticket__validation__question">
