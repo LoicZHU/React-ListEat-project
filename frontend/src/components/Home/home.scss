@@ -13,12 +13,11 @@
     justify-content: center;
     align-items: center;
     background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-position: bottom;
+    background-size: auto;
     margin-bottom: 50px;
-    
     height: 50vh;
+    min-height: 350px;
     max-height: 600px;
     width: 100%;
 
@@ -156,6 +155,10 @@
         font-weight: bold;
       }
 
+      p {
+        font-style: italic;
+      }
+
       &__detail {
         padding: 20px 0;
 
@@ -254,6 +257,7 @@
 @media (min-width: $mobile-breakpoint) {
   .home {
     &__top {
+
         &__partner {
           display: flex !important;
           flex-direction: column;

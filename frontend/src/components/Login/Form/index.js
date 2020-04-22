@@ -50,9 +50,9 @@ const Form = ({
 
       <button className="button" type="submit">Connexion</button>
 
-      <span className="bottom-links"><a href="/forgotten-password">Identifiant ou mot de passe oublié ?</a></span>
+      <span className="bottom-links"><a href="/forgotten-password">Identifiant ou mot de passe oublié&nbsp;?</a></span>
 
-      <span className="bottom-links"><a href="/signup">Vous n'avez pas de compte ? Créez-en un en 5 minutes !</a></span>
+      <span className="bottom-links"><a href="/signup">Vous n'avez pas de compte ? Créez-en un en 5 minutes&nbsp;!</a></span>
     </form>
   );
 };

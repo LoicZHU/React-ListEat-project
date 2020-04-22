@@ -1,10 +1,10 @@
 @import 'src/styles/_vars.scss';
 
 .faq {
-  min-width: 400px;
   width: 100%;
-  margin: 2em auto;
-  padding: 0 50px;
+  margin: 5em auto;
+  margin-bottom: 1em;
+  padding: 0 30px;
 
   h1 {
     text-align: center;
@@ -20,30 +20,54 @@
   &__links {
     color: $alt-color;
     text-align: center;
-    margin: 10px 40px 40px;
+    margin-top: 30px;
+    margin-bottom: 80px;
     
     .faq__link {
-      margin-right: 10px;
       padding: 10px;
+      color: black;
+      background-color: $light-color;
+
+      &:first-of-type {
+        border-radius: 5px 0px 0px 5px;
+      }
+
+      &:last-of-type {
+        border-radius: 0px 5px 5px 0px;
+      }
+
+      &.active {
+        background-color: $primary-color;
+        color: #fff;
+      }
     }
 
     .faq__link:hover {
       cursor: pointer;
-      color: $primary-color;
+      color: #fff;
+      background-color: $primary-color;
     }
   }
 
-  &__content {
-    margin: 20px 0;
-    text-align: justify;
-    // padding-right: 40%;
+  &__container {
+    width: 95%;
+    min-width: 250px;
+    max-width: 800px;
+    margin: 0 auto;
 
-    .faq__content__question {
-      font-weight: bold;
-    }
+    .faq__content {
+      margin: 40px 0;
+      // padding-right: 40%;
 
-    .faq__content__answer {
-      margin-top: 5px;
+      .faq__content__question {
+        font-weight: bold;
+        line-height: 1.3em;
+      }
+
+      .faq__content__answer {
+        margin-top: 5px;
+        line-height: 1.2em;
+      }
     }
   }
 
@@ -57,10 +81,4 @@
   //     font-weight: bold;
   //   }
   // }
-}
-
-@media (min-width: $mobile-breakpoint) {
-  .faq {
-    padding: 100px;
-  }
 }
