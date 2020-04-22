@@ -114,6 +114,7 @@ const Signup = ({
         )}
 
         <input
+          key="lastname"
           name="lastname"
           placeholder="Nom"
           id="lastname"
@@ -122,6 +123,7 @@ const Signup = ({
           required
         />
         <input
+          key="firstname"
           name="firstname"
           placeholder="Prénom"
           id="firstname"
@@ -130,6 +132,7 @@ const Signup = ({
           required
         />
         <input
+          key="email"
           name="email"
           type="email"
           placeholder="Adresse email"
@@ -139,6 +142,7 @@ const Signup = ({
           required
         />
         <input
+          key="password"
           name="password" 
           type="password"
           placeholder="Mot de passe"
@@ -147,6 +151,7 @@ const Signup = ({
           onChange={handleChange, checkPassword}
         />
         <input
+          key="passwordConfirmation"
           name="passwordConfirmation"
           type="password"
           placeholder="Confirmation du mot de passe"
@@ -159,6 +164,7 @@ const Signup = ({
 
         <span>Concernant votre restaurant</span>
         <input
+          key="restaurantName"
           name="restaurantName"
           placeholder="Nom de votre restaurant"
           id="name"
@@ -167,6 +173,7 @@ const Signup = ({
           required
         />
         <input
+          key="address"
           name="address"
           placeholder="Adresse"
           id="address"
@@ -175,6 +182,7 @@ const Signup = ({
           required
         />
         <input
+          key="postcode"
           name="postcode"
           placeholder="Code postal"
           id="postcode"
@@ -183,6 +191,7 @@ const Signup = ({
           required
         />
         <input
+          key="city"
           name="city"
           placeholder="Ville"
           id="city"
@@ -191,6 +200,7 @@ const Signup = ({
           required
         />
         <input
+          key="country"
           name="country"
           placeholder="Pays"
           id="country"
@@ -199,6 +209,7 @@ const Signup = ({
           required
         />
         <input
+          key="phone"
           name="phone"
           placeholder="Téléphone"
           id="phone"
@@ -207,6 +218,7 @@ const Signup = ({
           required
         />
         <input
+          key="cis"
           name="cis"
           placeholder="N°SIRET"
           id="cis"
@@ -215,6 +227,7 @@ const Signup = ({
           required
         />
         <input
+          key="averageEatingTime"
           name="averageEatingTime"
           placeholder="Temps moyen de repas en minutes"
           id="average-eating-time"
@@ -226,6 +239,7 @@ const Signup = ({
           required
         />
         <input
+          key="coversNumber"
           name="coversNumber"
           placeholder="Nombre de couverts"
           id="covers-number"
