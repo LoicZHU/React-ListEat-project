@@ -17,7 +17,9 @@ import {
   REFRESH_TIME,
   SHOW_SIGNUP_CONFIRMATION,
   MOBILE_MENU_OPENED,
-  CLOSE_MOBILE_MENU
+  CLOSE_MOBILE_MENU,
+  OPEN_RESTAURANT_CONTENT,
+  OPEN_CLIENT_CONTENT,
 } from 'src/actions/user';
 
 // initial state
@@ -79,6 +81,10 @@ const initialState = {
 
   // mobile menu handling
   mobileMenuOpened: false,
+
+  // FAQ
+  isRestaurantContentOpen: true,
+  isClientContentOpen: false,
 };
 
 // reducer
@@ -218,6 +224,20 @@ const userReducer = (state = initialState, action = {}) => {
           ...state,
           mobileMenuOpened: false,
         };
+
+    case OPEN_RESTAURANT_CONTENT:
+      return {
+        ...state,
+        isRestaurantContentOpen: true,
+        isClientContentOpen: false,
+      };
+
+    case OPEN_CLIENT_CONTENT:
+      return {
+        ...state,
+        isRestaurantContentOpen: false,
+        isClientContentOpen: true,
+      };
 
     default: return state;
   }

@@ -28,6 +28,8 @@ export const SHOW_SIGNUP_CONFIRMATION = 'SHOW_SIGNUP_CONFIRMATION';
 export const QRCODE_DOWNLOAD = 'QRCODE_DOWNLOAD';
 export const MOBILE_MENU_OPENED = 'MOBILE_MENU_OPENED';
 export const CLOSE_MOBILE_MENU = 'CLOSE_MOBILE_MENU';
+export const OPEN_RESTAURANT_CONTENT = 'OPEN_RESTAURANT_CONTENT';
+export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -164,6 +166,12 @@ export const handleMobileMenuOpened = () => ({
 
 export const closeMobileMenu = () => ({
   type: CLOSE_MOBILE_MENU,
-})
+});
 
+export const openRestaurantContent = () => ({
+  type: OPEN_RESTAURANT_CONTENT,
+});
 
+export const openClientContent = () => ({
+  type: OPEN_CLIENT_CONTENT,
+});
