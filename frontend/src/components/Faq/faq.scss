@@ -2,8 +2,9 @@
 
 .faq {
   min-width: 400px;
-  width: 60%;
+  width: 100%;
   margin: 2em auto;
+  padding: 0 50px;
 
   h1 {
     text-align: center;
@@ -56,4 +57,10 @@
   //     font-weight: bold;
   //   }
   // }
+}
+
+@media (min-width: $mobile-breakpoint) {
+  .faq {
+    padding: 100px;
+  }
 }
