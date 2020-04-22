@@ -31,7 +31,7 @@ const initialState = {
     phone: '',
     cutlery: '', // int
     showModalTicketValidation: false,
-    estimatedEntryTime: '',
+    ticketEstimatedEntryTime: '',
     ticketId: null,
     errors: {
       modal: false,
@@ -206,6 +206,7 @@ const ticketsReducer = (state = initialState, action = {}) => {
         ...state,
         ticketStatus: action.newValue,
         isTicketValidate: action.isValidate,
+        ticketEstimatedEntryTime: action.estimatedEntryTime,
       };
 
     default: return state;

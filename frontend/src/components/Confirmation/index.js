@@ -5,7 +5,7 @@ import React from 'react';
 import './confirmation.scss';
 
 // == Composant
-const Confirmation = ({ ticketId, ticketCutlery, ticketWaitingTime }) => (
+const Confirmation = ({ ticketId, ticketCutlery, ticketEstimatedEntryTime }) => (
   <main className="ticket__confirmation">
     <h1>Félicitations, vous êtes sur la liste d'attente !</h1>
 
@@ -17,7 +17,13 @@ const Confirmation = ({ ticketId, ticketCutlery, ticketWaitingTime }) => (
     <div className="ticket__confirmation__infos">
       <p>Numéro de ticket : <span className="ticket__confirmation__info">{ticketId}</span></p>
       <p>Nombre de couverts souhaités : <span className="ticket__confirmation__info">{ticketCutlery}</span></p>
-      <p>Temps d'attente estimé : <span className="ticket__confirmation__info">{ticketWaitingTime} minutes</span></p>
+      <p>Heure d'entrée estimée :
+        <span className="ticket__confirmation__info"> {ticketEstimatedEntryTime ? ticketEstimatedEntryTime.substring(
+          ticketEstimatedEntryTime.indexOf('T') + 1,
+          ticketEstimatedEntryTime.indexOf('T') + 6,
+        ) : ''}
+        </span>
+      </p>
     </div>
   </main>
 );

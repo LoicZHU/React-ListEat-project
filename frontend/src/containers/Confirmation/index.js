@@ -5,7 +5,7 @@ import Confirmation from 'src/components/Confirmation';
 const mapStateToProps = (state) => ({
   ticketId: state.tickets.ticketId,
   ticketCutlery: state.tickets.ticketCutlery,
-  ticketWaitingTime: state.tickets.ticketWaitingTime,
+  ticketEstimatedEntryTime: state.tickets.ticketEstimatedEntryTime,
 });
 
 const mapDispatchToProps = () => ({
