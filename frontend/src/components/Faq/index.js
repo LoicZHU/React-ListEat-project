@@ -26,8 +26,8 @@ const Faq = ({
       <p className="faq__choice">Je suis...</p>
 
       <div className="faq__links">
-        <a className="faq__link" onClick={handleRestaurantClick}>Restaurateur</a>
-        <a className="faq__link" onClick={handleClientClick}>Client</a>
+        <a className={`faq__link partner ${(isRestaurantContentOpen) ? 'active' : ''}`} onClick={handleRestaurantClick}>Restaurateur</a>
+        <a className={`faq__link customer ${(isClientContentOpen) ? 'active' : ''}`} onClick={handleClientClick}>Client</a>
       </div>
 
       {/* restaurant FAQ */}

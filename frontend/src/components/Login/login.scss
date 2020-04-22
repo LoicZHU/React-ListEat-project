@@ -1,11 +1,11 @@
 @import 'src/styles/index.scss';
 
 .login-container {
-  max-width: 700px;
   width: 90%;
   margin: 0px auto !important;
   padding: 50px 0; 
   text-align: center;
+  line-height: 1.2em;
 
   h1 {
     font-weight: bold;
