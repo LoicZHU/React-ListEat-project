@@ -29,6 +29,7 @@ const Admin = ({
   handleShowModalTicketValidation,
   showModalErrors,
   showModalEmailError,
+  handleClearModalForm,
 
   // modal (ticket add)
   lastName,
@@ -81,10 +82,11 @@ const Admin = ({
       dismiss: {
         duration: 4000,
         onScreen: true
-      }
+      },
     });
-    
+
     handleTicketSubscribe();
+    console.log('je suis dans Admin, l70');
   };
 
   const handleConfirm = () => {
@@ -104,7 +106,14 @@ const Admin = ({
   };
 
   const handleTicketCancel = () => {
+    setOpen(false);
+    handleClearModalForm();
     handleModalTicketCancel();
+    handleShowModalTicketForm();
+  };
+
+  const handleOnAfterClose = () => {
+    handleClearModalForm();
     handleShowModalTicketForm();
   };
 
@@ -117,6 +126,7 @@ const Admin = ({
   };
 
   const handleModalTicketValidation = () => {
+
     if   ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
       handleModalErrors();
     } else if (email.length > 0 && !email.includes('@') && !email.includes('.')) {
@@ -124,23 +134,8 @@ const Admin = ({
     } else {
       handleShowModalTicketValidation();
     }
+
   };
-
-// useEffect(() => {
-//   // refresh the showed time
-
-//   function convertaverageEatingTime(averageEatingTime) {
-//     var hours = Math.floor(averageEatingTime / 60);  
-//     var minutes = averageEatingTime % 60;
-//     var averageEatingTimeConverted = hours + ":" + minutes;
-//     return averageEatingTimeConverted;        
-//   };
-
-//  convertaverageEatingTime();
-// console.log('ok');
-// }, [averageEatingTime]);
-
-
 
   // bind modal to the app div : root
   Modal.setAppElement('#root');
@@ -177,11 +172,11 @@ const Admin = ({
     modalTitle.style.color = '#ff8400';
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
 
-  return (    
+  // };
+
+  return (
     (!loadingTicketsData && (
       <div id="admin-wrapper">
         {/* left section */}
@@ -214,10 +209,9 @@ const Admin = ({
                 <span>Nom : {tickets.length > 0 ? currentTicket.customer.lastName : ''} </span>
                 <span>Prénom : {tickets.length > 0 ? currentTicket.customer.firstName : ''}</span>
                 <span>Horaire estimé :&nbsp; {tickets.length > 0 ? currentTicket.estimatedEntryTime.substring(
-                    currentTicket.estimatedEntryTime.indexOf('T') + 1,
-                    currentTicket.estimatedEntryTime.indexOf('T') + 6,
-                  ) : ''}
-                  
+                  currentTicket.estimatedEntryTime.indexOf('T') + 1,
+                  currentTicket.estimatedEntryTime.indexOf('T') + 6,
+                ) : ''}
                 </span>
                 <div id="ticket-ref">
                   <span>Ref ticket : </span>
@@ -266,22 +260,22 @@ const Admin = ({
               <Modal
                 isOpen={open}
                 onAfterOpen={handleOpen}
-                onAfterClose={handleTicketCancel}
-                onRequestClose={handleClose}
+                onRequestClose={handleTicketCancel}
+                onAfterClose={handleOnAfterClose}
                 style={customStyles}
                 shouldFocusAfterRender
                 shouldCloseOnEsc
                 contentLabel="Ticket adding modal" // for screenreaders
               >
                 <div className="modal-title">                  
-                { showModalTicketValidation && <div className="previous-button" onClick={handleShowModalTicketForm}></div> }
-                { !showModalTicketValidation &&<div className="close-button" onClick={handleClose}>Fermer {/* &#x274C; */} </div>}
+                {showModalTicketValidation && <div className="previous-button" onClick={handleShowModalTicketForm}></div>}
+                {!showModalTicketValidation &&<div className="close-button" onClick={handleTicketCancel}>Fermer {/* &#x274C; */} </div>}
                 </div>
-                  
+
                  <div className="ticket-form--container">
-                  { !showModalTicketValidation && <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2> }
+                  {!showModalTicketValidation && <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2> }
                   <form className="ticket-form" onSubmit={handleSubmit} >
-                  { !showModalTicketValidation &&
+                  {!showModalTicketValidation &&
                   <>
                     <Field
                       name="lastName"
@@ -364,7 +358,7 @@ const Admin = ({
                     <span id="estimated-entry">{estimatedEntryTime}</span>
 
                     <div className="bottom">
-                      <div className="cancel-button" onClick={handleClose}>Annuler</div>
+                      <div className="cancel-button" onClick={handleTicketCancel}>Annuler</div>
                       <button className="ticket-submit button-alt" type="submit" >Valider</button>
                     </div>
                     </>
@@ -379,21 +373,6 @@ const Admin = ({
                     }
                   </form>
                 </div>
-                
-
-
-             
-
-
-
-
-
-
-
-
-
-
-
               </Modal>
             </div>
           </div>

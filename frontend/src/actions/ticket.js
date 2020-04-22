@@ -20,6 +20,7 @@ export const MODAL_TICKET_STORE_TEMP = 'MODAL_TICKET_STORE_TEMP';
 export const MODAL_TICKET_CANCEL = 'MODAL_TICKET_CANCEL';
 export const SHOW_MODAL_EMAIL_ERROR = 'SHOW_MODAL_EMAIL_ERROR';
 export const SHOW_MODAL_ERRORS = 'SHOW_MODAL_ERRORS';
+export const CLEAR_MODAL_FORM = 'CLEAR_MODAL_FORM';
 
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
@@ -62,14 +63,14 @@ export const modalTicketValidate = () => ({
 
 export const modalTicketStoreTemp = (estimatedEntryTime, ticketId) => ({
   type: MODAL_TICKET_STORE_TEMP,
-  estimatedEntryTime: estimatedEntryTime,
+  estimatedEntryTime,
   ticketId,
 });
 
 export const getRestaurantName = () => ({
   type: GET_RESTAURANT_NAME,
-  });
-  
+});
+
 export const getRestaurantInfos = () => ({
   type: GET_RESTAURANT_INFOS,
 });
@@ -119,6 +120,10 @@ export const saveTicketStatus = (newValue, isValidate) => ({
   type: SAVE_TICKET_STATUS,
   newValue,
   isValidate,
+});
+
+export const handleClearModalForm = () => ({
+  type: CLEAR_MODAL_FORM,
 });
 
 // export const changeCheckingTemporarySubscribedTicket = () => ({
