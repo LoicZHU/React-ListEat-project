@@ -32,7 +32,7 @@ const Trust = () => (
 
     <div className="home__trust__partner">
       <h2>Ils nous font confiance</h2>
-    
+      <p>Plus de 10 000 restaurants nous font confiance, pourquoi pas vous ?</p>
       <div className="clients-logo-list">
         <img src={logo1} />
         <img src={logo2} />
