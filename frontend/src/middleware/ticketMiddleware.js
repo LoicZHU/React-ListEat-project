@@ -42,6 +42,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_RESTAURANT_INFOS:
       const restaurantUrlId = window.location.pathname.match((new RegExp('restaurant/' + "(.*)" + '/tickets')))[1];
+      localStorage.setItem('restaurantUrlId', restaurantUrlId);
 
       axios({
         method: 'post',
@@ -116,7 +117,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           console.log(response);
           const isTicketValidate = (response.data.ticketStatus === 1); // boolean
-          store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate));
+          store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate, response.data.estimatedEntryTime));
         })
         .catch((error) => {
           console.warn(error.response);
