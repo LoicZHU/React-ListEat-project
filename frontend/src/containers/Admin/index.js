@@ -21,6 +21,7 @@ import {
   handleModalTicketCancel,
   showModalEmailError,
   showModalErrors,
+  handleClearModalForm,
 } from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
@@ -70,6 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleTicketSubscribe: () => {
     dispatch(modalTicketAdd());
+    console.log('je suis dans Admin Container, l71');
   },
 
   handleShowModalTicketForm: () => {
@@ -95,6 +97,10 @@ const mapDispatchToProps = (dispatch) => ({
   showModalEmailError: () => {
     dispatch(showModalEmailError());
   },
+
+  handleClearModalForm: () => {
+    dispatch(handleClearModalForm());
+  }
 
 });
 

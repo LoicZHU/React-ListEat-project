@@ -18,7 +18,6 @@ import {
   saveRestaurantName,
   modalTicketStoreTemp,
   MODAL_TICKET_CANCEL,
-  
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -28,8 +27,8 @@ import {
   fetchTicketsData,
 } from 'src/actions/user';
 
-const baseUrl = 'http://localhost:8001';
-// const baseUrl = 'https://www.listeat.io:8080'; 
+// const baseUrl = 'http://localhost:8001';
+const baseUrl = 'https://www.listeat.io:8080'; 
 
 // const id = store.getState().user.restaurantId;
 
@@ -125,117 +124,117 @@ const ticketMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
 
-      case CANCEL_CURRENT_TICKET:
-        axios({
-          method: 'put',
-          url:`${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
-          headers: {
-            'Content-Type': 'application/json',
+    case CANCEL_CURRENT_TICKET:
+      axios({
+        method: 'put',
+        url:`${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          status: 'cancelled',
+        },
+      }).then((response) => {
+        store.dispatch(fetchTicketsData());
+        console.log(response);
+      })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    case CONFIRM_CURRENT_TICKET:
+      axios({
+        method: 'put',
+        url: `${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          status: 'seated',
+        },
+      }).then((response) => {
+        console.log(response);
+        store.dispatch(fetchTicketsData());
+      })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    case MODAL_TICKET_VALIDATE:
+      axios({
+        method: 'post',
+        url:`${baseUrl}/api/tickets`, 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          lastName: store.getState().tickets.ticketInscriptionInput.lastName,
+          firstName: store.getState().tickets.ticketInscriptionInput.firstName,
+          cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
+          email: store.getState().tickets.ticketInscriptionInput.email,
+          restaurant: store.getState().user.restaurantId,
+          ticket: {
+            coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
           },
-          data: {              
-            status: "cancelled",
-          },
-        }).then((response) => {
+        },
+      })
+        .then((response) => {
+          let estimatedEntryTime = response.data.estimatedEntryTime;
+          estimatedEntryTime = estimatedEntryTime.substring(estimatedEntryTime.indexOf('T') + 1, estimatedEntryTime.indexOf('T') + 6);
+
+          store.dispatch(modalTicketStoreTemp(estimatedEntryTime, response.data.ticketId));
+        })
+        .catch((error) => {
+          console.warn(error.response);
+        });
+      next(action);
+      break;
+
+    case MODAL_TICKET_ADD:
+      axios({
+        method: 'put',
+        url: `${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          status: 'confirmed',
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          store.dispatch(fetchTicketsData());
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
+
+    case MODAL_TICKET_CANCEL:
+      axios({
+        method: 'put',
+        url:`${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          status: 'cancelled',
+        },
+      })
+        .then((response) => {
           store.dispatch(fetchTicketsData());
           console.log(response);
         })
-          .catch((error) => {
-            console.warn(error);
-          });
-        next(action);
-        break;
-
-        case CONFIRM_CURRENT_TICKET:
-          axios({
-            method: 'put',
-            url:`${baseUrl}/api/partner/${id}/tickets/${ticketId}`, 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            data: {              
-              status: "seated",             
-            },
-          }).then((response) => {
-            console.log(response);
-            store.dispatch(fetchTicketsData());
-          })
-            .catch((error) => {
-              console.warn(error);
-            });
-          next(action);
-          break;
-
-          case MODAL_TICKET_VALIDATE:
-            axios({
-              method: 'post',
-              url:`${baseUrl}/api/tickets`, 
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              data: {
-                    lastName: store.getState().tickets.ticketInscriptionInput.lastName,
-                    firstName: store.getState().tickets.ticketInscriptionInput.firstName,
-                    cellPhone: store.getState().tickets.ticketInscriptionInput.phone,
-                    email: store.getState().tickets.ticketInscriptionInput.email,
-                    restaurant: store.getState().user.restaurantId,
-                    ticket: {
-                      coversNb: Number(store.getState().tickets.ticketInscriptionInput.cutlery),
-                    },
-                  }
-                })
-            .then((response) => {
-              let estimatedEntryTime = response.data.estimatedEntryTime;
-              estimatedEntryTime = estimatedEntryTime.substring(estimatedEntryTime.indexOf('T') + 1, estimatedEntryTime.indexOf('T') + 6);
-
-              store.dispatch(modalTicketStoreTemp(estimatedEntryTime, response.data.ticketId));
-            })
-              .catch((error) => {
-                console.warn(error.response);
-              });
-            next(action);
-            break;
-
-        case MODAL_TICKET_ADD:
-          axios({
-            method: 'put',
-            url:`${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            data: {
-                    status: "confirmed",
-                  },
-              })
-          .then((response) => {
-            console.log(response);
-            store.dispatch(fetchTicketsData());
-          })
-            .catch((error) => {
-              console.warn(error);
-            });
-          next(action);
-          break;
-
-          case MODAL_TICKET_CANCEL:
-              axios({
-                method: 'put',
-                url:`${baseUrl}/api/partner/${id}/tickets/${tempModalTicketId}`, 
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                data: {
-                        status: "cancelled",
-                      },
-                  })
-              .then((response) => {
-                store.dispatch(fetchTicketsData());
-                console.log(response);
-              })
-                .catch((error) => {
-                  console.warn(error);
-                });
-              next(action);
-              break;
+        .catch((error) => {
+          console.warn(error);
+        });
+      next(action);
+      break;
 
     default:
       next(action);

@@ -10,6 +10,7 @@ import {
   MODAL_TICKET_CANCEL,
   SHOW_MODAL_EMAIL_ERROR,
   SHOW_MODAL_ERRORS,
+  CLEAR_MODAL_FORM,
 
   // SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
   SAVE_RESTAURANT_INFOS,
@@ -32,7 +33,7 @@ const initialState = {
     showModalTicketValidation: false,
     estimatedEntryTime: '',
     ticketId: null,
-    errors:  {
+    errors: {
       modal: false,
       email: false,
     },
@@ -53,7 +54,7 @@ const initialState = {
       email: '',
     },
     estimatedWaitingTime: 0,
-    estimatedEntryTime: "2020-04-16T21:20:18+02:00"
+    estimatedEntryTime: '2020-04-16T21:20:18+02:00',
   },
 
   // client : restaurant infos (on ticket form)
@@ -128,8 +129,8 @@ const ticketsReducer = (state = initialState, action = {}) => {
           ...state.ticketInscriptionInput,
           estimatedEntryTime: action.estimatedEntryTime,
           ticketId: action.ticketId,
-      },
-    };
+        },
+      };
 
     case SHOW_MODAL_TICKET_VALIDATION:
       return {
@@ -141,9 +142,9 @@ const ticketsReducer = (state = initialState, action = {}) => {
             ...state.ticketInscriptionInput.errors,
             email: false,
             modal: false,
-          }
-      },
-    };
+          },
+        },
+      };
 
     case SHOW_MODAL_TICKET_FORM:
       return {
@@ -151,56 +152,55 @@ const ticketsReducer = (state = initialState, action = {}) => {
         ticketInscriptionInput: {
           ...state.ticketInscriptionInput,
           showModalTicketValidation: false,
-      },
-    };
+        },
+      };
 
-    case MODAL_TICKET_CANCEL:
-      console.log('ticketcancel');
-        return {
-          ...state,
-          ticketInscriptionInput: {
-            ...state.ticketInscriptionInput,
-              lastName: '',
-              firstName: '',
-              email: '',
-              phone: '',
-              cutlery: '', 
-              estimatedEntryTime: '',
-              ticketId: null,
-              errors: {
-                ...state.ticketInscriptionInput.errors,
-                modal: false,
-                email: false,
-              }
+    case CLEAR_MODAL_FORM:
+      return {
+        ...state,
+        ticketInscriptionInput: {
+          ...state.ticketInscriptionInput,
+          lastName: '',
+          firstName: '',
+          email: '',
+          phone: '',
+          cutlery: '',
+          estimatedEntryTime: '',
+          ticketId: '',
+          errors: {
+            ...state.ticketInscriptionInput.errors,
+            modal: false,
+            email: false,
+          },
         },
       };
 
     case SHOW_MODAL_ERRORS:
-        return {
-          ...state,
-          ticketInscriptionInput: {
-            ...state.ticketInscriptionInput,
-            errors: {
-              ...state.ticketInscriptionInput.errors,
-              modal: true,
-              email: false,
-            }
+      return {
+        ...state,
+        ticketInscriptionInput: {
+          ...state.ticketInscriptionInput,
+          errors: {
+            ...state.ticketInscriptionInput.errors,
+            modal: true,
+            email: false,
+          },
         },
       };
 
     case SHOW_MODAL_EMAIL_ERROR:
-        return {
-          ...state,
-          ticketInscriptionInput: {
-            ...state.ticketInscriptionInput,
-            errors: {
-              ...state.ticketInscriptionInput.errors,
-              email: true,
-              modal: false,
-            }
+      return {
+        ...state,
+        ticketInscriptionInput: {
+          ...state.ticketInscriptionInput,
+          errors: {
+            ...state.ticketInscriptionInput.errors,
+            email: true,
+            modal: false,
+          },
         },
       };
-      
+
     case SAVE_TICKET_STATUS:
       return {
         ...state,
