@@ -116,10 +116,11 @@ export const sendTicketValidation = (newValue) => ({
   newValue,
 });
 
-export const saveTicketStatus = (newValue, isValidate) => ({
+export const saveTicketStatus = (newValue, isValidate, estimatedEntryTime) => ({
   type: SAVE_TICKET_STATUS,
   newValue,
   isValidate,
+  estimatedEntryTime,
 });
 
 export const handleClearModalForm = () => ({
