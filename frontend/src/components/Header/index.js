@@ -4,20 +4,97 @@ import {
   NavLink
 } from 'react-router-dom';
 
+import HamburgerMenu from 'react-hamburger-menu';
 import Logo from 'src/assets/img/logo.png';
 import './header.scss';
 
-const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
+const Header = ({
+  isRestaurantLogged,
+  handleLogout,
+  restaurantId,
+  mobileMenuOpened,
+  handleMobileMenuOpened,
+  closeMobileMenu,
+}) => {
+
   const handleClick = () => {
     handleLogout();
   };
+
+  const handleCloseMobileMenu = () => {
+    closeMobileMenu();
+  };
+
+  window.addEventListener('scroll', handleCloseMobileMenu);
 
   return (
     <header>
       <nav>
       <div id="mobile-nav">
         <div className="header">
-          <input type="checkbox" className="openSidebarMenu" id="openSidebarMenu"/>
+        
+        <HamburgerMenu
+        isOpen={mobileMenuOpened}
+        menuClicked={handleMobileMenuOpened}
+        width={25}
+        height={15}
+        strokeWidth={3}
+        rotate={0}
+        color='black'
+        borderRadius={0}
+        animationDuration={0.5}
+        />
+
+          <div id="logo-container">
+            <a href="/"><img src={Logo}/></a>
+          </div>
+          
+        </div>
+
+        {mobileMenuOpened && 
+        <>
+        <div id="mobile-menu-overlay" onClick={handleCloseMobileMenu} ></div>
+          <div id="mobile-menu-container" onScroll={handleCloseMobileMenu}>
+
+          <ul>
+              <a href="/">
+                <li>Accueil<i className="fa fa-home" aria-hidden="true"></i></li>
+              </a>
+              <a href="/faq">
+                <li id="help">Aide<i className="fa fa-question-circle" aria-hidden="true"></i></li>
+              </a>
+                {!isRestaurantLogged && (
+                  <a href="/signup"><li>Inscription<i className="fa fa-user-plus" aria-hidden="true"></i></li></a>
+                )}
+
+                {!isRestaurantLogged && (
+                  <a href="/login"><li>Connexion<i className="fa fa-sign-in" aria-hidden="true"></i></li></a>
+                )}
+
+                {isRestaurantLogged && (
+                  <a href={`/partner/${restaurantId}/administration/`}>
+                    <li>Mon espace<i className="fa fa-ticket" aria-hidden="true"></i></li>
+                  </a>
+                )}
+                {isRestaurantLogged && (
+                  <a href={`/partner/${restaurantId}/administration/edit`}>
+                    <li>Mon profil<i className="fa fa-user" aria-hidden="true"></i></li>
+                  </a>
+                )}
+
+                {isRestaurantLogged && (
+                  <a onClick={handleClick}>
+                    <li>Déconnexion<i className="fa fa-sign-out" aria-hidden="true"></i></li>
+                  </a>
+                )}
+              </ul>
+          
+          </div>
+          </>
+          }
+
+          
+          {/* <input type="checkbox" className="openSidebarMenu" id="openSidebarMenu"/>
           <label htmlFor="openSidebarMenu" className="sidebarIconToggle">
             <div className="spinner diagonal part-1"></div>
             <div className="spinner horizontal"></div>
@@ -37,17 +114,14 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
             <a href="/faq">
               <li id="help">Aide <span id="help-button-span">?</span></li>
             </a>
-              {/* if not logged */}
               {!isRestaurantLogged && (
                 <a href="/signup"><li>Inscription</li></a>
               )}
 
-              {/* if not logged */}
               {!isRestaurantLogged && (
                 <a href="/login"><li>Connexion</li></a>
               )}
 
-              {/* if logged */}
               {isRestaurantLogged && (
                 <a href={`/partner/${restaurantId}/administration/`}>
                   <li>Mon espace</li>
@@ -65,8 +139,8 @@ const Header = ({ isRestaurantLogged, handleLogout, restaurantId }) => {
                 </a>
               )}
             </ul>
-          </div>
-      </div>
+              </div> */}
+
     </div>
     <div id="divider"></div>
     <div id="desktop-menu">

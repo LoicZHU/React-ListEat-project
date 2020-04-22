@@ -26,6 +26,8 @@ export const SAVE_TICKETS_DATA = 'SAVE_TICKETS_DATA';
 export const REFRESH_TIME = 'REFRESH_TIME';
 export const SHOW_SIGNUP_CONFIRMATION = 'SHOW_SIGNUP_CONFIRMATION';
 export const QRCODE_DOWNLOAD = 'QRCODE_DOWNLOAD';
+export const MOBILE_MENU_OPENED = 'MOBILE_MENU_OPENED';
+export const CLOSE_MOBILE_MENU = 'CLOSE_MOBILE_MENU';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -155,4 +157,13 @@ export const refreshTime = () => ({
 export const qrCodeDownload = () => ({
   type: QRCODE_DOWNLOAD,
 });
+
+export const handleMobileMenuOpened = () => ({
+  type: MOBILE_MENU_OPENED,
+});
+
+export const closeMobileMenu = () => ({
+  type: CLOSE_MOBILE_MENU,
+})
+
 
