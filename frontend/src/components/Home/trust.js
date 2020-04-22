@@ -28,6 +28,12 @@ const Trust = () => (
         </p>
         <span className="author">Pierre,</span><span className="company">manager du restaurant Chez Baba (33)</span>
       </span>
+      <span className="statement">
+        <p>
+        Le QR code c’est la vie&nbsp;!
+        </p>
+        <span className="author">Christophe,</span><span className="company">client (59)</span>
+      </span>
     </div>
 
     <div className="home__trust__partner">
