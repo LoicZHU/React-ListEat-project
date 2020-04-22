@@ -21,6 +21,11 @@ import {
   CHANGE_PASSWORDRESET_INPUT_VALUE,
   SHOW_PASSWORDRESET_EMAIL_ERROR,
   SHOW_PASSWORDRESET_EMAIL_CONFIRMATION,
+  STORE_SERVER_TEMP_CODE,
+  SHOW_NEW_PASSWORD_FIELD,
+  SHOW_VERIFICATION_CODE_ERROR,
+  STORE_SERVER_TEMP_USERID,
+  CONFIRM_NEW_PASSWORD,
   OPEN_RESTAURANT_CONTENT,
   OPEN_CLIENT_CONTENT,
 } from 'src/actions/user';
@@ -89,10 +94,14 @@ const initialState = {
   passwordReset: {
     email: '',
     newPassword: '',
-    code: '',
-    customerId: '',
+    inputCode: '',
+    serverCode: '',
+    userId: null,
     emailConfirmation: false,
     emailError: false,
+    verificationCodeError: false,
+    newPasswordField: false,
+    newPasswordConfirmed: null,
   },
   
   // FAQ
@@ -247,6 +256,89 @@ const userReducer = (state = initialState, action = {}) => {
           },
         };
 
+        case CHANGE_PASSWORDRESET_INPUT_VALUE:
+          return {
+            ...state,
+            passwordReset: {
+              ...state.passwordReset,
+              [action.fieldName]: action.newValue,
+            },
+          };
+
+        case SHOW_PASSWORDRESET_EMAIL_ERROR:
+          return {
+            ...state,
+            passwordReset: {
+              ...state.passwordReset,
+              emailError: action.newValue,
+            },
+          };         
+
+        case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
+          return {
+            ...state,
+            passwordReset: {
+              ...state.passwordReset,
+              emailConfirmation: action.newValue,
+            },
+          };       
+
+          case STORE_SERVER_TEMP_CODE:
+              return {
+                ...state,
+                passwordReset: {
+                  ...state.passwordReset,
+                  serverCode: action.newValue,
+                },
+              }; 
+
+          case STORE_SERVER_TEMP_USERID:
+              return {
+                ...state,
+                passwordReset: {
+                  ...state.passwordReset,
+                  userId: action.newValue,
+                },
+              }; 
+
+          case STORE_SERVER_TEMP_CODE:
+              return {
+                ...state,
+                passwordReset: {
+                  ...state.passwordReset,
+                  serverCode: action.newValue,
+                  customerId: action.userId,
+                },
+              }; 
+
+
+        case SHOW_VERIFICATION_CODE_ERROR:
+            return {
+              ...state,
+              passwordReset: {
+                ...state.passwordReset,
+                verificationCodeError: true,
+              },
+            }; 
+
+        case SHOW_NEW_PASSWORD_FIELD:
+            return {
+              ...state,
+              passwordReset: {
+                ...state.passwordReset,
+                newPasswordField: true,
+              },
+            };     
+            
+        case CONFIRM_NEW_PASSWORD:
+            return {
+              ...state,
+              passwordReset: {
+                ...state.passwordReset,
+                newPasswordConfirmed: action.newValue,
+              },
+            }; 
+
     case SHOW_PASSWORDRESET_EMAIL_ERROR:
       return {
         ...state,
@@ -278,6 +370,7 @@ const userReducer = (state = initialState, action = {}) => {
         isRestaurantContentOpen: false,
         isClientContentOpen: true,
       };
+
 
     default: return state;
   }

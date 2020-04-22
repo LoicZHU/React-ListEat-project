@@ -28,7 +28,10 @@ import {
   PASSWORD_RESET_CHECK_EMAIL,
   showPasswordResetEmailConfirmation,
   showPasswordResetEmailError,
-  
+  storeServerCode,
+  storeUserId,
+  SUBMIT_NEW_PASSWORD,
+  confirmNewPassword
 } from 'src/actions/user';
 
 import {
@@ -328,10 +331,12 @@ const userMiddleware = (store) => (next) => (action) => {
             username: store.getState().user.passwordReset.email,
           }
         }).then((response) => {
-          console.log(response);
+          console.log(response.data.userId);
           store.dispatch(showPasswordResetEmailConfirmation(false));
           store.dispatch(showPasswordResetEmailError(false));
           store.dispatch(showPasswordResetEmailConfirmation(true));
+          store.dispatch(storeServerCode(response.data.securityCode));
+          store.dispatch(storeUserId(response.data.userId));          
         })
           .catch((error) => {
             console.warn(error);
@@ -342,8 +347,32 @@ const userMiddleware = (store) => (next) => (action) => {
         next(action);
         break;
 
+
+
+      case SUBMIT_NEW_PASSWORD:
+          axios({
+            method: 'post',
+            url: `${baseUrl}/forgotten-password/confirmation`, 
+            data : {
+              securityCode: store.getState().user.passwordReset.inputCode,
+              userId: store.getState().user.passwordReset.userId,
+              newPassword: store.getState().user.passwordReset.newPassword,
+              },
+          }).then((response) => {
+            console.log(response);
+            store.dispatch(confirmNewPassword(true));
+          })
+            .catch((error) => {
+              console.warn(error);
+              store.dispatch(confirmNewPassword(false));
+            });
+          next(action);
+          break;
+
     default:
       next(action);
+
+      
   }
 };
 
