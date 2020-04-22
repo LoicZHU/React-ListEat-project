@@ -168,8 +168,8 @@ class UserController extends AbstractController
         } else {
             return $this->json(['message' => 'Cet identifiant n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
-
-        return $this->json(['message' => 'Code de sécurité envoyé'], Response::HTTP_CREATED);
+        
+        return $this->json(['message' => 'Code de sécurité envoyé', 'userId' => $user->getId(), 'securityCode' => $token->getTokenString()], Response::HTTP_CREATED);
     }
 
     /**
