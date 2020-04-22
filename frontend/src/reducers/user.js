@@ -16,6 +16,8 @@ import {
   SAVE_TICKETS_DATA,
   REFRESH_TIME,
   SHOW_SIGNUP_CONFIRMATION,
+  MOBILE_MENU_OPENED,
+  CLOSE_MOBILE_MENU
 } from 'src/actions/user';
 
 // initial state
@@ -74,6 +76,9 @@ const initialState = {
   // restaurant tickets data
   loadingTickets: true,
   restaurantTicketsData: [],
+
+  // mobile menu handling
+  mobileMenuOpened: false,
 };
 
 // reducer
@@ -200,6 +205,19 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         currentTime: new Date().toLocaleTimeString("fr-FR", {hour: '2-digit', minute:'2-digit'}),
       };
+
+      case MOBILE_MENU_OPENED:
+        return {
+          ...state,
+          mobileMenuOpened: !state.mobileMenuOpened,
+        };
+
+
+      case CLOSE_MOBILE_MENU:
+        return {
+          ...state,
+          mobileMenuOpened: false,
+        };
 
     default: return state;
   }

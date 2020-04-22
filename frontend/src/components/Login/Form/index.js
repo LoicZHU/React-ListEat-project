@@ -48,9 +48,9 @@ const Form = ({
 
       {errorMessage && <ErrorMessage />}
 
-      <span className="bottom-links"><a href="/forgotten-password">Identifiant ou mot de passe oublié ?</a></span>
-
       <button className="button" type="submit">Connexion</button>
+
+      <span className="bottom-links"><a href="/forgotten-password">Identifiant ou mot de passe oublié ?</a></span>
 
       <span className="bottom-links"><a href="/signup">Vous n'avez pas de compte ? Créez-en un en 5 minutes !</a></span>
     </form>

@@ -2,7 +2,6 @@
 
 
 footer {
-  background-color: $light-color;
   font-size: .9em;
   width: 100% !important;
   position: absolute !important;
@@ -13,6 +12,7 @@ footer {
     flex-direction: column;
     text-align: center;
     align-items: center;
+    background-color: $light-color;
   }
 
   #footer-first {
