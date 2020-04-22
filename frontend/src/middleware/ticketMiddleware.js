@@ -100,10 +100,11 @@ const ticketMiddleware = (store) => (next) => (action) => {
       break;
 
     case SEND_TICKET_VALIDATION:
+      const ticktId = store.getState().tickets.ticketId;
 
       axios({
         method: 'put',
-        url: `${baseUrl}/api/tickets/${ticketId}`,
+        url: `${baseUrl}/api/tickets/${ticktId}`,
         headers: {
           'Content-Type': 'application/json',
         },
