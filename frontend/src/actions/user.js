@@ -32,6 +32,8 @@ export const CHANGE_PASSWORDRESET_INPUT_VALUE = 'CHANGE_PASSWORDRESET_INPUT_VALU
 export const PASSWORD_RESET_CHECK_EMAIL = 'PASSWORD_RESET_CHECK_EMAIL';
 export const SHOW_PASSWORDRESET_EMAIL_ERROR = 'SHOW_PASSWORDRESET_EMAIL_ERROR';
 export const SHOW_PASSWORDRESET_EMAIL_CONFIRMATION = 'SHOW_PASSWORDRESET_EMAIL_CONFIRMATION';
+export const OPEN_RESTAURANT_CONTENT = 'OPEN_RESTAURANT_CONTENT';
+export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -190,6 +192,10 @@ export const showPasswordResetEmailError = (newValue) => ({
   newValue,
 });
 
+export const openRestaurantContent = () => ({
+  type: OPEN_RESTAURANT_CONTENT,
+});
 
-
-
+export const openClientContent = () => ({
+  type: OPEN_CLIENT_CONTENT,
+});
