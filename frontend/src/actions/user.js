@@ -28,6 +28,10 @@ export const SHOW_SIGNUP_CONFIRMATION = 'SHOW_SIGNUP_CONFIRMATION';
 export const QRCODE_DOWNLOAD = 'QRCODE_DOWNLOAD';
 export const MOBILE_MENU_OPENED = 'MOBILE_MENU_OPENED';
 export const CLOSE_MOBILE_MENU = 'CLOSE_MOBILE_MENU';
+export const CHANGE_PASSWORDRESET_INPUT_VALUE = 'CHANGE_PASSWORDRESET_INPUT_VALUE';
+export const PASSWORD_RESET_CHECK_EMAIL = 'PASSWORD_RESET_CHECK_EMAIL';
+export const SHOW_PASSWORDRESET_EMAIL_ERROR = 'SHOW_PASSWORDRESET_EMAIL_ERROR';
+export const SHOW_PASSWORDRESET_EMAIL_CONFIRMATION = 'SHOW_PASSWORDRESET_EMAIL_CONFIRMATION';
 export const OPEN_RESTAURANT_CONTENT = 'OPEN_RESTAURANT_CONTENT';
 export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
 
@@ -166,6 +170,26 @@ export const handleMobileMenuOpened = () => ({
 
 export const closeMobileMenu = () => ({
   type: CLOSE_MOBILE_MENU,
+});
+
+export const changePasswordResetInputValue = (newValue, fieldName) => ({
+  type: CHANGE_PASSWORDRESET_INPUT_VALUE,
+  newValue,
+  fieldName,
+});
+
+export const passwordResetCheckEmail = () => ({
+  type: PASSWORD_RESET_CHECK_EMAIL,
+});
+
+export const showPasswordResetEmailConfirmation = (newValue) => ({
+  type: SHOW_PASSWORDRESET_EMAIL_CONFIRMATION,
+  newValue,
+});
+
+export const showPasswordResetEmailError = (newValue) => ({
+  type: SHOW_PASSWORDRESET_EMAIL_ERROR,
+  newValue,
 });
 
 export const openRestaurantContent = () => ({

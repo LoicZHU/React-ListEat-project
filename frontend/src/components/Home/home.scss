@@ -76,9 +76,10 @@
 
     #arguments-title
     {
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: bold;
       text-align: center;
+      line-height: 1.2em;
       margin: 20px;
     }
 
@@ -157,10 +158,18 @@
 
       &__detail {
         padding: 20px 0;
+
+        p {
+          text-decoration: italic;
+        }
       }
 
       &__detail {
         padding: 20px 0;
+
+        p {
+          text-decoration: italic;
+        }
       }
     }
   }
@@ -325,11 +334,11 @@
       align-content: flex-end !important;
       width: 90%;
       max-width: 1300px;
-      margin: 0 auto;
-      margin-bottom: 50px;
+      margin: 80px auto !important;
+      // margin-bottom: 50px;
 
       #arguments-title {
-        padding-bottom: 20px;
+        padding-bottom: 60px;
         color: $dark-color;
       }
 
@@ -420,6 +429,7 @@
         // border: 1px $primary-color solid;
         border-radius: 5px;
         z-index: 2;
+        
       }
     }
 

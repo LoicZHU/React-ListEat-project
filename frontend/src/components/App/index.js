@@ -13,7 +13,7 @@ import Home from 'src/components/Home';
 import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
 import TicketForm from 'src/containers/TicketForm';
-import PasswordForgotten from 'src/components/PasswordForgotten';
+import PasswordForgotten from 'src/containers/PasswordForgotten';
 import Validation from 'src/containers/Validation';
 import Confirmation from 'src/containers/Confirmation';
 import Cancellation from 'src/containers/Cancellation';

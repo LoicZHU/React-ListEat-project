@@ -191,7 +191,7 @@ const Header = ({
         )}
 
         {isRestaurantLogged && (
-          <NavLink exact activeClassName="menu-link" to="/" onClick={handleClick}>
+          <NavLink exact activeClassName="menu-link" to="/logout" onClick={handleClick}>
             <li className="header-nav-button button">Déconnexion</li>
           </NavLink>
         )}
