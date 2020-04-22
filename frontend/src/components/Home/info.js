@@ -21,17 +21,18 @@ const Info = () => {
       <div className="home__info__content__detail">
         <h2>Simplement efficace.</h2>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum alias, architecto voluptates incidunt minima et, omnis nesciunt, temporibus assumenda eius ipsum pariatur aspernatur molestiae consequuntur sapiente exercitationem amet nostrum qui?
+          Collez votre QR code sur la vitrine de votre restaurant. Vos clients le scannent, saisissent quelques renseignements, obtiennent une estimation de leur temps d’attente et sont automatiquement inscrits sur la liste d’attente. Il ne manque plus qu’à les placer lorsqu’une table se libère !
         </p>
       </div>
       <div className="home__info__content__detail">
         <h2>Comment ça marche ?</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed nostrum architecto unde quas dolor deleniti minima ad officia labore nam voluptate quod, sapiente maxime autem consequuntur ipsa? Voluptate, nam officiis.</p>
         <ol>
-          <li>Lorem dolor adipisicing elit sit amet, consectetur.</li>
-          <li>Lorem adipisicing ipsum dolor sit amet,  ipsum consectetur.</li>
-          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+          <li>Créez votre compte partenaire en quelques minutes.</li>
+          <li>Téléchargez votre QR code. Imprimez-le et collez-le sur votre vitrine.</li>
+          <li>Vos clients scannent le QR code, renseignent quelques informations dont le nombre de couverts souhaités et obtiennent un ticket avec une estimation du temps d’attente. Ils recevront une notification automatique à l’approche de leur horaire de passage estimé.</li>
+          <li>Vous gérez vos tickets via votre espace partenaire, soit en plaçant les clients lorsqu’une table se libère, soit en annulant leur venue.</li>
         </ol>
+        <p>Pratique, pour vous et vos clients !</p>
       </div>
     </div>
   </section>

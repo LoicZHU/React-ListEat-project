@@ -11,23 +11,23 @@ const Argument = () => (
     <span id="arguments-title">Votre métier, notre priorité.</span>
     <div className="content">
       <article className="home__argument__article">
-        <h1>Argument 1</h1>
+        <h1>Fini le papier, gérez votre liste d’attente numériquement&nbsp;!</h1>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita, doloribus sed fuga dolor nisi recusandae? Dolore quo distinctio soluta? Nam corporis nemo sapiente quas, fugit sequi laboriosam aspernatur quod quibusdam.
+          Vous tenez une liste d’attente papier ? Notre application vous permet de la gérer en ligne de façon très simple : les clients scannent un QR code pour s’inscrire sur la liste d’attente de votre restaurant, que vous pourrez manipuler sur tablette, pc ou smartphone.
         </p>
       </article>
 
       <article className="home__argument__article">
-        <h1>Argument 2</h1>
+        <h1>Réduisez le nombre de “no-shows”&nbsp;!</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perferendis in sit assumenda nisi, ipsum, animi asperiores nulla sint excepturi, et fugit ipsa quis aperiam fugiat fuga minima? Voluptas, debitis.
+          Victime de clients indélicats ne prenant pas la peine d’annuler leurs réservations ? Notre application est faite pour vous ! Les clients s’inscrivant sur votre liste d’attente via le scan de votre QR code apposé sur votre vitrine, vous pouvez être sûrs qu’ils sont à proximité et qu’ils reviendront lorsque leur tour arrivera.
         </p>
       </article>
 
       <article className="home__argument__article">
-        <h1>Argument 3</h1>
+        <h1>Stop aux files interminables devant vos restaurants&nbsp;!</h1>
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium et accusamus iste atque magni eaque sit excepturi consectetur ut sequi, dignissimos autem, eos dolores ea veniam quia omnis dolorem sed.
+          Victime de votre succès, vous ne prenez plus de réservations et la file devant votre restaurant semble interminable ? Grâce à la gestion numérique de votre liste d’attente, vos clients ne sont plus obligés d’attendre devant votre restaurant, gênant souvent les passants, décourageant parfois d’autres clients potentiels. Par ailleurs, vos clients peuvent mettre à profit le temps d’attente.
         </p>
       </article>
       </div>

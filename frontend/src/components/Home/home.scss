@@ -93,11 +93,13 @@
 
       h1 {
         text-transform: uppercase;
+        display: inline-block;
         font-size: 1.25em;
         font-weight: bold;
         text-decoration: underline;
         text-decoration-color: $primary-color;
         margin-bottom: 1em;
+        line-height: 1.2em;
       }
 
       p {
