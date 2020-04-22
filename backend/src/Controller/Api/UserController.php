@@ -141,8 +141,12 @@ class UserController extends AbstractController
         if($user) {
             $user = $user[0];
             $token = $denormalizer->denormalize($data, Token::class);
-            $tokenString = random_bytes(10);
-            $tokenforbdd= rtrim(strtr(base64_encode($tokenString), '+/', '-_'), '=');
+
+            // $tokenString = random_bytes(10);
+            // $tokenforbdd= rtrim(strtr(base64_encode($tokenString), '+/', '-_'), '=');
+
+            $tokenforbdd = rand(100000,999999);
+
             $token->setTokenString($tokenforbdd);
             $token->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();

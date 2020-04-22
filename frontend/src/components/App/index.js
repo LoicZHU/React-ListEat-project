@@ -20,7 +20,7 @@ import Cancellation from 'src/containers/Cancellation';
 import Admin from 'src/containers/Admin';
 import Legal from 'src/components/Legal';
 import Data from 'src/components/Data';
-import Faq from 'src/components/Faq';
+import Faq from 'src/containers/Faq';
 import Signup from 'src/containers/Signup';
 import RestaurantProfile from 'src/containers/RestaurantProfile';
 import NotFound from 'src/components/NotFound';

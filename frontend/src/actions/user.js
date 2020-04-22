@@ -38,6 +38,9 @@ export const SHOW_NEW_PASSWORD_FIELD = 'SHOW_NEW_PASSWORD_FIELD';
 export const SUBMIT_NEW_PASSWORD = 'SUBMIT_NEW_PASSWORD';
 export const STORE_SERVER_TEMP_USERID = 'STORE_SERVER_TEMP_USERID';
 export const CONFIRM_NEW_PASSWORD = 'CONFIRM_NEW_PASSWORD';
+export const OPEN_RESTAURANT_CONTENT = 'OPEN_RESTAURANT_CONTENT';
+export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
+
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -221,4 +224,11 @@ export const newPasswordSubmit = () => ({
 export const confirmNewPassword = (newValue) => ({
   type: CONFIRM_NEW_PASSWORD,
   newValue,
+  
+export const openRestaurantContent = () => ({
+  type: OPEN_RESTAURANT_CONTENT,
+});
+
+export const openClientContent = () => ({
+  type: OPEN_CLIENT_CONTENT,
 });

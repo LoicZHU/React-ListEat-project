@@ -26,6 +26,8 @@ import {
   SHOW_VERIFICATION_CODE_ERROR,
   STORE_SERVER_TEMP_USERID,
   CONFIRM_NEW_PASSWORD,
+  OPEN_RESTAURANT_CONTENT,
+  OPEN_CLIENT_CONTENT,
 } from 'src/actions/user';
 
 // initial state
@@ -87,7 +89,7 @@ const initialState = {
 
   // mobile menu handling
   mobileMenuOpened: false,
-
+  
   //password reset 
   passwordReset: {
     email: '',
@@ -101,6 +103,10 @@ const initialState = {
     newPasswordField: false,
     newPasswordConfirmed: null,
   },
+  
+  // FAQ
+  isRestaurantContentOpen: true,
+  isClientContentOpen: false,
 };
 
 // reducer
@@ -228,17 +234,26 @@ const userReducer = (state = initialState, action = {}) => {
         currentTime: new Date().toLocaleTimeString("fr-FR", {hour: '2-digit', minute:'2-digit'}),
       };
 
-      case MOBILE_MENU_OPENED:
-        return {
-          ...state,
-          mobileMenuOpened: !state.mobileMenuOpened,
-        };
+    case MOBILE_MENU_OPENED:
+      return {
+        ...state,
+        mobileMenuOpened: !state.mobileMenuOpened,
+      };
 
 
-      case CLOSE_MOBILE_MENU:
+    case CLOSE_MOBILE_MENU:
+      return {
+        ...state,
+        mobileMenuOpened: false,
+      };
+
+    case CHANGE_PASSWORDRESET_INPUT_VALUE:
         return {
           ...state,
-          mobileMenuOpened: false,
+          passwordReset: {
+            ...state.passwordReset,
+            [action.fieldName]: action.newValue,
+          },
         };
 
         case CHANGE_PASSWORDRESET_INPUT_VALUE:
@@ -323,6 +338,39 @@ const userReducer = (state = initialState, action = {}) => {
                 newPasswordConfirmed: action.newValue,
               },
             }; 
+
+    case SHOW_PASSWORDRESET_EMAIL_ERROR:
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          emailError: action.newValue,
+        },
+      };         
+
+    case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          emailConfirmation: action.newValue,
+        },
+      };  
+      
+    case OPEN_RESTAURANT_CONTENT:
+      return {
+        ...state,
+        isRestaurantContentOpen: true,
+        isClientContentOpen: false,
+      };
+
+    case OPEN_CLIENT_CONTENT:
+      return {
+        ...state,
+        isRestaurantContentOpen: false,
+        isClientContentOpen: true,
+      };
+
 
     default: return state;
   }
