@@ -11,7 +11,8 @@ const Cancellation = ({ restaurantUrlId }) => (
 
     <p>Vous avez annulé votre demande.</p>
 
-    <a className="ticket__cancellation__link" href={`/restaurant/${restaurantUrlId}/tickets/add`}>
+    {/* <a className="ticket__cancellation__link" href={`/restaurant/${restaurantUrlId}/tickets/add`}> */}
+    <a className="ticket__cancellation__link" href={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`}>
       Revenir sur la page d'inscription à la liste d'attente
     </a>
   </main>

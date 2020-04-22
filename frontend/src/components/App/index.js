@@ -138,11 +138,15 @@ const App = ({
               {isTicketValidate !== '' && !isTicketValidate && <Redirect to="/tickets/cancellation" />}
             </Route>
           )}
+          {!isTemporarySubscribedTicket && (
+            <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />
+          )}
 
           {/* Client : Confirmation of ticket */}
           <Route path="/tickets/confirmation" exact>
             <Header />
-            <Confirmation />
+            {isTicketValidate && <Confirmation />}
+            {!isTicketValidate && <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />}
           </Route>
 
           {/* Client : Cancellation of ticket */}
