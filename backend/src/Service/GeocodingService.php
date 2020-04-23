@@ -60,13 +60,13 @@ class GeocodingService
         }
 
         //we check that the results match with the entries
-        $t=stristr($address1, $data['street']);
+        //$t=stristr($address1, $data['street']);
         $c=stristr($address1, $data['postal_code']);
         $z=stristr($address1, $data['city']);
 
-        if($t===false){
-            return false;
-        }
+        //if($t===false){
+        //    return false;
+        //}
         if($c===false){
             return false;
         }
