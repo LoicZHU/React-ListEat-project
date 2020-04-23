@@ -30,6 +30,7 @@ import {
   OPEN_CLIENT_CONTENT,
   DISPLAY_EDIT_CONFIRMATION,
   DISPLAY_EDIT_ERROR,
+  CHANGE_IS_NEW_PASS_CONFIRMED,
 } from 'src/actions/user';
 
 // initial state
@@ -83,6 +84,7 @@ const initialState = {
     displayEditConfirmation: false,
     displayEditError: false,
     editErrorMessage: '',
+    isNewPassConfirmed: true,
   },
 
   // time
@@ -402,6 +404,17 @@ const userReducer = (state = initialState, action = {}) => {
           displayEditError: true,
           editErrorMessage: action.editErrorMessage,
           actualPass: '',
+        },
+      };
+
+    case CHANGE_IS_NEW_PASS_CONFIRMED:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          isNewPassConfirmed: action.newValue,
+          newPass: '',
+          newPassConfirmation: '',
         },
       };
 

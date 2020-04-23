@@ -42,6 +42,7 @@ export const OPEN_RESTAURANT_CONTENT = 'OPEN_RESTAURANT_CONTENT';
 export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
 export const DISPLAY_EDIT_CONFIRMATION = 'DISPLAY_EDIT_CONFIRMATION';
 export const DISPLAY_EDIT_ERROR = 'DISPLAY_EDIT_ERROR';
+export const CHANGE_IS_NEW_PASS_CONFIRMED = 'CHANGE_IS_NEW_PASS_CONFIRMED';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -257,4 +258,9 @@ export const displayEditConfirmation = () => ({
 export const displayEditError = (editErrorMessage) => ({
   type: DISPLAY_EDIT_ERROR,
   editErrorMessage,
+});
+
+export const changeIsNewPassConfirmed = (newValue) => ({
+  type: CHANGE_IS_NEW_PASS_CONFIRMED,
+  newValue,
 });

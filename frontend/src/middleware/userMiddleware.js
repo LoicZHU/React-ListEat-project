@@ -158,7 +158,9 @@ const userMiddleware = (store) => (next) => (action) => {
             city: store.getState().user.restaurantProfileEditInput.city,
             country: store.getState().user.restaurantProfileEditInput.country,
             phone: store.getState().user.restaurantProfileEditInput.phone,
-            newPass: store.getState().user.restaurantProfileEditInput.newPass,
+          },
+          user: {
+            password: store.getState().user.restaurantProfileEditInput.newPass,
           },
           currentpassword: store.getState().user.restaurantProfileEditInput.actualPass,
           withCredentials: true,
