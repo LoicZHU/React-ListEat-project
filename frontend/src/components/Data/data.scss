@@ -1,15 +1,26 @@
 @import 'src/styles/_vars.scss';
 
 .data {
-  min-width: 400px;
-  width: 60%;
-
-  margin: 2em auto;
+  min-width: 250px;
+  max-width: 800px;
+  width: 100%;
+  margin: 5em auto;
+  margin-bottom: 1em;
+  padding: 0 30px;
 
   h1 {
     text-align: center;
     font-size: 1.25em;
     font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  p, ul {
+    text-align: justify;
+  }
+
+  p {
+    margin-bottom: 40px;
   }
 
   &__content {
@@ -18,10 +29,20 @@
     h2 {
       font-size: 1.125em;
       font-weight: bold;
+      margin-top: 40px;
     }
 
-    p {
+    p, ul {
       margin: 10px 0 20px;
+
+      li {
+        margin: 5px 0;
+      }
     }
+
+    &__contact {
+      text-align: center;
+    }
+
   }
 }
