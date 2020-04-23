@@ -59,8 +59,8 @@ class SendNotifComeCommand extends Command
         $io->title('Listing all tickets coming soon -5min');
 
         $currentTime = date("d/m/Y H:i:s", strtotime('now')); 
-        $stamp = date("d/m/Y H:i:s", strtotime('now +5 Minutes')); 
-        dd($stamp);
+        $stamp = date("Y/m/d H:i:s", strtotime('now +5 Minutes')); 
+        //dd($stamp);
         // 1. Get tickets from the BDD
         $tickets = $this->ticketRepository->findWhereEstimated($stamp);
 

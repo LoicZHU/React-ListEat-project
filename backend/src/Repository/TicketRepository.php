@@ -47,12 +47,12 @@ class TicketRepository extends ServiceEntityRepository
             FROM App\Entity\Ticket t
             WHERE t.status = :status
             AND t.statusnotification = :statusnotification
-            AND t.estimatedEntryTime <= :estimatedEntryTime'
+            AND t.estimatedEntryTime <= :currentTime'
     
         );
         $query->setParameter('status', 1);
         $query->setParameter('statusnotification', 0);
-        $query->setParameter('estimatedEntryTime', $current);
+        $query->setParameter('currentTime', $current);
         // returns total number of covers for active tickets, for a given restaurant
         return  $query->getResult();
     }
