@@ -1,16 +1,42 @@
 @import 'src/styles/index.scss';
 
 .login-container {
-  width: 90%;
-  max-width: 600px;
-  margin: 0px auto !important;
-  padding: 50px 0; 
-  text-align: center;
-  line-height: 1.2em;
+position: relative;
+    top: 60px;
+    text-align: center;
+    width: 90%;
+    min-width: 300px;
+    max-width: 600px;
+    margin: 0px auto;
+    margin-bottom: 120px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgb(0,0,0,.2) !important;
 
   h1 {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.7em !important;
     margin: 0 auto 1em auto;
   }
+}
+
+.page-container {
+  background-image: linear-gradient(rgb(247, 247, 247), #fff) !important;
+  background-color: #fff;
+  position: relative;
+  height: 100% !important;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2em !important;
+  text-align: center;
+}
+
+label {
+  font-size: .9em !important;
+  text-align: left;
+  margin-top: 20px !important;
+  margin-bottom: 5px !important;
 }

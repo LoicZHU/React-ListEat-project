@@ -11,9 +11,13 @@ body {
     font-size: 1em;
     border: 1px solid rgb(182, 182, 182,.5);
     &:focus {
-      box-shadow: inset 0px 0px 10px rgb(255,132,0,1);
-      transition: box-shadow .5s;
-    }   
+      box-shadow: inset 0px 0px 10px rgb(255,132,0,.5);
+      transition: box-shadow .3s;
+    }
+
+    &::placeholder {
+      font-size: 1em;
+    }
   }
 
   input[type=number]::-webkit-inner-spin-button {
@@ -22,9 +26,11 @@ body {
 
   .button {
     border: 2px $primary-color solid;
-    border-radius: 5px;
-    padding: .5em;
-    box-shadow: 0px 0px 10px rgb(255,132,0,.4);
+    padding: 1em !important;
+    // text-transform: uppercase;
+    // border-radius: 5px;
+
+    // box-shadow: 0px 0px 10px rgb(255,132,0,.4);
     background-color: #fff;
     font-size: 1em;
     margin: 0 auto;
@@ -40,11 +46,12 @@ body {
   .button-alt {
     border: 2px $primary-color solid;
     border-radius: 5px;
-    padding: .5em;
-    box-shadow: 0px 0px 10px rgb(255,132,0,.4);
+    padding: 1em !important;
+    // box-shadow: 0px 0px 10px rgb(255,132,0,.4);
     background-color: $primary-color;
     color: #fff;
     font-size: 1em;
+    // text-transform: uppercase;
     // max-width: 100px;
     margin: 0 auto;s
 
