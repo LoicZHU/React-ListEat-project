@@ -13,7 +13,6 @@ use App\Repository\TokenRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,31 +60,32 @@ class UserController extends AbstractController
             }
         }
 
-        if(!empty($jsonErrors)){
-            if(!empty($jsonErrors)){
-                return $this->json($jsonErrors,Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-        }
-
-        //Checking siret or siren code call service
+        // Checking siret code by calling the service
         $response = SiretService::checkSiret($user->getRestaurant()->getSiretCode());
 
         //dd($response);
         if ($response === false) {
-            return $this->json([['field' => 'siret code',
-                                'message' => 'Numéro siret ou siren invalide.']],Response::HTTP_BAD_REQUEST);
+            $jsonErrors[] = [
+                'field' => 'siret code',
+                'message' => 'Le numéro siret est invalide.',
+            ];
         }
     
         $restaurantPosition = GeocodingService::geocodeAddress($restaurant->getAddress(), $restaurant->getPostcode(), $restaurant->getCity(),$restaurant->getCountry());
         //dd($restaurantPosition);
-        if($restaurantPosition == false ){
-            return $this->json([['field' => 'adresse postale',
-                                'message' => 'Adresse postale invalide']],Response::HTTP_UNPROCESSABLE_ENTITY);
-        }else{
+        if ($restaurantPosition == false ){
+            $jsonErrors[] = [
+                'field' => 'adresse postale',
+                'message' => 'L\'adresse postale est invalide',
+            ];
+        } else {
             $user->setRestaurant($restaurant->setLongitude($restaurantPosition['lng']));
             $user->setRestaurant($restaurant->setLatitude($restaurantPosition['lat']));
-        } 
+        }
 
+        if(!empty($jsonErrors)){
+            return $this->json($jsonErrors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
         $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
@@ -120,8 +120,7 @@ class UserController extends AbstractController
 
         $mailer->send($message);
 
-        return $this->json(['message' => 'Votre inscription est finalisé.',
-                            'code' => Response::HTTP_CREATED]);
+        return $this->json(['message' => 'Votre inscription est finalisée.'], Response::HTTP_CREATED);
     }
 
     /**
@@ -179,7 +178,7 @@ class UserController extends AbstractController
     /**
      * @Route("/forgotten-password/confirmation", name="api_new_pwd", methods={"POST"})
      */
-    public function newPwd(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $userRepository, TokenRepository $tokenRepository, DenormalizerInterface $denormalizer, \Swift_Mailer $mailer, ValidatorInterface $validator)
+    public function newPwd(Request $request, UserPasswordEncoderInterface $encoder, UserRepository $userRepository, TokenRepository $tokenRepository, \Swift_Mailer $mailer, ValidatorInterface $validator)
     {
          /*
         {
