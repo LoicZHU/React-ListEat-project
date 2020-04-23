@@ -1,6 +1,13 @@
+@import 'src/styles/index.scss';
+
 .app {
   min-height: 100vh;
   width: 100%;
   position: absolute !important;
-  padding-bottom: 300px;
 }
+
+@media (min-width: $mobile-breakpoint) {
+  .app {
+    padding-bottom: 150px;
+  }
+};

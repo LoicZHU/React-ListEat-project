@@ -51,6 +51,7 @@
     "react": "*",
     "react-dom": "*",
     "react-hamburger-menu": "^1.2.1",
+    "react-hook-form": "^5.5.3",
     "react-modal": "^3.11.2",
     "react-notifications-component": "^2.4.0",
     "react-redux": "^7.2.0",

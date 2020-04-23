@@ -113,10 +113,12 @@ const RestaurantProfile = ({
         <button className="save-button button-alt" type="submit">Enregistrer</button>
       </form>
 
-      <div className="qr-container">
-        <p>Mon QR code</p>
+      <div className="qr-container" onClick={handleQrCode}>
+        <span>Télécharger</span>
+        <p>mon QR code</p>
+        <i class="fa fa-qrcode" aria-hidden="true"></i>
 
-        <button className="download-button button-alt" onClick={handleQrCode}>Télécharger</button>
+        {/* <button className="download-button button-alt" onClick={handleQrCode}>Télécharger</button> */}
       </div>
     </div>
   );

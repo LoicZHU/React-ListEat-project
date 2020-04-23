@@ -9,7 +9,7 @@ import 'react-notifications-component/dist/theme.css';
 
 // == Import Components
 import Header from 'src/containers/Header';
-import Home from 'src/components/Home';
+import Home from 'src/containers/Home';
 import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
 import TicketForm from 'src/containers/TicketForm';
@@ -97,7 +97,8 @@ const App = ({
           {/* Subscribe */}
           <Route path="/signup" exact>
             <Header />
-            <Signup />
+            {!isRestaurantLogged && <Signup />}
+            {isRestaurantLogged && <Redirect to="/" />}
             <Footer />
           </Route>
 
@@ -124,7 +125,6 @@ const App = ({
 
           {/* Client : Get a ticket */}
           <Route path="/restaurant/:id/tickets/add" exact>
-            <Header />
             {!isTemporarySubscribedTicket && <TicketForm />}
             {isTemporarySubscribedTicket && <Redirect to="/restaurant/tickets/validate" />}
           </Route>
@@ -132,7 +132,6 @@ const App = ({
           {/* Client : Validate the ticket */}
           {isTemporarySubscribedTicket && (
             <Route path="/restaurant/tickets/validate" exact>
-              <Header />
               {isTicketValidate === '' && <Validation />}
               {isTicketValidate !== '' && isTicketValidate && <Redirect to="/tickets/confirmation" />}
               {isTicketValidate !== '' && !isTicketValidate && <Redirect to="/tickets/cancellation" />}
@@ -144,19 +143,17 @@ const App = ({
 
           {/* Client : Confirmation of ticket */}
           <Route path="/tickets/confirmation" exact>
-            <Header />
             {isTicketValidate && <Confirmation />}
             {!isTicketValidate && <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />}
           </Route>
 
           {/* Client : Cancellation of ticket */}
           <Route path="/tickets/cancellation" exact>
-            {!isTicketValidate && (
-              <>
-                <Header />
+
+            {!isTicketValidate && 
                 <Cancellation />
-              </>
-            )}
+            }
+
             {/* no need to define the redirection to ticketForm because of :
               {!isTemporarySubscribedTicket && (
                 <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />

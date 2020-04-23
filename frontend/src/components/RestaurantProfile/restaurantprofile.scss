@@ -35,15 +35,36 @@
   }
 
   .qr-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 30%;
     height: 20%;
-    padding: 1em;
-    border: 1px solid grey;
+    padding: 2em;
     text-align: center;
+    background-color: $primary-color;
+    color: #fff;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      font-size: 1.5em;
+      margin: 0 !important;
+    }
 
     p {
-      text-align: left;
+      font-size: 2em;
+      margin: .5em auto;
     }
+
+    i {
+      font-size: 4em;
+    } 
+
+
 
     .download-button {
       display: inline-block;

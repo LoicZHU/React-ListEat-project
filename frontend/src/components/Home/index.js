@@ -9,14 +9,17 @@ import Info from './info';
 import Trust from './trust';
 
 // == Composant
-const Home = () => (
-  <main className="home">
-    <Top />
-    <Argument />
-    <Info />
-    <Trust />
-  </main>
-);
+const Home = ({isRestaurantLogged}) => {
+
+  return (
+    <main className="home">
+      <Top logged={isRestaurantLogged}/>
+      <Argument />
+      <Info />
+      <Trust />
+    </main>
+  );
+};
 
 // == Export
 export default Home;

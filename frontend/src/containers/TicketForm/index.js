@@ -11,9 +11,10 @@ const mapStateToProps = (state) => ({
   email: state.tickets.ticketInscriptionInput.email,
   phone: state.tickets.ticketInscriptionInput.phone,
   cutlery: state.tickets.ticketInscriptionInput.cutlery,
-  errors: state.tickets.ticketSubscriptionErrors[0],
+  ticketSubscriptionErrors: state.tickets.ticketSubscriptionErrors,
   restaurantName: state.tickets.restaurantName,
   restaurantNameLoaded: state.tickets.restaurantNameLoaded,
+  restaurantServiceStatus: state.tickets.restaurantServiceStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
