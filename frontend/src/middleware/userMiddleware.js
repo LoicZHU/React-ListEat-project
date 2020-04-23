@@ -191,7 +191,11 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           console.log(response);
-          store.dispatch(saveRestaurantData(response.data.averageEatingTime, response.data.status));
+          let responseTime = response.data.averageEatingTime;
+          let responseTimeHours = Math.floor(responseTime / 60);
+          let responseTimeModulo = responseTime % 60;
+          let averageEatingTime = `${responseTimeHours}:${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}`;
+          store.dispatch(saveRestaurantData(averageEatingTime, response.data.status));
         })
         .catch((error) => {
           console.warn(error);
@@ -213,7 +217,11 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           // console.log(response);
-          store.dispatch(saveIncreasedAverageEatingTime(response.data.averageEatingTime));
+          let responseTime = response.data.averageEatingTime;
+          let responseTimeHours = Math.floor(responseTime / 60);
+          let responseTimeModulo = responseTime % 60;
+          let averageEatingTime = `${responseTimeHours}:${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}`;
+          store.dispatch(saveIncreasedAverageEatingTime(averageEatingTime));
         })
         .catch((error) => {
           console.warn(error);
@@ -236,7 +244,11 @@ const userMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           // console.log(response);
-          store.dispatch(saveDecreasedAverageEatingTime(response.data.averageEatingTime));
+          let responseTime = response.data.averageEatingTime;
+          let responseTimeHours = Math.floor(responseTime / 60);
+          let responseTimeModulo = responseTime % 60;
+          let averageEatingTime = `${responseTimeHours}:${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}`;
+          store.dispatch(saveDecreasedAverageEatingTime(averageEatingTime));
         })
         .catch((error) => {
           console.warn(error);

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  NavLink
+  NavLink,
+  Link,
 } from 'react-router-dom';
 
 import HamburgerMenu from 'react-hamburger-menu';
@@ -159,9 +160,11 @@ const Header = ({
       </NavLink>
       </ul>
 
-      <div id="logo-container">
-        <a href="/"><img src={Logo}/></a>
-      </div>
+      <Link to="/">
+        <div id="logo-container">
+          <img src={Logo}/>
+        </div>
+      </Link>
 
       <ul id="desktop-right-nav">
         {/* if not logged */}
@@ -191,7 +194,7 @@ const Header = ({
         )}
 
         {isRestaurantLogged && (
-          <NavLink exact activeClassName="menu-link" to="/logout" onClick={handleClick}>
+          <NavLink exact to="" onClick={handleClick}>
             <li className="header-nav-button button">Déconnexion</li>
           </NavLink>
         )}
