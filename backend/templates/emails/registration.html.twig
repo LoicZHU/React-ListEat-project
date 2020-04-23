@@ -2,12 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Registration confirmation{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-                Merci pour votre inscription {{name}}
-
+        <p>
+                Merci pour votre inscription {{name}}. <br>
+                <br>
+                Retrouvez votre QR code dans la rubrique Profil de votre Espace.
+        </p>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

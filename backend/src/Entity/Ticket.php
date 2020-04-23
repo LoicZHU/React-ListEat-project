@@ -14,7 +14,7 @@ class Ticket
     public function __construct()
     {
         $this->createdAt = new \DateTime;
-        $this->status = 0;
+        $this->status = 2;
         $this->statusnotification = 0;
     }
     /**
