@@ -69,14 +69,14 @@ class RestaurantController extends AbstractController
 
         //if the currentPassword is invalid we send a errors message
         if($CurrentPasswordVerifie == false){
-            return $this->json(['message' => 'CurrentPassword invalide.'],Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->json(['message' => 'Le mot de passe est invalide.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
      
         $messages = [];
        
         //if json argument is empty we send back a error
         if(!isset($data->user) && !isset($data->restaurant)){
-            return $this->json(['message' => 'Aucun champs à mettre à jour.'],Response::HTTP_I_AM_A_TEAPOT);
+            return $this->json(['message' => 'Aucun champs à mettre à jour.'], Response::HTTP_I_AM_A_TEAPOT);
         }
         //dd($data->restaurant);
         //if the argument of restaurant is setup we create a class of restaurant
@@ -106,13 +106,13 @@ class RestaurantController extends AbstractController
             //dd($data->user->newpassword);
             $user[0]->setPassword($encoder->encodePassword($user[0],  $NewdatasUser->getPassword()));
             //we put on the array all comments we want to put on the mail
-            $messages[] = "votre password à été mis à jour";
+            $messages[] = "Votre mot de passe a été mis à jour.";
         }
         if(!empty($NewdatasUser->getEmail())){
             //dd($data->user->newpassword);
             $user[0]->setEmail($NewdatasUser->getEmail());
             //we put on the array all the comments we want to put on the mail
-            $messages[] = "votre email à été mis à jour";
+            $messages[] = "Votre email a été mis à jour.";
         }
         if(!empty($Newdata->getName())){
             $restaurant->setName($Newdata->getName());
