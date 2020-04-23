@@ -23,18 +23,26 @@ const RestaurantProfile = ({
   displayEditConfirmation,
   displayEditError,
   editErrorMessage,
+  isNewPassConfirmed,
+  changeIsNewPassConfirmed,
 }) => {
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleRestaurantEdit();
+    if (newPass === newPassConfirmation) {
+      handleRestaurantEdit();
+      changeIsNewPassConfirmed(true);
+    }
+    else {
+      changeIsNewPassConfirmed(false);
+    }
   };
 
   const handleChange = (evt) => {
     evt.preventDefault();
     changeRestaurantProfileInputValue(evt.target.value, evt.target.name);
   };
-console.log(displayEditConfirmation);
+
   return (
     <div className="profile-container">
       <form className="infos-container" onSubmit={handleSubmit}>
@@ -95,6 +103,7 @@ console.log(displayEditConfirmation);
 
           <Field
             name="newPass"
+            type="password"
             placeholder="Nouveau mot de passe"
             onChange={changeRestaurantProfileInputValue}
             value={newPass}
@@ -102,10 +111,13 @@ console.log(displayEditConfirmation);
 
           <Field
             name="newPassConfirmation"
+            type="password"
             placeholder="Confirmation du nouveau mot de passe"
             onChange={changeRestaurantProfileInputValue}
             value={newPassConfirmation}
           />
+
+          {!isNewPassConfirmed && <span className="error">Les champs du nouveau mot de passe ne correspondent pas.</span>}
         </div>
 
         <div className="actual-pass">

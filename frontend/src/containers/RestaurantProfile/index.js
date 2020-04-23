@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 
 // import
 import RestaurantProfile from 'src/components/RestaurantProfile';
-import { changeRestaurantProfileInputValue, editRestaurant, qrCodeDownload } from 'src/actions/user';
+import {
+  changeRestaurantProfileInputValue,
+  editRestaurant,
+  qrCodeDownload,
+  changeIsNewPassConfirmed,
+} from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   restaurantName: state.user.restaurantProfileEditInput.restaurantName,
@@ -18,6 +23,7 @@ const mapStateToProps = (state) => ({
   displayEditConfirmation: state.user.restaurantProfileEditInput.displayEditConfirmation,
   displayEditError: state.user.restaurantProfileEditInput.displayEditError,
   editErrorMessage: state.user.restaurantProfileEditInput.editErrorMessage,
+  isNewPassConfirmed: state.user.restaurantProfileEditInput.isNewPassConfirmed,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -30,6 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleQrCode: () => {
     dispatch(qrCodeDownload());
+  },
+
+  changeIsNewPassConfirmed: (newValue) => {
+    dispatch(changeIsNewPassConfirmed(newValue));
   },
 });
 
