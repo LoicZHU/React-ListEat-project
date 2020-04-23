@@ -96,12 +96,17 @@ export const showModalErrors = () => ({
   type: SHOW_MODAL_ERRORS,
 });
 
-export const saveRestaurantInfos = (restaurantId, restaurantName, restaurantUrlId) => ({
+export const saveRestaurantInfos = (
+  restaurantId,
+  restaurantName,
+  restaurantUrlId,
+  restaurantServiceStatus,
+) => ({
   type: SAVE_RESTAURANT_INFOS,
   restaurantId,
   restaurantName,
   restaurantUrlId,
-
+  restaurantServiceStatus,
 });
 
 export const saveSubscribeTicketSubscription = (ticketId, ticketCutlery, ticketWaitingTime) => ({
