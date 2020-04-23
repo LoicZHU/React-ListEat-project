@@ -415,6 +415,9 @@ const userReducer = (state = initialState, action = {}) => {
           isNewPassConfirmed: action.newValue,
           newPass: '',
           newPassConfirmation: '',
+          actualPass: '',
+          displayEditConfirmation: false,
+          displayEditError: false,
         },
       };
 
