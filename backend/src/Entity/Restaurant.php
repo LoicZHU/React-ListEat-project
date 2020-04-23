@@ -140,6 +140,9 @@ class Restaurant
      */
     private $qrCode;
 
+    public function __toString() {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {

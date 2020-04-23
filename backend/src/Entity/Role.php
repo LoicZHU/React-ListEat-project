@@ -26,6 +26,11 @@ class Role
      */
     private $label;
 
+    public function __toString()
+    {
+        return (string) $this->label;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

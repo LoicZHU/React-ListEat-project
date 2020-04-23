@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <h1>Edit User</h1>
+
+  <h1>Ajouter un métier</h1>
+
+</div>
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+
+
+    <h1>Edit User</h1>
+
+    {{ include('backend/user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backend_user_list') }}">back to list</a>
+
+{% endblock %}
