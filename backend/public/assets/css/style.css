@@ -1,0 +1,17 @@
+.container_componement{
+    border:5px solid rgba(0, 0, 0, 0.671);
+    text-align: center;
+}
+
+.fas{
+    padding-top: 1.2rem;
+}
+
+.chiffre{
+    font-size: 1.6em;
+    background-color: #2c2c2c;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    color:#8fe74f ;
+}

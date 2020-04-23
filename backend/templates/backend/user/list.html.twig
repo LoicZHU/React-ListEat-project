@@ -64,8 +64,8 @@
                                         {{ user.email }}
                                         </td>
                                         <td>
-                                            <a href="{{ path('backend_user_show', {'id': user.id}) }}">show</a>
-                                            <a href="{{ path('backend_user_edit', {'id': user.id}) }}">edit</a>
+                                            <a href="{{ path('backend_user_show', {'id': user.id}) }}"><i class="fas fa-external-link-alt "></i></a>
+                                            <a href="{{ path('backend_user_edit', {'id': user.id}) }}"><i class="fas fa-user-edit "></i></a>
                                         </td>
                                         <td>
                                         <form action="{{ path('backend_user_delete', {id: user.id}) }}" method="post" onsubmit="return confirm('Supprimer l'utilisateur {{ user.firstName|e('js') }} ?')">
@@ -75,7 +75,7 @@
                                             {# Modification (surcharge) de la méthode HTTP #}
                                             <input type="hidden" name="_method" value="DELETE" />
 
-                                            <button type="submit">supprimer</button>
+                                             <button ype="submit" title="Delete"><i class="fa fa-trash"></i></button>
                                         </form>
                                         </td>
                                     </tr>
