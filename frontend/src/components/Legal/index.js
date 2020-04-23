@@ -14,15 +14,7 @@ const Legal = () => (
         <h2>Editeur</h2>
 
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus blanditiis voluptas ad, fugiat, dolorem optio vel consequuntur, repudiandae porro facilis ipsa eligendi distinctio? Hic amet vero beatae quis ullam quas.
-        </p>
-      </div>
-
-      <div>
-        <h2>Hébergeur</h2>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus blanditiis voluptas ad, fugiat, dolorem optio vel consequuntur, repudiandae porro facilis ipsa eligendi distinctio? Hic amet vero beatae quis ullam quas.
+          ListEat, équipe de 4 développeurs formés chez O’Clock au capital de 1 658 475 cafés, ayant son siège social chez eux.
         </p>
       </div>
 
@@ -30,7 +22,33 @@ const Legal = () => (
         <h2>Directeur de publication</h2>
 
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus blanditiis voluptas ad, fugiat, dolorem optio vel consequuntur, repudiandae porro facilis ipsa eligendi distinctio? Hic amet vero beatae quis ullam quas.
+          Mystère…
+        </p>
+      </div>
+
+      <div>
+        <h2>Adresse électronique</h2>
+
+        <p>
+          hello@listeat.io
+        </p>
+      </div>
+
+      <div>
+        <h2>Hébergeur</h2>
+
+        <p>
+          Amazon Web Services, Inc.<br />
+          P.O. Box 81226<br />
+          Seattle, WA 98108-1226
+        </p>
+      </div>
+
+      <div>
+        <h2>Déclaration CNIL</h2>
+
+        <p>
+          ¯\_(ツ)_/¯
         </p>
       </div>
     </div>
