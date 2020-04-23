@@ -38,7 +38,7 @@ class DeleteCustomersCommand extends Command
     }
 
     /**
-     * Configuration de la commande
+     * Configuration de la commande--
      */
     protected function configure()
     {
