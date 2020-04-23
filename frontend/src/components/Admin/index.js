@@ -29,7 +29,6 @@ const Admin = ({
   handleShowModalTicketValidation,
   showModalErrors,
   showModalEmailError,
-  handleClearModalForm,
 
   // modal (ticket add)
   lastName,
@@ -119,13 +118,11 @@ const Admin = ({
 
   const handleTicketCancel = () => {
     setOpen(false);
-    handleClearModalForm();
     handleModalTicketCancel();
     handleShowModalTicketForm();
   };
 
   const handleOnAfterClose = () => {
-    handleClearModalForm();
     handleShowModalTicketForm();
   };
 
