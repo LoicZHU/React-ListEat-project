@@ -43,7 +43,7 @@ const initialState = {
   },
 
   // ticket subscription errors
-  ticketSubscriptionErrors: [],
+  ticketSubscriptionErrors: '',
 
   currentTicket: {
     id: 0,
