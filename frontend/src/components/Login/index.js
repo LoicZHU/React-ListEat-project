@@ -7,9 +7,11 @@ import './login.scss';
 const Login = () => {
 
   return (
-    <div className="login-container">
-      <h1>Identifiez-vous</h1>
-      <Form />
+    <div className="page-container">
+      <div className="login-container">
+        <h1>Identifiez-vous</h1>
+        <Form />
+      </div>
     </div>
   );
 

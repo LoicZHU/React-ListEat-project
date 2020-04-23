@@ -4,9 +4,9 @@
 footer {
   font-size: .9em;
   width: 100% !important;
-  position: absolute !important;
-  bottom: 0px !important;
-  left: 0px !important;
+  position: relative;
+  bottom: 0px ;
+  left: 0px ;
 
   #footer-first, #contact-block, #contact-block .contact-infos span {
     flex-direction: column;
@@ -72,7 +72,10 @@ footer {
     background-color: $light-color;
     font-size: .9em !important;
     width: 100%;
-    margin-top: 50px !important;
+    // margin-top: 50px !important;
+    position: absolute !important;
+    bottom: 0px !important;
+    left: 0px !important;
   
     #footer-first {
       display: flex;

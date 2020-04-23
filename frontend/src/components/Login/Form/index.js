@@ -27,6 +27,8 @@ const Form = ({
 
   return (
     <form id="login-form" onSubmit={handleSubmit}>
+      {errorMessage && <ErrorMessage />}
+
       <input
         id="user-input"
         name="email"
@@ -46,9 +48,9 @@ const Form = ({
         required
       />
 
-      {errorMessage && <ErrorMessage />}
 
-      <button className="button" type="submit">Connexion</button>
+
+      <button className="button-alt" type="submit">Connexion</button>
 
       <span className="bottom-links"><a href="/forgotten-password">Identifiant ou mot de passe oublié&nbsp;?</a></span>
 
