@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show user{% endblock %}
+
+{% block body %}
+  
+
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">{{user.restaurant.name}}</h5>
+              </div>
+                <div class="card-body">
+        
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                        <label>restaurant</label>
+                        <div class="form-group">
+                            {{user.restaurant.name}}
+                        </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                        <label>Siret</label>
+                        <div class="form-group">
+                            {{user.restaurant.siretCode}}
+                        </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                        <label>Email address</label>
+                        <div class="form-group">
+                            {{user.email}}
+                        </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                        <label>First Name</label>
+                        <div class="form-group">
+                            {{user.firstName}}
+                        </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                        <label>Last Name</label>
+                        <div class="form-group">
+                            {{user.lastName}}
+                        </div>
+                        </div>
+                   
+                    <div class="col-md-4 pl-1">
+                        <label>Téléphone</label>
+                        <div class="form-group">
+                            {{user.restaurant.phone}}
+                        </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                        <label>Address</label>
+                        <div class="form-group">
+                            {{user.restaurant.address}}
+                        </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                        <label>Ville</label>
+                        <div class="form-group">
+                            {{user.restaurant.city}}
+                        </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                        <label>Pays</label>
+                        <div class="form-group">
+                            {{user.restaurant.country}}
+                        </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                        <label>Postal Code</label>
+                        <div class="form-group">
+                            {{user.restaurant.postcode}}
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 pr-1">
+                        <label>Nombre de places</label>
+                        <div class="form-group">
+                            {{user.restaurant.seatnb}} places
+                        </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                        <label>Average</label>
+                        <div class="form-group">
+                            {{user.restaurant.averageEatingTime}} minutes
+                        </div>
+                        </div>
+                        <div class="col-md-4 pl-1">
+                        <label>Restaurant Id</label>
+                        <div class="form-group">
+                            {{user.restaurant.id}}
+                        </div>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-4 pr-1">
+                        <label>User Id</label>
+                        <div class="form-group">
+                            {{user.id}}
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Localisation</label>
+                            <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">ICI LA MAP DE GOOGLE</textarea>
+                        </div>
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+{% endblock %}

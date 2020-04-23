@@ -23,6 +23,18 @@ class UserController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/backend/user/{id<\d+>}", name="backend_user_show", methods={"GET"})
+     */
+    public function list($id,UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+
+        return $this->render('backend/user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
     /**
      * @Route("/backend/user/delete/{id<\d+>}", name="backend_user_delete", methods={"DELETE"})
      */

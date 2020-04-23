@@ -54,8 +54,8 @@
                                         {{ user.email }}
                                         </td>
                                          <td>
-                                            <a href="{{ path('backend_user_delete', {'id': user.id}) }}">show</a>
-                                            <a href="{{ path('backend_user_delete', {'id': user.id}) }}">edit</a>
+                                            <a href="{{ path('backend_admin_user_delete', {'id': user.id}) }}">show</a>
+                                            <a href="{{ path('backend_admin_user_edit', {'id': user.id}) }}">edit</a>
                                         </td>
                                         <td>
                                         <form action="{{ path('backend_user_delete', {id: user.id}) }}" method="post" onsubmit="return confirm('Supprimer l'utilisateur {{ user.firstName|e('js') }} ?')">

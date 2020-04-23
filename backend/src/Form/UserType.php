@@ -44,14 +44,13 @@ class UserType extends AbstractType
             ->add('lastName')
             ->add('firstName')
             ->add('createdAt')
-            ->add('updatedAt')
             ->add('role')
-            ->add('restaurant')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        //important for no validate front
         $resolver->setDefaults([
             'data_class' => User::class,
             'attr' => [
