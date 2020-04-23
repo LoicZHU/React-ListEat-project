@@ -28,6 +28,8 @@ import {
   CONFIRM_NEW_PASSWORD,
   OPEN_RESTAURANT_CONTENT,
   OPEN_CLIENT_CONTENT,
+  DISPLAY_EDIT_CONFIRMATION,
+  DISPLAY_EDIT_ERROR,
 } from 'src/actions/user';
 
 // initial state
@@ -78,6 +80,9 @@ const initialState = {
     // page "administration" (mon espace)
     averageEatingTime: '', // int
     status: '', // int
+    displayEditConfirmation: false,
+    displayEditError: false,
+    editErrorMessage: '',
   },
 
   // time
@@ -103,7 +108,7 @@ const initialState = {
     newPasswordField: false,
     newPasswordConfirmed: null,
   },
-  
+
   // FAQ
   isRestaurantContentOpen: true,
   isClientContentOpen: false,
@@ -179,6 +184,12 @@ const userReducer = (state = initialState, action = {}) => {
           ...state.restaurantProfileEditInput,
           averageEatingTime: action.averageEatingTime,
           status: action.status,
+          restaurantName: action.restaurantName,
+          address: action.address,
+          postcode: action.postcode,
+          city: action.city,
+          country: action.country,
+          phone: action.phone,
         },
       };
 
@@ -371,6 +382,28 @@ const userReducer = (state = initialState, action = {}) => {
         isClientContentOpen: true,
       };
 
+    case DISPLAY_EDIT_CONFIRMATION:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          displayEditConfirmation: true,
+          displayEditError: false,
+          actualPass: '',
+        },
+      };
+
+    case DISPLAY_EDIT_ERROR:
+      return {
+        ...state,
+        restaurantProfileEditInput: {
+          ...state.restaurantProfileEditInput,
+          displayEditConfirmation: false,
+          displayEditError: true,
+          editErrorMessage: action.editErrorMessage,
+          actualPass: '',
+        },
+      };
 
     default: return state;
   }

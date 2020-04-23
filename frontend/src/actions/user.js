@@ -40,7 +40,8 @@ export const STORE_SERVER_TEMP_USERID = 'STORE_SERVER_TEMP_USERID';
 export const CONFIRM_NEW_PASSWORD = 'CONFIRM_NEW_PASSWORD';
 export const OPEN_RESTAURANT_CONTENT = 'OPEN_RESTAURANT_CONTENT';
 export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
-
+export const DISPLAY_EDIT_CONFIRMATION = 'DISPLAY_EDIT_CONFIRMATION';
+export const DISPLAY_EDIT_ERROR = 'DISPLAY_EDIT_ERROR';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -114,10 +115,25 @@ export const editRestaurant = () => ({
   type: EDIT_RESTAURANT,
 });
 
-export const saveRestaurantData = (averageEatingTime, status) => ({
+export const saveRestaurantData = (
+  averageEatingTime,
+  status,
+  restaurantName,
+  address,
+  postcode,
+  city,
+  country,
+  phone,
+) => ({
   type: SAVE_RESTAURANT_DATA,
   averageEatingTime,
   status,
+  restaurantName,
+  address,
+  postcode,
+  city,
+  country,
+  phone,
 });
 
 export const increaseMinute = () => ({
@@ -225,11 +241,20 @@ export const confirmNewPassword = (newValue) => ({
   type: CONFIRM_NEW_PASSWORD,
   newValue,
 });
-  
+
 export const openRestaurantContent = () => ({
   type: OPEN_RESTAURANT_CONTENT,
 });
 
 export const openClientContent = () => ({
   type: OPEN_CLIENT_CONTENT,
+});
+
+export const displayEditConfirmation = () => ({
+  type: DISPLAY_EDIT_CONFIRMATION,
+});
+
+export const displayEditError = (editErrorMessage) => ({
+  type: DISPLAY_EDIT_ERROR,
+  editErrorMessage,
 });
