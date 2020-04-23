@@ -475,6 +475,10 @@ div.ReactModalPortal {
         top: 0px;
         width: 50px;
 
+        &:hover {
+          cursor: pointer;
+        }
+
         &:before {
           content: '<';
           color: #fff;
@@ -497,7 +501,6 @@ div.ReactModalPortal {
           
       .close-button:hover {
         cursor: pointer;
-        color: $primary-color;
       }
     }
 
@@ -580,6 +583,10 @@ div.ReactModalPortal {
             bottom: 0px;
             left: 0px;
             box-shadow: none;
+          }
+
+          .ticket-next:hover, .cancel-button:hover {
+            cursor: pointer;
           }
         }
       }
