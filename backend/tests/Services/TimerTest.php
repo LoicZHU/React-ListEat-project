@@ -12,7 +12,7 @@ class TimerTest extends TestCase
         $timer = new Timer();
         $result = $timer->estimatedTime(10, 30, 15);
 
-        // assert that the timer calculated the estimated time correctly!
+        // assert that the timer calculated the estimated time correctly.
         $this->assertEquals(20, $result);
     }
 
