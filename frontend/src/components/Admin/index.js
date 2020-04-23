@@ -257,7 +257,7 @@ const Admin = ({
             </ul>
 
             <div className="tickets-count">
-              <span id="add-ticket" onClick={openModal}>Ajouter</span>
+              <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>
 
               <Modal
                 isOpen={open}
