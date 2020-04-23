@@ -45,12 +45,24 @@ const Admin = ({
   emailError,
 
 }) => {
+  
   useEffect(() => {
     // refresh the showed time
     setInterval(() => {
       refreshTime();
     }, 10000);
   }, []);
+
+  useEffect(() => {
+    //set first ticket as current
+    const setFirstTicketAsCurrent = () => {
+      const actualCurrentElement = document.querySelector('#ticket-list li.current');
+      if (actualCurrentElement == null && tickets.length > 0) {
+        document.querySelector('#ticket-list > li').classList.add('current');
+      } else {}
+    };
+    setFirstTicketAsCurrent();
+  }, [tickets]);
 
   // handle click on '+'
   const handleRemoveClick = () => {
@@ -240,6 +252,10 @@ const Admin = ({
                 <span id="more-time" onClick={handleAddClick} />
               </div>
             </div>
+            <div className="second">
+              <h3>Total en attente : </h3>
+                <span id="tickets-count">{tickets.length}{(tickets.length < 2 ? " ticket" : " tickets")}</span>
+            </div>
           </div>
         </div>
 
@@ -253,9 +269,7 @@ const Admin = ({
             </ul>
 
             <div className="tickets-count">
-              <span>Total en attente : {tickets.length}</span>
-
-              <span id="add-ticket" onClick={openModal}>Ajouter</span>
+              <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>
 
               <Modal
                 isOpen={open}

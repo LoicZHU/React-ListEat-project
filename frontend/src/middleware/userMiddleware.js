@@ -41,7 +41,6 @@ import {
 // const baseUrl = 'http://localhost:8001';
 const baseUrl = 'https://www.listeat.io:8080';
 
-
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
   const id = store.getState().user.restaurantId;

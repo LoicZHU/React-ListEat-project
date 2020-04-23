@@ -20,7 +20,7 @@ const Ticket = ({ ticket, updateCurrentTicket }) => {
 
   return (
     <li className="ticket" id={ticket.id} onClick={(e) => handleClick(e)} >
-      <i className="fa fa-info-circle" aria-hidden="true" />
+      {/* <i className="fa fa-info-circle" aria-hidden="true" /> */}
       {customer.firstName}
 
       <i className="fa fa-user" aria-hidden="true">

@@ -5,7 +5,11 @@ import React from 'react';
 import './confirmation.scss';
 
 // == Composant
-const Confirmation = ({ ticketId, ticketCutlery, ticketEstimatedEntryTime }) => (
+const Confirmation = ({ ticketId, ticketCutlery, ticketEstimatedEntryTime }) => {
+
+  window.scrollTo(0,0);
+
+  return (
   <main className="ticket__confirmation">
     <h1>Félicitations, vous êtes sur la liste d'attente !</h1>
 
@@ -25,8 +29,10 @@ const Confirmation = ({ ticketId, ticketCutlery, ticketEstimatedEntryTime }) => 
         </span>
       </p>
     </div>
+
   </main>
-);
+  )
+};
 
 // == Export
 export default Confirmation;

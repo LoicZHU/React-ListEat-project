@@ -21,6 +21,8 @@ const Validation = ({
     sendTicketValidation('cancel');
   };
 
+  window.scrollTo(0,0);
+
   return (
     <main className="ticket__validation">
       <h1>{restaurantName}</h1>

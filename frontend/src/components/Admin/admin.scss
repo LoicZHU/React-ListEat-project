@@ -7,6 +7,10 @@
   height: calc(100vh-51px);
   margin-bottom: -300px;
 
+  .react-notification-root {
+    width: 50%;
+  }
+
   span {
     margin-bottom: 0!important;
   }
@@ -253,9 +257,26 @@
 
   .first {
     width: 50%;
-    border: 2px $primary-color solid;
+    border: 1px $primary-color solid;
+    border-right: none;
     border-bottom: none;
     padding-top: 1em;
+  }
+
+  .second {
+    width: 50%;
+    border: 1px $primary-color solid;
+    border-right: none;
+    border-bottom: none;
+    padding-top: 1em;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5em;
+      font-size: 2em;
+    }
   }
 
   h3 {
@@ -353,10 +374,13 @@
     #add-ticket {
       display: flex;
       align-items: center;
+      justify-content: center;
       background-color: $primary-color;
       padding: 0 2em;
       height: 100%;
       color: #fff;
+      width: 100%;
+      margin: 0;
 
       &:hover {
         background-color: $dark-color;
