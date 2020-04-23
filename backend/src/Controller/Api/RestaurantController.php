@@ -106,13 +106,13 @@ class RestaurantController extends AbstractController
             //dd($data->user->newpassword);
             $user[0]->setPassword($encoder->encodePassword($user[0],  $NewdatasUser->getPassword()));
             //we put on the array all comments we want to put on the mail
-            $messages[] = "votre password à été mis à jour";
+            $messages[] = "Votre mot de passe a été mis à jour.";
         }
         if(!empty($NewdatasUser->getEmail())){
             //dd($data->user->newpassword);
             $user[0]->setEmail($NewdatasUser->getEmail());
             //we put on the array all the comments we want to put on the mail
-            $messages[] = "votre email à été mis à jour";
+            $messages[] = "Votre email a été mis à jour.";
         }
         if(!empty($Newdata->getName())){
             $restaurant->setName($Newdata->getName());

@@ -6,13 +6,16 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-                Bonjour {{name}},
-
-                {# On affiche les genres #}
+        <p>
+                Bonjour {{name}},<br>
+                <br>
+                {# On affiche les messages #}
             {% for key, message in messages %}
-            <span>{{ message }}</span>
+            {{ message }}<br>
             {% endfor %}
-
+            <br>
+            Si vous n'êtes pas à l'origine de cette action, veuillez nous contacter.
+        </p>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
