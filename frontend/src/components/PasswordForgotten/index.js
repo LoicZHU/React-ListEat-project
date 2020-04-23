@@ -88,7 +88,7 @@ const Login = ({
       {newPasswordField && <form id="password-reset-form" onSubmit={handleNewPasswordSubmit}>
         <p>Merci d'indiquer votre nouveau mot de passe.</p>
  
-        <input placeholder="Nouveau mot de passe" minLength="6"
+        <input placeholder="Nouveau mot de passe" minLength="6" type="password"
          name="newPassword" onChange={handleChange} value={newPassword} />
 
         {true && <button className="button">Envoyer</button>}
