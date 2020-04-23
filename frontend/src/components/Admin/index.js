@@ -317,7 +317,7 @@ const Admin = ({
                   { modalErrors &&
                     <div id="errors">
                       <span> Merci de compléter les champs <strong>Nom</strong>, <strong>Prénom</strong> et <strong>Nombre de couverts</strong>.</span>
-                  </div>
+                    </div>
                   }
 
 
