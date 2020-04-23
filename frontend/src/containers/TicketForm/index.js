@@ -14,6 +14,7 @@ const mapStateToProps = (state) => ({
   errors: state.tickets.ticketSubscriptionErrors[0],
   restaurantName: state.tickets.restaurantName,
   restaurantNameLoaded: state.tickets.restaurantNameLoaded,
+  restaurantServiceStatus: state.tickets.restaurantServiceStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -17,7 +17,10 @@ import {
   SAVE_SUBSCRIBE_TICKET_SUBSCRIPTION,
   SAVE_TICKET_STATUS,
   // CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,
+
 } from 'src/actions/ticket';
+
+import { SAVE_CHANGED_SERVICE_STATUS } from 'src/actions/user';
 
 // initial state
 const initialState = {
@@ -61,6 +64,7 @@ const initialState = {
   restaurantId: '',
   restaurantName: '',
   restaurantUrlId: '',
+  restaurantServiceStatus: '',
   restaurantNameLoaded: false,
 
   // client : temporary ticket infos (ticket form submit)
@@ -119,6 +123,7 @@ const ticketsReducer = (state = initialState, action = {}) => {
         restaurantId: action.restaurantId,
         restaurantName: action.restaurantName,
         restaurantUrlId: action.restaurantUrlId,
+        restaurantServiceStatus: action.restaurantServiceStatus,
         restaurantNameLoaded: true,
       };
 
@@ -207,6 +212,12 @@ const ticketsReducer = (state = initialState, action = {}) => {
         ticketStatus: action.newValue,
         isTicketValidate: action.isValidate,
         ticketEstimatedEntryTime: action.estimatedEntryTime,
+      };
+
+    case SAVE_CHANGED_SERVICE_STATUS:
+      return {
+        ...state,
+        restaurantServiceStatus: action.newStatusService,
       };
 
     default: return state;

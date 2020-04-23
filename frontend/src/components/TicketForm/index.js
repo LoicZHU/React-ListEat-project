@@ -18,6 +18,7 @@ const TicketForm = ({
   getRestaurantInfos,
   restaurantName,
   restaurantNameLoaded,
+  restaurantServiceStatus,
 }) => {
   useEffect(() => {
     getRestaurantInfos();
@@ -34,10 +35,10 @@ const TicketForm = ({
   if (errors && errors.field=='coversNb') {
     console.log(errors.message);
   }
-
+console.log(restaurantServiceStatus);
   return (
     <main className="ticket-form--container">
-      {restaurantNameLoaded && (
+      {(restaurantServiceStatus === 1) && restaurantNameLoaded && (
         <>
           <h1>S'inscrire sur la liste d'attente du restaurant {restaurantName}</h1>
 
