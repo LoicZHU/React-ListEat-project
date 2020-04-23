@@ -15,6 +15,9 @@ const mapStateToProps = (state) => ({
   newPass: state.user.restaurantProfileEditInput.newPass,
   newPassConfirmation: state.user.restaurantProfileEditInput.newPassConfirmation,
   actualPass: state.user.restaurantProfileEditInput.actualPass,
+  displayEditConfirmation: state.user.restaurantProfileEditInput.displayEditConfirmation,
+  displayEditError: state.user.restaurantProfileEditInput.displayEditError,
+  editErrorMessage: state.user.restaurantProfileEditInput.editErrorMessage,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -27,7 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleQrCode: () => {
     dispatch(qrCodeDownload());
-  }
+  },
 });
 
 // export

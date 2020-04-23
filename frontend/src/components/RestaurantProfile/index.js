@@ -20,6 +20,9 @@ const RestaurantProfile = ({
   changeRestaurantProfileInputValue,
   handleRestaurantEdit,
   handleQrCode,
+  displayEditConfirmation,
+  displayEditError,
+  editErrorMessage,
 }) => {
   // handle submit
   const handleSubmit = (evt) => {
@@ -27,10 +30,18 @@ const RestaurantProfile = ({
     handleRestaurantEdit();
   };
 
+  const handleChange = (evt) => {
+    evt.preventDefault();
+    changeRestaurantProfileInputValue(evt.target.value, evt.target.name);
+  };
+console.log(displayEditConfirmation);
   return (
     <div className="profile-container">
       <form className="infos-container" onSubmit={handleSubmit}>
         <div>
+          {displayEditConfirmation && <div className="confirmation">Vos modifications ont bien été prises en compte.</div>}
+          {displayEditError && <span className="error">{editErrorMessage}</span>}
+
           <p>Modifier les informations de mon restaurant</p>
 
           <Field
@@ -102,12 +113,23 @@ const RestaurantProfile = ({
             Pour valider ces modifications, merci d'indiquer votre mot de passe actuel
           </div>
 
-          <Field
+          {/* <Field
             name="actualPass"
             type="password"
             placeholder="Mot de passe actuel"
             onChange={changeRestaurantProfileInputValue}
             value={actualPass}
+          /> */}
+
+          <input
+            id="actualPass"
+            type="password"
+            className="field input"
+            placeholder="Mot de passe actuel"
+            name="actualPass"
+            value={actualPass}
+            onChange={handleChange}
+            required
           />
         </div>
         <button className="save-button button-alt" type="submit">Enregistrer</button>
@@ -116,7 +138,7 @@ const RestaurantProfile = ({
       <div className="qr-container" onClick={handleQrCode}>
         <span>Télécharger</span>
         <p>mon QR code</p>
-        <i class="fa fa-qrcode" aria-hidden="true"></i>
+        <i className="fa fa-qrcode" aria-hidden="true" />
 
         {/* <button className="download-button button-alt" onClick={handleQrCode}>Télécharger</button> */}
       </div>
