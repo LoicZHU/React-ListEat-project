@@ -19,6 +19,7 @@ const TicketForm = ({
   restaurantName,
   restaurantNameLoaded,
   restaurantServiceStatus,
+  ticketSubscriptionErrors,
 }) => {
   useEffect(() => {
     getRestaurantInfos();
@@ -29,63 +30,76 @@ const TicketForm = ({
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleTicketSubscribe();
+
+    if (restaurantServiceStatus === 1) {
+      handleTicketSubscribe();
+    }
   };
 
   if (errors && errors.field=='coversNb') {
     console.log(errors.message);
   }
-console.log(restaurantServiceStatus);
+
   return (
     <main className="ticket-form--container">
-      {(restaurantServiceStatus === 1) && restaurantNameLoaded && (
+      {restaurantNameLoaded && (
         <>
           <h1>S'inscrire sur la liste d'attente du restaurant {restaurantName}</h1>
 
-          <form className="ticket-form" onSubmit={handleSubmit}>
-            <Field
-              name="lastName"
-              placeholder="Nom"
-              onChange={changeTicketInputValue}
-              value={lastName}
-            />
+          {(restaurantServiceStatus === 0) && (
+            <p className="service-off">Le restaurant est fermé ou ne peut plus accepter de nouveaux clients.</p>
+          )}
 
-            <Field
-              name="firstName"
-              placeholder="Prénom"
-              onChange={changeTicketInputValue}
-              value={firstName}
-            />
+          {(restaurantServiceStatus === 1) && (
+            <form className="ticket-form" onSubmit={handleSubmit}>
+              <Field
+                name="lastName"
+                placeholder="Nom"
+                onChange={changeTicketInputValue}
+                value={lastName}
+              />
 
-            <Field
-              name="email"
-              type="email"
-              placeholder="Adresse Email"
-              onChange={changeTicketInputValue}
-              value={email}
-            />
+              <Field
+                name="firstName"
+                placeholder="Prénom"
+                onChange={changeTicketInputValue}
+                value={firstName}
+              />
 
-            <Field
-              name="phone"
-              placeholder="Téléphone"
-              onChange={changeTicketInputValue}
-              value={phone}
-            />
+              <Field
+                name="email"
+                type="email"
+                placeholder="Adresse Email"
+                onChange={changeTicketInputValue}
+                value={email}
+              />
 
-            <Field
-              name="cutlery"
-              type="number"
-              placeholder="Nombre de couverts"
-              onChange={changeTicketInputValue}
-              value={cutlery}
-            />
+              <Field
+                name="phone"
+                placeholder="Téléphone"
+                onChange={changeTicketInputValue}
+                value={phone}
+              />
 
-            {errors && errors.field=='coversNb' && (
+              <Field
+                name="cutlery"
+                type="number"
+                placeholder="Nombre de couverts"
+                onChange={changeTicketInputValue}
+                value={cutlery}
+              />
+
+              {errors && errors.field=='coversNb' && (
                 <span className="cover-error">{errors.message}</span>
-            )}
+              )}
 
-            <button className="ticket-submit button-alt" type="submit">Inscription</button>
-          </form>
+              <button className="ticket-submit button-alt" type="submit">Inscription</button>
+
+              {(ticketSubscriptionErrors !== '') && (
+                <div className="warning">{ticketSubscriptionErrors}</div>
+              )}
+            </form>
+          )}
         </>
       )}
     </main>

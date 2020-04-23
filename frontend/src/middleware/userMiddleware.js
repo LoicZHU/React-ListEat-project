@@ -279,7 +279,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          // console.log(response);
+          console.log(response);
 
           // convert the changeStatus (ex: 'on' = 1)
           if (changedStatus === 'on') {
@@ -288,7 +288,7 @@ const userMiddleware = (store) => (next) => (action) => {
           else {
             changedStatus = 0;
           }
-          console.log(changedStatus);
+          // console.log(changedStatus);
 
           store.dispatch(saveChangedServiceStatus(changedStatus));
         })
