@@ -12,9 +12,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-attachment: fixed;
-    background-position: bottom;
-    background-size: auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     margin-bottom: 50px;
     height: 50vh;
     min-height: 350px;
@@ -257,6 +257,8 @@
 @media (min-width: $mobile-breakpoint) {
   .home {
     &__top {
+      background-repeat: no-repeat !important;
+      background-size: cover;
 
         &__partner {
           display: flex !important;
