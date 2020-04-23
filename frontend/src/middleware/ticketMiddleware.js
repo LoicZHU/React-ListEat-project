@@ -18,6 +18,7 @@ import {
   saveRestaurantName,
   modalTicketStoreTemp,
   MODAL_TICKET_CANCEL,
+  handleClearModalForm,
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -27,8 +28,8 @@ import {
   fetchTicketsData,
 } from 'src/actions/user';
 
-// const baseUrl = 'http://localhost:8001';
-const baseUrl = 'https://www.listeat.io:8080';
+const baseUrl = 'http://localhost:8001';
+// const baseUrl = 'https://www.listeat.io:8080';
 
 // const id = store.getState().user.restaurantId;
 
@@ -55,11 +56,11 @@ const ticketMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(saveRestaurantInfos(response.data.id, response.data.name, restaurantUrlId));
         })
         .catch((error) => {
-          console.warn(error.response);
+          // console.warn(error.response);
         });
       next(action);
       break;
@@ -84,7 +85,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(saveSubscribeTicketSubscription(response.data.ticketId, store.getState().tickets.ticketInscriptionInput.cutlery, response.data.estimatedWaitingTime));
 
           // localStorage.setItem('ticketId', response.data.ticketId);
@@ -94,7 +95,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
           // window.location.replace(`http://${url}/restaurant/${restaurantId}/tickets/validate`);
         })
         .catch((error) => {
-          console.warn(error.response);
+          // console.warn(error.response);
           // store.dispatch(saveSubscribeTicketErrors(error.response.data));
         });
       next(action);
@@ -115,12 +116,12 @@ const ticketMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           const isTicketValidate = (response.data.ticketStatus === 1); // boolean
           store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate, response.data.estimatedEntryTime));
         })
         .catch((error) => {
-          console.warn(error.response);
+          // console.warn(error.response);
         });
 
       next(action);
@@ -138,10 +139,10 @@ const ticketMiddleware = (store) => (next) => (action) => {
         },
       }).then((response) => {
         store.dispatch(fetchTicketsData());
-        console.log(response);
+        // console.log(response);
       })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -157,11 +158,11 @@ const ticketMiddleware = (store) => (next) => (action) => {
           status: 'seated',
         },
       }).then((response) => {
-        console.log(response);
+        // console.log(response);
         store.dispatch(fetchTicketsData());
       })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -191,7 +192,6 @@ const ticketMiddleware = (store) => (next) => (action) => {
           store.dispatch(modalTicketStoreTemp(estimatedEntryTime, response.data.ticketId));
         })
         .catch((error) => {
-          console.warn(error.response);
         });
       next(action);
       break;
@@ -208,11 +208,11 @@ const ticketMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response);
           store.dispatch(fetchTicketsData());
+          store.dispatch(handleClearModalForm());
         })
         .catch((error) => {
-          console.warn(error);
+          store.dispatch(handleClearModalForm());
         });
       next(action);
       break;
@@ -230,10 +230,10 @@ const ticketMiddleware = (store) => (next) => (action) => {
       })
         .then((response) => {
           store.dispatch(fetchTicketsData());
-          console.log(response);
+          store.dispatch(handleClearModalForm());
         })
         .catch((error) => {
-          console.warn(error);
+          console.log(error.response);
         });
       next(action);
       break;

@@ -149,6 +149,7 @@ const Signup = ({
           id="password"
           value={password}
           onChange={handleChange, checkPassword}
+          required
         />
         <input
           key="passwordConfirmation"
@@ -158,6 +159,7 @@ const Signup = ({
           id="password-confirmation"
           value={passwordConfirmation}
           onChange={checkPasswordConfirmation}
+          required
         />
 
         { showPasswordError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>}

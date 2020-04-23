@@ -154,25 +154,14 @@
         content: counter(counter) ". ";
         color:$primary-color;
         font-weight: bold;
-      }
+      }    
 
-      p {
-        font-style: italic;
-      }
 
       &__detail {
         padding: 20px 0;
 
-        p {
-          text-decoration: italic;
-        }
-      }
-
-      &__detail {
-        padding: 20px 0;
-
-        p {
-          text-decoration: italic;
+        p.argument {
+          text-decoration: italic !important;
         }
       }
     }
@@ -287,6 +276,10 @@
 
           &__link {
               text-decoration: underline;
+
+              &.logged {
+                margin-top: 20px !important;
+              }
           }
 
           &__subscribe-button {

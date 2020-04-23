@@ -38,8 +38,8 @@ import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
-// const baseUrl = 'http://localhost:8001';
-const baseUrl = 'https://www.listeat.io:8080';
+const baseUrl = 'http://localhost:8001';
+// const baseUrl = 'https://www.listeat.io:8080';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
@@ -136,6 +136,7 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           store.dispatch(saveSignUpErrors(error.response.data));
           location.hash = "#" + 'signup-form';
+          console.log(error.response);
         });
       next(action);
       break;
