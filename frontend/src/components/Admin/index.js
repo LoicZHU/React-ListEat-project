@@ -45,12 +45,42 @@ const Admin = ({
   emailError,
 
 }) => {
+  
   useEffect(() => {
     // refresh the showed time
     setInterval(() => {
       refreshTime();
     }, 10000);
   }, []);
+
+  useEffect(() => {
+
+    //set first ticket as current
+    const setFirstTicketAsCurrent = () => {
+      const actualCurrentElement = document.querySelector('#ticket-list li.current');
+      if (actualCurrentElement == null && tickets.length > 0) {
+        document.querySelector('#ticket-list > li').classList.add('current');
+      } else {}
+    };
+
+    setFirstTicketAsCurrent();
+
+  }, [tickets]);
+
+
+  const handleClick = (e) => {
+    updateCurrentTicket(ticket);
+    const elements = document.querySelectorAll('.current');
+    elements.forEach(element => {
+      element.classList.remove('current');
+    });
+    const element = e.target;
+    element.classList.toggle('current');
+  };
+
+
+
+
 
   // handle click on '+'
   const handleRemoveClick = () => {
