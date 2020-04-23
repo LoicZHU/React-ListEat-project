@@ -23,6 +23,8 @@ const TicketForm = ({
     getRestaurantInfos();
   }, []);
 
+  window.scrollTo(0,0);
+
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
