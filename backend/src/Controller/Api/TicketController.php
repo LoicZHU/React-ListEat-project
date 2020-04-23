@@ -103,7 +103,7 @@ class TicketController extends AbstractController
         $entityManager->persist($ticket);
         $entityManager->flush();
     
-    return $this->json(['ticketId' => $ticket->getId(), 'estimatedWaitingTime' => $estimatedWaitingTime, 'estimatedEntryTime' => $estimatedEntryTime], Response::HTTP_CREATED);
+    return $this->json(['ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus(), 'estimatedWaitingTime' => $estimatedWaitingTime, 'estimatedEntryTime' => $estimatedEntryTime], Response::HTTP_CREATED);
     }
 
     /**

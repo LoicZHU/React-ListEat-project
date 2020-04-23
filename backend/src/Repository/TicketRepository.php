@@ -47,11 +47,29 @@ class TicketRepository extends ServiceEntityRepository
             FROM App\Entity\Ticket t
             WHERE t.status = :status
             AND t.statusnotification = :statusnotification
-            AND t.estimatedWaitingTime <= :estimatedWaitingTime'
+            AND t.estimatedEntryTime <= :currentTime'
     
         );
         $query->setParameter('status', 1);
         $query->setParameter('statusnotification', 0);
+        $query->setParameter('currentTime', $current);
+        // returns total number of covers for active tickets, for a given restaurant
+        return  $query->getResult();
+    }
+
+    public function findWhere($current)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT t
+            FROM App\Entity\Ticket t
+            WHERE t.status = :status OR t.status = :statusCancelled
+            AND t.createdAt < :estimatedWaitingTime'
+        
+        );
+        $query->setParameter('status', 2);
+        $query->setParameter('statusCancelled', 0);
         $query->setParameter('estimatedWaitingTime', $current);
         // returns total number of covers for active tickets, for a given restaurant
         return  $query->getResult();

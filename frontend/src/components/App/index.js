@@ -125,7 +125,6 @@ const App = ({
 
           {/* Client : Get a ticket */}
           <Route path="/restaurant/:id/tickets/add" exact>
-            <Header />
             {!isTemporarySubscribedTicket && <TicketForm />}
             {isTemporarySubscribedTicket && <Redirect to="/restaurant/tickets/validate" />}
           </Route>
@@ -133,7 +132,6 @@ const App = ({
           {/* Client : Validate the ticket */}
           {isTemporarySubscribedTicket && (
             <Route path="/restaurant/tickets/validate" exact>
-              <Header />
               {isTicketValidate === '' && <Validation />}
               {isTicketValidate !== '' && isTicketValidate && <Redirect to="/tickets/confirmation" />}
               {isTicketValidate !== '' && !isTicketValidate && <Redirect to="/tickets/cancellation" />}
@@ -145,7 +143,9 @@ const App = ({
 
           {/* Client : Confirmation of ticket */}
           <Route path="/tickets/confirmation" exact>
+
             {/* <Header /> */}
+
             {isTicketValidate && <Confirmation />}
             {!isTicketValidate && <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />}
           </Route>
@@ -157,6 +157,7 @@ const App = ({
                 {/* <Header /> */}
                 <Cancellation />
               </>
+              <Cancellation />
             )}
             {/* no need to define the redirection to ticketForm because of :
               {!isTemporarySubscribedTicket && (
