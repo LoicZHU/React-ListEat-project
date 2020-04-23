@@ -96,7 +96,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           // console.warn(error.response);
-          // store.dispatch(saveSubscribeTicketErrors(error.response.data));
+          store.dispatch(saveSubscribeTicketErrors(error.response.data.message));
         });
       next(action);
       break;

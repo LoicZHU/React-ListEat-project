@@ -19,6 +19,7 @@ const TicketForm = ({
   restaurantName,
   restaurantNameLoaded,
   restaurantServiceStatus,
+  ticketSubscriptionErrors,
 }) => {
   useEffect(() => {
     getRestaurantInfos();
@@ -29,20 +30,25 @@ const TicketForm = ({
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleTicketSubscribe();
+
+    if (restaurantServiceStatus === 1) {
+      handleTicketSubscribe();
+    }
   };
 
   if (errors && errors.field=='coversNb') {
     console.log(errors.message);
   }
-console.log(restaurantServiceStatus);
+
   return (
     <main className="ticket-form--container">
       {restaurantNameLoaded && (
         <>
           <h1>S'inscrire sur la liste d'attente du restaurant {restaurantName}</h1>
 
-          <p>Le formulaire d'inscription à la liste d'attente est désactivé.</p>
+          {(restaurantServiceStatus === 0) && (
+            <p className="service-off">Le restaurant est fermé ou ne peut plus accepter de nouveaux clients.</p>
+          )}
 
           {(restaurantServiceStatus === 1) && (
             <form className="ticket-form" onSubmit={handleSubmit}>
@@ -84,10 +90,14 @@ console.log(restaurantServiceStatus);
               />
 
               {errors && errors.field=='coversNb' && (
-                  <span className="cover-error">{errors.message}</span>
+                <span className="cover-error">{errors.message}</span>
               )}
 
               <button className="ticket-submit button-alt" type="submit">Inscription</button>
+
+              {(ticketSubscriptionErrors !== '') && (
+                <div className="warning">{ticketSubscriptionErrors}</div>
+              )}
             </form>
           )}
         </>

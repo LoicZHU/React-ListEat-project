@@ -7,6 +7,13 @@
   flex-direction: column;
   margin: 3em 0;
 
+  .service-off {
+    width: 100%;
+    margin: 5em auto;
+    margin-bottom: 1em;
+    padding: 0 30px;
+  }
+
   .ticket-submit {
     margin-top: 1em;
   }
@@ -34,6 +41,13 @@
       border-radius: 5px;
       color: white;
       width: 60%;
+    }
+
+    .warning {
+      background-color: $primary-color;
+      padding: 1em;
+      font-size: .9em;
+      border-radius: 5px;
     }
   }
 }
