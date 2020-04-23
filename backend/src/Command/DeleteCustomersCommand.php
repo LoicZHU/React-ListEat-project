@@ -57,7 +57,6 @@ class DeleteCustomersCommand extends Command
 
         $io->title('Delete all customers above 1 month');
 
-        $currentTime = date("d/m/Y H:i:s", strtotime('now')); 
         $stamp = date("d/m/Y H:i:s", strtotime('now -1 Months'));  
 
         // 1. Get tickets from the BDD
