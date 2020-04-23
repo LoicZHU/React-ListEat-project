@@ -54,7 +54,9 @@
   .left {
     font-weight: bold;
 
- 
+    label.switch {
+      margin: 0px !important;
+    }
 
     .toggle-name {
       margin-left: 1em;
@@ -484,6 +486,7 @@ div.ReactModalPortal {
           color: #fff;
           font-size: 1.5em;
         }
+        
       }
           
       .close-button {

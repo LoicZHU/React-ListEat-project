@@ -139,7 +139,7 @@ const Signup = ({
         </span>
 
 
-        <label htmlFor="lastname">Nom</label>
+        <label className="signup-label" htmlFor="lastname">Nom</label>
         <input
           key="lastname"
           name="lastname"
@@ -150,7 +150,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="firstname">Prénom</label>
+        <label className="signup-label" htmlFor="firstname">Prénom</label>
         <input
           key="firstname"
           name="firstname"
@@ -161,7 +161,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="email">Adresse email</label>
+        <label className="signup-label" htmlFor="email">Adresse email</label>
         <input
           key="email"
           name="email"
@@ -173,7 +173,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="password">Mot de passe</label>
+        <label className="signup-label" htmlFor="password">Mot de passe</label>
         <input
           key="password"
           name="password" 
@@ -185,7 +185,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="passwordConfirmation">Confirmation du mot de passe</label>
+        <label className="signup-label" htmlFor="passwordConfirmation">Confirmation du mot de passe</label>
         <input
           key="passwordConfirmation"
           name="passwordConfirmation"
@@ -204,7 +204,7 @@ const Signup = ({
           PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDYwLjczMSA2MC43MzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYwLjczMSA2MC43MzE7IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48Zz4KCTxnPgoJCTxwYXRoIGQ9Ik00NC44NTMsNDIuOTUyaDExLjAzMUwzOC4xMDEsNjAuNzMxTDIwLjMyNCw0Mi45NTJoMTEuMTZDMjkuOTA4LDIyLjAwMSwxOC45OTUsNS4wNzUsNC44NDcsMC45NiAgICBDNy4wMDcsMC4zMzIsOS4yNDMsMCwxMS41MjksMEMyOC44MTIsMCw0My4wMzcsMTguOCw0NC44NTMsNDIuOTUyeiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9ImFjdGl2ZS1wYXRoIiBzdHlsZT0iZmlsbDojRkY4NDAwIiBkYXRhLW9sZF9jb2xvcj0iIzAwMDAwMCI+PC9wYXRoPgoJPC9nPgo8L2c+PC9nPiA8L3N2Zz4=" />
         </span>
 
-        <label htmlFor="restaurantName">Nom du restaurant</label>
+        <label className="signup-label" htmlFor="restaurantName">Nom du restaurant</label>
         <input
           key="restaurantName"
           name="restaurantName"
@@ -215,7 +215,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="address">Adresse du restaurant</label>
+        <label className="signup-label" htmlFor="address">Adresse du restaurant</label>
         <input
           key="address"
           name="address"
@@ -226,7 +226,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="postcode">Code postal</label>
+        <label className="signup-label" htmlFor="postcode">Code postal</label>
         <input
           key="postcode"
           name="postcode"
@@ -234,11 +234,10 @@ const Signup = ({
           id="postcode"
           value={postcode}
           onChange={handleChange}
-          type="number"
           required
         />
 
-        <label htmlFor="city">Ville</label>
+        <label className="signup-label" htmlFor="city">Ville</label>
         <input
           key="city"
           name="city"
@@ -249,7 +248,7 @@ const Signup = ({
           required
         />
         
-        <label htmlFor="country">Pays</label>
+        <label className="signup-label" htmlFor="country">Pays</label>
         <input
           key="country"
           name="country"
@@ -260,7 +259,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="phone">Téléphone</label>        
+        <label className="signup-label" htmlFor="phone">Téléphone</label>        
         <input
           key="phone"
           name="phone"
@@ -268,23 +267,21 @@ const Signup = ({
           id="phone"
           value={phone}
           onChange={handleChange}
-          type="number"
           required
         />
 
-        <label htmlFor="cis">N°SIRET</label>           
+        <label className="signup-label" htmlFor="cis">N°SIRET</label>           
         <input
           key="cis"
           name="cis"
           placeholder="N°SIRET"
           id="cis"
           value={cis}
-          type="number"
           onChange={handleChange}
           required
         />
 
-        <label htmlFor="averageEatingTime">Temps moyen d'un repas dans votre restaurant</label>   
+        <label className="signup-label" htmlFor="averageEatingTime">Temps moyen d'un repas dans votre restaurant</label>   
         <input
           key="averageEatingTime"
           name="averageEatingTime"
@@ -298,7 +295,7 @@ const Signup = ({
           required
         />
 
-        <label htmlFor="coversNumber">Nombre de couverts</label>   
+        <label className="signup-label" htmlFor="coversNumber">Nombre de couverts</label>   
         <input
           key="coversNumber"
           name="coversNumber"

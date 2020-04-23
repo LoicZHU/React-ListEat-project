@@ -323,6 +323,9 @@ const Admin = ({
                       placeholder="Nombre de couverts"
                       onChange={changeTicketInputValue}
                       value={cutlery}
+                      type="number"
+                      step="5"
+                      min="0"
                     />
 
                   { modalErrors &&
