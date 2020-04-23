@@ -32,7 +32,7 @@ const Info = () => {
           <li>Vos clients scannent le QR code, renseignent quelques informations dont le nombre de couverts souhaités et obtiennent un ticket avec une estimation du temps d’attente. Ils recevront une notification automatique à l’approche de leur horaire de passage estimé.</li>
           <li>Vous gérez vos tickets via votre espace partenaire, soit en plaçant les clients lorsqu’une table se libère, soit en annulant leur venue.</li>
         </ol>
-        <p>Pratique, pour vous et vos clients !</p>
+        <p className="argument">Pratique, pour vous et vos clients !</p>
       </div>
     </div>
   </section>

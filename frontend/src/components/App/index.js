@@ -9,7 +9,7 @@ import 'react-notifications-component/dist/theme.css';
 
 // == Import Components
 import Header from 'src/containers/Header';
-import Home from 'src/components/Home';
+import Home from 'src/containers/Home';
 import Login from 'src/components/Login';
 import Footer from 'src/components/Footer';
 import TicketForm from 'src/containers/TicketForm';
@@ -97,7 +97,8 @@ const App = ({
           {/* Subscribe */}
           <Route path="/signup" exact>
             <Header />
-            <Signup />
+            {!isRestaurantLogged && <Signup />}
+            {isRestaurantLogged && <Redirect to="/" />}
             <Footer />
           </Route>
 
@@ -144,7 +145,7 @@ const App = ({
 
           {/* Client : Confirmation of ticket */}
           <Route path="/tickets/confirmation" exact>
-            <Header />
+            {/* <Header /> */}
             {isTicketValidate && <Confirmation />}
             {!isTicketValidate && <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />}
           </Route>
@@ -153,7 +154,7 @@ const App = ({
           <Route path="/tickets/cancellation" exact>
             {!isTicketValidate && (
               <>
-                <Header />
+                {/* <Header /> */}
                 <Cancellation />
               </>
             )}
