@@ -236,7 +236,7 @@ const Admin = ({
 
               <div className="estimate-waiting-time">
                 <span id="less-time" onClick={handleRemoveClick} />
-                <span id="time">{averageEatingTime} mn</span>
+                <span id="time">{averageEatingTime}</span>
                 <span id="more-time" onClick={handleAddClick} />
               </div>
             </div>

@@ -38,8 +38,8 @@ import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
-// const baseUrl = 'http://localhost:8001';
-const baseUrl = 'https://www.listeat.io:8080';
+const baseUrl = 'http://localhost:8001';
+// const baseUrl = 'https://www.listeat.io:8080';
 
 
 // middleware
@@ -190,11 +190,11 @@ const userMiddleware = (store) => (next) => (action) => {
           //     },
       })
         .then((response) => {
-          console.log(response);
           let responseTime = response.data.averageEatingTime;
           let responseTimeHours = Math.floor(responseTime / 60);
           let responseTimeModulo = responseTime % 60;
-          let averageEatingTime = `${responseTimeHours}:${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}`;
+          let averageEatingTime = 
+          `${(responseTimeHours === 0) ? '' : responseTimeHours + "h"}${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}${(responseTimeHours === 0) ? 'mn' : ""}`;
           store.dispatch(saveRestaurantData(averageEatingTime, response.data.status));
         })
         .catch((error) => {
@@ -220,7 +220,8 @@ const userMiddleware = (store) => (next) => (action) => {
           let responseTime = response.data.averageEatingTime;
           let responseTimeHours = Math.floor(responseTime / 60);
           let responseTimeModulo = responseTime % 60;
-          let averageEatingTime = `${responseTimeHours}:${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}`;
+          let averageEatingTime = 
+          `${(responseTimeHours === 0) ? '' : responseTimeHours + "h"}${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}${(responseTimeHours === 0) ? 'mn' : ""}`;
           store.dispatch(saveIncreasedAverageEatingTime(averageEatingTime));
         })
         .catch((error) => {
@@ -247,7 +248,8 @@ const userMiddleware = (store) => (next) => (action) => {
           let responseTime = response.data.averageEatingTime;
           let responseTimeHours = Math.floor(responseTime / 60);
           let responseTimeModulo = responseTime % 60;
-          let averageEatingTime = `${responseTimeHours}:${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}`;
+          let averageEatingTime = 
+          `${(responseTimeHours === 0) ? '' : responseTimeHours + "h"}${((responseTimeModulo.toString()).length == 1) ? ('0' + responseTimeModulo) : responseTimeModulo}${(responseTimeHours === 0) ? 'mn' : ""}`;
           store.dispatch(saveDecreasedAverageEatingTime(averageEatingTime));
         })
         .catch((error) => {
