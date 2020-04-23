@@ -240,6 +240,10 @@ const Admin = ({
                 <span id="more-time" onClick={handleAddClick} />
               </div>
             </div>
+            <div className="second">
+              <h3>Total en attente : </h3>
+                <span id="tickets-count">{tickets.length}{(tickets.length < 2 ? " ticket" : " tickets")}</span>
+            </div>
           </div>
         </div>
 
@@ -253,8 +257,6 @@ const Admin = ({
             </ul>
 
             <div className="tickets-count">
-              <span>Total en attente : {tickets.length}</span>
-
               <span id="add-ticket" onClick={openModal}>Ajouter</span>
 
               <Modal
