@@ -56,8 +56,8 @@ const ticketMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          // console.log(response);
-          store.dispatch(saveRestaurantInfos(response.data.id, response.data.name, restaurantUrlId));
+          console.log(response);
+          store.dispatch(saveRestaurantInfos(response.data.id, response.data.name, restaurantUrlId, response.data.status));
         })
         .catch((error) => {
           // console.warn(error.response);

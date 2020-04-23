@@ -288,7 +288,7 @@ const userMiddleware = (store) => (next) => (action) => {
           else {
             changedStatus = 0;
           }
-          // console.log(changedStatus);
+          console.log(changedStatus);
 
           store.dispatch(saveChangedServiceStatus(changedStatus));
         })
