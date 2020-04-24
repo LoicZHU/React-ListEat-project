@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mercure\Update;
+use Symfony\Component\Messenger\MessageBus;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class TicketController extends AbstractController
@@ -109,7 +113,7 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/tickets/{id<\d+>}", name="api_tickets_edit", methods={"PUT"})
      */
-    public function edit($id, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
+    public function edit($id, SerializerInterface $serializer,MessageBusInterface $bus, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
@@ -133,6 +137,18 @@ class TicketController extends AbstractController
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+
+        //// Sending New ticket To the Front By WebSocket///////////////////
+
+        $target=["http://localhost:8080/partner/".$restaurant->getId()."/administration"];
+
+        $update = New Update("http://listeat.io/ticket",
+        $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get'])
+        , $target);
+        $bus->dispatch($update);
+        
+        ////////////////////////////////////////////////////////////////////
+        
 
         //dd($_SERVER);
         // Cancellation route customer
