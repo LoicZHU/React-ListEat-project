@@ -138,7 +138,7 @@ const Admin = ({
 
     if   ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
       handleModalErrors();
-    } else if (email.length > 0 && !email.includes('@') && !email.includes('.')) {
+    } else if (email.length > 0 && !email.includes('@') || !email.includes('.')) {
       handleModalEmailError();
     } else {
       handleShowModalTicketValidation();
