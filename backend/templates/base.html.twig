@@ -77,7 +77,7 @@
               </button>
             </div>
             {% if app.user %}
-              <p class="navbar-brand text-white">Vous êtes identifié {{ app.user.username }}</p>
+              <p class="navbar-brand text-white">Vous êtes identifié <span class="text">{{ app.user.username }}</span></p>
             {% endif %}
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,7 @@
       </nav>
       <!-- End Navbar -->
       
-        <div class="panel-header-sm">
+        <div class="panel-header panel-header-sm">
 
         {% block body %}{% endblock %}
 

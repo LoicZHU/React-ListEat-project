@@ -16,10 +16,11 @@
     color:#8fe74f ;
 }
 
-.sidebar{
-    background-color:green;
+.text{
+font-weight: bold;
+color: #8fe74f;
 }
 
 .bg-orange{
-    background-color: #db8b33;
+    background-color: #ff8400;
 }
