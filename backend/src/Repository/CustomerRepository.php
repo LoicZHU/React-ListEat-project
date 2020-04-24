@@ -19,6 +19,18 @@ class CustomerRepository extends ServiceEntityRepository
         parent::__construct($registry, Customer::class);
     }
 
+    public function findNb()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT COUNT(c)
+            FROM App\Entity\Customer c' 
+        );
+        
+        // returns total number of covers for active tickets, for a given restaurant
+        return $query->getSingleScalarResult();;
+    }
     // /**
     //  * @return Customer[] Returns an array of Customer objects
     //  */

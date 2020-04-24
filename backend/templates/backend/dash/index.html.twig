@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashController!{% endblock %}
+
+{% block body %}
+
+
+
+    </div>
+        <div class="content">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card container_componement">
+                    <i class="fas fa-users fa-5x"></i>
+                    <h4 class="card-title">User</h4>
+                        <div class="card-header">
+                            <p class="chiffre">{{userNb}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card container_componement">
+                    <i class="fas fa-address-book fa-5x"></i>
+                    <h4 class="card-title">Customer</h4>
+                        <div class="card-header">
+                            <p class="chiffre">{{customer}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                   
+                    <div class="card container_componement">
+                    <i class="fas fa-clock fa-5x"></i>
+                    <h4 class="card-title">Waiting</h4>
+                        <div class="card-header">
+                            <p class="chiffre">{{waiting}} min</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card container_componement">
+                    <i class="fas fa-ban fa-5x"></i>
+                    <h4 class="card-title">ticket Cancelled</h4>
+                        <div class="card-header">
+                        <p class="chiffre">{{ticketsCancelled}}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card container_componement">
+                    *<i class="fas fa-ticket-alt fa-5x"></i>
+                     <h4 class="card-title">tickets</h4>
+                        <div class="card-header">
+                        <p class="chiffre">{{ticketNb}}</p>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card container_componement">
+                    <i class="fas fa-utensils fa-5x"></i>
+                    <h4 class="card-title">Cover</h4>
+                        <div class="card-header">
+                            <p class="chiffre">{{coversNb}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            {% endblock %}

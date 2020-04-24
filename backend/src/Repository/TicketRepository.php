@@ -75,6 +75,60 @@ class TicketRepository extends ServiceEntityRepository
         return  $query->getResult();
     }
 
+    public function findWaiting()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT SUM(t.estimatedWaitingTime)
+            FROM App\Entity\Ticket t
+            WHERE t.status = 1'
+        );
+        
+        // returns total number of covers for active tickets, for a given restaurant
+        return $query->getSingleScalarResult();;
+    }
+
+    public function countCovers()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT SUM(t.coversNb)
+            FROM App\Entity\Ticket t
+            WHERE t.status < 1'
+        );
+        
+        // returns total number of covers for active tickets, for a given restaurant
+        return $query->getSingleScalarResult();;
+    }
+
+    public function countCancelled()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT COUNT(t)
+            FROM App\Entity\Ticket t
+            WHERE t.status = 2'
+        );
+        
+        // returns total number of covers for active tickets, for a given restaurant
+        return $query->getSingleScalarResult();;
+    }
+
+    public function countTicket()
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT COUNT(t)
+            FROM App\Entity\Ticket t' 
+        );
+        
+        // returns total number of covers for active tickets, for a given restaurant
+        return $query->getSingleScalarResult();;
+    }
     // /**
     //  * @return Ticket[] Returns an array of Ticket objects
     //  */
