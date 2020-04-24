@@ -40,6 +40,7 @@
       font-size: 1em;
       margin-top: 20px;
       font-weight: bold;
+      // min-width: 20px;
 
       img {
         width: 30px;
@@ -129,3 +130,21 @@
 
     }
   }
+
+
+  @media (max-width: 361px) { 
+    .signup-wrapper {
+  
+      .form-zone-title:last-of-type {
+        
+        img {
+          width: 30px;
+          position: relative;
+          top: 0px;
+          transform: rotate(20deg);
+          left:  50% !important;
+        }
+      }
+  };
+
+};
