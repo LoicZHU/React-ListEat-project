@@ -1,5 +1,6 @@
 // == Import npm
 import React, { useEffect } from 'react';
+import Websocket from 'react-websocket';
 import Modal from 'react-modal';
 
 // == Import
@@ -95,9 +96,7 @@ const Admin = ({
         onScreen: true
       },
     });
-
     handleTicketSubscribe();
-    console.log('je suis dans Admin, l70');
   };
 
   const handleConfirm = () => {
@@ -135,15 +134,13 @@ const Admin = ({
   };
 
   const handleModalTicketValidation = () => {
-
     if   ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
       handleModalErrors();
-    } else if (email.length > 0 && !email.includes('@') || !email.includes('.')) {
+    } else if ((email.length > 0 && !email.includes('@')) || (email.length > 0 && !email.includes('.'))) {
       handleModalEmailError();
     } else {
       handleShowModalTicketValidation();
     }
-
   };
 
   // bind modal to the app div : root
@@ -180,14 +177,32 @@ const Admin = ({
   const handleOpen = () => {
     modalTitle.style.color = '#ff8400';
   };
+ 
+  // const url = new URL('http://localhost:3000');
+  // url.searchParams.append('topic', 'http://localhost:8001/mercure-test');
+  // const eventSource = new EventSource(url);
+  // eventSource.onmessage = e => console.log(JSON.parse(e));
 
-  // const handleClose = () => {
-
-  // };
+  const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://localhost:8001/mercure-test'),
+        {
+          headers: {
+              'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po',
+          }
+        }
+      );
+    es.onmessage = e => {
+    // Will be called every time an update is published by the server
+    console.log(e.data);
+  }
 
   return (
     (!loadingTicketsData && (
       <div id="admin-wrapper">
+{/* 
+         <Websocket url='ws://localhost:8001/mercure-test'
+        onMessage={(data) => console.log(data)}
+        /> */}
+
         {/* left section */}
         <div id="left-section">
           <div id="admin-top-section">
@@ -265,7 +280,7 @@ const Admin = ({
               ))}
             </ul>
 
-            <div className="tickets-count">
+              <div className="tickets-count">
               <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>
 
               <Modal
