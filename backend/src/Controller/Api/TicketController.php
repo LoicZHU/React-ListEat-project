@@ -161,7 +161,7 @@ class TicketController extends AbstractController
 
         $mailer->send($message);
 
-        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'estimatedEntryTime' => $ticket->getEstimatedEntryTime()], Response::HTTP_OK);
+        return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été validée.', 'ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus(), 'estimatedWaitingTime' => $ticket->getEstimatedWaitingTime(), 'estimatedEntryTime' => $ticket->getEstimatedEntryTime(), 'restaurantId' => $restaurant->getId()], Response::HTTP_OK);
 
         } elseif ($data->validation == "cancel") {
             $ticket->setStatus(2);
