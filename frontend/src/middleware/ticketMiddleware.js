@@ -19,6 +19,8 @@ import {
   modalTicketStoreTemp,
   MODAL_TICKET_CANCEL,
   handleClearModalForm,
+  fetchNewCustomerTicket,
+  updateCurrentTicket,
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -26,10 +28,12 @@ import {
 // import
 import {
   fetchTicketsData,
+  saveTicketsData,
+  // updateCurrentTicket,
 } from 'src/actions/user';
 
-// const baseUrl = 'http://localhost:8001';
-const baseUrl = 'https://www.listeat.io:8080';
+const baseUrl = 'http://localhost:8001';
+// const baseUrl = 'https://www.listeat.io:8080';
 
 // const id = store.getState().user.restaurantId;
 
@@ -103,7 +107,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
     case SEND_TICKET_VALIDATION:
       const ticktId = store.getState().tickets.ticketId;
-
+      
       axios({
         method: 'put',
         url: `${baseUrl}/api/tickets/${ticktId}`,
@@ -118,10 +122,34 @@ const ticketMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // console.log(response);
           const isTicketValidate = (response.data.ticketStatus === 1); // boolean
+          const restaurantId = response.data.restaurantId;
           store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate, response.data.estimatedEntryTime));
+          store.dispatch(fetchNewCustomerTicket(restaurantId));
+          console.log(response.data.restaurantId);
+          // console.log('send ticket validation ok');
+
+          // {
+          //   axios({
+          //   method: 'get',
+          //   url: `${baseUrl}/api/partner/${id}/tickets`,
+          //   withCredentials: true,
+          // })
+          //   .then((response) => {
+          //     console.log(response.data);
+          //     store.dispatch(saveTicketsData(response.data));
+          //     if (response.data.length > 0) {
+          //       store.dispatch(updateCurrentTicket(response.data[0]));
+          //     }
+          //   })
+          //   .catch((error) => {
+          //     console.warn(error);
+          //   });
+          // }
+
         })
         .catch((error) => {
-          // console.warn(error.response);
+          console.warn(error);
+          console.log('send ticket validation');
         });
 
       next(action);
@@ -233,7 +261,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
           store.dispatch(handleClearModalForm());
         })
         .catch((error) => {
-          console.log(error.response);
+          // console.log(error.response);
         });
       next(action);
       break;

@@ -40,8 +40,8 @@ import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
-// const baseUrl = 'http://localhost:8001';
-const baseUrl = 'https://www.listeat.io:8080';
+const baseUrl = 'http://localhost:8001';
+// const baseUrl = 'https://www.listeat.io:8080';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
@@ -75,7 +75,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: `${baseUrl}/api/partner/islogged`,
+        url: `${baseUrl}/islogged`,
         withCredentials: true,
       })
         .then((response) => {

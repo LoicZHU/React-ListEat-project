@@ -57,6 +57,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scroll-parallax": "^2.3.2",
+    "react-websocket": "^2.1.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
   },
