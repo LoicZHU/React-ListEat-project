@@ -66,14 +66,6 @@ const Faq = ({
           </div>
 
           <div className="faq__content">
-            <p className="faq__content__question">Comment est calculé le temps d’attente estimé ?</p>
-
-            <p className="faq__content__answer">
-              Lors de votre inscription, vous renseignez les informations liées à votre restaurant dont le temps moyen d’un repas, le nombre de places disponibles dans votre établissement. En fonction de ces informations, notre algorithme calcule le temps d’attente et l’horaire de passage estimés.
-            </p>
-          </div>
-
-          <div className="faq__content">
             <p className="faq__content__question">Est-il possible de changer le temps moyen d’un repas selon le moment de la journée ?</p>
 
             <p className="faq__content__answer">
