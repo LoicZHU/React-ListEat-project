@@ -18,7 +18,7 @@
     background-repeat: no-repeat;
     margin-bottom: 50px;
     height: 50vh;
-    min-height: 350px;
+    min-height: 300px;
     max-height: 600px;
     width: 100%;
 
@@ -55,10 +55,15 @@
         text-align: left;
         color: white;
         padding: 1.25rem;
+        padding-top: 0;
         width: 90%;
         font-size: 2em;
         font-weight: bold;
         text-shadow: $dark-color 0px 0px 10px;        
+      }
+
+      button {
+        width: auto;
       }
     }
   
