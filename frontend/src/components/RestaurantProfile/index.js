@@ -1,5 +1,5 @@
 // import npm
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // import
@@ -25,7 +25,12 @@ const RestaurantProfile = ({
   editErrorMessage,
   isNewPassConfirmed,
   changeIsNewPassConfirmed,
+  clearShowedConfirmationOrErrorMessage
 }) => {
+  useEffect(() => {
+    clearShowedConfirmationOrErrorMessage();
+  }, []);
+
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
