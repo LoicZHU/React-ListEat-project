@@ -43,6 +43,7 @@ export const OPEN_CLIENT_CONTENT = 'OPEN_CLIENT_CONTENT';
 export const DISPLAY_EDIT_CONFIRMATION = 'DISPLAY_EDIT_CONFIRMATION';
 export const DISPLAY_EDIT_ERROR = 'DISPLAY_EDIT_ERROR';
 export const CHANGE_IS_NEW_PASS_CONFIRMED = 'CHANGE_IS_NEW_PASS_CONFIRMED';
+export const CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE = 'CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -263,4 +264,8 @@ export const displayEditError = (editErrorMessage) => ({
 export const changeIsNewPassConfirmed = (newValue) => ({
   type: CHANGE_IS_NEW_PASS_CONFIRMED,
   newValue,
+});
+
+export const clearShowedConfirmationOrErrorMessage = () => ({
+  type: CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE,
 });

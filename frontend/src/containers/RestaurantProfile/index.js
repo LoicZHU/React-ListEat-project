@@ -8,6 +8,7 @@ import {
   editRestaurant,
   qrCodeDownload,
   changeIsNewPassConfirmed,
+  clearShowedConfirmationOrErrorMessage,
 } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
@@ -40,6 +41,9 @@ const mapDispatchToProps = (dispatch) => ({
 
   changeIsNewPassConfirmed: (newValue) => {
     dispatch(changeIsNewPassConfirmed(newValue));
+  },
+  clearShowedConfirmationOrErrorMessage: () => {
+    dispatch(clearShowedConfirmationOrErrorMessage());
   },
 });
 
