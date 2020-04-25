@@ -218,6 +218,7 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         signupErrors: action.errors,
+        signupConfirmation: false,
       };
 
     case SAVE_CHANGED_SERVICE_STATUS:
@@ -240,6 +241,7 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         signupConfirmation: true,
+        signupErrors: [],
       };
 
     case REFRESH_TIME:

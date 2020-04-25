@@ -177,10 +177,10 @@ const Admin = ({
     modalTitle.style.color = '#ff8400';
   };
  
-  const url = new URL('http://localhost:3000/.well-known/mercure?topic=');
-  url.searchParams.append('ticket', 'http://listeat.io/');
-  const eventSource = new EventSource(url);
-  eventSource.onmessage = e => console.log(JSON.parse(e));
+  // const url = new URL('http://localhost:3000/.well-known/mercure?topic=');
+  // url.searchParams.append('ticket', 'http://listeat.io/');
+  // const eventSource = new EventSource(url);
+  // eventSource.onmessage = e => console.log(JSON.parse(e));
 
   // const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://listeat.io/ticket'),
   //       {

@@ -84,54 +84,53 @@ const Signup = ({
           <ul>
             {signupErrors.map((error) => {
               if (error.field === 'email') {
-                return <li><span>Email :</span> {error.message}</li>;
+                return <li key="email"><span>Email :</span> {error.message}</li>;
               }
               if (error.field === 'password') {
-                return <li><span>Mot de passe :</span> {error.message}</li>;
+                return <li key="password"><span>Mot de passe :</span> {error.message}</li>;
               }
               if (error.field === 'lastname') {
-                return <li><span>Nom :</span> {error.message}</li>;
+                return <li key="lastname"><span>Nom :</span> {error.message}</li>;
               }
               if (error.field === 'firstname') {
-                return <li><span>Prénom :</span> {error.message}</li>;
+                return <li key="firstname"><span>Prénom :</span> {error.message}</li>;
               }
               if (error.field === 'siretCode') {
-                return <li><span>SIRET :</span> {error.message}</li>;
+                return <li key="siretCode"><span>SIRET :</span> {error.message}</li>;
               }
               if (error.field === 'name') {
-                return <li><span>Nom du restaurant :</span> {error.message}</li>;
+                return <li key="name"><span>Nom du restaurant :</span> {error.message}</li>;
               }
               if (error.field === 'address') {
-                return <li><span>Adresse restaurant :</span> {error.message}</li>;
+                return <li key="address"><span>Adresse restaurant :</span> {error.message}</li>;
               }
               if (error.field === 'city') {
-                return <li><span>Ville :</span> {error.message}</li>;
+                return <li key="city"><span>Ville :</span> {error.message}</li>;
               }
               if (error.field === 'country') {
-                return <li><span>Pays :</span> {error.message}</li>;
+                return <li key="country"><span>Pays :</span> {error.message}</li>;
               }
               if (error.field === 'phone') {
-                return <li><span>Téléphone :</span> {error.message}</li>;
-              } 
+                return <li key="phone"><span>Téléphone :</span> {error.message}</li>;
+              }
               if (error.field === 'siret code') {
-                return <li><span>N° SIRET :</span> {error.message}</li>;
+                return <li key="cis"><span>N° SIRET :</span> {error.message}</li>;
               }
               if (error.field === 'adresse postale') {
-                return <li><span>Adresse :</span> {error.message}</li>;
+                return <li key="postcode"><span>Adresse :</span> {error.message}</li>;
               }
             })}
           </ul>
         </div>
         )}
 
-        { showSignupConfirmation && scrollToTop() &&
-        <div id="signup-confirmation">
-          <span>Merci, vous avez bien été enregistré ! Vous pouvez désormais vous 
-            <a href="/login"> connecter à votre espace</a>.
-          </span>
-        </div>
-        }
-
+        { showSignupConfirmation && scrollToTop() && (
+          <div id="signup-confirmation">
+            <span>Merci, vous avez bien été enregistré ! Vous pouvez désormais vous 
+              <a href="/login"> connecter à votre espace</a>.
+            </span>
+          </div>
+        )}
 
         <span className="form-zone-title">Vous concernant 
         <img src="data:image/svg+xml;base64,
@@ -247,7 +246,7 @@ const Signup = ({
           onChange={handleChange}
           required
         />
-        
+
         <label className="signup-label" htmlFor="country">Pays</label>
         <input
           key="country"
@@ -281,7 +280,7 @@ const Signup = ({
           required
         />
 
-        <label className="signup-label" htmlFor="averageEatingTime">Temps moyen d'un repas dans votre restaurant</label>   
+        <label className="signup-label" htmlFor="averageEatingTime">Temps moyen d'un repas dans votre restaurant</label>
         <input
           key="averageEatingTime"
           name="averageEatingTime"
