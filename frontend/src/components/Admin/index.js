@@ -182,17 +182,17 @@ const Admin = ({
   // const eventSource = new EventSource(url);
   // eventSource.onmessage = e => console.log(JSON.parse(e));
 
-  // const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://listeat.io/ticket'),
-  //       {
-  //         headers: {
-  //             'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po',
-  //         }
-  //       }
-  //     );
-  //   es.onmessage = e => {
-  //   // Will be called every time an update is published by the server
-  //   console.log('ticket recu');
-  // }
+  const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://localhost:8001/ticket'),
+        {
+          headers: {
+              'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po',
+          }
+        }
+      );
+    es.onmessage = e => {
+    // Will be called every time an update is published by the server
+    console.log(e.data);
+  }
 
   return (
     (!loadingTicketsData && (
@@ -226,7 +226,13 @@ const Admin = ({
             </div>
           </div>
 
+          
           <div id="admin-middle-section">
+          { tickets.length === 0 && 
+            <div id="empty-ticket-overlay">
+              <span>Vous n'avez aucun ticket</span>
+            </div>
+          }
             <div className="left">
               <div id="ticket-infos">
                 <span>Nom : {tickets.length > 0 ? currentTicket.customer.lastName : ''} </span>
@@ -253,13 +259,17 @@ const Admin = ({
               </div>
             </div>
           </div>
+          
+
           <div id="admin-bottom-section">
             <div className="first">
               <h3>Temps d'attente actuel&nbsp;:</h3>
 
               <div className="estimate-waiting-time">
                 <span id="less-time" onClick={handleRemoveClick} />
-                <span id="time">{averageEatingTime}</span>
+                <div id="time-container">
+                  <span id="time">{averageEatingTime}</span>
+                </div>
                 <span id="more-time" onClick={handleAddClick} />
               </div>
             </div>
@@ -274,6 +284,14 @@ const Admin = ({
         <div id="right-section">
           <div id="admin-side-section">
             <ul id="ticket-list">
+              {tickets.length === 0 && 
+              <div id="empty-list-add-ticket">
+                <span>Pour ajouter un ticket, c'est ici</span>
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.proctorgallagherinstitute.com%2Fwp-content%2Fuploads%2F2019%2F03%2Forange-curved-arrow.png&f=1&nofb=1"/>
+              </div>
+              
+              }
+              
               {tickets.map((ticket) => (
                 <Ticket key={ticket.id} ticket={ticket} />
               ))}

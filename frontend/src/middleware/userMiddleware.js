@@ -315,7 +315,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch(saveTicketsData(response.data));
           if (response.data.length > 0) {
             store.dispatch(updateCurrentTicket(response.data[0]));
