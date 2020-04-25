@@ -44,6 +44,8 @@ export const DISPLAY_EDIT_CONFIRMATION = 'DISPLAY_EDIT_CONFIRMATION';
 export const DISPLAY_EDIT_ERROR = 'DISPLAY_EDIT_ERROR';
 export const CHANGE_IS_NEW_PASS_CONFIRMED = 'CHANGE_IS_NEW_PASS_CONFIRMED';
 export const CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE = 'CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE';
+export const CHANGE_IS_PASS_CONFIRMED = 'CHANGE_IS_PASS_CONFIRMED';
+export const CLEAR_ALL = 'CLEAR_ALL';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -268,4 +270,13 @@ export const changeIsNewPassConfirmed = (newValue) => ({
 
 export const clearShowedConfirmationOrErrorMessage = () => ({
   type: CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE,
+});
+
+export const changeIsPassConfirmed = (newValue) => ({
+  type: CHANGE_IS_PASS_CONFIRMED,
+  newValue,
+});
+
+export const clearAll = () => ({
+  type: CLEAR_ALL,
 });

@@ -32,6 +32,8 @@ import {
   DISPLAY_EDIT_ERROR,
   CHANGE_IS_NEW_PASS_CONFIRMED,
   CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE,
+  CHANGE_IS_PASS_CONFIRMED,
+  CLEAR_ALL,
 } from 'src/actions/user';
 
 // initial state
@@ -61,6 +63,7 @@ const initialState = {
     averageEatingTime: '', // int
     coversNumber: '',
     showPasswordError: false, // int
+    isPassConfirmed: true,
   },
 
   // sign up errors
@@ -133,6 +136,7 @@ const userReducer = (state = initialState, action = {}) => {
           ...state.signupInput,
           [action.fieldName]: action.newValue,
         },
+        signupConfirmation: false,
       };
 
     case CHANGE_RESTAURANT_PROFILE_INPUT_VALUE:
@@ -242,6 +246,25 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         signupConfirmation: true,
         signupErrors: [],
+        // clear all inputs
+        signupInput: {
+          lastname: '',
+          firstname: '',
+          email: '',
+          password: '',
+          passwordConfirmation: '',
+          restaurantName: '',
+          address: '',
+          postcode: '',
+          city: '',
+          country: '',
+          phone: '',
+          cis: '',
+          averageEatingTime: '',
+          coversNumber: '',
+          showPasswordError: false,
+          isPassConfirmed: true,
+        },
       };
 
     case REFRESH_TIME:
@@ -433,6 +456,41 @@ const userReducer = (state = initialState, action = {}) => {
           displayEditError: false,
           isNewPassConfirmed: true,
         },
+      };
+
+    case CHANGE_IS_PASS_CONFIRMED:
+      return {
+        ...state,
+        signupInput: {
+          ...state.signupInput,
+          isPassConfirmed: action.newValue,
+        },
+      };
+
+    case CLEAR_ALL:
+      return {
+        ...state,
+        signupInput: {
+          ...state.signupInput,
+          lastname: '',
+          firstname: '',
+          email: '',
+          password: '',
+          passwordConfirmation: '',
+          restaurantName: '',
+          address: '',
+          postcode: '',
+          city: '',
+          country: '',
+          phone: '',
+          cis: '',
+          averageEatingTime: '',
+          coversNumber: '',
+          showPasswordError: false,
+          isPassConfirmed: true,
+        },
+        signupErrors: [],
+        signupConfirmation: false,
       };
 
     default: return state;
