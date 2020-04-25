@@ -75,7 +75,7 @@ const userMiddleware = (store) => (next) => (action) => {
     case CHECK_LOGGED_RESTAURANT:
       axios({
         method: 'post',
-        url: `${baseUrl}/islogged`,
+        url: `${baseUrl}/api/partner/islogged`,
         withCredentials: true,
       })
         .then((response) => {
