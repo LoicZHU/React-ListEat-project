@@ -27,9 +27,9 @@ const RestaurantProfile = ({
   changeIsNewPassConfirmed,
   clearShowedConfirmationOrErrorMessage,
 }) => {
-  // useEffect( () => {
-  //   clearShowedConfirmationOrErrorMessage();
-  // }, []);
+  useEffect(() => {
+    clearShowedConfirmationOrErrorMessage();
+  }, []);
 
   // handle submit
   const handleSubmit = (evt) => {
