@@ -98,7 +98,7 @@ const Signup = ({
       <h1>Inscription</h1>
 
       <form id="signup-form" onSubmit={handleSubmit}>
-    
+
         { signupErrors.length > 0 && scrollToTop() && (
         <div id="errors">
           <h4>Des erreurs ont été détectées :</h4>
@@ -204,6 +204,7 @@ const Signup = ({
           value={password}
           // onChange={handleChange, checkPassword}
           onChange={handleChange}
+          minLength="6"
           required
         />
 
@@ -221,7 +222,6 @@ const Signup = ({
         />
 
         {/* { showPasswordError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>} */}
-        {/* {!isPassConfirmed && <span id="password-error">Les mots de passe ne correspondent pas.</span>} */}
         {!isPassConfirmed && scrollToPassInput(passInput) && <span id="password-error">Les mots de passe ne correspondent pas.</span>}
 
         <span className="form-zone-title">Concernant votre restaurant 
