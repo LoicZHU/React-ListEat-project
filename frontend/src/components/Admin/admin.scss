@@ -154,8 +154,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    // background-color: rgb(255,132,0,0.95);
-    background-color: $dark-color;
+    background-color: rgb(255,132,0,0.95);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -367,7 +366,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $dark-color;
+      background-color: $primary-color;
 
       #time {
         font-size: 3em;
@@ -426,23 +425,6 @@
 
     span:first-child {
       margin-left: 30px;
-    }
-    
-    #service-off {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: $dark-color;
-      padding: 0 2em;
-      height: 100%;
-      color: #fff;
-      width: 100%;
-      margin: 0;
-
-      &:hover {
-        background-color: $dark-color;
-        color: #fff;
-      }
     }
 
     #add-ticket {

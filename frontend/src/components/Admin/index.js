@@ -42,7 +42,9 @@ const Admin = ({
   estimatedEntryTime,
   modalErrors,
   emailError,
+
 }) => {
+  
   useEffect(() => {
     // refresh the showed time
     setInterval(() => {
@@ -56,7 +58,7 @@ const Admin = ({
       const actualCurrentElement = document.querySelector('#ticket-list li.current');
       if (actualCurrentElement == null && tickets.length > 0) {
         document.querySelector('#ticket-list > li').classList.add('current');
-      }
+      } else {}
     };
     setFirstTicketAsCurrent();
   }, [tickets]);
@@ -90,7 +92,7 @@ const Admin = ({
       animationOut: ["animated", "fadeOut"],
       dismiss: {
         duration: 4000,
-        onScreen: true,
+        onScreen: true
       },
     });
     handleTicketSubscribe();
@@ -131,13 +133,11 @@ const Admin = ({
   };
 
   const handleModalTicketValidation = () => {
-    if ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
+    if   ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
       handleModalErrors();
-    }
-    else if ((email.length > 0 && !email.includes('@')) || (email.length > 0 && !email.includes('.'))) {
+    } else if ((email.length > 0 && !email.includes('@')) || (email.length > 0 && !email.includes('.'))) {
       handleModalEmailError();
-    }
-    else {
+    } else {
       handleShowModalTicketValidation();
     }
   };
@@ -176,7 +176,7 @@ const Admin = ({
   const handleOpen = () => {
     modalTitle.style.color = '#ff8400';
   };
-
+ 
   // const url = new URL('http://localhost:3000/.well-known/mercure?topic=');
   // url.searchParams.append('ticket', 'http://listeat.io/');
   // const eventSource = new EventSource(url);
@@ -212,13 +212,13 @@ const Admin = ({
               </label>
               <span className="toggle-name">SERVICE : </span>
 
-              {(status === 1) && (
-                <span className="toggle-state on">ON</span>
-              )}
+              {(status === 1) &&
+              <span className="toggle-state on">ON</span>
+              }
 
-              {!(status === 1) && (
-                <span className="toggle-state off">OFF</span>
-              )}
+              {!(status === 1) &&
+              <span className="toggle-state off">OFF</span>
+              }
 
             </div>
             <div className="right">
@@ -226,12 +226,13 @@ const Admin = ({
             </div>
           </div>
 
+          
           <div id="admin-middle-section">
-            {tickets.length === 0 && (
-              <div id="empty-ticket-overlay">
-                <span>Vous n'avez aucun ticket</span>
-              </div>
-            )}
+          { tickets.length === 0 && 
+            <div id="empty-ticket-overlay">
+              <span>Vous n'avez aucun ticket</span>
+            </div>
+          }
             <div className="left">
               <div id="ticket-infos">
                 <span>Nom : {tickets.length > 0 ? currentTicket.customer.lastName : ''} </span>
@@ -258,6 +259,7 @@ const Admin = ({
               </div>
             </div>
           </div>
+          
 
           <div id="admin-bottom-section">
             <div className="first">
@@ -273,7 +275,7 @@ const Admin = ({
             </div>
             <div className="second">
               <h3>Total en attente : </h3>
-                <span id="tickets-count">{tickets.length}{(tickets.length < 2 ? ' ticket' : ' tickets')}</span>
+                <span id="tickets-count">{tickets.length}{(tickets.length < 2 ? " ticket" : " tickets")}</span>
             </div>
           </div>
         </div>
@@ -282,31 +284,21 @@ const Admin = ({
         <div id="right-section">
           <div id="admin-side-section">
             <ul id="ticket-list">
-              {tickets.length === 0 && (
-                <div id="empty-list-add-ticket">
-                  {(status === 0) && (
-                    <>
-                      <span>Pour ajouter un ticket, lancer le service.</span>
-                    </>
-                  )}
-
-                  {(status === 1) && (
-                    <>
-                      <span>Pour ajouter un ticket, c'est ici</span>
-                      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.proctorgallagherinstitute.com%2Fwp-content%2Fuploads%2F2019%2F03%2Forange-curved-arrow.png&f=1&nofb=1"/>
-                    </>
-                  )}
-                </div>
-              )}
-
+              {tickets.length === 0 && 
+              <div id="empty-list-add-ticket">
+                <span>Pour ajouter un ticket, c'est ici</span>
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.proctorgallagherinstitute.com%2Fwp-content%2Fuploads%2F2019%2F03%2Forange-curved-arrow.png&f=1&nofb=1"/>
+              </div>
+              
+              }
+              
               {tickets.map((ticket) => (
                 <Ticket key={ticket.id} ticket={ticket} />
               ))}
             </ul>
 
-            <div className="tickets-count">
-              {(status === 0) && <span id="service-off">Service à l'arrêt (off)</span>}
-              {(status === 1) && <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>}
+              <div className="tickets-count">
+              <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>
 
               <Modal
                 isOpen={open}
@@ -318,118 +310,113 @@ const Admin = ({
                 shouldCloseOnEsc
                 contentLabel="Ticket adding modal" // for screenreaders
               >
-                <div className="modal-title">
-                  {showModalTicketValidation && <div className="previous-button" onClick={handleShowModalTicketForm} />}
-                  {!showModalTicketValidation && <div className="close-button" onClick={handleTicketCancel}>Fermer {/* &#x274C; */} </div>}
+                <div className="modal-title">                  
+                {showModalTicketValidation && <div className="previous-button" onClick={handleShowModalTicketForm}></div>}
+                {!showModalTicketValidation &&<div className="close-button" onClick={handleTicketCancel}>Fermer {/* &#x274C; */} </div>}
                 </div>
 
-                <div className="ticket-form--container">
+                 <div className="ticket-form--container">
                   {!showModalTicketValidation && <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Ajout de ticket</h2> }
+                  <form className="ticket-form" onSubmit={handleSubmit} >
+                  {!showModalTicketValidation &&
+                  <>
+                    <Field
+                      name="lastName"
+                      placeholder="Nom"
+                      onChange={changeTicketInputValue}
+                      value={lastName}
+                    />
 
-                  <form className="ticket-form" onSubmit={handleSubmit}>
-                    {!showModalTicketValidation && (
-                      <>
-                        <Field
-                          name="lastName"
-                          placeholder="Nom"
-                          onChange={changeTicketInputValue}
-                          value={lastName}
-                        />
+                    <Field
+                      name="firstName"
+                      placeholder="Prénom"
+                      onChange={changeTicketInputValue}
+                      value={firstName}
+                    />
 
-                        <Field
-                          name="firstName"
-                          placeholder="Prénom"
-                          onChange={changeTicketInputValue}
-                          value={firstName}
-                        />
+                    <Field
+                      name="email"
+                      type="email"
+                      placeholder="Adresse Email"
+                      onChange={changeTicketInputValue}
+                      value={email}
+                    />
 
-                        <Field
-                          name="email"
-                          type="email"
-                          placeholder="Adresse Email"
-                          onChange={changeTicketInputValue}
-                          value={email}
-                        />
+                    <Field
+                      name="phone"
+                      placeholder="Téléphone"
+                      onChange={changeTicketInputValue}
+                      value={phone}
+                    />
 
-                        <Field
-                          name="phone"
-                          placeholder="Téléphone"
-                          onChange={changeTicketInputValue}
-                          value={phone}
-                        />
+                    <Field
+                      name="cutlery"
+                      type="number"
+                      placeholder="Nombre de couverts"
+                      onChange={changeTicketInputValue}
+                      value={cutlery}
+                      type="number"
+                      step="5"
+                      min="0"
+                    />
 
-                        <Field
-                          name="cutlery"
-                          type="number"
-                          placeholder="Nombre de couverts"
-                          onChange={changeTicketInputValue}
-                          value={cutlery}
-                          type="number"
-                          step="5"
-                          min="0"
-                        />
+                  { modalErrors &&
+                    <div id="errors">
+                      <span> Merci de compléter les champs <strong>Nom</strong>, <strong>Prénom</strong> et <strong>Nombre de couverts</strong>.</span>
+                    </div>
+                  }
 
-                        { modalErrors && (
-                          <div id="errors">
-                            <span> Merci de compléter les champs <strong>Nom</strong>, <strong>Prénom</strong> et <strong>Nombre de couverts</strong>.</span>
-                          </div>
-                        )}
 
-                        { emailError && (
-                          <div id="errors">
-                            <span> Merci de vérifier l'adresse mail.</span>
-                          </div>
-                        )}
+                  { emailError &&
+                    <div id="errors">
+                      <span> Merci de vérifier l'adresse mail.</span>
+                  </div>
+                  }
 
-                        {errors && errors.field=='coversNb' && (
-                          <span className="cover-error">{errors.message}</span>
-                        )}
-                      </>
+                    {errors && errors.field=='coversNb' && (
+                      <span className="cover-error">{errors.message}</span>
                     )}
+                    </>
+                  }
 
-                    { showModalTicketValidation && (
+                    { showModalTicketValidation &&
+                    <>
+                    <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Récapitulatif</h2>
+                    <h3>Prénom</h3>
+                    <span>{lastName}</span>
+                    <h3>Nom</h3>
+                    <span>{firstName}</span>
+                    {(email.length > 1) && 
                       <>
-                        <h2 ref={_modalTitle => (modalTitle = _modalTitle)}>Récapitulatif</h2>
-                        <h3>Prénom</h3>
-                        <span>{lastName}</span>
+                        <h3>Email</h3>
+                        <span>{email}</span>
+                      </> 
+                    }
+                    {(phone.length > 1) && 
+                      <>
+                        <h3>Téléphone</h3>
+                        <span>{phone}</span>
+                      </> 
+                    }
+                    <h3>Nombre de couverts</h3>
+                    <span>{cutlery}</span>
+                    <h3>Heure estimée</h3>
+                    <span id="estimated-entry">{estimatedEntryTime}</span>
 
-                        <h3>Nom</h3>
-                        <span>{firstName}</span>
-
-                        {(email.length > 1) && (
-                          <>
-                            <h3>Email</h3>
-                            <span>{email}</span>
-                          </>
-                        )}
-
-                        {(phone.length > 1) && (
-                          <>
-                            <h3>Téléphone</h3>
-                            <span>{phone}</span>
-                          </>
-                        )}
-
-                        <h3>Nombre de couverts</h3>
-                        <span>{cutlery}</span>
-
-                        <h3>Heure estimée</h3>
-                        <span id="estimated-entry">{estimatedEntryTime}</span>
-
-                        <div className="bottom">
-                          <div className="cancel-button" onClick={handleTicketCancel}>Annuler</div>
-                          <button className="ticket-submit button-alt" type="submit">Valider</button>
-                        </div>
-                      </>
-                    )}
-
-                    { !showModalTicketValidation && (
+                    <div className="bottom">
+                      <div className="cancel-button" onClick={handleTicketCancel}>Annuler</div>
+                      <button className="ticket-submit button-alt" type="submit" >Valider</button>
+                    </div>
+                    </>
+                    }
+                    
+                    { !showModalTicketValidation &&
                       <div className="bottom">
                         <a className="ticket-next button-alt" onClick={handleTicketValidation}>
                           Suivant
                         </a>
                       </div>
-                    )}
+                    }
                   </form>
                 </div>
               </Modal>
