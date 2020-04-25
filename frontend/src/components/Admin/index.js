@@ -1,6 +1,5 @@
 // == Import npm
 import React, { useEffect } from 'react';
-import Websocket from 'react-websocket';
 import Modal from 'react-modal';
 
 // == Import
@@ -178,22 +177,22 @@ const Admin = ({
     modalTitle.style.color = '#ff8400';
   };
  
-  // const url = new URL('http://localhost:3000');
-  // url.searchParams.append('topic', 'http://localhost:8001/mercure-test');
-  // const eventSource = new EventSource(url);
-  // eventSource.onmessage = e => console.log(JSON.parse(e));
+  const url = new URL('http://localhost:3000/.well-known/mercure?topic=');
+  url.searchParams.append('ticket', 'http://listeat.io/');
+  const eventSource = new EventSource(url);
+  eventSource.onmessage = e => console.log(JSON.parse(e));
 
-  const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://localhost:8001/mercure-test'),
-        {
-          headers: {
-              'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po',
-          }
-        }
-      );
-    es.onmessage = e => {
-    // Will be called every time an update is published by the server
-    console.log(e.data);
-  }
+  // const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://listeat.io/ticket'),
+  //       {
+  //         headers: {
+  //             'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po',
+  //         }
+  //       }
+  //     );
+  //   es.onmessage = e => {
+  //   // Will be called every time an update is published by the server
+  //   console.log('ticket recu');
+  // }
 
   return (
     (!loadingTicketsData && (
