@@ -1,5 +1,5 @@
 // == Import npm
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 // == Import
@@ -27,47 +27,68 @@ const Signup = ({
   handleChangePasswordConfirmation,
   signupErrors,
   showSignupConfirmation,
+  isPassConfirmed,
+  changeIsPassConfirmed,
+  clearAll,
 }) => {
+  useEffect(() => {
+    clearAll();
+  }, []);
 
   // handle input change
   const handleChange = (evt) => {
     changeSignUpInputValue(evt.target.value, evt.target.name);
   };
 
-  // const areSamePassword = false;
+  let passInput = useRef('');
+
+  const scrollToPassInput = (ref) => {
+    window.scrollTo(0, ref.current.offsetTop);
+
+    return true;
+  };
 
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if (password === passwordConfirmation && password.length > 0 ) {
+    // if (password === passwordConfirmation && password.length > 0 ) {
+    //   handleSubscribe();
+    // }
+
+    if (password === passwordConfirmation) {
       handleSubscribe();
-    }
-  };
-
-  const checkPasswordConfirmation = (e) => {
-    if (e.target.value == password) {
-      handleChangePasswordConfirmation(false);
-      handleChange(e);
-    } else {
-      handleChangePasswordConfirmation(true);
-      handleChange(e);
-    }
-  };
-
-  const checkPassword = (e) => {
-    if (e.target.value == passwordConfirmation) {
-      handleChangePasswordConfirmation(false);
-      handleChange(e);
+      changeIsPassConfirmed(true);
     }
     else {
-      handleChangePasswordConfirmation(true);
-      handleChange(e);
+      changeIsPassConfirmed(true);
+      changeIsPassConfirmed(false);
     }
   };
 
+  // const checkPasswordConfirmation = (e) => {
+  //   if (e.target.value == password) {
+  //     handleChangePasswordConfirmation(false);
+  //     handleChange(e);
+  //   } else {
+  //     handleChangePasswordConfirmation(true);
+  //     handleChange(e);
+  //   }
+  // };
+
+  // const checkPassword = (e) => {
+  //   if (e.target.value == passwordConfirmation) {
+  //     handleChangePasswordConfirmation(false);
+  //     handleChange(e);
+  //   }
+  //   else {
+  //     handleChangePasswordConfirmation(true);
+  //     handleChange(e);
+  //   }
+  // };
+
   const scrollToTop = () => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     return true;
   };
 
@@ -77,7 +98,7 @@ const Signup = ({
       <h1>Inscription</h1>
 
       <form id="signup-form" onSubmit={handleSubmit}>
-
+    
         { signupErrors.length > 0 && scrollToTop() && (
         <div id="errors">
           <h4>Des erreurs ont été détectées :</h4>
@@ -174,13 +195,15 @@ const Signup = ({
 
         <label className="signup-label" htmlFor="password">Mot de passe</label>
         <input
+          ref={passInput}
           key="password"
           name="password" 
           type="password"
           placeholder="Mot de passe"
           id="password"
           value={password}
-          onChange={handleChange, checkPassword}
+          // onChange={handleChange, checkPassword}
+          onChange={handleChange}
           required
         />
 
@@ -192,11 +215,14 @@ const Signup = ({
           placeholder="Confirmation du mot de passe"
           id="password-confirmation"
           value={passwordConfirmation}
-          onChange={checkPasswordConfirmation}
+          // onChange={checkPasswordConfirmation}
+          onChange={handleChange}
           required
         />
 
-        { showPasswordError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>}
+        {/* { showPasswordError && <span id="password-error">Les deux mots de passe ne correspondent pas.</span>} */}
+        {/* {!isPassConfirmed && <span id="password-error">Les mots de passe ne correspondent pas.</span>} */}
+        {!isPassConfirmed && scrollToPassInput(passInput) && <span id="password-error">Les mots de passe ne correspondent pas.</span>}
 
         <span className="form-zone-title">Concernant votre restaurant 
           <img src="data:image/svg+xml;base64,

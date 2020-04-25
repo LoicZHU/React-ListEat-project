@@ -1,7 +1,13 @@
 import { connect } from 'react-redux';
 
 import Signup from 'src/components/Signup';
-import { changeSignUpInputValue, signUp, changeShowPasswordError } from 'src/actions/user';
+import {
+  changeSignUpInputValue,
+  signUp,
+  changeShowPasswordError,
+  changeIsPassConfirmed,
+  clearAll,
+} from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   lastname: state.user.signupInput.lastname,
@@ -21,20 +27,29 @@ const mapStateToProps = (state) => ({
   showPasswordError: state.user.signupInput.showPasswordError,
   signupErrors: state.user.signupErrors,
   showSignupConfirmation: state.user.signupConfirmation,
+  isPassConfirmed: state.user.signupInput.isPassConfirmed,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeSignUpInputValue: (newValue, fieldName) => {
     dispatch(changeSignUpInputValue(newValue, fieldName));
-
   },
+
   handleSubscribe: () => {
     dispatch(signUp());
   },
 
   handleChangePasswordConfirmation: (newValue) => {
     dispatch(changeShowPasswordError(newValue));
-  }
+  },
+
+  changeIsPassConfirmed: (newValue) => {
+    dispatch(changeIsPassConfirmed(newValue));
+  },
+
+  clearAll: () => {
+    dispatch(clearAll());
+  },
 });
 
 export default connect(
