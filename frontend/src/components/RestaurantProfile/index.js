@@ -33,6 +33,11 @@ const RestaurantProfile = ({
     clearPasswordInputs();
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+    return true;
+  };
+
   // handle submit
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -54,8 +59,8 @@ const RestaurantProfile = ({
     <div className="profile-container">
       <form className="infos-container" onSubmit={handleSubmit}>
         <div>
-          {displayEditConfirmation && <div className="confirmation">Vos modifications ont bien été prises en compte.</div>}
-          {displayEditError && <span className="error">{editErrorMessage}</span>}
+          {displayEditConfirmation && scrollToTop() && <div className="confirmation">Vos modifications ont bien été prises en compte.</div>}
+          {displayEditError && scrollToTop() && <span className="error">{editErrorMessage}</span>}
 
           <p>Modifier les informations de mon restaurant</p>
 
@@ -108,13 +113,15 @@ const RestaurantProfile = ({
         <div>
           <p>Modifier mes informations personnelles</p>
 
-          <Field
-            name="newPass"
+          <input
+            id="newPass"
             type="password"
+            className="field input"
             placeholder="Nouveau mot de passe"
-            onChange={changeRestaurantProfileInputValue}
+            name="newPass"
             value={newPass}
-            min
+            onChange={handleChange}
+            minLength="6"
           />
 
           <Field

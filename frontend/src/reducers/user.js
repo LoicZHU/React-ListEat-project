@@ -101,8 +101,8 @@ const initialState = {
 
   // mobile menu handling
   mobileMenuOpened: false,
-  
-  //password reset 
+
+  // password reset
   passwordReset: {
     email: '',
     newPassword: '',
@@ -146,6 +146,10 @@ const userReducer = (state = initialState, action = {}) => {
         restaurantProfileEditInput: {
           ...state.restaurantProfileEditInput,
           [action.fieldName]: action.newValue,
+          displayEditConfirmation: false,
+          displayEditError: false,
+          editErrorMessage: '',
+          isNewPassConfirmed: true,
         },
       };
 
