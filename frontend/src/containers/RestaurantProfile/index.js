@@ -9,6 +9,7 @@ import {
   qrCodeDownload,
   changeIsNewPassConfirmed,
   clearShowedConfirmationOrErrorMessage,
+  clearPasswordInputs,
 } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
@@ -31,6 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeRestaurantProfileInputValue: (newValue, fieldName) => {
     dispatch(changeRestaurantProfileInputValue(newValue, fieldName));
   },
+
   handleRestaurantEdit: () => {
     dispatch(editRestaurant());
   },
@@ -42,9 +44,14 @@ const mapDispatchToProps = (dispatch) => ({
   changeIsNewPassConfirmed: (newValue) => {
     dispatch(changeIsNewPassConfirmed(newValue));
   },
+
   clearShowedConfirmationOrErrorMessage: () => {
     dispatch(clearShowedConfirmationOrErrorMessage());
   },
+
+  clearPasswordInputs: () => {
+    dispatch(clearPasswordInputs());
+  }
 });
 
 // export

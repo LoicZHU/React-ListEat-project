@@ -26,9 +26,11 @@ const RestaurantProfile = ({
   isNewPassConfirmed,
   changeIsNewPassConfirmed,
   clearShowedConfirmationOrErrorMessage,
+  clearPasswordInputs,
 }) => {
   useEffect(() => {
     clearShowedConfirmationOrErrorMessage();
+    clearPasswordInputs();
   }, []);
 
   // handle submit
@@ -112,6 +114,7 @@ const RestaurantProfile = ({
             placeholder="Nouveau mot de passe"
             onChange={changeRestaurantProfileInputValue}
             value={newPass}
+            min
           />
 
           <Field

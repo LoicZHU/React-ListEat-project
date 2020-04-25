@@ -44,6 +44,7 @@ export const DISPLAY_EDIT_CONFIRMATION = 'DISPLAY_EDIT_CONFIRMATION';
 export const DISPLAY_EDIT_ERROR = 'DISPLAY_EDIT_ERROR';
 export const CHANGE_IS_NEW_PASS_CONFIRMED = 'CHANGE_IS_NEW_PASS_CONFIRMED';
 export const CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE = 'CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE';
+export const CLEAR_PASSWORD_INPUTS = 'CLEAR_PASSWORD_INPUTS';
 export const CHANGE_IS_PASS_CONFIRMED = 'CHANGE_IS_PASS_CONFIRMED';
 export const CLEAR_ALL = 'CLEAR_ALL';
 
@@ -270,6 +271,10 @@ export const changeIsNewPassConfirmed = (newValue) => ({
 
 export const clearShowedConfirmationOrErrorMessage = () => ({
   type: CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE,
+});
+
+export const clearPasswordInputs = () => ({
+  type: CLEAR_PASSWORD_INPUTS,
 });
 
 export const changeIsPassConfirmed = (newValue) => ({
