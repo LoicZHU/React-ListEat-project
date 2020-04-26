@@ -1,8 +1,8 @@
 let app = {
 
   //WARNING BIEN MODIFIER EN PROD
-  apiBaseURL: 'http://localhost:8001/',
-
+  //apiBaseURL: 'http://localhost:8001/',
+  apiBaseURL: 'https://www.listeat.io:8080/',
   // Méthode executée au lancement de l'application
   init: function () {
     console.log('init');
