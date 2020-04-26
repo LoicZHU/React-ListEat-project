@@ -2,6 +2,7 @@
 import {
   CHANGE_INPUT_VALUE,
   LOG_USER,
+  CLEAR_LOGIN_PAGE,
   LOG_OUT,
   SHOW_LOGIN_ERROR,
   CHANGE_CHECKING_RESTAURANT_LOGGED,
@@ -159,6 +160,14 @@ const userReducer = (state = initialState, action = {}) => {
         isLogged: action.isLogged,
         checking: false,
         restaurantId: action.restaurantId,
+      };
+
+    case CLEAR_LOGIN_PAGE:
+      return {
+        ...state,
+        email: '',
+        password: '',
+        loginErrorMessage: false,
       };
 
     case LOG_OUT:
