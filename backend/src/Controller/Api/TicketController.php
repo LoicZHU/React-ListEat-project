@@ -155,14 +155,33 @@ class TicketController extends AbstractController
                     'eventName' => $data,
                 ]),
             ]);
+         
+                // we do a POST request to mercure
+                $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
+                    'method'  => 'POST',
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'content' => $postData,
+                ]]));
 
+         
+            $postData = http_build_query([
+                // we stay on topic
+                'topic' => 'https://www.listeat.io/backoffice',
+                'data' => json_encode([
+                    'eventName' => 'new add ticket',
+                ]),
+            ]);
+
+            //Make function or service for send
             // we do a POST request to mercure
-            $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
-                'method'  => 'POST',
-                'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
-                'content' => $postData,
-            ]]));
-
+          
+                $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
+                    'method'  => 'POST',
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'content' => $postData,
+                ]]));
+          
+        
             // if (!$r) {
             //     echo sprintf("Erreur lors de l'envoi du message: %s\n", $r);
             // }

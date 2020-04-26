@@ -24,3 +24,11 @@ color: #8fe74f;
 .bg-orange{
     background-color: #ff8400;
 }
+
+.logo{
+    background-color: rgba(0, 0, 0, 0.363);
+}
+
+#map{
+    height:400px
+}

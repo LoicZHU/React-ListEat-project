@@ -104,6 +104,32 @@ class UserController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //WEBSOCKET NOTIF
+        // We asset token  
+        // define('PUBLIC_JWT', $_ENV['MERCURE_JWT_TOKEN']);
+
+        // $topic = 'backoffice';
+       
+        // $postData = http_build_query([
+        //     // we stay on topic
+        //     'topic' => 'https://www.listeat.io/'.$topic,
+        //     'data' => json_encode([
+        //         'eventName' => 'new user',
+        //     ]),
+        // ]);
+
+   
+        // // we do a POST request to mercure
+        // $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
+        //     'method'  => 'POST',
+        //     'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+        //     'content' => $postData,
+        // ]]));
+
+
+/////////////////////////////////////////////////////////////////////
 
         // Email sent to the newly created User/Restaurant to confirm the registration
         $message = (new \Swift_Message('Information partenaire ListEat'))

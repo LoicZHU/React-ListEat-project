@@ -43,6 +43,7 @@ class Restaurant
      * @Assert\NotBlank()
      * @Groups("restaurant_get")
      * @Groups("restaurant_decrypt")
+     * @Groups("restaurant_backoffice")
      */
     private $name;
 
@@ -90,11 +91,13 @@ class Restaurant
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups("restaurant_backoffice")
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups("restaurant_backoffice")
      */
     private $longitude;
 
