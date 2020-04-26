@@ -16,8 +16,6 @@ let app = {
 
     // On va se placer sur le topic "ticket" partout
     var topic = 'backoffice';
-    var scoreBoard = document.querySelector('#scoreBoard');
-
     // Note: je vais utiliser partout ici des templates litterals JS, plus lisibles,
     // au lieu de quotes on a des backtics (`), et deans on peut afficher des variables avec ${}.
     //scoreBoard.insertAdjacentHTML('beforeEnd', `Écoute du topic ${topic}`);
