@@ -508,11 +508,15 @@ div.ReactModalPortal {
     padding: 0 15px !important;
     border-radius: 0px !important;
     overflow: none !important;
+    min-width:300px;
+    max-width: 90%;
+    box-sizing: border-box;
 
     h2 {
       padding: 15px 0;
       font-size: 1.5em;
       line-height: 2em;
+      margin: .5em 0 0 0 !important;
     }
 
     .modal-title {
