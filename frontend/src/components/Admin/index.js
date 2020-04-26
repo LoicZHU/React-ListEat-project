@@ -29,6 +29,8 @@ const Admin = ({
   handleShowModalTicketValidation,
   showModalErrors,
   showModalEmailError,
+  fetchTicketsData,
+  restaurantId,
 
   // modal (ticket add)
   lastName,
@@ -179,22 +181,18 @@ const Admin = ({
     modalTitle.style.color = '#ff8400';
   };
  
-  // const url = new URL('http://localhost:3000/.well-known/mercure?topic=');
-  // url.searchParams.append('ticket', 'http://listeat.io/');
-  // const eventSource = new EventSource(url);
-  // eventSource.onmessage = e => console.log(JSON.parse(e));
+  // websocket to place a event listener on the topic 'ticket' with the current restaurantId
+  var topic = 'ticket';
+  const url = new URL('http://localhost:3000/.well-known/mercure');
+  url.searchParams.append('topic', `https://www.listeat.io/${topic}/${restaurantId}`);
+  const eventSource = new EventSource(url);
 
-  const es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://localhost:8001/ticket'),
-        {
-          headers: {
-              'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po',
-          }
-        }
-      );
-    es.onmessage = e => {
-    // Will be called every time an update is published by the server
-    console.log(e.data);
-  }
+  // when a ticket is added to the DB, the server pushes a message to the front
+  // then we update the ticket list 
+  eventSource.onmessage = function(event) {
+       fetchTicketsData();
+  };
+
 
   return (
     (!loadingTicketsData && (
@@ -287,7 +285,7 @@ const Admin = ({
             <ul id="ticket-list">
               {tickets.length === 0 && (
                 <div id="empty-list-add-ticket">
-                  {(status === 0) && <span>Pour ajouter un ticket, lancer le service.</span>}
+                  {(status === 0) && <span id="service-off">Pour ajouter un ticket, lancez le service.</span>}
 
                   {(status === 1) && (
                     <>
@@ -304,7 +302,7 @@ const Admin = ({
             </ul>
 
             <div className="tickets-count">
-              {(status === 0) && <span id="service-off">Service à l'arrêt (off)</span>}
+              {(status === 0) && <span id="service-off">Service à l'arrêt</span>}
               {(status === 1) && <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>}
 
               <Modal

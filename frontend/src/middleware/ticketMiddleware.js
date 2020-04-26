@@ -19,7 +19,7 @@ import {
   modalTicketStoreTemp,
   MODAL_TICKET_CANCEL,
   handleClearModalForm,
-  fetchNewCustomerTicket,
+  // fetchNewCustomerTicket,
   updateCurrentTicket,
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
@@ -124,7 +124,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
           const isTicketValidate = (response.data.ticketStatus === 1); // boolean
           const restaurantId = response.data.restaurantId;
           store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate, response.data.estimatedEntryTime));
-          store.dispatch(fetchNewCustomerTicket(restaurantId));
+          // store.dispatch(fetchNewCustomerTicket(restaurantId));
           console.log(response.data.restaurantId);
           // console.log('send ticket validation ok');
 

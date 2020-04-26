@@ -64,6 +64,7 @@ const RestaurantProfile = ({
 
           <p>Modifier les informations de mon restaurant</p>
 
+          <label htmlFor="restaurantName">Nom du restaurant</label>
           <Field
             name="restaurantName"
             placeholder="Nom de l'établissement"
@@ -71,6 +72,7 @@ const RestaurantProfile = ({
             value={restaurantName}
           />
 
+          <label htmlFor="address">Adresse du restaurant</label>
           <Field
             name="address"
             placeholder="Adresse"
@@ -78,7 +80,7 @@ const RestaurantProfile = ({
             value={address}
           />
 
-          <div className="postcode__city">
+          <label htmlFor="postcode">Code postal</label>
             <Field
               name="postcode"
               placeholder="Code postal"
@@ -86,6 +88,7 @@ const RestaurantProfile = ({
               value={postcode}
             />
 
+          <label htmlFor="city">Ville</label>
             <Field
               className="city"
               name="city"
@@ -93,8 +96,9 @@ const RestaurantProfile = ({
               onChange={changeRestaurantProfileInputValue}
               value={city}
             />
-          </div>
+       
 
+          <label htmlFor="country">Pays</label>
           <Field
             name="country"
             placeholder="Pays"
@@ -102,6 +106,7 @@ const RestaurantProfile = ({
             value={country}
           />
 
+          <label htmlFor="phone">Numéro de téléphone</label>
           <Field
             name="phone"
             placeholder="Téléphone"
@@ -112,7 +117,7 @@ const RestaurantProfile = ({
 
         <div>
           <p>Modifier mes informations personnelles</p>
-
+          <label htmlFor="newPass">Nouveau mot de passe</label>
           <input
             id="newPass"
             type="password"
@@ -124,6 +129,7 @@ const RestaurantProfile = ({
             minLength="6"
           />
 
+          <label htmlFor="password">Confirmation du nouveau mot de passe</label>
           <Field
             name="newPassConfirmation"
             type="password"
@@ -148,6 +154,7 @@ const RestaurantProfile = ({
             value={actualPass}
           /> */}
 
+          <label htmlFor="actualPass">Mot de passe actuel</label>
           <input
             id="actualPass"
             type="password"

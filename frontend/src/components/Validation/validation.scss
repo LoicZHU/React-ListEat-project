@@ -7,35 +7,64 @@
   h1 {
     font-weight: bold;
     font-size: 1.5em;
+    color: $primary-color;
   }
 
   .ticket__validation__infos {
-    margin: 20px 0 40px 0;
+    margin: 2em 0;
 
     .ticket__validation__info {
       margin-top: 5px;
       font-weight: bold;
       color: $primary-color;
     }
+
+    p {
+      line-height: 1.5;
+
+      span {
+        display: block;
+        font-size: 1.5em;
+      }
+    }
   }
 
   .ticket__validation__question {
     margin-bottom: 20px;
+    background-color: $light-color;
+    padding: 1em;
+
+    p {
+      font-weight: bold;
+    }
+
+    #choice {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
 
     .yes__button {
-      background-color: green;
+      background-color: $success-background !important;
+      color: $success-color;
+      width: 50%;
+      border-radius: 5px;
     }
 
     .no__button {
-      background-color: red;
+      background-color: $warning-background;
+      color: $warning-color;
+      border-radius: 5px;
+      width: 45%;
+    }
+
+    button {
+      border: none;
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
-
-  button {
-    margin: 1em !important;
-    border: none !important;
-    color: #fff;
-    width: 50%;
-  
   }
+
 }

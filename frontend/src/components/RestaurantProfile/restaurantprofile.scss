@@ -2,22 +2,34 @@
 
 .profile-container {
   display: flex;
-  margin: 10px;
+  flex-direction: column;
+  padding: 10px;
+  width: 100% !important;
+  justify-content: space-between;
+  margin: 0 auto;
   
   p {
     font-weight: bold;
+    margin-bottom: 1em;
+    font-size: 1.2em;
   }
 
   .infos-container {
-    width: 70%;
-    border: 1px solid grey;
-    margin-right: 15px;
+    width: 100%;
+    // border: 1px solid grey;
+    background-color: $light-color;
     padding: 1em;
+    order: 2 !important;
+    margin-top: 10px;
+
+
+    input {
+      margin-bottom: 20px;
+    }
 
     .confirmation {
       font-size: .9em;
-      background-color: greenyellow;
-      border: greenyellow 2px solid;
+      background-color: $success-background;
       padding: 1em;
       border-radius: 5px;
       display: inline-block;
@@ -43,10 +55,12 @@
   .actual-pass {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     &-info {
       font-size: 0.75em;
       margin-right: 10px;
+      display: block !important;
     }
   }
 
@@ -60,12 +74,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 100%;
     height: 20%;
     padding: 2em;
     text-align: center;
     background-color: $primary-color;
     color: #fff;
+    order: 1 ;
 
     &:hover {
       cursor: pointer;
@@ -92,4 +107,31 @@
       margin: 20px auto 10px;
     }
   }
+}
+
+@media (min-width: $mobile-breakpoint) { 
+
+
+  .profile-container {
+    flex-direction: row;
+    padding: 10px;
+    width: 100% !important;
+    justify-content: space-between;
+  }
+
+  .infos-container {
+    width: 70% !important;
+    // border: 1px solid grey;
+    background-color: $light-color;
+    padding: 1em;
+    order: 1 !important;
+    margin-top: 0px !important;
+    margin-right: 10px;
+  }
+
+  .qr-container {
+    width: 30% !important;
+    order: 2 !important;
+  }
+
 }
