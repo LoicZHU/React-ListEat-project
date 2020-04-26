@@ -1,5 +1,5 @@
 // import npm
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // import
@@ -13,7 +13,12 @@ const Form = ({
   changeInputValue,
   handleLogin,
   errorMessage,
+  clearLoginPage,
 }) => {
+  useEffect(() => {
+    clearLoginPage();
+  }, []);
+
   // handle input change
   const handleChange = (evt) => {
     changeInputValue(evt.target.value, evt.target.name);

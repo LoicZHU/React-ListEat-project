@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Form from 'src/components/Login/Form';
-import { changeInputValue, logIn, showLoginError } from 'src/actions/user';
+import { changeInputValue, logIn, showLoginError, clearLoginPage } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
@@ -13,14 +13,18 @@ const mapDispatchToProps = (dispatch) => ({
   changeInputValue: (newValue, fieldName) => {
     dispatch(changeInputValue(newValue, fieldName));
   },
+
   handleLogin: () => {
     dispatch(logIn());
   },
 
   showLoginError: () => {
     dispatch(showLoginError());
-  }
+  },
 
+  clearLoginPage: () => {
+    dispatch(clearLoginPage());
+  },
 });
 
 export default connect(
