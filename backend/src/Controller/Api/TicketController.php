@@ -2,6 +2,10 @@
 
 namespace App\Controller\Api;
 
+
+use Symfony\Component\Mercure\Jwt\StaticJwtProvider;
+use Symfony\Component\Mercure\Publisher;
+
 use App\Entity\Ticket;
 use App\Service\Timer;
 use App\Service\CryptoService;
@@ -140,13 +144,33 @@ class TicketController extends AbstractController
 
         //// Sending New ticket To the Front By WebSocket///////////////////
 
-        $target=["http://localhost:8080/partner/".$restaurant->getId()."/administration"];
 
-        $update = New Update("http://listeat.io/ticket",
-        $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get'])
-        , $target);
-        $bus->dispatch($update);
+        // change these values accordingly to your hub installation
+        define('HUB_URL', 'http://localhost:3000/.well-known/mercure');
+        define('JWT', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.NFCEbEEiI7zUxDU2Hj0YB71fQVT8YiQBGQWEyxWG0po');
+
         
+        $publisher = new Publisher(HUB_URL, new StaticJwtProvider(JWT));
+        // Serialize the update, and dispatch it to the hub, that will broadcast it to the clients
+        $id = $publisher(new Update('http://localhost:8080/ticket/', 'Hi from Symfony!'));
+
+        return $this->json([
+            '@id' => '/books/1',
+            'availability' => 'https://schema.org/InStock',
+        ]);
+dd($id);
+
+
+        //dd($restaurant);
+        //$target=["http://localhost:8001/partner/".$restaurant->getId()."/administration"];
+
+        //$update = New Update("http://localhost:8080/ticket", json_encode(['status' => 'OutOfStock']), $target);
+
+        // $update = New Update("http://localhost:8080/ticket",
+        // $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get'])
+        // , $target);
+        //$bus->dispatch($update);
+    
         ////////////////////////////////////////////////////////////////////
         
 
