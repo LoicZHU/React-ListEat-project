@@ -44,7 +44,8 @@ const TicketForm = ({
     <main className="ticket-form--container">
       {restaurantNameLoaded && (
         <>
-          <h1>S'inscrire sur la liste d'attente du restaurant {restaurantName}</h1>
+          <h1>{restaurantName}</h1>
+          <h2>Iscription sur la liste d'attente</h2>
 
           {(restaurantServiceStatus === 0) && (
             <p className="service-off">Le restaurant est fermé ou ne peut plus accepter de nouveaux clients.</p>

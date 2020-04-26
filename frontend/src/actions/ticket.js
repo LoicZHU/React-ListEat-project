@@ -133,10 +133,10 @@ export const handleClearModalForm = () => ({
   type: CLEAR_MODAL_FORM,
 });
 
-export const fetchNewCustomerTicket = (restaurantId) => ({
-  type: FETCH_NEW_CUSTOMER_TICKET,
-  restaurantId,
-});
+// export const fetchNewCustomerTicket = (restaurantId) => ({
+//   type: FETCH_NEW_CUSTOMER_TICKET,
+//   restaurantId,
+// });
 
 // export const changeCheckingTemporarySubscribedTicket = () => ({
 //   type: CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,

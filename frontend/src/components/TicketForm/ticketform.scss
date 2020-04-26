@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 3em 0;
+  margin: 2em 0;
 
   .service-off {
     width: 100%;
@@ -21,12 +21,16 @@
   h1 {
     font-weight: bold;
     font-size: 1.5em;
-    margin: 0 auto 1em auto;
+    margin: 0 auto .2em auto;
     color: $primary-color;
     width: 30%;
     min-width: 300px;
     line-height: 1.2em;
     // font-family: 
+  }
+
+  h2 {
+    margin-bottom: 2em;
   }
 
   .ticket-form {
@@ -44,7 +48,7 @@
     }
 
     .warning {
-      background-color: $primary-color;
+      background-color: $warning-background;
       padding: 1em;
       font-size: .9em;
       border-radius: 5px;

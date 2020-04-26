@@ -28,7 +28,7 @@ const Validation = ({
       <h1>{restaurantName}</h1>
 
       <div className="ticket__validation__infos">
-        <p>Nombre de couverts souhaités :
+        <p>{ticketCutlery == 1 ? 'Nombre de couvert souhaité :' : 'Nombre de couverts souhaités :'}
           <span className="ticket__validation__info"> {ticketCutlery}</span>
         </p>
 
@@ -40,9 +40,10 @@ const Validation = ({
 
       <div className="ticket__validation__question">
         <p>Souhaitez-vous vous inscrire sur la liste d'attente ?</p>
-
-        <button className="yes__button button" type="button" onClick={handleYesClick}>Oui</button>
-        <button className="no__button button" type="button" onClick={handleNoClick}>Non</button>
+        <div id="choice">
+          <button className="yes__button button" type="button" onClick={handleYesClick}>Oui</button>
+          <button className="no__button button" type="button" onClick={handleNoClick}>Non</button>
+        </div>
       </div>
     </main>
   );

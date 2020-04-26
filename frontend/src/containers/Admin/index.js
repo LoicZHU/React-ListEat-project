@@ -8,6 +8,7 @@ import {
   decreaseMinute,
   changeServiceStatus,
   refreshTime,
+  fetchTicketsData,
 } from 'src/actions/user';
 
 import {
@@ -25,6 +26,7 @@ import {
 } from 'src/actions/ticket';
 
 const mapStateToProps = (state) => ({
+  restaurantId: state.user.restaurantId,
   status: state.user.restaurantProfileEditInput.status,
   averageEatingTime: state.user.restaurantProfileEditInput.averageEatingTime,
   tickets: state.user.restaurantTicketsData,
@@ -100,6 +102,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleClearModalForm: () => {
     dispatch(handleClearModalForm());
+  },
+
+  fetchTicketsData: () => {
+    dispatch(fetchTicketsData());
   }
 
 });

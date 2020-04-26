@@ -66,10 +66,10 @@
   }
 
   #signup-confirmation {
-    background-color: rgba(204, 255, 146, 0.884);
+    background-color: $success-background;
     padding: 1em;
     border-radius: 5px;
-    color: #000;
+    color: $success-color;
     margin: 30px 0 0 0;
     font-size: .9em;
     line-height: 1.4em;

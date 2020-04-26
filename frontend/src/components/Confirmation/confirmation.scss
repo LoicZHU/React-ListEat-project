@@ -1,28 +1,45 @@
 @import 'src/styles/index.scss';
 
 p {
-  line-height: 1.5em;
+  line-height: 1.5em !important;
 }
 
 .ticket__confirmation {
   text-align: center;
-  margin: 5em 0;
+  margin: 2em 1em;
 
   h1 {
     font-weight: bold;
     font-size: 1.5em;
+    margin: 0 auto .2em auto;
+    color: $primary-color;
+    width: 30%;
+    min-width: 300px;
+    line-height: 1.2em;
+  }
+
+  h2 {
+
   }
 
   .ticket__confirmation__message {
     margin: 20px 0 40px 0;
-
+    text-align: center;
     p {
       margin-top: 5px;
+      margin-top: 2em;
+    }
+
+    p:last-of-type {
+      font-weight: bold;
     }
   }
 
   .ticket__confirmation__infos {
     margin-bottom: 20px;
+    background-color: $light-color;
+    padding: 1em;
+    border-radius: 5px;
 
     .ticket__confirmation__info {
       color: $primary-color;
