@@ -214,13 +214,9 @@ const Admin = ({
               </label>
               <span className="toggle-name">SERVICE : </span>
 
-              {(status === 1) && (
-              <span className="toggle-state on">ON</span>
-              )}
+              {(status === 1) && <span className="toggle-state on">ON</span>}
 
-              {!(status === 1) && (
-              <span className="toggle-state off">OFF</span>
-              )}
+              {!(status === 1) && <span className="toggle-state off">OFF</span>}
             </div>
 
             <div className="right">
@@ -231,7 +227,7 @@ const Admin = ({
           <div id="admin-middle-section">
             {tickets.length === 0 && (
               <div id="empty-ticket-overlay">
-                <span>Vous n'avez aucun ticket</span>
+                <span>Pas de ticket en cours</span>
               </div>
             )}
 
@@ -269,11 +265,13 @@ const Admin = ({
               <h3>Temps d'attente actuel&nbsp;:</h3>
 
               <div className="estimate-waiting-time">
-                <span id="less-time" onClick={handleRemoveClick} />
+                {(status === 1) && <span id="less-time" onClick={handleRemoveClick} />}
+
                 <div id="time-container">
                   <span id="time">{averageEatingTime}</span>
                 </div>
-                <span id="more-time" onClick={handleAddClick} />
+
+                {(status === 1) && <span id="more-time" onClick={handleAddClick} />}
               </div>
             </div>
             <div className="second">
