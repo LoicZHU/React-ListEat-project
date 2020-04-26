@@ -70,7 +70,7 @@ const Login = ({
 
         {emailError && <ErrorMessage />}
 
-        {true && <button className="button">Envoyer</button>}
+        {true && <button className="button-alt">Envoyer</button>}
       </form> }
 
       {emailConfirmation && !newPasswordField && <form id="password-reset-form" onSubmit={handleCodeSubmit}>
@@ -82,7 +82,7 @@ const Login = ({
 
         { verificationCodeError && <CodeErrorMessage />}
 
-        {true && <button className="button">Envoyer</button>}
+        {true && <button className="button-alt">Envoyer</button>}
       </form> }
 
       {newPasswordField && <form id="password-reset-form" onSubmit={handleNewPasswordSubmit}>
@@ -91,7 +91,7 @@ const Login = ({
         <input placeholder="Nouveau mot de passe" minLength="6" type="password"
          name="newPassword" onChange={handleChange} value={newPassword} />
 
-        {true && <button className="button">Envoyer</button>}
+        {true && <button className="button-alt">Envoyer</button>}
         { newPasswordConfirmed && <NewPasswordConfirmationMessage />}
       </form> }
 
