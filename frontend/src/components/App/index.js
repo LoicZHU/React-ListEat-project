@@ -110,17 +110,21 @@ const App = ({
           </Route>
 
           {/* Restaurant (Admin) */}
-          <Route path={`/partner/${restaurantId}/administration`} exact>
+          {/* <Route path={`/partner/${restaurantId}/administration`} exact></Route> */}
+          <Route path="/partner/:id/administration" exact>
             <Header />
             {isRestaurantLogged && <Admin />}
-            {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration`} to="/" />}
+            {/* {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration`} to="/" />} */}
+            {!isRestaurantLogged && <Redirect to="/login" />}
           </Route>
 
           {/* Restaurant (Admin) */}
-          <Route path={`/partner/${restaurantId}/administration/edit`}>
+          {/* <Route path={`/partner/${restaurantId}/administration/edit`}> */}
+          <Route path="/partner/:id/administration/edit" exact>
             <Header />
             {isRestaurantLogged && <RestaurantProfile />}
-            {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration/edit`} to="/" />}
+            {/* {!isRestaurantLogged && <Redirect from={`/partner/${restaurantId}/administration/edit`} to="/" />} */}
+            {!isRestaurantLogged && <Redirect to="/login" />}
           </Route>
 
           {/* Client : Get a ticket */}
@@ -138,7 +142,9 @@ const App = ({
             </Route>
           )}
           {!isTemporarySubscribedTicket && (
-            <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />
+            <Route path="/restaurant/tickets/validate" exact>
+              <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />
+            </Route>
           )}
 
           {/* Client : Confirmation of ticket */}
@@ -149,16 +155,8 @@ const App = ({
 
           {/* Client : Cancellation of ticket */}
           <Route path="/tickets/cancellation" exact>
-
-            {!isTicketValidate && 
-                <Cancellation />
-            }
-
-            {/* no need to define the redirection to ticketForm because of :
-              {!isTemporarySubscribedTicket && (
-                <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />
-              )}
-            */}
+            {!isTicketValidate && <Cancellation />}
+            {isTicketValidate === '' && <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />}
           </Route>
 
           <Route path="*">
