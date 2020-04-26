@@ -3,6 +3,7 @@ export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE';
 export const CHANGE_SIGNUP_INPUT_VALUE = 'CHANGE_SIGNUP_INPUT_VALUE';
 export const CHANGE_RESTAURANT_PROFILE_INPUT_VALUE = 'CHANGE_RESTAURANT_PROFILE_INPUT_VALUE';
 export const LOG_IN = 'LOG_IN';
+export const CLEAR_LOGIN_PAGE = 'CLEAR_LOGIN_PAGE';
 export const LOG_USER = 'LOG_USER';
 export const CHECK_LOGGED_RESTAURANT = 'CHECK_LOGGED_RESTAURANT';
 export const LOG_OUT = 'LOG_OUT';
@@ -75,6 +76,10 @@ export const logUser = (isLogged, restaurantId) => ({
   type: LOG_USER,
   isLogged,
   restaurantId,
+});
+
+export const clearLoginPage = () => ({
+  type: CLEAR_LOGIN_PAGE,
 });
 
 export const checkLoggedRestaurant = () => ({
