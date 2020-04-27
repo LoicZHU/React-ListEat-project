@@ -255,7 +255,6 @@ class TicketController extends AbstractController
 
     /**
      * @Route("api/partner/{id<\d+>}/tickets/{ticketId<\d+>}", name="api_tickets_partner_edit", methods={"PUT"})
-     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function partnerEdit($id, $ticketId, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository)
     {
@@ -274,11 +273,6 @@ class TicketController extends AbstractController
         }
         $ticket = $ticket[0];
 
-        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
-        $user = $this->getUser();
-        if ($user->getRestaurant()->getId() != $id) {
-            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
-        }
         // if the ticket was created by the restaurateur, the below condition can be used to confirm the ticket and add the customer to the waiting list (thus not sending an email to the customer, contrary to the validation made by the client him/herself)
         if ($data->status == "confirmed") {
             $ticket->setStatus(1);
