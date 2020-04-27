@@ -22,18 +22,11 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/api/partner/{id}", name="api_restaurant_show", methods={"GET"})
-     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function show($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository)
     {
         if($request->get('restaurant') === null){
             return $this->json( Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
-        $user = $this->getUser();
-        if ($user->getRestaurant()->getId() != $id) {
-            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         $restaurant = $restaurantRepository->find($id);
