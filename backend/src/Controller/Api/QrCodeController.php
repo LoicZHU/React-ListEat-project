@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\QrCode;
 use App\Service\QrCodeGenerator;
 use App\Repository\RestaurantRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -33,6 +34,7 @@ class QrCodeController extends AbstractController
 
     /**
      * @Route("api/partner/{id}/qrcode", name="api_QrCode_add", methods={"POST"})
+     * @isGranted("ROLE_RESTAURATEUR")
      */
     public function add($id,ValidatorInterface $validator, RestaurantRepository $restaurantRepository)
     {
@@ -40,10 +42,15 @@ class QrCodeController extends AbstractController
         $restaurant = $restaurantRepository->find($id);
 
         if (!$restaurant) {
-            return $this->json(["message" =>"Aucun restaurant pour cet Id"],Response::HTTP_BAD_REQUEST);
+            return $this->json(['message' => 'Ce restaurant n\'existe pas.'],Response::HTTP_NOT_FOUND);
         } 
 
-        //we generat the QRccode if the restaurant exist
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
+        }
+        // generates the QRccode if the restaurant exists
         $lien = QrCodeGenerator::generate($id,$restaurant->getName());
 
         $QrCode = new QrCode;

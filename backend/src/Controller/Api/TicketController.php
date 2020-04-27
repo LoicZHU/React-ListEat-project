@@ -19,6 +19,7 @@ use Symfony\Component\Messenger\MessageBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class TicketController extends AbstractController
 {
@@ -160,6 +161,7 @@ class TicketController extends AbstractController
                 $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
                     'method'  => 'POST',
                     'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'Content-Security-Policy' => "upgrade-insecure-requests",
                     'content' => $postData,
                 ]]));
 
@@ -178,6 +180,7 @@ class TicketController extends AbstractController
                 $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
                     'method'  => 'POST',
                     'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'Content-Security-Policy' => "upgrade-insecure-requests",
                     'content' => $postData,
                 ]]));
           
@@ -228,15 +231,22 @@ class TicketController extends AbstractController
 
     }
 
-     /**
-     * @Route("/api/partner/{id<\d+>}/tickets", name="api_tickets_show", methods={"GET"})
-     */
+    /**
+    * @Route("/api/partner/{id<\d+>}/tickets", name="api_tickets_show", methods={"GET"})
+    * @IsGranted("ROLE_RESTAURATEUR")
+    */
     public function showAll($id, TicketRepository $ticketRepository, RestaurantRepository $restaurantRepository)
     {
         $restaurant = $restaurantRepository->find($id);
 
         if (!$restaurant) {
             return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
         
         // finds all active tickets related to a single restaurant, ordered by estimatedEntryTime, sorted in ascending order
@@ -247,6 +257,7 @@ class TicketController extends AbstractController
 
     /**
      * @Route("api/partner/{id<\d+>}/tickets/{ticketId<\d+>}", name="api_tickets_partner_edit", methods={"PUT"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function partnerEdit($id, $ticketId, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository)
     {
@@ -264,7 +275,12 @@ class TicketController extends AbstractController
             return $this->json(['Ce ticket n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
         $ticket = $ticket[0];
-        
+
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
+        }
         // if the ticket was created by the restaurateur, the below condition can be used to confirm the ticket and add the customer to the waiting list (thus not sending an email to the customer, contrary to the validation made by the client him/herself)
         if ($data->status == "confirmed") {
             $ticket->setStatus(1);

@@ -17,7 +17,7 @@ const Data = () => (
       <div>
         <h2>Quelles données recueillons-nous ?</h2>
 
-        <ul>
+        {/* <ul>
           Les différentes catégories de données collectées dans le cadre de votre utilisation de nos services sont les suivantes :
           <li>
             - Données d’identification (notamment nom, prénom, nom de votre établissement, siret, adresse postale),
@@ -34,7 +34,15 @@ const Data = () => (
           <li>
             - Données de localisation.
           </li>
-        </ul>
+        </ul> */}
+        <p>
+          Les différentes catégories de données collectées dans le cadre de votre utilisation de nos services sont les suivantes :<br />
+          - Données d’identification (notamment nom, prénom, nom de votre établissement, siret, adresse postale),<br />
+          - Données de contact (notamment numéro de téléphone, adresse email),<br />
+          - Données d’usage (notamment pages web visitées, quantité de tickets créés),<br />
+          - Données de connexion (notamment adresse IP de votre appareil numérique, logs de connexion et d’usage),<br />
+          - Données de localisation.
+        </p>
       </div>
 
       <div>
@@ -96,12 +104,10 @@ const Data = () => (
           Ces droits s’exercent par email à l’adresse suivante :
         </p>
 
-        <p>
-          <div className="data__content__contact">
-            Délégué à la Protection des Données<br />
-            hello@listeat.io
-          </div>
-        </p>
+        <div className="data__content__contact">
+          Délégué à la Protection des Données<br />
+          hello@listeat.io
+        </div>
 
         <p>
           Dans ce cadre, nous vous prions de bien vouloir accompagner votre demande des éléments nécessaires à votre identification (nom, prénom, email) ainsi que toute autre information nécessaire à la confirmation de votre identité.

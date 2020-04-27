@@ -8,11 +8,10 @@ use App\Service\CryptoService;
 use App\Service\GeocodingService;
 use App\Repository\UserRepository;
 use App\Repository\RestaurantRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -23,11 +22,18 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/api/partner/{id}", name="api_restaurant_show", methods={"GET"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function show($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository)
     {
         if($request->get('restaurant') === null){
             return $this->json( Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         $restaurant = $restaurantRepository->find($id);
@@ -57,6 +63,12 @@ class RestaurantController extends AbstractController
         //If the restaurant didn't exist we send back a error
         if($request->get('restaurant') === null){
             return $this->json( Response::HTTP_NOT_FOUND);
+        }
+
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         // I decode the json
@@ -248,6 +260,7 @@ class RestaurantController extends AbstractController
 
      /**
      * @Route("/api/partner/{id<\d+>}/status", name="api_restaurant_status", methods={"PUT"})
+     * @isGranted("ROLE_RESTAURATEUR")
      */
     public function editStatus($id, Request $request, RestaurantRepository $restaurantRepository)
     {
@@ -262,6 +275,12 @@ class RestaurantController extends AbstractController
 
         if (!$restaurant) {
            return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         if ($data->status == "on") {
@@ -283,6 +302,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/api/partner/{id<\d+>}/eating-time", name="api_restaurant_eating_time", methods={"PUT"})
+     * @isGranted("ROLE_RESTAURATEUR")
      */
     public function editEatingTime($id, Request $request, RestaurantRepository $restaurantRepository)
     {
@@ -297,6 +317,12 @@ class RestaurantController extends AbstractController
 
         if (!$restaurant) {
            return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
+        $user = $this->getUser();
+        if ($user->getRestaurant()->getId() != $id) {
+            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         $currentAverageEatingTime = $restaurant->getAverageEatingTime();

@@ -6,8 +6,8 @@ import ConfirmationMessage from './ConfirmationMessage';
 import NewPasswordConfirmationMessage from './NewPasswordConfirmationMessage';
 import NewPasswordErrorMessage from './NewPasswordErrorMessage';
 
-import ErrorMessage from './ErrorMessage'
-import CodeErrorMessage from './CodeErrorMessage'
+import ErrorMessage from './ErrorMessage';
+import CodeErrorMessage from './CodeErrorMessage';
 
 const Login = ({
   changePasswordResetInputValue,
@@ -25,7 +25,6 @@ const Login = ({
   newPasswordSubmit,
   newPasswordConfirmed
 }) => {
-
   // handle input change
   const handleChange = (evt) => {
     changePasswordResetInputValue(evt.target.value, evt.target.name);
@@ -37,12 +36,14 @@ const Login = ({
     handleSendEmail();
   };
 
-  // handle verification submit 
+  // handle verification submit
   const handleCodeSubmit = (e) => {
     e.preventDefault();
+
     if (serverCode == inputCode) {
       showNewPasswordField();
-    } else {
+    }
+    else {
       showVerificationCodeError();
     }
   };
@@ -52,54 +53,67 @@ const Login = ({
     newPasswordSubmit();
   };
 
-    return (
+  return (
     <div className="form-container">
       <h1>Réinitialisez votre mot de passe</h1>
 
-      {!emailConfirmation && <form id="password-reset-form" onSubmit={handleSubmit}>
-        <p>Merci d'indiquer l'adresse mail rattachée à votre compte.</p>
-        <input
-          onChange={handleChange}
-          value={email}
-          id="user-input"
-          name="email"
-          placeholder="Adresse email"
-          type="email"
-          required
-        />
+      {!emailConfirmation && (
+        <form id="password-reset-form" onSubmit={handleSubmit}>
+          <p>Merci d'indiquer l'adresse mail rattachée à votre compte.</p>
+          <input
+            onChange={handleChange}
+            value={email}
+            id="user-input"
+            name="email"
+            placeholder="Adresse email"
+            type="email"
+            required
+          />
 
-        {emailError && <ErrorMessage />}
+          {emailError && <ErrorMessage />}
 
-        {true && <button className="button-alt">Envoyer</button>}
-      </form> }
+          {true && <button className="button-alt" type="submit">Envoyer</button>}
+        </form>
+      )}
 
-      {emailConfirmation && !newPasswordField && <form id="password-reset-form" onSubmit={handleCodeSubmit}>
-        <p>Merci d'indiquer le code de vérification envoyé par email.</p>
- 
-        <input placeholder="Code de confirmation" 
-        // type="number" maxLength="6"
-         name="inputCode" onChange={handleChange} value={inputCode} />
+      {emailConfirmation && !newPasswordField && (
+        <form id="password-reset-form" onSubmit={handleCodeSubmit}>
+          <p>Merci d'indiquer le code de vérification envoyé par email.</p>
 
-        { verificationCodeError && <CodeErrorMessage />}
+          <input
+            placeholder="Code de confirmation"
+            // type="number"
+            // maxLength="6"
+            name="inputCode"
+            onChange={handleChange}
+            value={inputCode}
+          />
 
-        {true && <button className="button-alt">Envoyer</button>}
-      </form> }
+          { verificationCodeError && <CodeErrorMessage />}
 
-      {newPasswordField && <form id="password-reset-form" onSubmit={handleNewPasswordSubmit}>
-        <p>Merci d'indiquer votre nouveau mot de passe.</p>
- 
-        <input placeholder="Nouveau mot de passe" minLength="6" type="password"
-         name="newPassword" onChange={handleChange} value={newPassword} />
+          {true && <button className="button-alt" type="submit">Envoyer</button>}
+        </form>
+      )}
 
-        {true && <button className="button-alt">Envoyer</button>}
-        { newPasswordConfirmed && <NewPasswordConfirmationMessage />}
-      </form> }
+      {newPasswordField && (
+        <form id="password-reset-form" onSubmit={handleNewPasswordSubmit}>
+          <p>Merci d'indiquer votre nouveau mot de passe.</p>
 
-      
+          <input
+            placeholder="Nouveau mot de passe"
+            minLength="6"
+            type="password"
+            name="newPassword"
+            onChange={handleChange}
+            value={newPassword}
+          />
 
-
+          {true && <button className="button-alt" type="submit">Envoyer</button>}
+          { newPasswordConfirmed && <NewPasswordConfirmationMessage />}
+        </form>
+      )}
     </div>
-    );
-  };
+  );
+};
 
 export default Login;
