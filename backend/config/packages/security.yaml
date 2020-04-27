@@ -21,9 +21,9 @@ security:
             access_denied_handler: App\Security\AccessDeniedHandler
             anonymous: lazy
             provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\LoginAuthenticator
+            #guard:
+                #authenticators:
+                    #- App\Security\LoginAuthenticator
 
             logout:
                 path: api_logout
@@ -42,4 +42,3 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/backend, roles: ROLE_ADMIN }
-        #- { path: ^/api, roles: ROLE_RESTAURATEUR }
