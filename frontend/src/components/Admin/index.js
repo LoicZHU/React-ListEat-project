@@ -58,13 +58,23 @@ const Admin = ({
   useEffect(() => {
     //set first ticket as current
     const setFirstTicketAsCurrent = () => {
-      const actualCurrentElement = document.querySelector('#ticket-list li.current');
+      const actualCurrentElement = document.querySelector('#admin-mobile-wrapper #ticket-list li.current');
       if (actualCurrentElement == null && tickets.length > 0) {
-        document.querySelector('#ticket-list > li').classList.add('current');
+        document.querySelector('#admin-mobile-wrapper #ticket-list > li').classList.add('current');
       }
     };
-
     setFirstTicketAsCurrent();
+  }, [tickets]);
+
+  useEffect(() => {
+    //set first ticket as current
+    const setFirstTicketAsCurrentDesktop = () => {
+      const actualCurrentElementDesktop = document.querySelector('#admin-desktop-wrapper #ticket-list li.current');
+      if (actualCurrentElementDesktop == null && tickets.length > 0) {
+        document.querySelector('#admin-desktop-wrapper #ticket-list > li').classList.add('current');
+      }
+    };
+    setFirstTicketAsCurrentDesktop();
   }, [tickets]);
 
   // handle click on '+'
@@ -194,7 +204,7 @@ const Admin = ({
  
   // websocket to place a event listener on the topic 'ticket' with the current restaurantId
   var topic = 'ticket';
-  const url = new URL('http://localhost:3000/.well-known/mercure');
+  const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
   url.searchParams.append('topic', `https://www.listeat.io/${topic}/${restaurantId}`);
   const eventSource = new EventSource(url);
 
@@ -208,10 +218,6 @@ const Admin = ({
     (!loadingTicketsData && (
       <>
       <div id="admin-mobile-wrapper">
-{/* 
-         <Websocket url='ws://localhost:8001/mercure-test'
-        onMessage={(data) => console.log(data)}
-        /> */}
 
         {/* left section */}
         <div id="left-section">
@@ -260,7 +266,7 @@ const Admin = ({
             <div className="right">
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
-                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}<i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}<i className="fa fa-cutlery" aria-hidden="true"></i></span>
                 
                 <div className="add-ticket">
                   <span id="confirm" onClick={handleConfirm}>Placé</span>
@@ -315,7 +321,7 @@ const Admin = ({
 
             <div className="tickets-count">
               {(status === 0) && <span id="service-off">Service à l'arrêt</span>}
-              <span id="mobile-time-button" onClick={handleMobileClockButtonClick}><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+              <span id="mobile-time-button" onClick={handleMobileClockButtonClick}><i className="fa fa-clock-o" aria-hidden="true"></i></span>
               {(status === 1) && <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>}
 
               <Modal
@@ -448,11 +454,7 @@ const Admin = ({
         </div>
       </div>
 
-<div id="admin-desktop-wrapper">
-{/* 
-         <Websocket url='ws://localhost:8001/mercure-test'
-        onMessage={(data) => console.log(data)}
-        /> */}
+      <div id="admin-desktop-wrapper">
 
         {/* left section */}
         <div id="left-section">
@@ -501,7 +503,7 @@ const Admin = ({
             <div className="right">
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
-                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}<i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}<i className="fa fa-cutlery" aria-hidden="true"></i></span>
                 
                 <div className="add-ticket">
                   <span id="confirm" onClick={handleConfirm}>Placé</span>
@@ -556,7 +558,7 @@ const Admin = ({
 
             <div className="tickets-count">
               {(status === 0) && <span id="service-off">Service à l'arrêt</span>}
-              <span id="mobile-time-button" onClick={handleMobileClockButtonClick}><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+              <span id="mobile-time-button" onClick={handleMobileClockButtonClick}><i className="fa fa-clock-o" aria-hidden="true"></i></span>
               {(status === 1) && <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>}
 
               <Modal
