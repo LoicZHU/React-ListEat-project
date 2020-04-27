@@ -1,6 +1,41 @@
 @import 'src/styles/index.scss';
 
+
 li.ticket {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  border: 2px $light-color solid;
+  padding: 1.5em 1em;
+  font-size: 1em;
+  position: relative;
+
+  .fa-user {
+    position: absolute;
+    left: 80%;
+
+    span {
+      margin-left: 10px;
+    }
+  }
+
+  .fa-info-circle {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  &:hover, &.current {
+    color: #fff;
+    background: $primary-color;
+    border: 2px $primary-color solid;
+    transition: .2s;
+    cursor: pointer;
+  }
+}
+
+
+@media (min-width: $mobile-breakpoint) { 
+  li.ticket {
     height: 40px;
     display: flex;
     align-items: center;
@@ -30,4 +65,5 @@ li.ticket {
       transition: .2s;
       cursor: pointer;
     }
+}
 }

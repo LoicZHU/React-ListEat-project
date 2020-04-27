@@ -48,6 +48,7 @@ export const CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE = 'CLEAR_SHOWED_CONFIRMA
 export const CLEAR_PASSWORD_INPUTS = 'CLEAR_PASSWORD_INPUTS';
 export const CHANGE_IS_PASS_CONFIRMED = 'CHANGE_IS_PASS_CONFIRMED';
 export const CLEAR_ALL = 'CLEAR_ALL';
+export const MOBILE_CLOCK_CLICK = 'MOBILE_CLOCK_CLICK';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -290,3 +291,8 @@ export const changeIsPassConfirmed = (newValue) => ({
 export const clearAll = () => ({
   type: CLEAR_ALL,
 });
+
+export const handleMobileClockClick = (newValue) => ({
+  type: MOBILE_CLOCK_CLICK,
+  newValue,
+})

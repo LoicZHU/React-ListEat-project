@@ -31,6 +31,7 @@ const Admin = ({
   showModalEmailError,
   fetchTicketsData,
   restaurantId,
+  handleMobileClockClick,
 
   // modal (ticket add)
   lastName,
@@ -44,6 +45,7 @@ const Admin = ({
   estimatedEntryTime,
   modalErrors,
   emailError,
+  mobileClockClickState,
 
 }) => {
   useEffect(() => {
@@ -180,6 +182,15 @@ const Admin = ({
   const handleOpen = () => {
     modalTitle.style.color = '#ff8400';
   };
+
+  // handle mobile clock button click
+  const handleMobileClockButtonClick = () => {
+    if (mobileClockClickState === 'flex') {
+      handleMobileClockClick('none');
+    } else {
+      handleMobileClockClick('flex');
+    }
+  };
  
   // websocket to place a event listener on the topic 'ticket' with the current restaurantId
   var topic = 'ticket';
@@ -192,7 +203,6 @@ const Admin = ({
   eventSource.onmessage = function(event) {
        fetchTicketsData();
   };
-
 
   return (
     (!loadingTicketsData && (
@@ -249,7 +259,8 @@ const Admin = ({
             <div className="right">
               <div id="covers-nb">
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
-                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}</span>
+                <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}<i class="fa fa-cutlery" aria-hidden="true"></i></span>
+                
                 <div className="add-ticket">
                   <span id="confirm" onClick={handleConfirm}>Placé</span>
                   <span id="cancel" onClick={handleCancel}>Absent</span>
@@ -258,7 +269,7 @@ const Admin = ({
             </div>
           </div>
 
-          <div id="admin-bottom-section">
+          <div id="admin-bottom-section" style={mobileClockClickState == 'none' ? {display: 'none'} : {display: 'flex'}}>
             <div className="first">
               <h3>Temps d'attente actuel&nbsp;:</h3>
 
@@ -303,6 +314,7 @@ const Admin = ({
 
             <div className="tickets-count">
               {(status === 0) && <span id="service-off">Service à l'arrêt</span>}
+              <span id="mobile-time-button" onClick={handleMobileClockButtonClick}><i class="fa fa-clock-o" aria-hidden="true"></i></span>
               {(status === 1) && <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>}
 
               <Modal
