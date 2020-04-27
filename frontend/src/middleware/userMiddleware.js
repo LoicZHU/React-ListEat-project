@@ -208,7 +208,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveRestaurantData(averageEatingTime, response.data.status, response.data.name, response.data.address, response.data.postcode, response.data.city, response.data.country, response.data.phone));
         })
         .catch((error) => {
-          console.warn(error);
+          console.warn(error.response);
         });
       next(action);
       break;

@@ -148,7 +148,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
         })
         .catch((error) => {
-          console.warn(error);
+          console.warn(error.response);
           console.log('send ticket validation');
         });
 
