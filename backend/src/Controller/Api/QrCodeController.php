@@ -34,7 +34,7 @@ class QrCodeController extends AbstractController
 
     /**
      * @Route("api/partner/{id}/qrcode", name="api_QrCode_add", methods={"POST"})
-     * @isGranted("ROLE_RESTAURATEUR")
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function add($id,ValidatorInterface $validator, RestaurantRepository $restaurantRepository)
     {
