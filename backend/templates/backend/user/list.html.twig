@@ -4,20 +4,16 @@
 
 {% block body %}
 
-    
 
-
-    {% for label, messages in app.flashes %}
+    </div>
+        <div class="content">
+         {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} mt-3">
                         {{ message }}
                     </div>
                 {% endfor %}
             {% endfor %}
-
-
-    </div>
-        <div class="content">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">

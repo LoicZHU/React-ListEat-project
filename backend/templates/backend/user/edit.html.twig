@@ -5,7 +5,6 @@
 {% block body %}
     <h1>Edit User</h1>
 
-  <h1>Ajouter un métier</h1>
 
 </div>
         <div class="content">
@@ -15,10 +14,10 @@
                         <div class="card-header">
 
 
-    <h1>Edit User</h1>
+    <h1>Modifier utilisateur</h1>
 
     {{ include('backend/user/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('backend_user_list') }}">back to list</a>
+    <a href="{{ path('backend_user_list') }}">retour</a>
 
 {% endblock %}

@@ -8,6 +8,13 @@
 
     </div>
         <div class="content">
+         {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} mt-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -54,7 +61,7 @@
                                         {{ user.email }}
                                         </td>
                                          <td>
-                                            <a href="{{ path('backend_admin_user_delete', {'id': user.id}) }}"><i class="fas fa-external-link-alt "></i></a>
+                                            <a href="{{ path('backend_user_show', {'id': user.id}) }}"><i class="fas fa-external-link-alt "></i></a>
                                             <a href="{{ path('backend_admin_user_edit', {'id': user.id}) }}"><i class="fas fa-user-edit "></i></a>
                                         </td>
                                         <td>
