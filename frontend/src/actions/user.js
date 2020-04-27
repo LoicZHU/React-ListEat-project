@@ -48,6 +48,7 @@ export const CLEAR_SHOWED_CONFIRMATION_OR_ERROR_MESSAGE = 'CLEAR_SHOWED_CONFIRMA
 export const CLEAR_PASSWORD_INPUTS = 'CLEAR_PASSWORD_INPUTS';
 export const CHANGE_IS_PASS_CONFIRMED = 'CHANGE_IS_PASS_CONFIRMED';
 export const CLEAR_ALL = 'CLEAR_ALL';
+export const CHANGE_IS_PASS_TOO_SHORT = 'CHANGE_IS_PASS_TOO_SHORT';
 
 // action creator
 export const changeInputValue = (newValue, fieldName) => ({
@@ -289,4 +290,9 @@ export const changeIsPassConfirmed = (newValue) => ({
 
 export const clearAll = () => ({
   type: CLEAR_ALL,
+});
+
+export const changeIsPassTooShort = (newValue) => ({
+  type: CHANGE_IS_PASS_TOO_SHORT,
+  newValue,
 });

@@ -36,6 +36,7 @@ import {
   CLEAR_PASSWORD_INPUTS,
   CHANGE_IS_PASS_CONFIRMED,
   CLEAR_ALL,
+  CHANGE_IS_PASS_TOO_SHORT,
 } from 'src/actions/user';
 
 // initial state
@@ -66,6 +67,7 @@ const initialState = {
     coversNumber: '',
     showPasswordError: false, // int
     isPassConfirmed: true,
+    isPassTooShort: false,
   },
 
   // sign up errors
@@ -513,9 +515,19 @@ const userReducer = (state = initialState, action = {}) => {
           coversNumber: '',
           showPasswordError: false,
           isPassConfirmed: true,
+          isPassTooShort: false,
         },
         signupErrors: [],
         signupConfirmation: false,
+      };
+
+    case CHANGE_IS_PASS_TOO_SHORT:
+      return {
+        ...state,
+        signupInput: {
+          ...state.signupInput,
+          isPassTooShort: action.newValue,
+        },
       };
 
     default: return state;
