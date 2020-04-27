@@ -10,7 +10,7 @@ body {
     margin: .5em auto;
     font-size: 1em;
     border: 1px solid rgb(182, 182, 182,.5);
-    min-width: 100%;
+    min-width: 100% !important;
     &:focus {
       box-shadow: inset 0px 0px 10px rgb(255,132,0,.5);
       transition: box-shadow .3s;
