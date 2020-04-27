@@ -34,7 +34,6 @@ class QrCodeController extends AbstractController
 
     /**
      * @Route("api/partner/{id}/qrcode", name="api_QrCode_add", methods={"POST"})
-     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function add($id,ValidatorInterface $validator, RestaurantRepository $restaurantRepository)
     {
@@ -45,11 +44,6 @@ class QrCodeController extends AbstractController
             return $this->json(['message' => 'Ce restaurant n\'existe pas.'],Response::HTTP_NOT_FOUND);
         } 
 
-        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
-        $user = $this->getUser();
-        if ($user->getRestaurant()->getId() != $id) {
-            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
-        }
         // generates the QRccode if the restaurant exists
         $lien = QrCodeGenerator::generate($id,$restaurant->getName());
 
