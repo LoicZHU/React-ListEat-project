@@ -1,5 +1,10 @@
 @import 'src/styles/index.scss';
-#admin-wrapper {
+
+#admin-desktop-wrapper {
+  display: none;
+}
+
+#admin-mobile-wrapper {
   height: calc(100vh-50px);
   overflow: hidden;
 
@@ -199,6 +204,7 @@
           height: 100%;
           background-color: #fff;
 
+
           .covers-title {
             display: none;
           }
@@ -212,6 +218,7 @@
             margin-bottom: 0 !important;
             position: absolute !important;
             top: 30px !important;
+
           }
 
           i {
@@ -369,6 +376,15 @@
           cursor: pointer;
         }
       }
+
+      #service-off {
+        position: absolute;
+        bottom: -22px;
+        right: 0;
+        height: 43px;
+        width: 85%;
+        font-size: .8em !important;
+      }
     }
   }
 
@@ -402,7 +418,7 @@
           height: 50px;
           position: absolute;
           left: 0px;
-          top: 0px;
+          top: 10px;
           width: 50px;
 
           &:hover {
@@ -501,19 +517,17 @@
             }
 
             .ticket-next {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 100% !important;
-              background-color: $primary-color;
-              border-radius: 0;
-              height: 50px;
-              margin: 0 !important;
-              margin-top: 40px !important;
-              position: absolute;
-              bottom: 0px;
-              left: 0px;
-              box-shadow: none;
+              // display: flex;
+              // justify-content: center;
+              // align-items: center;
+              // width: 100% !important;
+              // background-color: $primary-color;
+              // border-radius: 0;
+              // margin: 0 !important;
+              // margin-top: 100px !important;
+              // position: relative;
+              // bottom: 0px;
+              // left: 50px;
             }
 
             .ticket-next:hover, .cancel-button:hover {
@@ -641,9 +655,48 @@
   }
 }
 
+@media (min-width: $mobile-breakpoint) and (max-width: 1290px) {
+  #ticket-infos {
+    span {
+    font-size: 1.2em !important;
+  }
+  }
+
+  #covers-nb {
+    #confirm, #cancel {
+    font-size: 1.5em !important;
+    }
+
+    .covers-title, .covers-nb {
+      font-size: 1.5em !important;
+    }
+  }
+
+  #add-ticket {
+    text-align: center;
+  }
+
+  #admin-bottom-section {
+    h3 {
+      font-size: 1em !important;
+    }
+    .first {
+      #time-container {
+        span {
+          font-size: 2em !important;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: $mobile-breakpoint) {
 
-#admin-wrapper {
+  #admin-mobile-wrapper {
+    display: none;
+  }
+
+#admin-desktop-wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -870,6 +923,12 @@
           font-size: 5em;
           font-weight: bold;
           flex-grow: 0;
+
+
+          i {
+            display: none !important;
+          }
+
         }
 
         .add-ticket {
@@ -915,7 +974,7 @@
 }
 
 #admin-bottom-section {
-  display: flex;
+  display: flex !important;
   background-color: $light-color;
 
   .first {
@@ -1069,6 +1128,10 @@
     height: 10%;
     font-size: 1.7em;
     box-shadow: 2px -5px 15px rgb(0,0,0,.2);
+
+    #mobile-time-button {
+      display: none !important;
+    }
 
     span:first-child {
       margin-left: 30px;
