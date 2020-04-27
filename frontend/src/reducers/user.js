@@ -36,7 +36,9 @@ import {
   CLEAR_PASSWORD_INPUTS,
   CHANGE_IS_PASS_CONFIRMED,
   CLEAR_ALL,
+  MOBILE_CLOCK_CLICK,
   CHANGE_IS_PASS_TOO_SHORT,
+
 } from 'src/actions/user';
 
 // initial state
@@ -93,6 +95,10 @@ const initialState = {
     displayEditError: false,
     editErrorMessage: '',
     isNewPassConfirmed: true,
+  },
+
+  showElements: {
+    mobileTimeEstimation: 'none',
   },
 
   // time
@@ -491,6 +497,16 @@ const userReducer = (state = initialState, action = {}) => {
         signupInput: {
           ...state.signupInput,
           isPassConfirmed: action.newValue,
+        },
+      };
+
+
+    case MOBILE_CLOCK_CLICK:
+      return {
+        ...state,
+        showElements: {
+          ...state.showElements,
+          mobileTimeEstimation: action.newValue,
         },
       };
 

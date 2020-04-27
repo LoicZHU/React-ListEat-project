@@ -9,6 +9,7 @@ import {
   changeServiceStatus,
   refreshTime,
   fetchTicketsData,
+  handleMobileClockClick,
 } from 'src/actions/user';
 
 import {
@@ -45,6 +46,9 @@ const mapStateToProps = (state) => ({
   estimatedEntryTime: state.tickets.ticketInscriptionInput.estimatedEntryTime,
   modalErrors: state.tickets.ticketInscriptionInput.errors.modal,
   emailError: state.tickets.ticketInscriptionInput.errors.email,
+
+  // show elements 
+  mobileClockClickState: state.user.showElements.mobileTimeEstimation,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -106,6 +110,11 @@ const mapDispatchToProps = (dispatch) => ({
 
   fetchTicketsData: () => {
     dispatch(fetchTicketsData());
+  },
+
+  handleMobileClockClick: (newValue) => {
+    dispatch(handleMobileClockClick(newValue));
+    console.log(newValue);
   }
 
 });
