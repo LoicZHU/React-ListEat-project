@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
@@ -37,14 +38,17 @@ class UserType extends AbstractType
             }
         })
 
-
-            ->add('email')
-            ->add('role')
-            ->add('password')
             ->add('lastName')
             ->add('firstName')
-            ->add('createdAt')
+            ->add('email')       
+            ->add('password')
             ->add('role')
+            ->add('createdAt',DateType::class, [
+                'widget' => 'single_text',
+                // this is actually the default format for single_text
+                'format' => 'yyyy-MM-dd',
+            ])
+            
         ;
     }
 

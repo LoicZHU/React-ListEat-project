@@ -1,6 +1,11 @@
-.container_componement{
-    border:5px solid rgba(0, 0, 0, 0.671);
+.container_componement, .container__map{
+    border:1px solid rgba(0, 0, 0, 0.671);
     text-align: center;
+}
+
+.container__map{
+    border-radius: 5px;
+    margin-bottom: 1.2rem;
 }
 
 .fas{
@@ -22,13 +27,30 @@ color: #8fe74f;
 }
 
 .bg-orange{
-    background-color: #ff8400;
+    background-color: #474747;
 }
 
 .logo{
-    background-color: rgba(0, 0, 0, 0.363);
+    background-color: #ffff;
 }
 
 #map{
     height:400px
+}
+
+.containner_bt--sub button{
+    float: right;
+
+}
+
+.back{
+    margin-top: 1.2em;
+    display: inline-block;
+}
+
+.alert{
+    z-index: 9999;
+    position: absolute;
+    width: 100%;
+    margin-left: 50%;
 }

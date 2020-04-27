@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('assets/js/backoffice.js') }}"></script>
+
+    <script src="three.r95.min.js"></script>
+<script src="vanta.clouds.min.js"></script>
+<script>
+VANTA.CLOUDS({
+  el: "#your-element-selector",
+  mouseControls: true,
+  touchControls: true,
+  minHeight: 200.00,
+  minWidth: 200.00
+})
+</script>
+
+{% endblock %}
+ 
+

@@ -1,4 +1,11 @@
 {{ form_start(form) }}
- 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+  {{ form_widget(form) }}
+
+  <div class="containner_bt--sub">
+
+   <button class="btn">{{ button_label|default('Save') }}</button>
+   
+  </div>
+  
 {{ form_end(form) }}

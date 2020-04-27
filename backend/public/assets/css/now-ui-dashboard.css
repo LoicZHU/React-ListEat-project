@@ -1041,7 +1041,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .btn-outline-primary {
-  color: #f96332;
+  color: #3235f9;
   border-color: #f96332;
 }
 
@@ -3004,7 +3004,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .alert.alert-success {
-  background-color: #1be611;
+  background-color: #00000094;
 }
 
 .alert.alert-danger {
@@ -4208,7 +4208,7 @@ Created using IcoMoon - icomoon.io
   padding-bottom: 45px;
   background: #141E30;
   /* fallback for old browsers */
-  background: #ff8400;
+  background:#ececf1 ;
   position: relative;
   overflow: hidden;
 }
