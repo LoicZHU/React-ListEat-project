@@ -22,7 +22,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/api/partner/{id}", name="api_restaurant_show", methods={"GET"})
-     * @IsGranted("ROLE_RESTAURATEUR")
+     * 
      */
     public function show($id, Request $request, ?Restaurant $restaurant, RestaurantRepository $restaurantRepository)
     {
