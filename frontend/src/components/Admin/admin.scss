@@ -388,8 +388,6 @@
     }
   }
 
-  div.ReactModalPortal {
-
     .ReactModal__Content {
       border: none !important;
       padding: 0 15px !important;
@@ -406,7 +404,7 @@
         display: flex;
         justify-content: space-between;
         font-size: 1em;
-      
+      }
 
         .previous-button {
           display: flex;
@@ -439,7 +437,7 @@
           align-items: center;
           color: #fff;
           padding: 15px 15px 15px 15px;
-          background-color: $dark-color;
+          // background-color: $dark-color;
           position: absolute;
           right: 0;
           top: 0;
@@ -449,7 +447,7 @@
         .close-button:hover {
           cursor: pointer;
         }
-      }
+      
 
         .ticket-form--container {
           margin-bottom: 70px !important;
@@ -468,6 +466,7 @@
               line-height: 1.3em;
             }
           }
+        }
         
           .ticket-form {
             span {
@@ -501,6 +500,7 @@
               right: 0px;
               box-shadow: none;
             }
+          
 
             .cancel-button {
               display: flex;
@@ -517,25 +517,25 @@
             }
 
             .ticket-next {
-              // display: flex;
-              // justify-content: center;
-              // align-items: center;
-              // width: 100% !important;
-              // background-color: $primary-color;
-              // border-radius: 0;
-              // margin: 0 !important;
-              // margin-top: 100px !important;
-              // position: relative;
-              // bottom: 0px;
-              // left: 50px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 100% !important;
+              background-color: $primary-color;
+              border-radius: 0;
+              margin: 0 !important;
+              margin-top: 100px !important;
+              position: absolute !important;
+              top: 50px !important;
+              left: 50px;
             }
 
             .ticket-next:hover, .cancel-button:hover {
               cursor: pointer;
             }
-          }
+          
         }
-    }
+    
   }
 
   #admin-bottom-section {
