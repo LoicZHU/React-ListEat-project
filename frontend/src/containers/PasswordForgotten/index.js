@@ -1,7 +1,14 @@
 import { connect } from 'react-redux';
 
 import PasswordForgotten from 'src/components/PasswordForgotten';
-import { changePasswordResetInputValue, passwordResetCheckEmail, showVerificationCodeError, showNewPasswordField, newPasswordSubmit } from 'src/actions/user';
+import {
+  changePasswordResetInputValue,
+  passwordResetCheckEmail,
+  showVerificationCodeError,
+  showNewPasswordField,
+  newPasswordSubmit,
+  clearForgottenPasswordPage,
+} from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
   email: state.user.passwordReset.email,
@@ -37,6 +44,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(newPasswordSubmit());
   },
 
+  clearForgottenPasswordPage: () => {
+    dispatch(clearForgottenPasswordPage());
+  },
 });
 
 export default connect(
