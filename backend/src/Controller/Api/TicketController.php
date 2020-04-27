@@ -231,7 +231,6 @@ class TicketController extends AbstractController
 
     /**
     * @Route("/api/partner/{id<\d+>}/tickets", name="api_tickets_show", methods={"GET"})
-    * @IsGranted("ROLE_RESTAURATEUR")
     */
     public function showAll($id, TicketRepository $ticketRepository, RestaurantRepository $restaurantRepository)
     {
@@ -239,12 +238,6 @@ class TicketController extends AbstractController
 
         if (!$restaurant) {
             return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
-        }
-
-        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
-        $user = $this->getUser();
-        if ($user->getRestaurant()->getId() != $id) {
-            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
         
         // finds all active tickets related to a single restaurant, ordered by estimatedEntryTime, sorted in ascending order
