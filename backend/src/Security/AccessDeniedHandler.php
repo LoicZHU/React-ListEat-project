@@ -13,6 +13,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         //tuned message response for access denied
         $content = json_encode(['logged' => false]);
 
-        return new Response($content);
+        return new Response($content, 401);
     }
 }

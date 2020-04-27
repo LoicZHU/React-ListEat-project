@@ -36,6 +36,7 @@ import {
   CLEAR_PASSWORD_INPUTS,
   CHANGE_IS_PASS_CONFIRMED,
   CLEAR_ALL,
+  MOBILE_CLOCK_CLICK,
   CHANGE_IS_PASS_TOO_SHORT,
   CLEAR_FORGOTTEN_PASSWORD_PAGE,
 } from 'src/actions/user';
@@ -94,6 +95,10 @@ const initialState = {
     displayEditError: false,
     editErrorMessage: '',
     isNewPassConfirmed: true,
+  },
+
+  showElements: {
+    mobileTimeEstimation: 'none',
   },
 
   // time
@@ -506,6 +511,14 @@ const userReducer = (state = initialState, action = {}) => {
         },
       };
 
+    case MOBILE_CLOCK_CLICK:
+      return {
+        ...state,
+        showElements: {
+          ...state.showElements,
+          mobileTimeEstimation: action.newValue,
+        },
+      };
 
     case CLEAR_ALL:
       return {
