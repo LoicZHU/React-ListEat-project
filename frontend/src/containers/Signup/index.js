@@ -7,6 +7,7 @@ import {
   changeShowPasswordError,
   changeIsPassConfirmed,
   clearAll,
+  changeIsPassTooShort,
 } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
@@ -28,6 +29,7 @@ const mapStateToProps = (state) => ({
   signupErrors: state.user.signupErrors,
   showSignupConfirmation: state.user.signupConfirmation,
   isPassConfirmed: state.user.signupInput.isPassConfirmed,
+  isPassTooShort: state.user.signupInput.isPassTooShort,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -49,6 +51,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   clearAll: () => {
     dispatch(clearAll());
+  },
+
+  changeIsPassTooShort: (newValue) => {
+    dispatch(changeIsPassTooShort(newValue));
   },
 });
 

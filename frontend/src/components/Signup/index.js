@@ -30,6 +30,8 @@ const Signup = ({
   isPassConfirmed,
   changeIsPassConfirmed,
   clearAll,
+  isPassTooShort,
+  changeIsPassTooShort,
 }) => {
   useEffect(() => {
     clearAll();
@@ -46,6 +48,25 @@ const Signup = ({
     window.scrollTo(0, ref.current.offsetTop);
 
     return true;
+  };
+
+  const checkBothPassInputs = () => {
+    // if password hasn't at least 6 characters : display pass is too short
+    if (password.length < 6) {
+      // console.log('pass < 6');
+      changeIsPassTooShort(true);
+    }
+    // else if (password has at least 6 characters or passwordConfirmation exists) and both aren't identical : only display passwords not the same
+    else if ((password.length >= 6 || passwordConfirmation) && password !== passwordConfirmation) {
+      changeIsPassTooShort(false);
+      // console.log('pass !=');
+      changeIsPassConfirmed(false);
+    }
+    // else if all OK : clear errors
+    else {
+      changeIsPassTooShort(false);
+      changeIsPassConfirmed(true);
+    }
   };
 
   // handle submit
@@ -205,8 +226,11 @@ const Signup = ({
           // onChange={handleChange, checkPassword}
           onChange={handleChange}
           minLength="6"
+          onBlur={checkBothPassInputs}
           required
         />
+
+        {isPassTooShort && scrollToPassInput(passInput) && <span id="password-error">Le mot de passe doit contenir au moins 6 catactères.</span>}
 
         <label className="signup-label" htmlFor="passwordConfirmation">Confirmation du mot de passe</label>
         <input
@@ -218,6 +242,7 @@ const Signup = ({
           value={passwordConfirmation}
           // onChange={checkPasswordConfirmation}
           onChange={handleChange}
+          onBlur={checkBothPassInputs}
           required
         />
 
