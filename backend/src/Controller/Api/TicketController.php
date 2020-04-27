@@ -178,6 +178,7 @@ class TicketController extends AbstractController
                 $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
                     'method'  => 'POST',
                     'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'Content-Security-Policy' => "upgrade-insecure-requests",
                     'content' => $postData,
                 ]]));
           
