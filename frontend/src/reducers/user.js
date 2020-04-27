@@ -38,7 +38,7 @@ import {
   CLEAR_ALL,
   MOBILE_CLOCK_CLICK,
   CHANGE_IS_PASS_TOO_SHORT,
-
+  CLEAR_FORGOTTEN_PASSWORD_PAGE,
 } from 'src/actions/user';
 
 // initial state
@@ -301,7 +301,6 @@ const userReducer = (state = initialState, action = {}) => {
         mobileMenuOpened: !state.mobileMenuOpened,
       };
 
-
     case CLOSE_MOBILE_MENU:
       return {
         ...state,
@@ -309,40 +308,31 @@ const userReducer = (state = initialState, action = {}) => {
       };
 
     case CHANGE_PASSWORDRESET_INPUT_VALUE:
-        return {
-          ...state,
-          passwordReset: {
-            ...state.passwordReset,
-            [action.fieldName]: action.newValue,
-          },
-        };
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          [action.fieldName]: action.newValue,
+        },
+      };
 
-        case CHANGE_PASSWORDRESET_INPUT_VALUE:
-          return {
-            ...state,
-            passwordReset: {
-              ...state.passwordReset,
-              [action.fieldName]: action.newValue,
-            },
-          };
+    case SHOW_PASSWORDRESET_EMAIL_ERROR:
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          emailError: action.newValue,
+        },
+      };
 
-        case SHOW_PASSWORDRESET_EMAIL_ERROR:
-          return {
-            ...state,
-            passwordReset: {
-              ...state.passwordReset,
-              emailError: action.newValue,
-            },
-          };         
-
-        case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
-          return {
-            ...state,
-            passwordReset: {
-              ...state.passwordReset,
-              emailConfirmation: action.newValue,
-            },
-          };       
+    case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          emailConfirmation: action.newValue,
+        },
+      };
 
           case STORE_SERVER_TEMP_CODE:
               return {
@@ -373,51 +363,72 @@ const userReducer = (state = initialState, action = {}) => {
               }; 
 
 
-        case SHOW_VERIFICATION_CODE_ERROR:
-            return {
-              ...state,
-              passwordReset: {
-                ...state.passwordReset,
-                verificationCodeError: true,
-              },
-            }; 
-
-        case SHOW_NEW_PASSWORD_FIELD:
-            return {
-              ...state,
-              passwordReset: {
-                ...state.passwordReset,
-                newPasswordField: true,
-              },
-            };     
-            
-        case CONFIRM_NEW_PASSWORD:
-            return {
-              ...state,
-              passwordReset: {
-                ...state.passwordReset,
-                newPasswordConfirmed: action.newValue,
-              },
-            }; 
-
-    case SHOW_PASSWORDRESET_EMAIL_ERROR:
+    case SHOW_VERIFICATION_CODE_ERROR:
       return {
         ...state,
         passwordReset: {
           ...state.passwordReset,
-          emailError: action.newValue,
+          verificationCodeError: true,
         },
-      };         
+      };
 
-    case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
+    case SHOW_NEW_PASSWORD_FIELD:
       return {
         ...state,
         passwordReset: {
           ...state.passwordReset,
-          emailConfirmation: action.newValue,
+          newPasswordField: true,
         },
-      };  
-      
+      };
+
+    case CONFIRM_NEW_PASSWORD:
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          newPasswordConfirmed: action.newValue,
+          inputCode: '', // to have new page
+          emailConfirmation: false, // to have new page
+          newPasswordField: false, // to have new page
+        },
+      };
+
+      // case SHOW_PASSWORDRESET_EMAIL_ERROR:
+      //   return {
+      //     ...state,
+      //     passwordReset: {
+      //       ...state.passwordReset,
+      //       emailError: action.newValue,
+      //     },
+      //   };
+
+      // case SHOW_PASSWORDRESET_EMAIL_CONFIRMATION:
+      //   return {
+      //     ...state,
+      //     passwordReset: {
+      //       ...state.passwordReset,
+      //       emailConfirmation: action.newValue,
+      //     },
+      //   };
+
+    case CLEAR_FORGOTTEN_PASSWORD_PAGE:
+      return {
+        ...state,
+        passwordReset: {
+          ...state.passwordReset,
+          email: '',
+          newPassword: '',
+          // inputCode: '',
+          // serverCode: '',
+          // userId: null,
+          // emailConfirmation: false,
+          emailError: false,
+          verificationCodeError: false,
+          // newPasswordField: false,
+          newPasswordConfirmed: false,
+        },
+      };
+
     case OPEN_RESTAURANT_CONTENT:
       return {
         ...state,
@@ -499,7 +510,6 @@ const userReducer = (state = initialState, action = {}) => {
           isPassConfirmed: action.newValue,
         },
       };
-
 
     case MOBILE_CLOCK_CLICK:
       return {

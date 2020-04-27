@@ -1,6 +1,8 @@
-import React from 'react';
+// import npm
+import React, { useEffect } from 'react';
 // import PropTypes from 'prop-types';
 
+// import
 import './passwordforgotten.scss';
 import ConfirmationMessage from './ConfirmationMessage';
 import NewPasswordConfirmationMessage from './NewPasswordConfirmationMessage';
@@ -23,8 +25,13 @@ const Login = ({
   verificationCodeError,
   newPassword,
   newPasswordSubmit,
-  newPasswordConfirmed
+  newPasswordConfirmed,
+  clearForgottenPasswordPage,
 }) => {
+  useEffect(() => {
+    clearForgottenPasswordPage();
+  }, []);
+
   // handle input change
   const handleChange = (evt) => {
     changePasswordResetInputValue(evt.target.value, evt.target.name);
@@ -57,7 +64,7 @@ const Login = ({
     <div className="form-container">
       <h1>Réinitialisez votre mot de passe</h1>
 
-      {!emailConfirmation && (
+      {(!emailConfirmation && !newPasswordConfirmed) && (
         <form id="password-reset-form" onSubmit={handleSubmit}>
           <p>Merci d'indiquer l'adresse mail rattachée à votre compte.</p>
           <input
@@ -87,6 +94,7 @@ const Login = ({
             name="inputCode"
             onChange={handleChange}
             value={inputCode}
+            required
           />
 
           { verificationCodeError && <CodeErrorMessage />}
@@ -95,7 +103,7 @@ const Login = ({
         </form>
       )}
 
-      {newPasswordField && (
+      {emailConfirmation && newPasswordField && !newPasswordConfirmed && (
         <form id="password-reset-form" onSubmit={handleNewPasswordSubmit}>
           <p>Merci d'indiquer votre nouveau mot de passe.</p>
 
@@ -106,12 +114,14 @@ const Login = ({
             name="newPassword"
             onChange={handleChange}
             value={newPassword}
+            required
           />
 
-          {true && <button className="button-alt" type="submit">Envoyer</button>}
-          { newPasswordConfirmed && <NewPasswordConfirmationMessage />}
+          <button className="button-alt" type="submit">Envoyer</button>
         </form>
       )}
+
+      {newPasswordConfirmed && <NewPasswordConfirmationMessage />}
     </div>
   );
 };
