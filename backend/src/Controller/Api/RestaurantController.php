@@ -57,6 +57,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("api/partner/{id}", name="api_restaurant_update",  methods={"PUT"})
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function edit($id, Request $request, ?Restaurant $restaurant, UserPasswordEncoderInterface $encoder, UserRepository $userRepository,RestaurantRepository $restaurantRepository , DenormalizerInterface $denormalizer, ValidatorInterface $validator, \Swift_Mailer $mailer)
     {
@@ -260,7 +261,7 @@ class RestaurantController extends AbstractController
 
      /**
      * @Route("/api/partner/{id<\d+>}/status", name="api_restaurant_status", methods={"PUT"})
-     * @isGranted("ROLE_RESTAURATEUR")
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function editStatus($id, Request $request, RestaurantRepository $restaurantRepository)
     {
@@ -302,7 +303,7 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/api/partner/{id<\d+>}/eating-time", name="api_restaurant_eating_time", methods={"PUT"})
-     * @isGranted("ROLE_RESTAURATEUR")
+     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function editEatingTime($id, Request $request, RestaurantRepository $restaurantRepository)
     {
