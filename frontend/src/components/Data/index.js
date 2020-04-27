@@ -96,12 +96,10 @@ const Data = () => (
           Ces droits s’exercent par email à l’adresse suivante :
         </p>
 
-        <p>
-          <div className="data__content__contact">
-            Délégué à la Protection des Données<br />
-            hello@listeat.io
-          </div>
-        </p>
+        <div className="data__content__contact">
+          Délégué à la Protection des Données<br />
+          hello@listeat.io
+        </div>
 
         <p>
           Dans ce cadre, nous vous prions de bien vouloir accompagner votre demande des éléments nécessaires à votre identification (nom, prénom, email) ainsi que toute autre information nécessaire à la confirmation de votre identité.
