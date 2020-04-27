@@ -21,7 +21,7 @@ let app = {
     //scoreBoard.insertAdjacentHTML('beforeEnd', `Écoute du topic ${topic}`);
 
     //Ici l'adresse du serveur Mercure
-    const url = new URL('http://localhost:3000/.well-known/mercure');
+    const url = new URL('http://54.162.210.163:3000/.well-known/mercure');
     // Et on rajoute les topics auxquels s'inscrire (en paramètre GET)
     url.searchParams.append('topic', `https://www.listeat.io/${topic}`);
 
