@@ -17,7 +17,7 @@ const Data = () => (
       <div>
         <h2>Quelles données recueillons-nous ?</h2>
 
-        <ul>
+        {/* <ul>
           Les différentes catégories de données collectées dans le cadre de votre utilisation de nos services sont les suivantes :
           <li>
             - Données d’identification (notamment nom, prénom, nom de votre établissement, siret, adresse postale),
@@ -34,7 +34,15 @@ const Data = () => (
           <li>
             - Données de localisation.
           </li>
-        </ul>
+        </ul> */}
+        <p>
+          Les différentes catégories de données collectées dans le cadre de votre utilisation de nos services sont les suivantes :<br />
+          - Données d’identification (notamment nom, prénom, nom de votre établissement, siret, adresse postale),<br />
+          - Données de contact (notamment numéro de téléphone, adresse email),<br />
+          - Données d’usage (notamment pages web visitées, quantité de tickets créés),<br />
+          - Données de connexion (notamment adresse IP de votre appareil numérique, logs de connexion et d’usage),<br />
+          - Données de localisation.
+        </p>
       </div>
 
       <div>
