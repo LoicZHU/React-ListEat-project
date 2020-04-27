@@ -40,8 +40,8 @@ import {
   updateCurrentTicket,
 } from 'src/actions/ticket';
 
-const baseUrl = 'http://localhost:8001';
-// const baseUrl = 'https://www.listeat.io:8080';
+// const baseUrl = 'http://localhost:8001';
+const baseUrl = 'https://www.listeat.io:8080';
 
 // middleware
 const userMiddleware = (store) => (next) => (action) => {
