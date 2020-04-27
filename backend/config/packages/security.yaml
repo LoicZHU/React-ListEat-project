@@ -21,9 +21,9 @@ security:
             access_denied_handler: App\Security\AccessDeniedHandler
             anonymous: lazy
             provider: app_user_provider
-            #guard:
-                #authenticators:
-                    #- App\Security\LoginAuthenticator
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator
 
             logout:
                 path: api_logout
