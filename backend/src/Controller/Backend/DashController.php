@@ -2,11 +2,13 @@
 
 namespace App\Controller\Backend;
 
-use App\Repository\CustomerRepository;
-use App\Repository\TicketRepository;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\TicketRepository;
+use App\Repository\CustomerRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
 
 class DashController extends AbstractController
 {
@@ -15,6 +17,7 @@ class DashController extends AbstractController
      */
     public function index(UserRepository $userRepository ,TicketRepository $ticketRepository, CustomerRepository $customerRepository)
     {
+
         return $this->render('backend/dash/index.html.twig', [
             'controller_name' => 'DashController',
             'waiting' =>  $ticketRepository->findWaiting(),
@@ -22,7 +25,9 @@ class DashController extends AbstractController
             'ticketNb' => $ticketRepository->countTicket(),
             'userNb' => $userRepository->countUser(),
             'ticketsCancelled' => $ticketRepository->countCancelled(),
-            'coversNb' => $ticketRepository->countCovers()
+            'coversNb' => $ticketRepository->countCovers(),
+         
         ]);
     }
+
 }

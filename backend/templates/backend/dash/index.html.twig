@@ -7,9 +7,10 @@
 
 
     </div>
-                     
+
+         
         <div class="content">
-                        
+     
             <div id="map" class="container__map">
                 <!-- Ici s'affichera la carte -->
             </div>
@@ -61,7 +62,7 @@
 
                 <div class="col-md-4">
                     <div class="card container_componement">
-                    *<i class="fas fa-ticket-alt fa-5x"></i>
+                    <i class="fas fa-ticket-alt fa-5x"></i>
                      <h4 class="card-title">tickets</h4>
                         <div class="card-header">
                         <p id="ticketNb" class="chiffre">{{ticketNb}}</p>
@@ -80,6 +81,22 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row container__test">
+                    <div class="col-md-6">
+                        <p id="user" class=""><i id="login" class="fas fa-bolt fa-1x amber-text pr-3"></i>Service login</p>
+                        <p id="user" class=""><i id="ticket_add" class="fas fa-bolt fa-1x amber-text pr-3"></i>Service ticket add</p>
+                        <p id="user" class=""><i id="ticket_edit" class="fas fa-bolt fa-1x amber-text pr-3"></i>Service ticket édit</p>
+                        <p id="user" class=""><i id="restaurant_show" class="fas fa-bolt fa-1x amber-text pr-3"></i>Service restaurant show</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p id="user" class=""><i id="restaurant_edit" class="fas fa-bolt fa-1x amber-text pr-3" aria-hidden="true"></i>Service restaurant edit</p>
+                        <p id="user" class=""><i id="is_logged" class="fas fa-bolt fa-1x amber-text pr-3"></i>Service is logged</i></p>
+                        <p id="user" class=""><i id="logout" class="fas fa-bolt fa-1x amber-text pr-3"></i>Service logout</p>
+                        <button id="bouton_service" type="button" class="btn btn-outline-default btn-rounded waves-effect">Lancer la vérification</button>
+                    </div>    
+                </div>
+
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnC8-HtRMV3wBgYeSogDMYWtD-zYRTuRU" type="text/javascript"></script>
 	
