@@ -13,6 +13,7 @@ const mapStateToProps = (state) => ({
   cutlery: state.tickets.ticketInfoToCancel.cutlery,
   estimatedEntryTime: state.tickets.ticketInfoToCancel.estimatedEntryTime,
   estimatedWaitingTime: state.tickets.ticketInfoToCancel.estimatedWaitingTime,
+  status: state.tickets.ticketInfoToCancel.status,
   ticketInfoLoaded: state.tickets.ticketInfoToCancel.ticketInfoLoaded,
   displayCancelConfirmation: state.tickets.ticketInfoToCancel.displayCancelConfirmation,
 });

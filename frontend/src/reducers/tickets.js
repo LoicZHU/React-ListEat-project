@@ -89,6 +89,7 @@ const initialState = {
     estimatedWaitingTime: '',
     ticketInfoLoaded: false,
     displayCancelConfirmation: false,
+    status: '',
   },
 };
 
@@ -247,6 +248,7 @@ const ticketsReducer = (state = initialState, action = {}) => {
           cutlery: action.cutlery,
           estimatedEntryTime: action.estimatedEntryTime,
           estimatedWaitingTime: action.estimatedWaitingTime,
+          status: action.status,
           ticketInfoLoaded: true,
         },
       };

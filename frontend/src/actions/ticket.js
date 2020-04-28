@@ -158,6 +158,7 @@ export const saveTicketInfoToCancel = (
   cutlery,
   estimatedEntryTime,
   estimatedWaitingTime,
+  status,
 ) => ({
   type: SAVE_TICKET_INFO_TO_CANCEL,
   restaurantName,
@@ -167,6 +168,7 @@ export const saveTicketInfoToCancel = (
   cutlery,
   estimatedEntryTime,
   estimatedWaitingTime,
+  status,
 });
 
 export const cancelTicket = () => ({
