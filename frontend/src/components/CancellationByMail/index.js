@@ -14,6 +14,7 @@ const CancellationByMail = ({
   cutlery,
   estimatedEntryTime,
   estimatedWaitingTime,
+  status,
   ticketInfoLoaded,
   cancelTicket,
   displayCancelConfirmation,
@@ -54,8 +55,15 @@ const CancellationByMail = ({
             </span>
           </p>
 
-          <p>Pour annuler votre ticket, appuyez sur le bouton suivant :</p>
-          <button className="yes__button button" type="button" onClick={handleCancel}>Annuler</button>
+          {/* status 1 = ticket default value */}
+          {status === 1 && (
+            <>
+              <p>Pour annuler votre ticket, appuyez sur le bouton suivant :</p>
+              <button className="yes__button button" type="button" onClick={handleCancel}>Annuler</button>
+            </>
+          )}
+          {/* status 2 = ticket canceled */}
+          {status === 2 && <div>Le ticket a été annulé.</div>}
         </div>
       </main>
     ))
