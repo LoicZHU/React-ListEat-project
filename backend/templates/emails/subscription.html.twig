@@ -7,10 +7,10 @@
     </head>
     <body>
                 <p>{{name}},<br>
-                    Vous êtes bien inscrit sur la liste d'attente du restaurant {{ restaurantName }}.<br>
+                    Vous êtes bien inscrit(e) sur la liste d'attente du restaurant {{ restaurantName }}.<br>
                     Votre numéro de ticket est le : {{ ticketId }}<br>
-                    Votre temps d'attente estimé est de : {{ estimatedWaitingTime }}<br>
-                    Votre horaire de passage estimé est : {{ estimatedEntryTime|date("h:i") }}<br>
+                    Votre temps d'attente estimé est de : {{ estimatedWaitingTime }} minutes<br>
+                    Votre horaire de passage estimé est : {{ estimatedEntryTime|date("H:i") }}<br>
                     Bon appétit !<br>
                     <br>
                     Si vous souhaitez annuler votre inscription, merci de cliquer sur ce <a href="{{ customerCancellation }}">lien</a>.

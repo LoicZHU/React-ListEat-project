@@ -59,7 +59,7 @@ class QrCodeGenerator
         //we save image on server
         imagejpeg($image,  $baseUrl."/file/qr_code/qrcode-".$restaurantId.".png");
 
-        //Remove the Qr-code with Out Logo
+        //Remove the Qr-code without Logo
         unlink( $baseUrl.'/file/temp/Qrcode'.$restaurantId.'.png');
 
 
