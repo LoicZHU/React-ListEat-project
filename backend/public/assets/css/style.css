@@ -59,6 +59,14 @@ color: #8fe74f;
     font-family: 'Audiowide', cursive;
 }
 
+.container_bt_list{
+    margin-bottom: 1em;
+}
+
+.important{
+    color: crimson;
+}
+
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -73,3 +81,4 @@ color: #8fe74f;
     -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
     background-color: #ff8400;
 }
+
