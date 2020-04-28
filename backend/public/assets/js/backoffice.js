@@ -1,15 +1,126 @@
 let app = {
 
   //WARNING BIEN MODIFIER EN PROD
-  //apiBaseURL: 'http://localhost:8001/',
+  //apiBaseURL: 'http://localhost:8000/',
   apiBaseURL: 'https://www.listeat.io:8080/',
   // Méthode executée au lancement de l'application
   init: function () {
     //console.log('init');
 
     app.initMap();
-    app. webSocket();
+    app.webSocket();
+    app.addAllEventListeners();
+    
+  },
 
+  addAllEventListeners: function() {
+    console.log('coucou');
+    // On récupère l'élément <select> des jeux vidéo
+    let selectElement = document.getElementById('bouton_service');
+    // On ajoute l'écouteur pour l'event "change"
+    selectElement.addEventListener('click', app.handleSubmitCheck);
+  },
+
+  handleSubmitCheck: function(evt) {
+    app.spine1();
+    setTimeout(app.spine2, 700);
+    setTimeout(app.spine3, 1200);
+    setTimeout(app.spine4, 1400);
+    setTimeout(app.spine5, 1900);
+    setTimeout(app.spine6, 2100);
+    setTimeout(app.spine7, 2500);
+
+    
+    // https://developer.mozilla.org/fr/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling
+   
+    let fetchOptions = {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        // les données doivent être envoyées dans un format
+        // spécifique pour que Lumen arrive à les lire
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+    };
+
+    fetch('https://www.listeat.io:8080/back/office/test', fetchOptions)
+    .then(app.convertJSONtoJS)
+    .then(function(jsonResponse){
+      console.log(jsonResponse);
+      if(jsonResponse[0]['login'] == true){
+        document.getElementById('login').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('login').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+
+      if(jsonResponse[1]['ticket_add'] == true){
+        document.getElementById('ticket_add').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('ticket_add').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+
+      if(jsonResponse[2]['ticket_edit'] == true){
+        document.getElementById('ticket_edit').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('ticket_edit').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+
+      if(jsonResponse[3]['restaurant_show'] == true){
+        document.getElementById('restaurant_show').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('restaurant_show').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+
+      if(jsonResponse[4]['restaurant_edit'] == true){
+        document.getElementById('restaurant_edit').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('restaurant_edit').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+
+      if(jsonResponse[5]['islogged'] == true){
+        document.getElementById('is_logged').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('is_logged').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+
+      if(jsonResponse[6]['logout'] == true){
+        document.getElementById('logout').className = "fas fa-bolt fa-1x ok pr-3";
+      }else{
+        document.getElementById('logout').className = "fas fa-bolt fa-1x bad pr-3";
+      }
+    });
+  },
+
+  spine1: function(){
+    document.getElementById('login').className = "spinner-border spinner-border-sm spiner";
+  },
+  spine2: function(){
+    document.getElementById('ticket_add').className = "spinner-border spinner-border-sm spiner";
+  },
+  spine3: function(){
+    document.getElementById('ticket_edit').className = "spinner-border spinner-border-sm spiner";
+  },
+  spine4: function(){
+    document.getElementById('restaurant_show').className = "spinner-border spinner-border-sm spiner";
+  },
+  spine5: function(){
+    document.getElementById('restaurant_edit').className = "spinner-border spinner-border-sm spiner";
+  },
+  spine6: function(){
+    document.getElementById('is_logged').className = "spinner-border spinner-border-sm spiner";
+  },
+  spine7: function(){
+    document.getElementById('logout').className = "spinner-border spinner-border-sm spiner";
+  },
+
+  convertJSONtoJS: function (response) {
+    //console.log(response);
+    if (!response.ok) {
+      throw "Erreur";
+    }
+    return response.json();
   },
 
   webSocket: function(){

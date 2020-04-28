@@ -2,6 +2,8 @@
 
 namespace App\Controller\Api;
 
+
+use App\Service\StatusService;
 use App\Repository\UserRepository;
 use App\Repository\TicketRepository;
 use App\Repository\CustomerRepository;
@@ -27,6 +29,7 @@ class BackOfficeController extends AbstractController
      */
     public function Getinformation(UserRepository $userRepository ,TicketRepository $ticketRepository, CustomerRepository $customerRepository)
     {
+
         $datas =   [
             'controller_name' => 'DashController',
             'waiting' =>  $ticketRepository->findWaiting(),
@@ -37,8 +40,21 @@ class BackOfficeController extends AbstractController
             'coversNb' => $ticketRepository->countCovers()
         ];
 
- 
-        return $this->json ($datas, 200, []);
+        return $this->json($datas, 200, []);
        
     }
+
+      /**
+     * @Route("/back/office/test", name="back_office_test", methods={"GET"})
+     */
+    public function Gettest(UserRepository $userRepository ,TicketRepository $ticketRepository, CustomerRepository $customerRepository)
+    {
+
+        $datas = StatusService::test();
+
+
+        return $this->json($datas, 200, []);
+       
+    }
+
 }

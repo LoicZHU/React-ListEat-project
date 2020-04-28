@@ -82,3 +82,38 @@ color: #8fe74f;
     background-color: #ff8400;
 }
 
+.container__test{
+    background-color: rgba(0, 0, 0, 0.671);
+    color: white;
+    margin: 0;
+    padding-top: 1.2rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    padding-left: 1.2rem;
+    border:1px solid rgba(0, 0, 0, 0.671);
+    font-family: 'Audiowide', cursive;
+    
+    
+}
+
+.container__test  p{
+    margin: 0;
+    
+}
+
+.spiner{
+    margin: 0.4rem;
+    margin-top: 0.8rem;
+    margin-left: 0.1rem;
+    margin-right: 7px;
+ 
+
+}
+
+.bad{
+    color: crimson;
+}
+
+.ok{
+    color: yellowgreen;
+}
