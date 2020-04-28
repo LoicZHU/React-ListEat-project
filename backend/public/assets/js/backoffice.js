@@ -5,7 +5,7 @@ let app = {
   apiBaseURL: 'https://www.listeat.io:8080/',
   // Méthode executée au lancement de l'application
   init: function () {
-    console.log('init');
+    //console.log('init');
 
     app.initMap();
     app. webSocket();
@@ -27,7 +27,7 @@ let app = {
 
     const eventSource = new EventSource(url);
 
-    console.log('Client démarré!');
+    //console.log('Client démarré!');
     // Ce callback sera appelé à chaque réception de message
     //A toi sylvain de le tuner
     eventSource.onmessage = function(event) {
@@ -48,8 +48,8 @@ let app = {
       .then(
         function (jsonResponse) {
 
-          console.log(jsonResponse);
-          console.log(`Reçu un message avec l\'ID ${event.lastEventId}`);
+          //console.log(jsonResponse);
+          //console.log(`Reçu un message avec l\'ID ${event.lastEventId}`);
 
           const details = JSON.parse(event.data);
 

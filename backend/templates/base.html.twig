@@ -9,37 +9,28 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Audiowide|Orbitron&display=swap" rel="stylesheet">
 
   <!-- CSS Files -->
   <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/now-ui-dashboard.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-</head>
+  <link rel="icon" type="image/icone" href="{{ asset('images/logo.ico') }}">
+
 
 
         {% block stylesheets %}{% endblock %}
     </head>
 
-
-
-
-
-
-
-
-
     <body>
 
     <div class="wrapper">
     <div class="sidebar" data-color="yellow">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    -->
+     
       <div class="logo">
      
-     <img src="{{asset('images/LogoListEat.png')}}">
-          Admin
+     <a href="https://listeat.io"><img src="{{asset('images/LogoListEat.png')}}"></a>
+          <span class="admin">Admin</span>
     
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
@@ -106,6 +97,7 @@
         </div>
       </nav>
       <!-- End Navbar -->
+       {% block subnav %}{% endblock %}
       
         <div class="panel-header panel-header-sm">
 
@@ -126,7 +118,12 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
  <script src="{{ asset('assets/js/now-ui-dashboard.min.js?v=1.5.0') }}" type="text/javascript"></script>
 
+
+{% if app.request.get('_route') == 'backend_dash'%}
  <script src="{{ asset('assets/js/backoffice.js') }}"></script>
+{% endif %}
+
+
 
         {% block javascripts %}{% endblock %}
     </body>

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}ListEat admin{% endblock %}
 
 {% block body %}
 
 
-    </div>
+   </div>
         <div class="content">
          {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">User</h4>
+                            <h4 class="card-title"><span class="admin">liste clients</span></h4>
                         </div>
                         
                         <div class="card-body">
@@ -26,19 +26,19 @@
                                 <table class="table">
                                     <thead class=" text-primary">
                                     <th>
-                                        Id
+                                        #
                                     </th>
                                     <th>
-                                        First name
+                                        Prénom
                                     </th>
                                     <th>
-                                        Last name
+                                        Nom
                                     </th>
                                     <th>
-                                        restaurant
+                                        Restaurant
                                     </th>
                                     <th class="text-right">
-                                        email
+                                        Email
                                     </th>
                                     </thead>
                                     <tbody>
@@ -54,7 +54,7 @@
                                         {{ user.lastName }}
                                         </td>
                                         <td>
-                                        {{ user.restaurant.name }}
+                                        {{ user.role.name }}
                                         </td>
                                         <td class="text-right">
                                         {{ user.email }}
@@ -71,8 +71,9 @@
                                             {# Modification (surcharge) de la méthode HTTP #}
                                             <input type="hidden" name="_method" value="DELETE" />
 
-                                             <button ype="submit" title="Delete"><i class="fa fa-trash"></i></button>
+                                            <button ype="submit" title="Delete"><i class="fa fa-trash"></i></button>
                                         </form>
+                        
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -84,6 +85,5 @@
                 </div>
             </div>
         </div>
-
 
 {% endblock %}

@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}ListEat admin{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    <h1><span class="admin">Edit User<span></h1>
 
 
 </div>
@@ -14,7 +14,7 @@
                         <div class="card-header">
 
 
-    <h1>Modifier utilisateur</h1>
+    <h1>Modifier {{user.email}}</h1>
 
     {{ include('backend/user/_form.html.twig', {'button_label': 'Update'}) }}
 

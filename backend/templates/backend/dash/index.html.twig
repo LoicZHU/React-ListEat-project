@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashController!{% endblock %}
+{% block title %}ListEat Dashboard{% endblock %}
 
 {% block body %}
 
 
 
     </div>
+                     
         <div class="content">
-
+                        
             <div id="map" class="container__map">
                 <!-- Ici s'affichera la carte -->
             </div>
@@ -80,7 +81,8 @@
                 </div>
             </div>
 
-            <script src="https://maps.google.com/maps/api/js?key=AIzaSyAnC8-HtRMV3wBgYeSogDMYWtD-zYRTuRU" type="text/javascript"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnC8-HtRMV3wBgYeSogDMYWtD-zYRTuRU" type="text/javascript"></script>
 	
+    {% block javascripts %}{% endblock %}
 		     
             {% endblock %}
