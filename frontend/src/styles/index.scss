@@ -3,7 +3,11 @@
 
 
 body {
-  font-family: $title-font !important;
+  font-family: $text-font !important;
+
+  h1, h2, h3 {
+    font-family: $title-font !important;
+  }
 
   input {
     max-height: 40px !important;

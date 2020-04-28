@@ -4,7 +4,7 @@
   margin: 0;
 
   p {
-    line-height: 1.2em !important;
+    line-height: 1.4em !important;
   }
 
   // top
@@ -50,16 +50,20 @@
       justify-content: center;
       align-items: center;
 
-      p {
+      h1 {
         bottom: 2rem;
         text-align: left;
         color: white;
         padding: 1.25rem;
         padding-top: 0;
         width: 90%;
-        font-size: 2em;
+        font-size: 2.3em !important;
         font-weight: bold;
         text-shadow: $dark-color 0px 0px 10px;        
+      }
+
+      p {
+        color: #fff;
       }
 
       button {
@@ -86,6 +90,10 @@
       text-align: center;
       line-height: 1.2em;
       margin: 20px;
+      text-decoration: underline;
+      text-decoration-color: $primary-color;
+      font-family: $title-font;
+      font-size: 1.7em;
     }
 
     &__article {
@@ -97,19 +105,22 @@
       padding: 10px;
       width: 80%;
 
-      h1 {
+      h2 {
         text-transform: uppercase;
         display: inline-block;
-        font-size: 1.25em;
+        font-size: 1.4em;
         font-weight: bold;
-        text-decoration: underline;
-        text-decoration-color: $primary-color;
         margin-bottom: 1em;
         line-height: 1.2em;
       }
 
       p {
         text-align: left;
+
+        span {
+          color: $primary-color;
+          font-weight: bold;
+        }
       }
     }
   }
@@ -308,7 +319,7 @@
 
           .home__top__slogan{
             width: 70%;
-            p {
+            h1 {
             text-align: center !important;
             padding-bottom: 0;
             }
@@ -348,6 +359,8 @@
       #arguments-title {
         padding-bottom: 60px;
         color: $dark-color;
+        font-family: $title-font;
+        font-size: 2em;
       }
 
       .content {
@@ -366,13 +379,13 @@
         padding: 0 !important;
         width: 30%;
 
-        h1 {
+        h2 {
           text-align: left;
           text-transform: uppercase;
-          font-size: 1.25em;
+          font-size: 1.5em !important;
           font-weight: bold;
-          text-decoration: underline;
-          text-decoration-color: $primary-color;
+          // text-decoration: underline;
+          // text-decoration-color: $primary-color;
           margin-bottom: 1em;
           color: $dark-color;
         }

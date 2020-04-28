@@ -107,10 +107,14 @@
       margin: 20px auto 10px;
     }
   }
+
+  .actual-pass-info {
+    display: block !important;
+  }
+
 }
 
 @media (min-width: $mobile-breakpoint) { 
-
 
   .profile-container {
     flex-direction: row;
@@ -132,6 +136,11 @@
   .qr-container {
     width: 30% !important;
     order: 2 !important;
+  }
+
+  .actual-pass-info {
+    display: block !important;
+    width: 100%;
   }
 
 }

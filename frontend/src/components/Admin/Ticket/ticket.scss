@@ -33,15 +33,35 @@ li.ticket {
   }
 }
 
-
-@media (min-width: $mobile-breakpoint) { 
+@media (min-width: $mobile-breakpoint) and (max-width: 1290px) {
   li.ticket {
     height: 40px;
     display: flex;
     align-items: center;
     border: 2px $light-color solid;
     padding: 1.5em 1em;
-    font-size: 1.8em;
+    font-size: 1.2em !important;
+    position: relative;
+  
+    .fa-user {
+      position: absolute;
+      left: 80%;
+  
+      span {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1290px) { 
+  li.ticket {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 2px $light-color solid;
+    padding: 1.5em 1em;
+    font-size: 1.8em !important;
     position: relative;
 
     .fa-user {

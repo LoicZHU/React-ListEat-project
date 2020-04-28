@@ -12,9 +12,9 @@ const Top = ({ logged, restaurantName }) => {
     <section className="home__top" style={{ backgroundImage:`url(${background})` }}>
       <div id="layer-opacity">
         <div className="home__top__slogan">
-          <p>
+          <h1>
             L'attente n'aura jamais été aussi agréable.
-          </p>
+          </h1>
           <p id="desktop-slogan-description">Optimisez vos flux, gagnez du temps ! Pour en savoir plus, vous pouvez consulter notre <a href="/faq">rubrique Aide</a>. </p>
           <button
             className="button-alt mobile"
