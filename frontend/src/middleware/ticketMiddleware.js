@@ -21,6 +21,10 @@ import {
   handleClearModalForm,
   // fetchNewCustomerTicket,
   updateCurrentTicket,
+  FETCH_TICKET_DATA_TO_CANCEL,
+  saveTicketInfoToCancel,
+  CANCEL_TICKET,
+  displayCancelConfirmation,
   // saveSubscribeTicketSubscription,
 } from 'src/actions/ticket';
 
@@ -107,7 +111,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
     case SEND_TICKET_VALIDATION:
       const ticktId = store.getState().tickets.ticketId;
-      
+
       axios({
         method: 'put',
         url: `${baseUrl}/api/tickets/${ticktId}`,
@@ -150,6 +154,56 @@ const ticketMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.warn(error.response);
           console.log('send ticket validation');
+        });
+
+      next(action);
+      break;
+
+    case FETCH_TICKET_DATA_TO_CANCEL:
+      const hashedTicketId = window.location.pathname.match((new RegExp('tickets/' + "(.*)" + '/customer')))[1];
+
+      axios({
+        method: 'post',
+        url: `${baseUrl}/api/decrypt/tickets`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          ticket: hashedTicketId,
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          console.log(response);
+          store.dispatch(saveTicketInfoToCancel(response.data.restaurant.name, response.data.id, response.data.customer.lastName, response.data.customer.firstName, response.data.coversNb, response.data.estimatedEntryTime, response.data.estimatedWaitingTime));
+        })
+        .catch((error) => {
+          console.warn(error.response);
+        });
+
+      next(action);
+      break;
+
+    case CANCEL_TICKET:
+      const hashedTicktId = store.getState().tickets.ticketInfoToCancel.ticketId;
+
+      axios({
+        method: 'put',
+        url: `${baseUrl}/api/tickets/${hashedTicktId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          validation: 'cancel',
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          console.log(response);
+          store.dispatch(displayCancelConfirmation());
+        })
+        .catch((error) => {
+          console.warn(error.response);
         });
 
       next(action);

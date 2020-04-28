@@ -18,6 +18,8 @@ import {
   SAVE_TICKET_STATUS,
   // CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,
 
+  SAVE_TICKET_INFO_TO_CANCEL,
+  DISPLAY_CANCEL_CONFIRMATION,
 } from 'src/actions/ticket';
 
 import { SAVE_CHANGED_SERVICE_STATUS } from 'src/actions/user';
@@ -75,6 +77,19 @@ const initialState = {
 
   ticketStatus: '',
   isTicketValidate: '',
+
+  // client : ticket info (cancellation by mail)
+  ticketInfoToCancel: {
+    restaurantName: '',
+    ticketId: '',
+    lastName: '',
+    firstName: '',
+    cutlery: '',
+    estimatedEntryTime: '',
+    estimatedWaitingTime: '',
+    ticketInfoLoaded: false,
+    displayCancelConfirmation: false,
+  },
 };
 
 // reducer
@@ -218,6 +233,31 @@ const ticketsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         restaurantServiceStatus: action.newStatusService,
+      };
+
+    case SAVE_TICKET_INFO_TO_CANCEL:
+      return {
+        ...state,
+        ticketInfoToCancel: {
+          ...state.ticketInfoToCancel,
+          restaurantName: action.restaurantName,
+          ticketId: action.ticketId,
+          lastName: action.lastName,
+          firstName: action.firstName,
+          cutlery: action.cutlery,
+          estimatedEntryTime: action.estimatedEntryTime,
+          estimatedWaitingTime: action.estimatedWaitingTime,
+          ticketInfoLoaded: true,
+        },
+      };
+
+    case DISPLAY_CANCEL_CONFIRMATION:
+      return {
+        ...state,
+        ticketInfoToCancel: {
+          ...state.ticketInfoToCancel,
+          displayCancelConfirmation: true,
+        },
       };
 
     default: return state;

@@ -1,0 +1,21 @@
+@import 'src/styles/index.scss';
+
+h1 {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 0 auto .2em auto;
+  color: $primary-color;
+  width: 30%;
+  min-width: 300px;
+  line-height: 1.2em;
+}
+
+#cancel-confirmation {
+  background-color: $success-background;
+  padding: 1em;
+  border-radius: 5px;
+  color: $success-color;
+  margin: 60px 0;
+  font-size: .9em;
+  line-height: 1.4em;
+}
