@@ -4,7 +4,7 @@
   min-width: 250px;
   max-width: 800px;
   width: 100%;
-  margin: 5em auto;
+  margin: 5em auto 10em !important;
   margin-bottom: 1em;
   padding: 0 30px;
 
@@ -12,7 +12,7 @@
     text-align: center;
     font-size: 1.25em;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 2em;
   }
 
   p, ul {

@@ -46,6 +46,7 @@ const Admin = ({
   modalErrors,
   emailError,
   mobileClockClickState,
+  handleClearModalForm,
 
 }) => {
   useEffect(() => {
@@ -132,10 +133,12 @@ const Admin = ({
     setOpen(false);
     handleModalTicketCancel();
     handleShowModalTicketForm();
+    handleClearModalForm();
   };
 
   const handleOnAfterClose = () => {
     handleShowModalTicketForm();
+    handleClearModalForm();
   };
 
   const handleModalErrors = () => {
@@ -268,10 +271,11 @@ const Admin = ({
                 <span className="covers-title">Nombre de couverts&nbsp;:</span>
                 <span className="covers">{tickets.length > 0 ? currentTicket.coversNb : ''}<i className="fa fa-cutlery" aria-hidden="true"></i></span>
                 
-                <div className="add-ticket">
+                {tickets.length > 0 && <div className="add-ticket">
                   <span id="confirm" onClick={handleConfirm}>Placé</span>
                   <span id="cancel" onClick={handleCancel}>Absent</span>
-                </div>
+                
+                </div>}
               </div>
             </div>
           </div>
@@ -557,7 +561,7 @@ const Admin = ({
             </ul>
 
             <div className="tickets-count">
-              {(status === 0) && <span id="service-off">Service à l'arrêt</span>}
+              {(status === 0) && <span id="service-off">Service suspendu</span>}
               <span id="mobile-time-button" onClick={handleMobileClockButtonClick}><i className="fa fa-clock-o" aria-hidden="true"></i></span>
               {(status === 1) && <span id="add-ticket" onClick={openModal}>Ajouter un ticket</span>}
 
