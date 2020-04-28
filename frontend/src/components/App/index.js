@@ -24,6 +24,7 @@ import Faq from 'src/containers/Faq';
 import Signup from 'src/containers/Signup';
 import RestaurantProfile from 'src/containers/RestaurantProfile';
 import NotFound from 'src/components/NotFound';
+import CancellationByMail from 'src/containers/CancellationByMail';
 
 // == Import
 import './styles.css';
@@ -157,6 +158,11 @@ const App = ({
           <Route path="/tickets/cancellation" exact>
             {!isTicketValidate && <Cancellation />}
             {isTicketValidate === '' && <Redirect to={`/restaurant/${localStorage.getItem('restaurantUrlId')}/tickets/add`} />}
+          </Route>
+
+          {/* Client : Cancellation of ticket by mail */}
+          <Route path="/tickets/:id/customer-cancellation" exact>
+            <CancellationByMail />
           </Route>
 
           <Route path="*">

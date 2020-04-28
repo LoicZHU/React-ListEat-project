@@ -22,6 +22,10 @@ export const SHOW_MODAL_EMAIL_ERROR = 'SHOW_MODAL_EMAIL_ERROR';
 export const SHOW_MODAL_ERRORS = 'SHOW_MODAL_ERRORS';
 export const CLEAR_MODAL_FORM = 'CLEAR_MODAL_FORM';
 export const FETCH_NEW_CUSTOMER_TICKET = 'FETCH_NEW_CUSTOMER_TICKET';
+export const FETCH_TICKET_DATA_TO_CANCEL = 'FETCH_TICKET_DATA_TO_CANCEL';
+export const SAVE_TICKET_INFO_TO_CANCEL = 'SAVE_TICKET_INFO_TO_CANCEL';
+export const CANCEL_TICKET = 'CANCEL_TICKET';
+export const DISPLAY_CANCEL_CONFIRMATION = 'DISPLAY_CANCEL_CONFIRMATION';
 
 // export const CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET = 'CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET';
 
@@ -141,3 +145,34 @@ export const handleClearModalForm = () => ({
 // export const changeCheckingTemporarySubscribedTicket = () => ({
 //   type: CHANGE_CHECKING_TEMPORARY_SUBSCRIBED_TICKET,
 // });
+
+export const fetchTicketDataToCancel = () => ({
+  type: FETCH_TICKET_DATA_TO_CANCEL,
+});
+
+export const saveTicketInfoToCancel = (
+  restaurantName,
+  ticketId,
+  lastName,
+  firstName,
+  cutlery,
+  estimatedEntryTime,
+  estimatedWaitingTime,
+) => ({
+  type: SAVE_TICKET_INFO_TO_CANCEL,
+  restaurantName,
+  ticketId,
+  lastName,
+  firstName,
+  cutlery,
+  estimatedEntryTime,
+  estimatedWaitingTime,
+});
+
+export const cancelTicket = () => ({
+  type: CANCEL_TICKET,
+});
+
+export const displayCancelConfirmation = () => ({
+  type: DISPLAY_CANCEL_CONFIRMATION,
+});
