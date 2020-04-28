@@ -31,12 +31,14 @@ class Ticket
      * @Assert\Type(type="integer")
      * @Assert\Positive
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $coversNb;
 
     /**
      * @ORM\Column(type="smallint")
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $status;
 
@@ -67,12 +69,14 @@ class Ticket
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $estimatedWaitingTime;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $estimatedEntryTime;
 

@@ -28,6 +28,7 @@ class Restaurant
      * @ORM\Column(type="integer")
      * @Groups("restaurant_get")
      * @Groups("restaurant_decrypt")
+     * @Groups("ticket_decrypt")
      */
     private $id;
 
@@ -44,6 +45,7 @@ class Restaurant
      * @Groups("restaurant_get")
      * @Groups("restaurant_decrypt")
      * @Groups("restaurant_backoffice")
+     * @Groups("ticket_decrypt")
      */
     private $name;
 

@@ -67,6 +67,11 @@ URL|Contrôleur|Méthode|Paramètres|Description|
 >	"validation": "cancel"
 >}
 -------------------------------------------
+### /api/decrypt/tickets **POST**
+
+> {"ticket": "**MA CHAINE A DECRYPTER**"}
+
+-------------------------------------------
 ### /forgotten-password **POST**
 
 > {"username": "blabla@bla.com"}

@@ -19,22 +19,21 @@ use Symfony\Component\Messenger\MessageBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class TicketController extends AbstractController
 {
 
     /**
-     * @Route("/api/decrypt/tickets", name="api_restaurant_decrypt_tickets", methods={"POST"})
+     * @Route("/api/decrypt/tickets", name="api_tickets_decrypt", methods={"POST"})
      */
     public function decryptId(Request $request, TicketRepository $ticketRepository)
     {
         $data = json_decode($request->getContent());
-
+        
         $ticketId = CryptoService::decrypt($data->ticket);
-        
+
         $ticket = $ticketRepository->find($ticketId);
-        
+
         return $this->json($ticket, 200, [], ['groups' => 'ticket_decrypt']);
     }
 
@@ -145,13 +144,13 @@ class TicketController extends AbstractController
             define('PUBLIC_JWT', $_ENV['MERCURE_JWT_TOKEN']);
 
             $topic = 'ticket';
-            $id = $restaurant->getId();
+            $restaurantId = $restaurant->getId();
             //We put $ticket objet on
             $data = $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get']);
     
             $postData = http_build_query([
                 // we stay on topic
-                'topic' => 'https://www.listeat.io/'.$topic."/".$id,
+                'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantId,
                 'data' => json_encode([
                     'eventName' => $data,
                 ]),

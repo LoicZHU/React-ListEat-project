@@ -8,7 +8,6 @@ use App\Service\CryptoService;
 use App\Service\GeocodingService;
 use App\Repository\UserRepository;
 use App\Repository\RestaurantRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,44 +52,44 @@ class RestaurantController extends AbstractController
      */
     public function edit($id, Request $request, ?Restaurant $restaurant, UserPasswordEncoderInterface $encoder, UserRepository $userRepository,RestaurantRepository $restaurantRepository , DenormalizerInterface $denormalizer, ValidatorInterface $validator, \Swift_Mailer $mailer)
     {
-        //If the restaurant didn't exist we send back a error
+        // If the restaurant does not exist we send back an error
         if($request->get('restaurant') === null){
             return $this->json( Response::HTTP_NOT_FOUND);
         }
 
-        // I decode the json
+        // Decodes the json
         $data = json_decode($request->getContent());
 
-        //We get an array of user
+        // We get an array of users
         $user = $userRepository->findBy(['restaurant' => $restaurant]);
-        //we check the current password of user password on BDD 
-        $CurrentPasswordVerifie = password_verify($data->currentpassword , $user[0]->getpassword());
+        // We check the current password of the user in the database 
+        $currentPasswordVerify = password_verify($data->currentpassword , $user[0]->getpassword());
 
-        //if the currentPassword is invalid we send a errors message
-        if($CurrentPasswordVerifie == false){
+        // If the current password is invalid we send an error message
+        if($currentPasswordVerify == false){
             return $this->json(['message' => 'Le mot de passe est invalide.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
      
         $messages = [];
        
-        //if json argument is empty we send back a error
+        // If json argument is empty we send back an error
         if(!isset($data->user) && !isset($data->restaurant)){
             return $this->json(['message' => 'Aucun champs à mettre à jour.'], Response::HTTP_I_AM_A_TEAPOT);
         }
         //dd($data->restaurant);
-        //if the argument of restaurant is setup we create a class of restaurant
+        //if the argument of restaurant is set we create a class of restaurant
         if(isset($data->restaurant)){
           
             $restaurant = $restaurantRepository->find($id);
             $Newdata = $denormalizer->denormalize($data->restaurant, Restaurant::class);
             $restaurant->setUpdatedAt(new \DateTime);
         }else{
-            //else we create a empty new class of restaurant
+            // else we create a new empty class of restaurant
             $Newdata = new Restaurant;
         }
 
        
-        //if the argument of user is setup we create a class of user
+        // if the argument of user is set we create a class of user
         if(isset($data->user)){
             $NewdatasUser = $denormalizer->denormalize($data->user, User::class);
             $user[0]->setUpdatedAt(new \DateTime);
@@ -247,7 +246,6 @@ class RestaurantController extends AbstractController
 
      /**
      * @Route("/api/partner/{id<\d+>}/status", name="api_restaurant_status", methods={"PUT"})
-     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function editStatus($id, Request $request, RestaurantRepository $restaurantRepository)
     {
@@ -262,12 +260,6 @@ class RestaurantController extends AbstractController
 
         if (!$restaurant) {
            return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
-        }
-
-        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
-        $user = $this->getUser();
-        if ($user->getRestaurant()->getId() != $id) {
-            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         if ($data->status == "on") {
@@ -289,7 +281,6 @@ class RestaurantController extends AbstractController
 
     /**
      * @Route("/api/partner/{id<\d+>}/eating-time", name="api_restaurant_eating_time", methods={"PUT"})
-     * @IsGranted("ROLE_RESTAURATEUR")
      */
     public function editEatingTime($id, Request $request, RestaurantRepository $restaurantRepository)
     {
@@ -304,12 +295,6 @@ class RestaurantController extends AbstractController
 
         if (!$restaurant) {
            return $this->json(['message' => 'Ce restaurant n\'existe pas.'], Response::HTTP_NOT_FOUND);
-        }
-
-        // checks if the connected partner is the same as the owner of the restaurant on which he/she wants to perform an action
-        $user = $this->getUser();
-        if ($user->getRestaurant()->getId() != $id) {
-            return $this->json(['message' => 'Ce n\'est pas votre restaurant.'], Response::HTTP_BAD_REQUEST);
         }
 
         $currentAverageEatingTime = $restaurant->getAverageEatingTime();

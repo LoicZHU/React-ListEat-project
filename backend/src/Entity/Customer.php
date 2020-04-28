@@ -21,6 +21,7 @@ class Customer
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $id;
 
@@ -28,6 +29,7 @@ class Customer
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $lastName;
 
@@ -35,6 +37,7 @@ class Customer
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
      * @Groups("tickets_get")
+     * @Groups("ticket_decrypt")
      */
     private $firstName;
 
