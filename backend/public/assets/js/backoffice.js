@@ -102,12 +102,23 @@ let app = {
         for (let i = 0; i < jsonResponse.length; i++) {
           var marker = new google.maps.Marker({
             // A chaque boucle, la latitude et la longitude sont lues dans le tableau
+            animation: google.maps.Animation.DROP,
             position: { lat: parseFloat(jsonResponse[i]['latitude']), lng: parseFloat(jsonResponse[i]['longitude']) },
             // On en profite pour ajouter une info-bulle contenant le nom de la ville
             title: `restaurant: ${jsonResponse[i]['name']}`,
             map: map
           });
+          
         }
+
+        function toggleBounce() {
+          if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+          } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+          }
+        }
+        
       }
     );
   }
