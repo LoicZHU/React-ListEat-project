@@ -219,13 +219,13 @@ const Admin = ({
 
    // websocket to place a event listener on the topic 'ticket' with the current restaurantId
    var topicDelete = 'ticket-delete';
-   const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
-   url.searchParams.append('topic', `https://www.listeat.io/${topicDelete}/${restaurantId}`);
-   const eventSource = new EventSource(url);
+   const urlDelete = new URL('https://www.listeat.io/hub/.well-known/mercure');
+   urlDelete.searchParams.append('topic', `https://www.listeat.io/${topicDelete}/${restaurantId}`);
+   const eventSourceDelete = new EventSource(urlDelete);
  
    // when a ticket is deleted in the DB, the server pushes a message to the front
    // then we update the ticket list 
-   eventSource.onmessage = function(event) {
+   eventSourceDelete.onmessage = function(event) {
         fetchTicketsData();
    };
 
