@@ -40,7 +40,7 @@ const CancellationByMail = ({
           <p>Nom : <span>{lastName}</span></p>
           <p>Prénom : <span>{firstName}</span></p>
           <p>Nombre de couverts : <span>{cutlery}</span></p>
-          <p>Temps d'attente estimée : <span>{estimatedWaitingTime}</span></p>
+          <p>Temps d'attente estimée : <span>{estimatedWaitingTime}</span>&nbsp;minutes</p>
           <p>Heure d'entrée estimée :
             <span> {estimatedEntryTime ? estimatedEntryTime.substring(
               estimatedEntryTime.indexOf('T') + 1,

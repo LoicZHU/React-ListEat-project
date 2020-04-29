@@ -150,12 +150,14 @@ const Admin = ({
   };
 
   const handleModalTicketValidation = () => {
-    if ((!firstName.length > 0 || !lastName.length > 0 || !cutlery.length > 0)) {
+    if ((!firstName.length > 0 || !lastName.length > 0 || cutlery.length === 0 || cutlery == "0" )) {
       handleModalErrors();
     }
+
     else if ((email.length > 0 && !email.includes('@')) || (email.length > 0 && !email.includes('.'))) {
       handleModalEmailError();
     }
+
     else {
       handleShowModalTicketValidation();
     }

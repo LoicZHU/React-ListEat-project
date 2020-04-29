@@ -230,7 +230,7 @@ const Signup = ({
           required
         />
 
-        {isPassTooShort && scrollToPassInput(passInput) && <span id="password-error">Le mot de passe doit contenir au moins 6 catactères.</span>}
+        {isPassTooShort && scrollToPassInput(passInput) && <span id="password-error">Le mot de passe doit contenir au moins 6 caractères.</span>}
 
         <label className="signup-label" htmlFor="passwordConfirmation">Confirmation du mot de passe</label>
         <input
