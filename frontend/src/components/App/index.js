@@ -25,6 +25,7 @@ import Signup from 'src/containers/Signup';
 import RestaurantProfile from 'src/containers/RestaurantProfile';
 import NotFound from 'src/components/NotFound';
 import CancellationByMail from 'src/containers/CancellationByMail';
+import Team from 'src/components/Team';
 
 // == Import
 import './styles.css';
@@ -84,6 +85,13 @@ const App = ({
           <Route path="/data-protection" exact>
             <Header />
             <Data />
+            <Footer />
+          </Route>
+
+          {/* Team */}
+          <Route path="/team" exact>
+            <Header />
+            <Team />
             <Footer />
           </Route>
 

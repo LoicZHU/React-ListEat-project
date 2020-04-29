@@ -298,7 +298,7 @@ const Admin = ({
 
           <div id="admin-bottom-section" style={mobileClockClickState == 'none' ? {display: 'none'} : {display: 'flex'}}>
             <div className="first">
-              <h3>Temps d'attente actuel&nbsp;:</h3>
+              <h3>Temps de repas moyen&nbsp;:</h3>
 
               <div className="estimate-waiting-time">
                 {(status === 1) && <span id="less-time" onClick={handleRemoveClick} />}
