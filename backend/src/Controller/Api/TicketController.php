@@ -196,7 +196,7 @@ class TicketController extends AbstractController
         $cryptedId = CryptoService::crypt($id);
         // /tickets/id/customer-cancellation
         //////////////////////////////////// TODO RECTIFICATION SERVER HOSTING//////////////////////////////////////
-        $routeCancel = 'https://www.listeat.io/tickets/'.$cryptedId.'/customer-cancellation';
+        $routeCancel = 'http://www.listeat.io/tickets/'.$cryptedId.'/customer-cancellation';
     
          // Email sent to the customer to confirm the subscription to the waiting list
          $message = (new \Swift_Message('Information client ListEat'))
