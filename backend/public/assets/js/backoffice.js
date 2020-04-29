@@ -28,7 +28,7 @@ let app = {
     setTimeout(app.spine4, 1400);
     setTimeout(app.spine5, 1900);
     setTimeout(app.spine6, 2100);
-    setTimeout(app.spine7, 2500);
+    setTimeout(app.spine7, 2200);
 
     
     // https://developer.mozilla.org/fr/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling
