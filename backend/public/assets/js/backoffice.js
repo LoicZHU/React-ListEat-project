@@ -86,7 +86,9 @@ let app = {
       }
 
       if(jsonResponse[6]['logout'] == true){
-        document.getElementById('logout').className = "fas fa-bolt fa-1x ok pr-3";
+        setTimeout(function(){
+          document.getElementById('logout').className = "fas fa-bolt fa-1x ok pr-3";
+        }, 1600);
       }else{
         document.getElementById('logout').className = "fas fa-bolt fa-1x bad pr-3";
       }
