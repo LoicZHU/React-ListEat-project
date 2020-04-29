@@ -225,6 +225,65 @@ class TicketController extends AbstractController
             $ticket->setUpdatedAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+
+
+//// Sending deleted ticket To the Front By WebSocket///////////////////
+
+            // We asset token  
+            define('PUBLIC_JWT', $_ENV['MERCURE_JWT_TOKEN']);
+
+            $topic = 'ticket-delete';
+            $restaurantId = $restaurant->getId();
+            //We put $ticket objet on
+            $data = $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get']);
+    
+            $postData = http_build_query([
+                // we stay on topic
+                'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantId,
+                'data' => json_encode([
+                    'eventName' => $data,
+                ]),
+            ]);
+         
+                // we do a POST request to mercure
+                $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
+                    'method'  => 'POST',
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'Content-Security-Policy' => "upgrade-insecure-requests",
+                    'content' => $postData,
+                ]]));
+
+         
+            $postData = http_build_query([
+                // we stay on topic
+                'topic' => 'https://www.listeat.io/backoffice',
+                'data' => json_encode([
+                    'eventName' => 'new add ticket',
+                ]),
+            ]);
+
+            //Make function or service for send
+            // we do a POST request to mercure
+          
+                $r = file_get_contents($_ENV['MERCURE_PUBLISH_URL'], false, stream_context_create(['http' => [
+                    'method'  => 'POST',
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\nAuthorization: Bearer ".PUBLIC_JWT,
+                    'Content-Security-Policy' => "upgrade-insecure-requests",
+                    'content' => $postData,
+                ]]));
+        
+     ////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
             return $this->json(['message' => 'Votre inscription sur la liste d\'attente a bien été annulée.','ticketId' => $ticket->getId(), 'ticketStatus' => $ticket->getStatus()], Response::HTTP_OK);
         }
 
