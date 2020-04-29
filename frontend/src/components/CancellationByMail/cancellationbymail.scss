@@ -1,21 +1,43 @@
 @import 'src/styles/index.scss';
 
-h1 {
-  font-weight: bold;
-  font-size: 1.5em;
-  margin: 0 auto .2em auto;
-  color: $primary-color;
-  width: 30%;
-  min-width: 300px;
-  line-height: 1.2em;
-}
-
-#cancel-confirmation {
-  background-color: $success-background;
-  padding: 1em;
-  border-radius: 5px;
-  color: $success-color;
-  margin: 60px 0;
-  font-size: .9em;
-  line-height: 1.4em;
-}
+#cancellation-by-mail {
+  margin: 2em auto 1em auto;
+  max-width: 600px;
+  padding: 0 1em;
+  h1 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0 auto .2em auto;
+    color: $primary-color;
+    line-height: 1.2em;
+  }
+  h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  #cancel-infos {
+    margin: 2em auto;
+  }
+  #cancel-confirmation {
+    background-color: $success-background;
+    padding: 1em;
+    border-radius: 5px;
+    color: $success-color;
+    position: relative;
+    top: 20px;
+    margin-bottom: 1em !important;
+    font-size: .9em;
+    line-height: 1.4em;
+  }
+  button {
+    margin-top: 1em;
+  }
+  p:last-of-type {
+    margin: 1em auto;
+    font-weight: bold;
+  }
+  p:nth-of-type(5) {
+    margin-top: 1em;
+  }
+} 

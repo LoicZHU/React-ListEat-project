@@ -1,9 +1,7 @@
 // == Import npm
 import React, { useEffect } from 'react';
-
 // == Import
 import './cancellationbymail.scss';
-
 // == Composant
 const CancellationByMail = ({
   fetchTicketDataToCancel,
@@ -22,26 +20,22 @@ const CancellationByMail = ({
   useEffect(() => {
     fetchTicketDataToCancel();
   }, []);
-
   const handleCancel = () => {
     cancelTicket();
   };
-
   return (
     (ticketInfoLoaded && (
-      <main>
+      <main id="cancellation-by-mail">
         <h1>Annulation de ticket </h1>
         <h2>{restaurantName}</h2>
-
         {displayCancelConfirmation && (
-          <div>
-            <span id="cancel-confirmation">
+          <div id="cancel-confirmation">
+            <span>
               Merci, vous avez bien annulé votre ticket. A bientôt !
             </span>
           </div>
         )}
-
-        <div>
+        <div id="cancel-infos">
           <p>Numéro de ticket : <span>{ticketId}</span></p>
           <p>Nom : <span>{lastName}</span></p>
           <p>Prénom : <span>{firstName}</span></p>
@@ -54,12 +48,11 @@ const CancellationByMail = ({
             ) : ''}
             </span>
           </p>
-
           {/* status 1 = ticket default value */}
-          {status === 1 && (
+          {status === 1 && !displayCancelConfirmation && (
             <>
               <p>Pour annuler votre ticket, appuyez sur le bouton suivant :</p>
-              <button className="yes__button button" type="button" onClick={handleCancel}>Annuler</button>
+              <button className="yes__button button-alt" type="button" onClick={handleCancel}>Annuler</button>
             </>
           )}
           {/* status 2 = ticket canceled */}
@@ -69,6 +62,5 @@ const CancellationByMail = ({
     ))
   );
 };
-
 // == Export
 export default CancellationByMail;
