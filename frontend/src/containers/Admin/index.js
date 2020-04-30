@@ -77,7 +77,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleTicketSubscribe: () => {
     dispatch(modalTicketAdd());
-    console.log('je suis dans Admin Container, l71');
   },
 
   handleShowModalTicketForm: () => {
@@ -114,7 +113,6 @@ const mapDispatchToProps = (dispatch) => ({
 
   handleMobileClockClick: (newValue) => {
     dispatch(handleMobileClockClick(newValue));
-    console.log(newValue);
   }
 
 });

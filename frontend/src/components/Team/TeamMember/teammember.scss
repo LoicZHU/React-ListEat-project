@@ -1,0 +1,56 @@
+@import 'src/styles/_vars.scss';
+
+.team-member {
+  max-width: 22%;
+  text-align: center;
+  min-width: 250px;
+  position: relative;
+  margin: 0 .5em;
+
+  div#avatar {
+    width: 100%;
+    border-radius: 5px;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    border: none !important;
+
+    &:hover{
+      box-shadow: 0px 10px 13px rgb(0,0,0,.3);
+      transition: box-shadow .5s;
+    }
+  }
+
+  #techno-logo {
+    position: absolute;
+    left: 10px;
+    top: 260px;
+    max-width: 100px;
+    height: 20px; 
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    display: inline-block;
+    margin-top: 2em;
+  }
+
+  i {
+    margin-left: 10px;
+
+    &:hover{
+      color: #2867B2;
+      transition: color .4s;
+    }
+  }
+
+  span {
+    display: block;
+    margin-top: 1em;
+    font-style: italic;
+    margin-bottom: 80px !important;
+  }
+}

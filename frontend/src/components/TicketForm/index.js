@@ -37,7 +37,6 @@ const TicketForm = ({
   };
 
   if (errors && errors.field=='coversNb') {
-    console.log(errors.message);
   }
 
   return (

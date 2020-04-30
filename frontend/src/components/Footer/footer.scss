@@ -61,6 +61,19 @@ footer {
     background-color: $dark-color;
     color: #fff;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center !important;
+
+    span {
+        margin: 0 2em 0 2em;
+        line-height: 1.2em;
+
+        a {
+          text-decoration: underline;
+        }
+    }
   }
 }
 
@@ -76,7 +89,7 @@ footer {
     position: absolute !important;
     bottom: 0px !important;
     left: 0px !important;
-  
+
     #footer-first {
       display: flex;
       flex-direction: row;
@@ -124,6 +137,18 @@ footer {
       background-color: $dark-color;
       color: #fff;
       text-align: center;
+      justify-content: center;
+      align-items: center !important;
+      flex-direction: row !important;
+
+      span {
+        margin: 0 2em 0 2em !important;
+        line-height: 1.2em;
+
+        a {
+          text-decoration: underline;
+        }
+      }
     }
   }
 
