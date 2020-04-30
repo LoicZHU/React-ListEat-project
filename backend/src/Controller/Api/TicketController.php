@@ -113,7 +113,7 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/tickets/{id<\d+>}", name="api_tickets_edit", methods={"PUT"})
      */
-    public function edit($id, MessageBusInterface $bus, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
+    public function edit($id, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
