@@ -10,6 +10,18 @@
   flex-wrap: wrap; 
 }
 
+.team-member:first-of-type {
+  #avatar {
+  background-position: center -10px !important;
+  }
+}
+
+.team-member:nth-of-type(3) {
+  #avatar {
+  background-position: center -20px !important;
+  }
+}
+
 #hi-there {
   width: 80% !important;
   min-width: 250px;
@@ -18,6 +30,7 @@
   margin: 2em auto 5em auto !important;
 
   span {
+    font-size: 1em;
     line-height: 1.3em;
     display: block;
   }
