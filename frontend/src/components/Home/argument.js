@@ -13,7 +13,7 @@ const Argument = () => (
       <article className="home__argument__article">
         <h2>Fini le papier, gérez votre liste d’attente numériquement&nbsp;!</h2>
         <p>
-          Vous tenez une liste d’attente papier ? Notre application vous permet de la <span>gérer en ligne de façon très simple</span> : les clients scannent un QR code pour s’inscrire sur la liste d’attente de votre restaurant, que vous pourrez manipuler sur <span>tablette</span>, <span>p</span> ou <span>smartphone</span>.
+          Vous tenez une liste d’attente papier ? Notre application vous permet de la <span>gérer en ligne de façon très simple</span> : les clients scannent un QR code pour s’inscrire sur la liste d’attente de votre restaurant, que vous pourrez manipuler sur <span>tablette</span>, <span>PC</span> ou <span>smartphone</span>.
         </p>
       </article>
 
@@ -30,7 +30,7 @@ const Argument = () => (
           Victime de votre succès, vous ne prenez plus de réservations et la file devant votre restaurant semble interminable ? Grâce à la gestion numérique de votre liste d’attente, <span>vos clients ne sont plus obligés d’attendre devant votre restaurant</span>, gênant souvent les passants, décourageant parfois d’autres clients potentiels. Par ailleurs, vos clients peuvent mettre à profit le temps d’attente.
         </p>
       </article>
-      </div>
+    </div>
   </section>
 );
 
