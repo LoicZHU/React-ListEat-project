@@ -18,13 +18,13 @@ const Team = () => {
           <span><strong>Cette application web est le projet de fin de formation</strong> : nous avions un mois pour rédiger notre cahier des charges, cadrer notre projet, le développer et le mettre en ligne. Tout cela en partant de 0.</span>
         </div>
       <div id="team-container">
-        <TeamMember name="Liza Ta" role="Scrum Master" linkedinURL="https://www.linkedin.com/in/liza-t-xls/" avatar={AvatarLiza} tech={LogoSymfony}/>
-        <TeamMember name="Damien Hugueny" role="Lead dev back" linkedinURL="https://www.linkedin.com/in/damien-hugueny-717376194" avatar={AvatarDamien} tech={LogoSymfony}/>
-        <TeamMember name="Loïc Zhu" role="Lead dev front" linkedinURL="https://fr.linkedin.com/in/loiczhu" avatar={AvatarLoic} tech={LogoReact}/>
-        <TeamMember name="Sylvain Payet" role="Product Owner, Git Master" linkedinURL="https://www.linkedin.com/in/sylvainpayet" avatar={AvatarSylvain} tech={LogoReact}/>
+        <TeamMember name="Liza TA" role="Scrum Master" linkedinURL="https://www.linkedin.com/in/liza-t-xls/" avatar={AvatarLiza} tech={LogoSymfony}/>
+        <TeamMember name="Damien HUGUENY" role="Lead dev back, SysAdmin" linkedinURL="https://www.linkedin.com/in/damien-hugueny-717376194" avatar={AvatarDamien} tech={LogoSymfony}/>
+        <TeamMember name="Loïc ZHU" role="Lead dev front" linkedinURL="https://fr.linkedin.com/in/loiczhu" avatar={AvatarLoic} tech={LogoReact}/>
+        <TeamMember name="Sylvain PAYET" role="Product Owner, Git Master" linkedinURL="https://www.linkedin.com/in/sylvainpayet" avatar={AvatarSylvain} tech={LogoReact}/>
       </div>
     </main>
-  )
+  );
 };
 
 export default Team;

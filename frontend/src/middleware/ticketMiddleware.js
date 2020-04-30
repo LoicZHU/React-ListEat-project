@@ -176,7 +176,6 @@ const ticketMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // console.log(response);
           store.dispatch(saveTicketInfoToCancel(response.data.restaurant.name, response.data.ticket.id, response.data.customer.lastName, response.data.customer.firstName, response.data.ticket.coversNb, response.data.ticket.estimatedEntryTime, response.data.ticket.estimatedWaitingTime, response.data.ticket.status));
-
         })
         .catch((error) => {
           // console.warn(error.response);

@@ -20,10 +20,10 @@ const Footer = () => {
       </div>
       <div id="footer-last">
         <span>Copyright ListEat 2020</span>
-        <span>Made with <i class="fa fa-heart" aria-hidden="true"></i> by<a href="/team"> our team</a></span>
+        <span>Made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="/team">our team</a></span>
       </div>
     </footer>
-  )
+  );
 };
 
 export default Footer;
