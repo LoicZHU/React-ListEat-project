@@ -33,8 +33,11 @@ class TicketController extends AbstractController
         $ticketId = CryptoService::decrypt($data->ticket);
 
         $ticket = $ticketRepository->find($ticketId);
-
-        return $this->json($ticket, 200, [], ['groups' => 'ticket_decrypt']);
+        
+        $serializer = $this->get('serializer');
+        $data = $serializer->serialize($ticket, 'json' , ['groups' => 'ticket_decrypt']);
+        
+        return $this->json($data, 200, []);
     }
 
     /**
