@@ -27,15 +27,15 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/decrypt/tickets", name="api_tickets_decrypt", methods={"POST"})
      */
-    public function decryptId(Request $request, Serializer $serializer,TicketRepository $ticketRepository)
+    public function decryptId(Request $request, TicketRepository $ticketRepository)
     {
         $data = json_decode($request->getContent());
         
         $ticketId = CryptoService::decrypt($data->ticket);
-
+        
         $ticket = $ticketRepository->find($ticketId);
         
- return $this->json([
+        return $this->json([
             'ticket' => $ticket,
             'restaurant' => ['id' => $ticket->getRestaurant()->getId(), 'name' => $ticket->getRestaurant()->getName()],
             'customer' => ['id' => $ticket->getCustomer()->getId(), 'lastName' => $ticket->getCustomer()->getLastName(), 'firstName' => $ticket->getCustomer()->getFirstName()]],
