@@ -14,7 +14,7 @@ const Legal = () => (
         <h2>Editeur</h2>
 
         <p>
-          ListEat, équipe de 4 développeurs formés chez O’Clock au capital de 1 658 475 cafés, ayant son siège social chez eux.
+          ListEat, équipe de 4 développeurs formés chez O’clock au capital de 1 658 475 cafés, ayant son siège social chez eux.
         </p>
       </div>
 
