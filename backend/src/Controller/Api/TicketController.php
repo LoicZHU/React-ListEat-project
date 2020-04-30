@@ -35,10 +35,13 @@ class TicketController extends AbstractController
 
         $ticket = $ticketRepository->find($ticketId);
         
-        $data = $serializer->serialize($ticket, 'json' , ['groups' => 'ticket_decrypt']);
-        
-        //return $this->json($data, 200, [], ['groups' => 'ticket_decrypt']);
-        return $this->json($ticket, 200, [], ['groups' => 'ticket_decrypt']);
+ return $this->json([
+            'ticket' => $ticket,
+            'restaurant' => ['id' => $ticket->getRestaurant()->getId(), 'name' => $ticket->getRestaurant()->getName()],
+            'customer' => ['id' => $ticket->getCustomer()->getId(), 'lastName' => $ticket->getCustomer()->getLastName(), 'firstName' => $ticket->getCustomer()->getFirstName()]],
+            200,
+            [],
+            ['groups' => 'ticket_decrypt']);
     }
 
     /**
