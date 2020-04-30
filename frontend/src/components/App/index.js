@@ -95,6 +95,7 @@ const App = ({
             <Footer />
           </Route>
 
+
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
