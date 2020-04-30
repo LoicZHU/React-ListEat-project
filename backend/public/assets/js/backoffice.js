@@ -24,11 +24,11 @@ let app = {
   handleSubmitCheck: function(evt) {
     app.spine1();
     setTimeout(app.spine2, 700);
-    setTimeout(app.spine3, 1200);
-    setTimeout(app.spine4, 1400);
-    setTimeout(app.spine5, 1900);
-    setTimeout(app.spine6, 2100);
-    setTimeout(app.spine7, 2500);
+    setTimeout(app.spine3, 1000);
+    setTimeout(app.spine4, 1200);
+    setTimeout(app.spine5, 1300);
+    setTimeout(app.spine6, 1450);
+    setTimeout(app.spine7, 1700);
 
     
     // https://developer.mozilla.org/fr/docs/Web/API/NonDocumentTypeChildNode/nextElementSibling
@@ -49,47 +49,49 @@ let app = {
     .then(app.convertJSONtoJS)
     .then(function(jsonResponse){
       console.log(jsonResponse);
-      if(jsonResponse[0]['login'] == true){
-        document.getElementById('login').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('login').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+      setTimeout(function(){
+        if(jsonResponse[0]['login'] == true){
+          document.getElementById('login').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('login').className = "fas fa-bolt fa-1x bad pr-3";
+        }
 
-      if(jsonResponse[1]['ticket_add'] == true){
-        document.getElementById('ticket_add').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('ticket_add').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+        if(jsonResponse[1]['ticket_add'] == true){
+          document.getElementById('ticket_add').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('ticket_add').className = "fas fa-bolt fa-1x bad pr-3";
+        }
 
-      if(jsonResponse[2]['ticket_edit'] == true){
-        document.getElementById('ticket_edit').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('ticket_edit').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+        if(jsonResponse[2]['ticket_edit'] == true){
+          document.getElementById('ticket_edit').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('ticket_edit').className = "fas fa-bolt fa-1x bad pr-3";
+        }
 
-      if(jsonResponse[3]['restaurant_show'] == true){
-        document.getElementById('restaurant_show').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('restaurant_show').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+        if(jsonResponse[3]['restaurant_show'] == true){
+          document.getElementById('restaurant_show').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('restaurant_show').className = "fas fa-bolt fa-1x bad pr-3";
+        }
 
-      if(jsonResponse[4]['restaurant_edit'] == true){
-        document.getElementById('restaurant_edit').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('restaurant_edit').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+        if(jsonResponse[4]['restaurant_edit'] == true){
+          document.getElementById('restaurant_edit').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('restaurant_edit').className = "fas fa-bolt fa-1x bad pr-3";
+        }
 
-      if(jsonResponse[5]['islogged'] == true){
-        document.getElementById('is_logged').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('is_logged').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+        if(jsonResponse[5]['islogged'] == true){
+          document.getElementById('is_logged').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('is_logged').className = "fas fa-bolt fa-1x bad pr-3";
+        }
 
-      if(jsonResponse[6]['logout'] == true){
-        document.getElementById('logout').className = "fas fa-bolt fa-1x ok pr-3";
-      }else{
-        document.getElementById('logout').className = "fas fa-bolt fa-1x bad pr-3";
-      }
+        if(jsonResponse[6]['logout'] == true){
+          document.getElementById('logout').className = "fas fa-bolt fa-1x ok pr-3";
+        }else{
+          document.getElementById('logout').className = "fas fa-bolt fa-1x bad pr-3";
+        }
+      }, 1750);
     });
   },
 
