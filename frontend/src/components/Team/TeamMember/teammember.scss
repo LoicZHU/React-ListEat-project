@@ -7,7 +7,7 @@
   position: relative;
   margin: 0 .5em;
 
-  img#avatar {
+  div#avatar {
     width: 100%;
     border-radius: 5px;
     width: 250px;
@@ -15,6 +15,7 @@
     overflow: hidden;
     background-size: cover;
     background-position: center;
+    border: none !important;
 
     &:hover{
       box-shadow: 0px 10px 13px rgb(0,0,0,.3);

@@ -197,7 +197,6 @@ const userReducer = (state = initialState, action = {}) => {
       };
 
     case CHANGE_SHOW_PASSWORD_ERROR:
-      console.log(action.newValue);
       return {
         ...state,
         signupInput: {

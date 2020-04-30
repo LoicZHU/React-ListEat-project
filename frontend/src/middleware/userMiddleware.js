@@ -66,7 +66,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(logUser(response.data.logged, response.data.restaurantId));
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
           store.dispatch(showLoginError());
         });
       next(action);
@@ -100,7 +100,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(logUser(response.data.logged));
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -132,13 +132,13 @@ const userMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(showSignupConfirmation());
         })
         .catch((error) => {
           store.dispatch(saveSignUpErrors(error.response.data));
           location.hash = "#" + 'signup-form';
-          console.log(error.response);
+          // console.log(error.response);
         });
       next(action);
       break;
@@ -167,13 +167,13 @@ const userMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response);
-          console.log(response.data.message);
+          // console.log(response);
+          // console.log(response.data.message);
           store.dispatch(displayEditConfirmation());
         })
         .catch((error) => {
-          console.warn(error.response);
-          console.warn(error.response.data.message);
+          // console.warn(error.response);
+          // console.warn(error.response.data.message);
           store.dispatch(displayEditError(error.response.data.message));
         });
       next(action);
@@ -199,7 +199,7 @@ const userMiddleware = (store) => (next) => (action) => {
           //     },
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           let responseTime = response.data.averageEatingTime;
           let responseTimeHours = Math.floor(responseTime / 60);
           let responseTimeModulo = responseTime % 60;
@@ -208,7 +208,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveRestaurantData(averageEatingTime, response.data.status, response.data.name, response.data.address, response.data.postcode, response.data.city, response.data.country, response.data.phone));
         })
         .catch((error) => {
-          console.warn(error.response);
+          // console.warn(error.response);
         });
       next(action);
       break;
@@ -235,7 +235,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveIncreasedAverageEatingTime(averageEatingTime));
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
 
       next(action);
@@ -263,7 +263,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveDecreasedAverageEatingTime(averageEatingTime));
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -289,7 +289,7 @@ const userMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
 
           // convert the changeStatus (ex: 'on' = 1)
           if (changedStatus === 'on') {
@@ -303,7 +303,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(saveChangedServiceStatus(changedStatus));
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -322,7 +322,7 @@ const userMiddleware = (store) => (next) => (action) => {
           }
         })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -342,7 +342,7 @@ const userMiddleware = (store) => (next) => (action) => {
         link.click();
       })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
         });
       next(action);
       break;
@@ -355,7 +355,7 @@ const userMiddleware = (store) => (next) => (action) => {
           username: store.getState().user.passwordReset.email,
         }
       }).then((response) => {
-        console.log(response.data.userId);
+        // console.log(response.data.userId);
         store.dispatch(showPasswordResetEmailConfirmation(false));
         store.dispatch(showPasswordResetEmailError(false));
         store.dispatch(showPasswordResetEmailConfirmation(true));
@@ -363,7 +363,7 @@ const userMiddleware = (store) => (next) => (action) => {
         store.dispatch(storeUserId(response.data.userId));          
       })
         .catch((error) => {
-          console.warn(error);
+          // console.warn(error);
           store.dispatch(showPasswordResetEmailConfirmation(false));
           store.dispatch(showPasswordResetEmailError(false));
           store.dispatch(showPasswordResetEmailError(true));
@@ -383,11 +383,11 @@ const userMiddleware = (store) => (next) => (action) => {
             newPassword: store.getState().user.passwordReset.newPassword,
             },
         }).then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(confirmNewPassword(true));
         })
           .catch((error) => {
-            console.warn(error);
+            // console.warn(error);
             store.dispatch(confirmNewPassword(false));
           });
         next(action);

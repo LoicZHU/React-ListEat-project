@@ -64,7 +64,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
         },
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(saveRestaurantInfos(response.data.id, response.data.name, restaurantUrlId, response.data.status));
         })
         .catch((error) => {
@@ -129,7 +129,7 @@ const ticketMiddleware = (store) => (next) => (action) => {
           const restaurantId = response.data.restaurantId;
           store.dispatch(saveTicketStatus(response.data.ticketStatus, isTicketValidate, response.data.estimatedEntryTime));
           // store.dispatch(fetchNewCustomerTicket(restaurantId));
-          console.log(response.data.restaurantId);
+          // console.log(response.data.restaurantId);
           // console.log('send ticket validation ok');
 
           // {
@@ -152,8 +152,8 @@ const ticketMiddleware = (store) => (next) => (action) => {
 
         })
         .catch((error) => {
-          console.warn(error.response);
-          console.log('send ticket validation');
+          // console.warn(error.response);
+          // console.log('send ticket validation');
         });
 
       next(action);
@@ -174,11 +174,11 @@ const ticketMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(saveTicketInfoToCancel(response.data.restaurant.name, response.data.id, response.data.customer.lastName, response.data.customer.firstName, response.data.coversNb, response.data.estimatedEntryTime, response.data.estimatedWaitingTime, response.data.status));
         })
         .catch((error) => {
-          console.warn(error.response);
+          // console.warn(error.response);
         });
 
       next(action);
@@ -199,11 +199,11 @@ const ticketMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           store.dispatch(displayCancelConfirmation());
         })
         .catch((error) => {
-          console.warn(error.response);
+          // console.warn(error.response);
         });
 
       next(action);
