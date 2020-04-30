@@ -87,6 +87,14 @@ const App = ({
             <Footer />
           </Route>
 
+          {/* Team */}
+          <Route path="/team" exact>
+            <Header />
+            <Team />
+            <Footer />
+          </Route>
+
+
           {/* Log in */}
           <Route path="/login" exact>
             <Header />
