@@ -19,6 +19,7 @@ use Symfony\Component\Messenger\MessageBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class TicketController extends AbstractController
 {
@@ -31,10 +32,16 @@ class TicketController extends AbstractController
         $data = json_decode($request->getContent());
         
         $ticketId = CryptoService::decrypt($data->ticket);
-
+        
         $ticket = $ticketRepository->find($ticketId);
-
-        return $this->json($ticket, 200, [], ['groups' => 'ticket_decrypt']);
+        
+        return $this->json([
+            'ticket' => $ticket,
+            'restaurant' => ['id' => $ticket->getRestaurant()->getId(), 'name' => $ticket->getRestaurant()->getName()],
+            'customer' => ['id' => $ticket->getCustomer()->getId(), 'lastName' => $ticket->getCustomer()->getLastName(), 'firstName' => $ticket->getCustomer()->getFirstName()]],
+            200,
+            [],
+            ['groups' => 'ticket_decrypt']);
     }
 
     /**
@@ -113,7 +120,7 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/tickets/{id<\d+>}", name="api_tickets_edit", methods={"PUT"})
      */
-    public function edit($id, SerializerInterface $serializer,MessageBusInterface $bus, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
+    public function edit($id, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
@@ -146,6 +153,7 @@ class TicketController extends AbstractController
             $topic = 'ticket';
             $restaurantId = $restaurant->getId();
             //We put $ticket objet on
+            $serializer = $this->get('serializer');
             $data = $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get']);
     
             $postData = http_build_query([
@@ -235,6 +243,7 @@ class TicketController extends AbstractController
             $topic = 'ticket-delete';
             $restaurantIdD = $restaurant->getId();
             //We put $ticket objet on
+            $serializer = $this->get('serializer');
             $data = $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get']);
     
             $postData = http_build_query([
@@ -293,7 +302,7 @@ class TicketController extends AbstractController
     public function showAll($id, TicketRepository $ticketRepository, RestaurantRepository $restaurantRepository)
     {
         //$hasAccess = $this->isGranted('ROLE_RESTAURATEUR');
-        $this->denyAccessUnlessGranted('ROLE_RESTAURATEUR');
+        //$this->denyAccessUnlessGranted('ROLE_RESTAURATEUR');
 
         $restaurant = $restaurantRepository->find($id);
 

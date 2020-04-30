@@ -55,14 +55,12 @@ class Ticket
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("ticket_decrypt")
      */
     private $restaurant;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Customer", mappedBy="ticket", cascade={"persist", "remove"})
      * @Groups("tickets_get")
-     * @Groups("ticket_decrypt"))
      */
     private $customer;
 
