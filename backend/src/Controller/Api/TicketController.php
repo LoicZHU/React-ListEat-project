@@ -37,7 +37,8 @@ class TicketController extends AbstractController
         $serializer = $this->get('serializer');
         $data = $serializer->serialize($ticket, 'json' , ['groups' => 'ticket_decrypt']);
         
-        return $this->json($data, 200, [], ['groups' => 'ticket_decrypt']);
+        //return $this->json($data, 200, [], ['groups' => 'ticket_decrypt']);
+        return new Response($data, 200, []);
     }
 
     /**
