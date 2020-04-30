@@ -293,7 +293,7 @@ class TicketController extends AbstractController
     public function showAll($id, TicketRepository $ticketRepository, RestaurantRepository $restaurantRepository)
     {
         //$hasAccess = $this->isGranted('ROLE_RESTAURATEUR');
-        $this->denyAccessUnlessGranted('ROLE_RESTAURATEUR');
+        //$this->denyAccessUnlessGranted('ROLE_RESTAURATEUR');
 
         $restaurant = $restaurantRepository->find($id);
 
