@@ -113,7 +113,7 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/tickets/{id<\d+>}", name="api_tickets_edit", methods={"PUT"})
      */
-    public function edit($id, SerializerInterface $serializer,MessageBusInterface $bus, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
+    public function edit($id, MessageBusInterface $bus, Request $request, TicketRepository $ticketRepository, CustomerRepository $customerRepository, RestaurantRepository $restaurantRepository, \Swift_Mailer $mailer)
     {
 
         $data = json_decode($request->getContent());
@@ -146,6 +146,7 @@ class TicketController extends AbstractController
             $topic = 'ticket';
             $restaurantId = $restaurant->getId();
             //We put $ticket objet on
+            $serializer = $this->get('serializer');
             $data = $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get']);
     
             $postData = http_build_query([
@@ -235,6 +236,7 @@ class TicketController extends AbstractController
             $topic = 'ticket-delete';
             $restaurantIdD = $restaurant->getId();
             //We put $ticket objet on
+            $serializer = $this->get('serializer');
             $data = $serializer->serialize($ticket, 'json' , ['groups' => 'tickets_get']);
     
             $postData = http_build_query([
