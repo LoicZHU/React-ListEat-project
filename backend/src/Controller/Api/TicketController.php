@@ -19,6 +19,7 @@ use Symfony\Component\Messenger\MessageBus;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class TicketController extends AbstractController
 {
@@ -26,7 +27,7 @@ class TicketController extends AbstractController
     /**
      * @Route("/api/decrypt/tickets", name="api_tickets_decrypt", methods={"POST"})
      */
-    public function decryptId(Request $request, TicketRepository $ticketRepository)
+    public function decryptId(Request $request, Serializer $serializer,TicketRepository $ticketRepository)
     {
         $data = json_decode($request->getContent());
         
@@ -34,7 +35,7 @@ class TicketController extends AbstractController
 
         $ticket = $ticketRepository->find($ticketId);
         
-        return $this->json([
+ return $this->json([
             'ticket' => $ticket,
             'restaurant' => ['id' => $ticket->getRestaurant()->getId(), 'name' => $ticket->getRestaurant()->getName()],
             'customer' => ['id' => $ticket->getCustomer()->getId(), 'lastName' => $ticket->getCustomer()->getLastName(), 'firstName' => $ticket->getCustomer()->getFirstName()]],
