@@ -19,7 +19,7 @@ ListEat permet aux clients de s’inscrire sur une liste d’attente numérique.
   - daily meeting
   - 4 sprints d'une semaine
 
-## Technologies :
+## Technologies
 |Type de technologie|Nom|
 |-|-|
 |Client|HTML, CSS, JavaScript (React.js)|
