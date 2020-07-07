@@ -4,7 +4,7 @@
 
 http://listeat.io
 
-https://youtu.be/DpvXly0SK6c?t=3531
+[![Alt text](https://github.com/LoicZHU/listeat/blob/master/listeat%20YT.png)](https://youtu.be/DpvXly0SK6c?t=3531)
 
 ## Objet
 Le projet ListEat vise à faciliter la gestion des files d’attente des restaurants n’acceptant pas les réservations.
