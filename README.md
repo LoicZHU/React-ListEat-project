@@ -1,6 +1,8 @@
 # Projet ListEat
 http://listeat.io
 
+[![Alt text](https://img.youtube.com/vi/VID/0.jpg)](https://youtu.be/DpvXly0SK6c?t=3531)
+
 ## Objet
 Le projet ListEat vise à faciliter la gestion des files d’attente des restaurants n’acceptant pas les réservations.
 ListEat permet aux clients de s’inscrire sur une liste d’attente numérique. Lorsqu’ils se rendent dans un restaurant partenaire : 
