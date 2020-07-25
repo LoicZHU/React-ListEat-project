@@ -158,7 +158,8 @@ class TicketController extends AbstractController
     
             $postData = http_build_query([
                 // we stay on topic
-                'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantId,
+                // 'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantId,
+                'topic' => 'http://localhost:8080/'.$topic."/".$restaurantId,
                 'data' => json_encode([
                     'eventName' => $data,
                 ]),
@@ -175,7 +176,8 @@ class TicketController extends AbstractController
          
             $postData = http_build_query([
                 // we stay on topic
-                'topic' => 'https://www.listeat.io/backoffice',
+                // 'topic' => 'https://www.listeat.io/backoffice',
+                'topic' => 'http://localhost:8080/backoffice',
                 'data' => json_encode([
                     'eventName' => 'new add ticket',
                 ]),
@@ -204,7 +206,8 @@ class TicketController extends AbstractController
         $cryptedId = CryptoService::crypt($id);
         // /tickets/id/customer-cancellation
         //////////////////////////////////// TODO RECTIFICATION SERVER HOSTING//////////////////////////////////////
-        $routeCancel = 'https://www.listeat.io/tickets/'.$cryptedId.'/customer-cancellation';
+        //$routeCancel = 'https://www.listeat.io/tickets/'.$cryptedId.'/customer-cancellation';
+        $routeCancel = 'http://localhost:8080/tickets/'.$cryptedId.'/customer-cancellation';
     
          // Email sent to the customer to confirm the subscription to the waiting list
          $message = (new \Swift_Message('Information client ListEat'))
@@ -248,7 +251,8 @@ class TicketController extends AbstractController
     
             $postData = http_build_query([
                 // we stay on topic
-                'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantIdD,
+                // 'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantIdD,
+                'topic' => 'http://localhost:8080/'.$topic."/".$restaurantIdD,
                 'data' => json_encode([
                     'eventName' => $data,
                 ]),
@@ -265,7 +269,8 @@ class TicketController extends AbstractController
          
             $postData = http_build_query([
                 // we stay on topic
-                'topic' => 'https://www.listeat.io/backoffice',
+                // 'topic' => 'https://www.listeat.io/backoffice',
+                'topic' => 'http://localhost:8080/backoffice',
                 'data' => json_encode([
                     'eventName' => 'new delete ticket',
                 ]),

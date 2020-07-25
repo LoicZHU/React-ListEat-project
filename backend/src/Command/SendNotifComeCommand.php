@@ -56,10 +56,10 @@ class SendNotifComeCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $io->title('Listing all tickets coming soon -5min');
+        $io->title('Listing all tickets coming soon -3min');
 
         $currentTime = date("d/m/Y H:i:s", strtotime('now')); 
-        $stamp = date("Y/m/d H:i:s", strtotime('now +5 Minutes')); 
+        $stamp = date("Y/m/d H:i:s", strtotime('now +3 Minutes')); 
         //dd($stamp);
         // 1. Get tickets from the BDD
         $tickets = $this->ticketRepository->findWhereEstimated($stamp);
@@ -100,7 +100,7 @@ class SendNotifComeCommand extends Command
 
         //We writed a history sample of notification sended a='write at the end'
         //Must write the absolut way of the file for when cron execut it
-        $fichier = fopen('/var/www/html/projet-list-eat/backend/diary/Notification.txt', 'a','c+b');
+        $fichier = fopen('/var/www/html/apotheose/React-ListEat-project/backend/diary/Notification.txt', 'a','c+b');
         foreach ($tickets as $ticket) {
             fwrite($fichier,'to'.$ticket->getCustomer()->getEmail().'at'.$currentTime.'  ');
         }
