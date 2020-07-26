@@ -2,7 +2,9 @@ let app = {
 
   //WARNING BIEN MODIFIER EN PROD
   //apiBaseURL: 'http://localhost:8000/',
-  apiBaseURL: 'https://www.listeat.io:8080/',
+  //apiBaseURL: 'https://www.listeat.io:8080/',
+  apiBaseURL: 'http://ec2-100-26-241-214.compute-1.amazonaws.com:8080/',
+
   // Méthode executée au lancement de l'application
   init: function () {
     //console.log('init');
@@ -44,8 +46,8 @@ let app = {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
     };
-
-    fetch('https://www.listeat.io:8080/back/office/test', fetchOptions)
+    //fetch('https://www.listeat.io:8080/back/office/test', fetchOptions)
+    fetch('http://ec2-100-26-241-214.compute-1.amazonaws.com:8080/back/office/test', fetchOptions)
     .then(app.convertJSONtoJS)
     .then(function(jsonResponse){
       console.log(jsonResponse);
@@ -135,10 +137,10 @@ let app = {
 
     //Ici l'adresse du serveur Mercure
     // const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
-    const url = new URL('http://localhost:3000/.well-known/mercure');
+    const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com:3000/.well-known/mercure');
     // Et on rajoute les topics auxquels s'inscrire (en paramètre GET)
     // url.searchParams.append('topic', `https://www.listeat.io/${topic}`);
-    url.searchParams.append('topic', `http://localhost:8080/${topic}`);
+    url.searchParams.append('topic', `http://ec2-100-26-241-214.compute-1.amazonaws.com/${topic}`);
 
     const eventSource = new EventSource(url);
 
@@ -176,7 +178,6 @@ let app = {
           let waiting = document.getElementById('waiting').textContent = jsonResponse['waiting'];
           let coversNb = document.getElementById('coversNb').textContent = jsonResponse['coversNb'];
           //scoreBoard.insertAdjacentHTML('beforeEnd', `<p>${details.eventName}</p>`);
-
         }
       );
     } 

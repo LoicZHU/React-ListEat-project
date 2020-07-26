@@ -159,7 +159,7 @@ class TicketController extends AbstractController
             $postData = http_build_query([
                 // we stay on topic
                 // 'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantId,
-                'topic' => 'http://localhost:8080/'.$topic."/".$restaurantId,
+                'topic' => 'http://ec2-100-26-241-214.compute-1.amazonaws.com/'.$topic."/".$restaurantId,
                 'data' => json_encode([
                     'eventName' => $data,
                 ]),
@@ -177,7 +177,7 @@ class TicketController extends AbstractController
             $postData = http_build_query([
                 // we stay on topic
                 // 'topic' => 'https://www.listeat.io/backoffice',
-                'topic' => 'http://localhost:8080/backoffice',
+                'topic' => 'http://ec2-100-26-241-214.compute-1.amazonaws.com/backoffice',
                 'data' => json_encode([
                     'eventName' => 'new add ticket',
                 ]),
@@ -207,7 +207,7 @@ class TicketController extends AbstractController
         // /tickets/id/customer-cancellation
         //////////////////////////////////// TODO RECTIFICATION SERVER HOSTING//////////////////////////////////////
         //$routeCancel = 'https://www.listeat.io/tickets/'.$cryptedId.'/customer-cancellation';
-        $routeCancel = 'http://localhost:8080/tickets/'.$cryptedId.'/customer-cancellation';
+        $routeCancel = 'http://ec2-100-26-241-214.compute-1.amazonaws.com/tickets/'.$cryptedId.'/customer-cancellation';
     
          // Email sent to the customer to confirm the subscription to the waiting list
          $message = (new \Swift_Message('Information client ListEat'))
@@ -252,7 +252,7 @@ class TicketController extends AbstractController
             $postData = http_build_query([
                 // we stay on topic
                 // 'topic' => 'https://www.listeat.io/'.$topic."/".$restaurantIdD,
-                'topic' => 'http://localhost:8080/'.$topic."/".$restaurantIdD,
+                'topic' => 'http://ec2-100-26-241-214.compute-1.amazonaws.com/'.$topic."/".$restaurantIdD,
                 'data' => json_encode([
                     'eventName' => $data,
                 ]),
@@ -265,12 +265,11 @@ class TicketController extends AbstractController
                     'Content-Security-Policy' => "upgrade-insecure-requests",
                     'content' => $postData,
                 ]]));
-
          
             $postData = http_build_query([
                 // we stay on topic
                 // 'topic' => 'https://www.listeat.io/backoffice',
-                'topic' => 'http://localhost:8080/backoffice',
+                'topic' => 'http://ec2-100-26-241-214.compute-1.amazonaws.com/backoffice',
                 'data' => json_encode([
                     'eventName' => 'new delete ticket',
                 ]),
