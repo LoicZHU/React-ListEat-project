@@ -19,7 +19,6 @@ class QrCodeGenerator
      */
     public function generate($restaurantId,$restaurantName)
     {
-
         //we encrypt the resaturant id, it will be in the QR code Url
         $cryptedId = CryptoService::crypt($restaurantId);
 
@@ -29,7 +28,8 @@ class QrCodeGenerator
         $trimmed = trim($baseUrl,  $binary);
         $baseUrl = '/'.$trimmed;
         // $server = 'https://www.listeat.io'
-        $server = 'http://localhost:8080';
+        // $server = 'http://localhost:8080';
+        $server = 'http://ec2-100-26-241-214.compute-1.amazonaws.com';
         // creating a qrcode with the Qrcode class
         //$lien='https://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
 
