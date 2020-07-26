@@ -211,7 +211,7 @@ const Admin = ({
   var topic = 'ticket';
   // const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
   // const url = new URL('http://localhost:3000/.well-known/mercure');
-  const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com:3000/.well-known/mercure');
+  const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com/hub/.well-known/mercure');
   // url.searchParams.append('topic', `https://www.listeat.io/${topic}/${restaurantId}`);
   // url.searchParams.append('topic', `http://localhost:8080/${topic}/${restaurantId}`);
   url.searchParams.append('topic', `http://ec2-100-26-241-214.compute-1.amazonaws.com/${topic}/${restaurantId}`);
@@ -230,7 +230,7 @@ const Admin = ({
   // const urlDelete = new URL('https://www.listeat.io/hub/.well-known/mercure');
   // urlDelete.searchParams.append('topic', `https://www.listeat.io/${topicDelete}/${restaurantId}`);
   
-  const urlDelete = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com:3000/.well-known/mercure');
+  const urlDelete = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com/hub/.well-known/mercure');
   urlDelete.searchParams.append('topic', `http://ec2-100-26-241-214.compute-1.amazonaws.com/${topicDelete}/${restaurantId}`);
   const eventSourceDelete = new EventSource(urlDelete);
 

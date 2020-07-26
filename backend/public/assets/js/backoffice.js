@@ -137,7 +137,7 @@ let app = {
 
     //Ici l'adresse du serveur Mercure
     // const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
-    const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com:3000/.well-known/mercure');
+    const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com/hub/.well-known/mercure');
     // Et on rajoute les topics auxquels s'inscrire (en paramètre GET)
     // url.searchParams.append('topic', `https://www.listeat.io/${topic}`);
     url.searchParams.append('topic', `http://ec2-100-26-241-214.compute-1.amazonaws.com/${topic}`);
