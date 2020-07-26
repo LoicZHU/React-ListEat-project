@@ -36,7 +36,7 @@ import {
   // updateCurrentTicket,
 } from 'src/actions/user';
 
-const baseUrl = 'http://localhost:8000';
+const baseUrl = 'http://localhost:8080';
 // const baseUrl = 'https://www.listeat.io:8080';
 
 // const id = store.getState().user.restaurantId;
