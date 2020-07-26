@@ -1,4 +1,4 @@
-== Import npm
+// == Import npm
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 
