@@ -29,7 +29,7 @@ class QrCodeGenerator
         $baseUrl = '/'.$trimmed;
         // $server = 'https://www.listeat.io'
         // $server = 'http://localhost:8080';
-        $server = 'http://ec2-100-26-241-214.compute-1.amazonaws.com';
+        $server = 'http://listeat.io';
         // creating a qrcode with the Qrcode class
         //$lien='https://'.$_SERVER['HTTP_HOST'].'/restaurant/'.$cryptedId.'/tickets/add';
 

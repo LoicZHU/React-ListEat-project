@@ -37,7 +37,8 @@ import {
 } from 'src/actions/user';
 
 // const baseUrl = 'http://localhost:8080';
-const baseUrl = 'http://ec2-100-26-241-214.compute-1.amazonaws.com:8080';
+// const baseUrl = 'http://ec2-100-26-241-214.compute-1.amazonaws.com:8080';
+const baseUrl = 'http://www.listeat.io:8080';
 // const baseUrl = 'https://www.listeat.io:8080';
 
 

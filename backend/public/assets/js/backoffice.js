@@ -3,7 +3,7 @@ let app = {
   //WARNING BIEN MODIFIER EN PROD
   //apiBaseURL: 'http://localhost:8000/',
   //apiBaseURL: 'https://www.listeat.io:8080/',
-  apiBaseURL: 'http://ec2-100-26-241-214.compute-1.amazonaws.com:8080/',
+  apiBaseURL: 'http://listeat.io:8080/',
 
   // Méthode executée au lancement de l'application
   init: function () {
@@ -47,7 +47,7 @@ let app = {
       },
     };
     //fetch('https://www.listeat.io:8080/back/office/test', fetchOptions)
-    fetch('http://ec2-100-26-241-214.compute-1.amazonaws.com:8080/back/office/test', fetchOptions)
+    fetch('http://listeat.io:8080/back/office/test', fetchOptions)
     .then(app.convertJSONtoJS)
     .then(function(jsonResponse){
       console.log(jsonResponse);
@@ -127,61 +127,61 @@ let app = {
     return response.json();
   },
 
-  webSocket: function(){
+  // webSocket: function(){
 
-    // On va se placer sur le topic "ticket" partout
-    var topic = 'backoffice';
-    // Note: je vais utiliser partout ici des templates litterals JS, plus lisibles,
-    // au lieu de quotes on a des backtics (`), et deans on peut afficher des variables avec ${}.
-    //scoreBoard.insertAdjacentHTML('beforeEnd', `Écoute du topic ${topic}`);
+  //   // On va se placer sur le topic "ticket" partout
+  //   var topic = 'backoffice';
+  //   // Note: je vais utiliser partout ici des templates litterals JS, plus lisibles,
+  //   // au lieu de quotes on a des backtics (`), et deans on peut afficher des variables avec ${}.
+  //   //scoreBoard.insertAdjacentHTML('beforeEnd', `Écoute du topic ${topic}`);
 
-    //Ici l'adresse du serveur Mercure
-    // const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
-    const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com:3000/.well-known/mercure');
-    // Et on rajoute les topics auxquels s'inscrire (en paramètre GET)
-    // url.searchParams.append('topic', `https://www.listeat.io/${topic}`);
-    url.searchParams.append('topic', `http://ec2-100-26-241-214.compute-1.amazonaws.com/${topic}`);
+  //   //Ici l'adresse du serveur Mercure
+  //   // const url = new URL('https://www.listeat.io/hub/.well-known/mercure');
+  //   const url = new URL('http://ec2-100-26-241-214.compute-1.amazonaws.com:3000/.well-known/mercure');
+  //   // Et on rajoute les topics auxquels s'inscrire (en paramètre GET)
+  //   // url.searchParams.append('topic', `https://www.listeat.io/${topic}`);
+  //   url.searchParams.append('topic', `http://ec2-100-26-241-214.compute-1.amazonaws.com/${topic}`);
 
-    const eventSource = new EventSource(url);
+  //   const eventSource = new EventSource(url);
 
-    //console.log('Client démarré!');
-    // Ce callback sera appelé à chaque réception de message
-    //A toi sylvain de le tuner
-    eventSource.onmessage = function(event) {
+  //   //console.log('Client démarré!');
+  //   // Ce callback sera appelé à chaque réception de message
+  //   //A toi sylvain de le tuner
+  //   eventSource.onmessage = function(event) {
 
-      //On appel l'Api pour mettre à jour les imformations
-      let fetchOptions = {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache'
-      };
-      fetch(app.apiBaseURL + 'back/office', fetchOptions)
-      // .then(app.convertJSONtoJS)
-      .then(
-        function (response) {
-          return response.json();
-        }
-      )
-      .then(
-        function (jsonResponse) {
+  //     //On appel l'Api pour mettre à jour les imformations
+  //     let fetchOptions = {
+  //       method: 'GET',
+  //       mode: 'cors',
+  //       cache: 'no-cache'
+  //     };
+  //     fetch(app.apiBaseURL + 'back/office', fetchOptions)
+  //     // .then(app.convertJSONtoJS)
+  //     .then(
+  //       function (response) {
+  //         return response.json();
+  //       }
+  //     )
+  //     .then(
+  //       function (jsonResponse) {
 
-          //console.log(jsonResponse);
-          //console.log(`Reçu un message avec l\'ID ${event.lastEventId}`);
+  //         //console.log(jsonResponse);
+  //         //console.log(`Reçu un message avec l\'ID ${event.lastEventId}`);
 
-          const details = JSON.parse(event.data);
+  //         const details = JSON.parse(event.data);
 
-          let ticket = document.getElementById('ticketNb').textContent = jsonResponse['ticketNb'];
-          let userNb = document.getElementById('user').textContent = jsonResponse['userNb'];
-          let customer = document.getElementById('customer').textContent = jsonResponse['customer'];
+  //         let ticket = document.getElementById('ticketNb').textContent = jsonResponse['ticketNb'];
+  //         let userNb = document.getElementById('user').textContent = jsonResponse['userNb'];
+  //         let customer = document.getElementById('customer').textContent = jsonResponse['customer'];
 
-          let ticketsCancelled = document.getElementById('cancelled').textContent = jsonResponse['ticketsCancelled'];
-          let waiting = document.getElementById('waiting').textContent = jsonResponse['waiting'];
-          let coversNb = document.getElementById('coversNb').textContent = jsonResponse['coversNb'];
-          //scoreBoard.insertAdjacentHTML('beforeEnd', `<p>${details.eventName}</p>`);
-        }
-      );
-    } 
-  },  
+  //         let ticketsCancelled = document.getElementById('cancelled').textContent = jsonResponse['ticketsCancelled'];
+  //         let waiting = document.getElementById('waiting').textContent = jsonResponse['waiting'];
+  //         let coversNb = document.getElementById('coversNb').textContent = jsonResponse['coversNb'];
+  //         //scoreBoard.insertAdjacentHTML('beforeEnd', `<p>${details.eventName}</p>`);
+  //       }
+  //     );
+  //   } 
+  // },  
 
   initMap: function () {
     map = new google.maps.Map(document.getElementById("map"), {
